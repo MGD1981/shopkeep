@@ -1,4 +1,5 @@
-## Shopkeep Development Plan
+Shopkeep Development Plan
+============================
 
 # Main Ideas
 
