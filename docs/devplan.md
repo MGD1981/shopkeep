@@ -30,6 +30,7 @@ Shopkeep Development Plan
 - Gut (e.g. bow)
 - Wood (e.g. spear, club)
 - Stone (e.g. tomahawk, sling bullet)
+- Copper
 - Bronze
 - Silver
 - Gold
@@ -37,3 +38,11 @@ Shopkeep Development Plan
 - Steel
 - Mithril
 - Adamantium
+
+###Basic Qualities
+
+- Weight
+- Sharpness (possible null)
+- Grip
+- Durability (upon breaking, splits into component materials)
+- Balance
