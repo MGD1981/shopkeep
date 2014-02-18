@@ -12,12 +12,20 @@ Shopkeep Development Plan
 - Stats (i.e. strength, dex, etc.) do not change.  There are no experience levels.  But heroes may develop familiarity with both a specific item and also with a generic item type.
 - Will start coding just weapons, leaving a framework for expansion.
 - Tile-based sprites.  Will have a designer create these; will start with CP437 on my own.
+- Interactions with other shops in town (e.g. order wood from woodcutter); towns may not always have every kind of shop.
+- Humorous hate-thy-neighbor relationship with neighboring apothecary.
+- Ability to auto-transact by setting buy/sell rules; easy method to view/query rules.
+- Magic (and cursed!) weapons.
+- Large government commissions at wartime (not very profitable, but war loss can have serious consequences).
+- Small government commissions (e.g. whip for judiciary punishment)
+
 
 #Potential Future (post v1)
 
 - Physical shop with limited capacity, ability to expand space, storage, functionality (i.e. purchasing a forge)
 - Potential for shoplifting, robberies, need to hire guards
 - Create CP437 sprite system (OpenGL, like Dwarf Fortress?)
+- Build weapons based on components in addition to templates (e.g. long oak hilt, long curved steel blade, 2" joint)
 
 
 #To Do
@@ -28,6 +36,7 @@ Shopkeep Development Plan
 - Flesh out concept of new hero generation
 - Create list of weapon types
 - Create list of weapon classes
+- Devise appraisal system to determine player's ability to determine worth/magic
 
 
 #Hero Traits
@@ -47,6 +56,22 @@ Shopkeep Development Plan
 	- Specific Weapon Familiarity (value for each weapon ever wielded)
 	
 
+#Town Shops
+
+- Hunter (purchase raw leather/sinew/rawhide/bone)
+- Farmer (puchase raw cotton/cannibis/silk)
+- Textile Mill (create new linen/hemp/silk components)
+- Mine (purchase raw metal ore / gems)
+- Smelter (melt down metal items / ore)
+- Blacksmith (create new metal components)
+- Lumberjack (purchase raw wood)
+- Woodcutter (create new wood components)
+- Quarry (purchase raw stone)
+- Stonemason (create new stone components)
+- Jeweler (adorn items)
+- Enchanter (enchant items)
+- Priest (remove curses)
+
 
 #Item Types
 
@@ -55,10 +80,11 @@ Shopkeep Development Plan
 ###Basic Qualities
 
 - Unique ID Hash
-- Class (e.g. 1-handed blade, 2-handed bludgeon, etc.)
+- Class (e.g. sword, axe, etc.)
 - Type (e.g. falchion, warhammer, etc.)
 - Weight
 - Materials (% for each?  For each component?)
+- Joint quality (per joint; 0 = break at joint)
 - Sharpness (possible null)
 - Grip
 - Durability (upon breaking, splits into component materials)
@@ -68,7 +94,12 @@ Shopkeep Development Plan
 ###Materials (items may be made of more than one)
 
 - Leather (e.g. whip, sling)
-- Gut (e.g. bow)
+- Fiber (e.g. bow)
+	- Linen
+	- Hemp
+	- Sinew
+	- Silk
+	- Rawhide
 - Wood (e.g. spear, club)
 	- Oak
 	- Pine
@@ -87,7 +118,7 @@ Shopkeep Development Plan
 
 ###Classes/Types/Components/Possible Materials
 
-- 1-Handed Blades
+- Swords
 	- Shortsword
 		- Hilt
 			- Wood, Stone, Metal
@@ -98,7 +129,7 @@ Shopkeep Development Plan
 			- Wood, Stone, Metal
 		- Blade
 			- Metal
-- 1-Handed Bludgeons
+- Bludgeons
 	- Club
 		- Body
 			- Wood
@@ -106,4 +137,33 @@ Shopkeep Development Plan
 		- Handle
 			- Wood
 		- Head
+			- Stone, Metal
+- Axes
+	- Greataxe
+		- Hilt
+			- Wood
+		- Blade
+			- Metal
+- Bows
+	- Shortbow
+		- Upper Limb
+			- Wood
+		- Lower Limb
+			- Wood
+		- Bow String
+			- Fiber
+- Lashers
+	- Whip
+		- Hilt
+			- Leather, Wood
+		- Chord
+			- Leather
+		- Tail(s)
+			- Leather, Metal
+	- Flail
+		- Handle
+			- Wood
+		- Chain(s)
+			- Metal
+		- Head(s)
 			- Metal
