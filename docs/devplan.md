@@ -135,11 +135,15 @@ Shopkeep Development Plan
 			- Wood, Stone, Metal
 		- Blade
 			- Metal
+		- Scabbard
+			- Leather, Wood, Metal
 	- Longsword
 		- Hilt
 			- Wood, Stone, Metal
 		- Blade
 			- Metal
+		- Scabbard
+			- Leather, Wood, Metal
 - Bludgeons
 	- Club
 		- Body
