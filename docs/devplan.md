@@ -88,7 +88,7 @@ Shopkeep Development Plan
 - Type (e.g. falchion, warhammer, etc.)
 - Weight
 - Materials (% for each?  For each component?)
-- Joint quality (per joint; 0 = break at joint) (e.g. quality of lugs where axe head meets shaft)
+- Joint quality (per joint; 0 = break at joint) (e.g. quality of lugs where axe head meets haft)
 - Sharpness (possible null)
 - Grip
 - Durability (upon breaking, splits into component materials)
@@ -148,6 +148,8 @@ Shopkeep Development Plan
 	- Club (1/2H)
 		- Body
 			- Wood
+		- Head (optional)
+			- Stone, Metal
 	- Warhammer (1H)
 		- Handle
 			- Wood
