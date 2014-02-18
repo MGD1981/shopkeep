@@ -13,6 +13,8 @@ Shopkeep Development Plan
 - Will start coding just weapons, leaving a framework for expansion.
 - Tile-based sprites.  Will have a designer create these; will start with CP437 on my own.
 - Interactions with other shops in town (e.g. order wood from woodcutter); towns may not always have every kind of shop.
+- Raw material shops have dynamic inventory dependent on world activity; may need resource sites along with adventure sites.
+- Becoming self-sufficient may anger neglected shops, who could attempt to rob/damange player's shop; player could hire guards.
 - Humorous hate-thy-neighbor relationship with neighboring apothecary.
 - Ability to auto-transact by setting buy/sell rules; easy method to view/query rules.
 - Magic (and cursed!) weapons.
@@ -26,6 +28,7 @@ Shopkeep Development Plan
 - Potential for shoplifting, robberies, need to hire guards
 - Create CP437 sprite system (OpenGL, like Dwarf Fortress?)
 - Build weapons based on components in addition to templates (e.g. long oak hilt, long curved steel blade, 2" joint)
+	(more specific e.g.: axe head would be composed of heel, beard, bit, toe, cheek, eye, butt; haft composed of shoulder, belly, grip, throat, knob)
 
 
 #To Do
@@ -33,9 +36,10 @@ Shopkeep Development Plan
 - Create console-based dev menu for shop actions to act as starting point (make sure will be able to translate into a graphical system)
 - Determine turn-based or time-based system (mixed?)
 - Flesh out concept of adventure locations
+- Flesh out concept of resource locations
 - Flesh out concept of new hero generation
-- Create list of weapon types
-- Create list of weapon classes
+- Create list of weapon types/classes/components/materials
+- Devise town representation and system of player-town interaction
 - Devise appraisal system to determine player's ability to determine worth/magic
 
 
@@ -84,7 +88,7 @@ Shopkeep Development Plan
 - Type (e.g. falchion, warhammer, etc.)
 - Weight
 - Materials (% for each?  For each component?)
-- Joint quality (per joint; 0 = break at joint)
+- Joint quality (per joint; 0 = break at joint) (e.g. quality of lugs where axe head meets shaft)
 - Sharpness (possible null)
 - Grip
 - Durability (upon breaking, splits into component materials)
@@ -94,6 +98,11 @@ Shopkeep Development Plan
 ###Materials (items may be made of more than one)
 
 - Leather (e.g. whip, sling)
+	- Cow
+	- Goat
+	- Deer
+	- Horse
+	- Bear
 - Fiber (e.g. bow)
 	- Linen
 	- Hemp
@@ -101,6 +110,8 @@ Shopkeep Development Plan
 	- Silk
 	- Rawhide
 - Wood (e.g. spear, club)
+	- Hickory
+	- Ash
 	- Oak
 	- Pine
 - Stone (e.g. tomahawk, sling bullet)
@@ -108,13 +119,13 @@ Shopkeep Development Plan
 	- Marble
 - Metal
 	- Copper
-	- Bronze
+	- Bronze (alloy)
 	- Silver
 	- Gold
 	- Iron
-	- Steel
+	- Steel (alloy)
 	- Mithril
-	- Adamantium
+	- Adamantium (alloy)
 
 ###Classes/Types/Components/Possible Materials
 
@@ -140,7 +151,7 @@ Shopkeep Development Plan
 			- Stone, Metal
 - Axes
 	- Greataxe
-		- Hilt
+		- Haft
 			- Wood
 		- Blade
 			- Metal
