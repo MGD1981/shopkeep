@@ -1,7 +1,7 @@
 Shopkeep Development Plan
-============================
+=========================
 
-# Main Ideas
+#Main Ideas
 
 - Player owns and operates a shop in a town in a medieval fantasy setting a la D&D.
 - Shop will procure/create weapons and armor -- possibly expanding to other things in the future.
@@ -14,8 +14,26 @@ Shopkeep Development Plan
 - Tile-based sprites.  Will have a designer create these; will start with CP437 on my own.
 
 
-# To Do
+#To Do
 
 - Create CP437 sprite system (OpenGL, like Dwarf Fortress?)
 - Create console-based dev menu for shop actions to act as starting point (make sure will be able to translate into a graphical system)
 
+
+#Item Types
+
+##Weapons
+
+###Materials (items may be made of more than one)
+
+- Leather (e.g. whip, sling)
+- Gut (e.g. bow)
+- Wood (e.g. spear, club)
+- Stone (e.g. tomahawk, sling bullet)
+- Bronze
+- Silver
+- Gold
+- Iron
+- Steel
+- Mithril
+- Adamantium
