@@ -52,30 +52,58 @@ Shopkeep Development Plan
 
 ##Weapons
 
-###Materials (items may be made of more than one)
-
-- Leather (e.g. whip, sling)
-- Gut (e.g. bow)
-- Wood (e.g. spear, club)
-- Stone (e.g. tomahawk, sling bullet)
-- Copper
-- Bronze
-- Silver
-- Gold
-- Iron
-- Steel
-- Mithril
-- Adamantium
-
-
 ###Basic Qualities
 
 - Unique ID Hash
-- Class (e.g. 1-handed slashing, 2-handed bludgeon, etc.)
+- Class (e.g. 1-handed blade, 2-handed bludgeon, etc.)
 - Type (e.g. falchion, warhammer, etc.)
 - Weight
+- Materials (% for each?  For each component?)
 - Sharpness (possible null)
 - Grip
 - Durability (upon breaking, splits into component materials)
 - Balance
 
+
+###Materials (items may be made of more than one)
+
+- Leather (e.g. whip, sling)
+- Gut (e.g. bow)
+- Wood (e.g. spear, club)
+	- Oak
+	- Pine
+- Stone (e.g. tomahawk, sling bullet)
+	- Granite
+	- Marble
+- Metal
+	- Copper
+	- Bronze
+	- Silver
+	- Gold
+	- Iron
+	- Steel
+	- Mithril
+	- Adamantium
+
+###Classes/Types/Components/Possible Materials
+
+- 1-Handed Blades
+	- Shortsword
+		- Hilt
+			- Wood, Stone, Metal
+		- Blade
+			- Metal
+	- Longsword
+		- Hilt
+			- Wood, Stone, Metal
+		- Blade
+			- Metal
+- 1-Handed Bludgeons
+	- Club
+		- Body
+			- Wood
+	- Warhammer
+		- Handle
+			- Wood
+		- Head
+			- Metal
