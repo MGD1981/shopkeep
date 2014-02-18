@@ -26,6 +26,8 @@ Shopkeep Development Plan
 - Determine turn-based or time-based system (mixed?)
 - Flesh out concept of adventure locations
 - Flesh out concept of new hero generation
+- Create list of weapon types
+- Create list of weapon classes
 
 
 #Hero Traits
