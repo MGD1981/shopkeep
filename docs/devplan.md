@@ -19,6 +19,23 @@ Shopkeep Development Plan
 - Create CP437 sprite system (OpenGL, like Dwarf Fortress?)
 - Create console-based dev menu for shop actions to act as starting point (make sure will be able to translate into a graphical system)
 
+#Hero Traits
+
+- Constants
+	- Name
+	- Date of Birth
+	- Sex
+	- Race
+	- Class
+	- Size
+	- Personality (may not include in v1)
+
+- Variables
+	- Weapon Class Familiarity (value for each class)
+	- Weapon Type Familiarity (value for each type)
+	- Specific Weapon Familiarity (value for each weapon ever wielded)
+	
+
 
 #Item Types
 
@@ -41,8 +58,12 @@ Shopkeep Development Plan
 
 ###Basic Qualities
 
+- ID Hash
+- Class (e.g. 1-handed slashing, 2-handed bludgeon, etc.)
+- Type (e.g. falchion, warhammer, etc.)
 - Weight
 - Sharpness (possible null)
 - Grip
 - Durability (upon breaking, splits into component materials)
 - Balance
+
