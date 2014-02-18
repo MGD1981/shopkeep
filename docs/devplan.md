@@ -130,14 +130,14 @@ Shopkeep Development Plan
 ###Classes/Types/Components/Possible Materials
 
 - Swords
-	- Shortsword
+	- Shortsword (1H)
 		- Hilt
 			- Wood, Stone, Metal
 		- Blade
 			- Metal
 		- Scabbard
 			- Leather, Wood, Metal
-	- Longsword
+	- Longsword (2H)
 		- Hilt
 			- Wood, Stone, Metal
 		- Blade
@@ -145,22 +145,22 @@ Shopkeep Development Plan
 		- Scabbard
 			- Leather, Wood, Metal
 - Bludgeons
-	- Club
+	- Club (1/2H)
 		- Body
 			- Wood
-	- Warhammer
+	- Warhammer (1H)
 		- Handle
 			- Wood
 		- Head
 			- Stone, Metal
 - Axes
-	- Greataxe
+	- Greataxe (2H)
 		- Haft
 			- Wood
 		- Blade
 			- Metal
 - Bows
-	- Shortbow
+	- Shortbow (2H)
 		- Upper Limb
 			- Wood
 		- Lower Limb
@@ -168,14 +168,14 @@ Shopkeep Development Plan
 		- Bow String
 			- Fiber
 - Lashers
-	- Whip
+	- Whip (1H)
 		- Hilt
 			- Leather, Wood
 		- Chord
 			- Leather
 		- Tail(s)
 			- Leather, Metal
-	- Flail
+	- Flail (1H)
 		- Handle
 			- Wood
 		- Chain(s)
