@@ -13,11 +13,20 @@ Shopkeep Development Plan
 - Will start coding just weapons, leaving a framework for expansion.
 - Tile-based sprites.  Will have a designer create these; will start with CP437 on my own.
 
+#Potential Future (post v1)
+
+- Physical shop with limited capacity, ability to expand space, storage, functionality (i.e. purchasing a forge)
+- Potential for shoplifting, robberies, need to hire guards
+- Create CP437 sprite system (OpenGL, like Dwarf Fortress?)
+
 
 #To Do
 
-- Create CP437 sprite system (OpenGL, like Dwarf Fortress?)
 - Create console-based dev menu for shop actions to act as starting point (make sure will be able to translate into a graphical system)
+- Determine turn-based or time-based system (mixed?)
+- Flesh out concept of adventure locations
+- Flesh out concept of new hero generation
+
 
 #Hero Traits
 
@@ -56,9 +65,10 @@ Shopkeep Development Plan
 - Mithril
 - Adamantium
 
+
 ###Basic Qualities
 
-- ID Hash
+- Unique ID Hash
 - Class (e.g. 1-handed slashing, 2-handed bludgeon, etc.)
 - Type (e.g. falchion, warhammer, etc.)
 - Weight
