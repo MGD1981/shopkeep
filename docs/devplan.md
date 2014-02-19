@@ -4,7 +4,7 @@ Shopkeep Development Plan
 #Main Ideas
 
 - Player owns and operates a shop in a town in a medieval fantasy setting a la D&D.
-- Shop will procure/create weapons and armor -- possibly expanding to other things in the future.
+- Shop will procure/create weapons and possibly armor -- possibly expanding to other things in the future.
 - Heroes and would-be heroes will make transactions at shop.
 - Off-screen, heroes will adventure at various locations which may or may not contain treasure.  Death of a hero will add his/her inventory to that location's treasure.
 - Keeping the number of transactions small will keep it manageable and keep the player interested in them.  Expanding to a megastore style will be boring without a fun management system.  Imagine throngs of villagers coming in selling their everyday garden herbs in the shop's apothecary section.
@@ -34,7 +34,12 @@ Shopkeep Development Plan
 #To Do
 
 - Create console-based dev menu for shop actions to act as starting point (make sure will be able to translate into a graphical system)
+- Create mapping system and system to display map (ANSI, possibly to be replaced with real graphics)
+	- How big should shop grid be?
+	- Movable view when player gets close to screen boundary
 - Determine turn-based or time-based system (mixed?)
+	- If motion every tick, how responsive will keyboard movement be?
+	- Time passes at motion, or when sitting at counter and pressing button?
 - Flesh out concept of adventure locations
 - Flesh out concept of resource locations
 - Flesh out concept of new hero generation
@@ -70,11 +75,25 @@ Shopkeep Development Plan
 - Blacksmith (create new metal components)
 - Lumberjack (purchase raw wood)
 - Woodcutter (create new wood components)
+- Carpenter (expand shop, purchase furniture)
 - Quarry (purchase raw stone)
 - Stonemason (create new stone components)
 - Jeweler (adorn items)
 - Enchanter (enchant items)
 - Priest (remove curses)
+
+
+#Shop Furnishings
+
+- Walls
+- Doors?
+- Counter?  Or just one fixed one?
+- Display Case
+- Weapon Rack
+- Barrel (for parts)
+- Chest
+- Safe?
+- Decorations? (decor could affect repeat business)
 
 
 #Item Types
