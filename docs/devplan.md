@@ -20,6 +20,7 @@ Shopkeep Development Plan
 - Magic (and cursed!) weapons.
 - Large government commissions at wartime (not very profitable, but war loss can have serious consequences).
 - Small government commissions (e.g. whip for judiciary punishment)
+- Daily herald tells of news events (like adventurers being found dead or slaying a big enemy)
 
 
 #Potential Future (post v1)
