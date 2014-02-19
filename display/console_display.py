@@ -42,10 +42,21 @@ class _GetchWindows:
 getch = _Getch()
 
 def cls():
-    print CSI+"37;40m" + CSI+"2J" # clears screen
+    print CSI+"37;40m" + CSI+"?25l" + CSI+"2J" # clears screen
 
 def disp_reset():
     print CSI+"0m"
 
+def default_reset():
+    disp_reset()
+    print CSI+"?25h" + CSI+"2J"
 
-
+def draw_map(shopmap):
+    cls()
+    assert type(shopmap) == list
+    for n in range(1,25):
+        line = []
+        for m in shopmap[n]:
+            if m == 0:
+                line.append(CSI+"40m" + ' ')
+        print ''.join(line)
