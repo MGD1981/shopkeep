@@ -30,6 +30,8 @@ Shopkeep Development Plan
 - Create CP437 sprite system (OpenGL, like Dwarf Fortress?)
 - Build weapons based on components in addition to templates (e.g. long oak hilt, long curved steel blade, 2" joint)
 	(more specific e.g.: axe head would be composed of heel, beard, bit, toe, cheek, eye, butt; haft composed of shoulder, belly, grip, throat, knob)
+- World map which shows adventure, resource locations, etc.
+- Option to choose a starting town based on world map
 
 
 #To Do
