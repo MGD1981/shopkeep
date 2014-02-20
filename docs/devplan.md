@@ -86,7 +86,7 @@ Shopkeep Development Plan
 - Stonemason (create new stone components)
 - Jeweler (adorn items)
 - Enchanter (enchant items)
-- Priest (remove curses)
+- Dispeller (remove enhantments)
 
 
 #Shop Furnishings
