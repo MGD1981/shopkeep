@@ -21,6 +21,9 @@ Shopkeep Development Plan
 - Large government commissions at wartime (not very profitable, but war loss can have serious consequences).
 - Small government commissions (e.g. whip for judiciary punishment)
 - Daily herald tells of news events (like adventurers being found dead or slaying a big enemy)
+- Try to keep minimal personal apotheosis, but town may improve based in part on player's actions.
+- Player able to haggle and potentially deceive customers (e.g. convince someone that a cursed sword is actually magically bless and worth more than normal).  Charisma stat?
+- Weapons based more on real life/history than D&D?
 
 
 #Potential Future (post v1)
