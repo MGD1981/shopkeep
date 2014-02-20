@@ -153,8 +153,28 @@ Shopkeep Development Plan
 	- Adamantium (alloy)
 
 ###Classes/Types/Components/Possible Materials
+(using http://en.wikipedia.org/wiki/List_of_medieval_weapons -- TODO: filter to ~1400)
+
+- Daggers/Knives
+	- Baselard
+	- Cinquedea
+	- Ear dagger
+	- Großes Messer
+	- Katar
+	- Mercygiver
+	- Poniard
+	- Rondel
+	- Scramasax
+	- Sgian
+	- Stiletto
+	- Dirk
+	- Anelace
+	- Parrying Dagger
+	- Seax
+	- Sai
 
 - Swords
+	- Arming sword
 	- Shortsword (1H)
 		- Hilt
 			- Wood, Stone, Metal
@@ -162,6 +182,8 @@ Shopkeep Development Plan
 			- Metal
 		- Scabbard
 			- Leather, Wood, Metal
+	- Zweihander
+	- Claymore
 	- Longsword (2H)
 		- Hilt
 			- Wood, Stone, Metal
@@ -169,39 +191,23 @@ Shopkeep Development Plan
 			- Metal
 		- Scabbard
 			- Leather, Wood, Metal
-- Bludgeons
+	- Broadsword
+	- Falchion
+	- Flamberge
+	- Sabre
+	- Katana
+
+- Blunt/Cleaving Weapons
+	- Battle axe (2H)
+		- Haft
+			- Wood
+		- Blade
+			- Metal
 	- Club (1/2H)
 		- Body
 			- Wood
 		- Head (optional)
 			- Stone, Metal
-	- Warhammer (1H)
-		- Handle
-			- Wood
-		- Head
-			- Stone, Metal
-- Axes
-	- Greataxe (2H)
-		- Haft
-			- Wood
-		- Blade
-			- Metal
-- Bows
-	- Shortbow (2H)
-		- Upper Limb
-			- Wood
-		- Lower Limb
-			- Wood
-		- Bow String
-			- Fiber
-- Lashers
-	- Whip (1H)
-		- Hilt
-			- Leather, Wood
-		- Chord
-			- Leather
-		- Tail(s)
-			- Leather, Metal
 	- Flail (1H)
 		- Handle
 			- Wood
@@ -209,3 +215,73 @@ Shopkeep Development Plan
 			- Metal
 		- Head(s)
 			- Metal
+	- Mace
+	- Flanged mace
+	- Pernach
+	- Shestopyor
+	- Maul
+	- Morning star
+	- Quarterstaff
+	- War hammer (1H)
+		- Handle
+			- Wood
+		- Head
+			- Stone, Metal
+	- Bec de Corbin
+	- Horseman's pick
+	- Bludgeon
+
+- Polearms
+	- Bardiche
+	- Bill
+	- Glaive
+	- Guisarme
+	- Halberd
+	- Lance
+	- Lochaber Axe
+	- Lucerne hammer
+	- Man catcher
+	- Military fork, the weaponized Pitchfork
+	- Partisan
+	- Pike
+	- Plançon a picot
+	- Ranseur
+	- Sovnya
+	- Spetum
+	- Swordstaff
+	- Voulge
+	- War-scythe
+	- War hammer (2H)
+
+- Ranged (separate into thrown/drawn?)
+	- Bombard
+	- Longbow (2H)
+		- Upper Limb
+			- Wood
+		- Lower Limb
+			- Wood
+		- Bow String
+			- Fiber)
+	- Recurve bow
+	- Arbalest
+	- Ballista
+	- Repeating crossbow
+	- Sling
+	- Francisca
+	- Nzappa zap
+	- Tomahawk
+	- Throwing Spear
+	- Shuriken
+	- Chakram
+	- Culverin
+	- Musket
+	
+- Lashers
+    - Whip (1H)
+		- Hilt
+			- Leather, Wood
+		- Chord
+			- Leather
+		- Tail(s)
+			- Leather, Metal
+
