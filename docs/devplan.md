@@ -14,6 +14,7 @@ Shopkeep Development Plan
 - Tile-based sprites.  Will have a designer create these; will start with CP437 on my own.
 - Interactions with other shops in town (e.g. order wood from woodcutter); towns may not always have every kind of shop.
 - Raw material shops have dynamic inventory dependent on world activity; may need resource sites along with adventure sites.
+- New resource or adventure sites may be discovered or come into existence (e.g. depleted/abandoned mine may become dungeon).
 - Becoming self-sufficient may anger neglected shops, who could attempt to rob/damange player's shop; player could hire guards.
 - Humorous hate-thy-neighbor relationship with neighboring apothecary?
 - Ability to auto-transact by setting buy/sell rules; easy method to view/query rules.
@@ -35,6 +36,7 @@ Shopkeep Development Plan
 	(more specific e.g.: axe head would be composed of heel, beard, bit, toe, cheek, eye, butt; haft composed of shoulder, belly, grip, throat, knob)
 - World map which shows adventure, resource locations, etc.
 - Option to choose a starting town based on world map
+	- Potential sites have different surrounding known resource & adventure sites, and different pre-existing shops.
 - Ability to move around town to go to other shops, etc.
 	- Dynamically growing town
 	- Museum of legendary heroes, which may house the weapons of retired/slain adventurers (if they don't come back to the shop)
