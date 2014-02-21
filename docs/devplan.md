@@ -66,15 +66,32 @@ Shopkeep Development Plan
 	- Date of Birth
 	- Sex
 	- Race
-	- Class
+	- Class?  (e.g. thieves would loot dungeons and run [and try to steal from shop], fighters would battle more)
 	- Size
-	- Personality (may not include in v1)
+	- Personality (may not include in v1, but may be vital for gullibility)
 
 - Variables
-	- Weapon Class Familiarity (value for each class)
-	- Weapon Type Familiarity (value for each type)
+	- Weapon Class Familiarity (value for each class) - affects combat, possibly appraisal
+	- Weapon Type Familiarity (value for each type) - affects combat, possibly appraisal
 	- Specific Weapon Familiarity (value for each weapon ever wielded)
+	- Impression of shopkeep
+	- Impression of shop
+	- Gullibility?
+	- Guile?
 	
+	
+#Player Traits
+	There should be no general reputation -- just an impression specific to each shopper, which may be shared.
+	There should be no gullibility/guile, as these are choices made by the player.
+
+- Constants
+	- Name?  Or leave as generic "shopkeep"?
+	- Sex?  Or leave genderless?  Or female?	
+
+- Variables
+	- Charisma?  If so, should it be constant or variable?  Should it have separate facets (e.g. appearance, language skill, etc.)?
+	- Appraisal ability?  If so, should it be constant or variable?  Appraisal ability for each weapon? Class? Material? Magic type?
+
 
 #Town Shops
 
