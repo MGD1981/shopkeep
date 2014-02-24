@@ -59,6 +59,25 @@ Shopkeep Development Plan
 - Devise appraisal system to determine player's ability to determine worth/magic
 
 
+#Mapping
+- Two possibilities as I see it:
+
+##Matrix
+
+- Each map (shop map, world map, etc.) contains a set number of tiles represented by a matrix.
+- Tile includes various pieces of information.
+	- Background object (e.g. floor, wall, counter)
+	- Foreground object (e.g. player, NPC, weapon rack)
+- Screen displays certain number of tiles in radius around player's tile.
+
+##Coordinates
+
+- Each object is given x and y coordinate information.
+- Program must store list of "full" coordinates to prevent duplication.
+- Not certain about most efficient way to display screen
+	- Every time player moves, iterate through all objects?
+
+
 #Hero Traits
 
 - Constants
