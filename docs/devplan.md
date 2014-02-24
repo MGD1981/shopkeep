@@ -69,7 +69,7 @@ Shopkeep Development Plan
 	- Background object (e.g. floor, wall, counter)
 	- Foreground object (e.g. player, NPC, weapon rack)
 - Screen displays certain number of tiles in radius around player's tile OR
-- Screen is as big as any map will be, so no scrolling (conducive to a faster FPS in PyGame)
+- Screen is fixed (as big as any map will be), so no scrolling (conducive to a faster FPS in PyGame)
 
 ##Coordinates
 
@@ -77,6 +77,7 @@ Shopkeep Development Plan
 - Program must store list of "full" coordinates to prevent duplication.
 - Not certain about most efficient way to display screen
 	- Every time player moves, iterate through all objects?
+	- If screen is fixed, direct relationship to PyGame surface coords.
 
 
 #Hero Traits
