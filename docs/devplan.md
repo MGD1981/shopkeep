@@ -42,17 +42,29 @@ Shopkeep Development Plan
 	- Museum of legendary heroes, which may house the weapons of retired/slain adventurers (if they don't come back to the shop)
 
 
+#Immediate Goals
+
+- Create hero-shopkeep transaction menu
+- Create weapon object parent class
+- Create player class
+	- inventory = list of weapon objects
+- Create hero object parent class
+
+
 #To Do
 
-- Create console-based dev menu for shop actions to act as starting point (make sure will be able to translate into a graphical system)
 - Create mapping system and system to display map (ANSI, possibly to be replaced with real graphics)
+	- See "Mapping" section below
 	- How big should shop grid be?
 	- Movable view when player gets close to screen boundary
 - Determine turn-based or time-based system (mixed?)
 	- If motion every tick, how responsive will keyboard movement be?
 	- Time passes at motion, or when sitting at counter and pressing button?
 - Flesh out concept of adventure locations
+	- World map
+	- Dependent on biomes?
 - Flesh out concept of resource locations
+	- Dependent on biomes?
 - Flesh out concept of new hero generation
 - Create list of weapon types/classes/components/materials
 - Devise town representation and system of player-town interaction
