@@ -81,8 +81,8 @@ Shopkeep Development Plan
 	
 	
 #Player Traits
-	There should be no general reputation -- just an impression specific to each shopper, which may be shared.
-	There should be no gullibility/guile, as these are choices made by the player.
+- There should be no general reputation -- just an impression specific to each shopper, which may be shared.
+- There should be no gullibility/guile, as these are choices made by the player.
 
 - Constants
 	- Name?  Or leave as generic "shopkeep"?
