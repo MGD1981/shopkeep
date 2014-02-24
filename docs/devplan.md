@@ -68,7 +68,8 @@ Shopkeep Development Plan
 - Tile includes various pieces of information.
 	- Background object (e.g. floor, wall, counter)
 	- Foreground object (e.g. player, NPC, weapon rack)
-- Screen displays certain number of tiles in radius around player's tile.
+- Screen displays certain number of tiles in radius around player's tile OR
+- Screen is as big as any map will be, so no scrolling (conducive to a faster FPS in PyGame)
 
 ##Coordinates
 
