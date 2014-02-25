@@ -48,8 +48,18 @@ Shopkeep Development Plan
 
 - Create hero-shopkeep transaction menu
 - Create weapon dictionary
+	- Weapons
+		- WeaponID (Surrogate PK)
+		- WeaponType (Natural FK)
+		- Components
+			- ComponentType (can be populated from Type) (Natural FK)
+			- Material (Natural FK)
+		- Kills
+			- MonsterID (Surrogate FK)
+			- HeroID (Surrogate FK)
 - Create hero dictionary
 	- inventory = list of weapon ids
+- Initiate following tables (dicts): WeaponType, WeaponClass, ComponentType, Material, Monsters, Heroes
 - Create player class
 
 
@@ -93,6 +103,11 @@ Shopkeep Development Plan
 - Not certain about most efficient way to display screen
 	- Every time player moves, iterate through all objects?
 	- If screen is fixed, direct relationship to PyGame surface coords.
+
+
+#Saving/Loading
+
+- Need something to serialize data.  Pickle?
 
 
 #Hero Traits
