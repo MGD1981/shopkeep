@@ -13,6 +13,8 @@ Shopkeep Development Plan
 - Will start coding just weapons, leaving a framework for expansion.
 - Tile-based sprites.  Will have a designer create these; will start with CP437 on my own.
 - Interactions with other shops in town (e.g. order wood from woodcutter); towns may not always have every kind of shop.
+- Player does not control town growth/prosperity, but her actions do play a significant role.
+- Town growth leads to new opportunities, more customers, wider variety of available shops.
 - Raw material shops have dynamic inventory dependent on world activity; may need resource sites along with adventure sites.
 - New resource or adventure sites may be discovered or come into existence (e.g. depleted/abandoned mine may become dungeon).
 - Becoming self-sufficient may anger neglected shops, who could attempt to rob/damange player's shop; player could hire guards.
@@ -67,6 +69,7 @@ Shopkeep Development Plan
 	- Dependent on biomes?
 - Flesh out concept of new hero generation
 - Create list of weapon types/classes/components/materials
+	- Should weapons be stored in a database?  They are unique.  Easy to think in db format regarding history.
 - Devise town representation and system of player-town interaction
 - Devise appraisal system to determine player's ability to determine worth/magic
 
