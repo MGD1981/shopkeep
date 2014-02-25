@@ -47,10 +47,10 @@ Shopkeep Development Plan
 #Immediate Goals
 
 - Create hero-shopkeep transaction menu
-- Create weapon object parent class
+- Create weapon dictionary
+- Create hero dictionary
+	- inventory = list of weapon ids
 - Create player class
-	- inventory = list of weapon objects
-- Create hero object parent class
 
 
 #To Do
