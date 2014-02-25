@@ -69,7 +69,7 @@ Shopkeep Development Plan
 	- Dependent on biomes?
 - Flesh out concept of new hero generation
 - Create list of weapon types/classes/components/materials
-	- Should weapons be stored in a database?  They are unique.  Easy to think in db format regarding history.
+	- Database would be overkill?  Store in dict.
 - Devise town representation and system of player-town interaction
 - Devise appraisal system to determine player's ability to determine worth/magic
 
