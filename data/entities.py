@@ -2,10 +2,7 @@ import pickle
 
 
 def initialize():
-    global weapons
-    global heroes
-    global adventure_sites
-    global resource_sites
+    global weapons, heroes, adventure_sites, resource_sites
     weapons = {}
     heroes = {}
     adventure_sites = {}
@@ -14,10 +11,7 @@ def initialize():
 
 
 def load(save_name):
-    global weapons
-    global heroes
-    global adventure_sites
-    global resource_sites
+    global weapons, heroes, adventure_sites, resource_sites
     save_file = open('saves/%s' % save_name)
     dict_list = pickle.load(save_file)
     weapons = dict_list[0]
@@ -29,10 +23,7 @@ def load(save_name):
 
 
 def save(save_name):
-    global weapons
-    global heroes
-    global adventure_sites
-    global resource_sites
+    global weapons, heroes, adventure_sites, resource_sites
     save_file = open('saves/%s' % save_name)
     dict_list = [weapons, 
                  heroes, 
