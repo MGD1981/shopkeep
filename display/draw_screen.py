@@ -1,4 +1,5 @@
 # coding = utf-8
+import menus
 
 CSI="\x1B["
 # sample: print CSI+"31;40m" + "Colored Text" + CSI + "0m"
@@ -50,6 +51,32 @@ def disp_reset():
 def default_reset():
     disp_reset()
     print CSI+"?25h" + CSI+"2J"
+
+
+
+def run_menu(menu):
+    """Displays a Menu class object."""
+
+    print 24*'\n'
+    cls()
+    i = 1
+    for option in menu.options:
+        print " %d) %s" % (i, option.text)
+        i += 1
+    print '\n\n'
+
+    try:
+        choice = int(getch())
+        chosen_option = menu.options[choice - 1]
+    except:
+        return run_menu(menu)
+    if chosen_option.actions != None:
+        for action in chosen_option.actions: 
+            exec(action)
+    if chosen_option.return_value != None:
+        return chosen_option.return_value
+    return
+
 
 def draw_map(shopmap):
     cls()
