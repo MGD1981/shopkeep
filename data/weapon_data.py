@@ -18,6 +18,7 @@ class Weapon():
     }
 
     def __init__(self):
+        self.weapon_id = None #TODO: get unique based on entities.weapons
         self.weapon_type = None
         self.weapon_class = None
         self.components = []
