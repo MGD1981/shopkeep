@@ -41,6 +41,7 @@ Shopkeep Development Plan
 - Monster generation similar to "Forgotten Beasts" in Dwarf Fortress
 	- Like weapons, monsters have classes and a list of possible "components" made of different materials.
 	- Randomly-generated powers, perhaps informed by town/world info/resources.
+	- New monsters may bring interesting weapons into the world.
 
 
 #Potential Future (post v1)
