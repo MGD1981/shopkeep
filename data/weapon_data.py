@@ -7,17 +7,32 @@ class Weapon():
     weapon_type_dct = {
         'dirk': {
             'class': 'dagger',
-            'component': ['hilt', 'blade', 'scabbard'],
+            'components': ['hilt', 'blade', 'scabbard'],
             'hands to wield': 1
         },
         'shortsword': {
             'class': 'sword',
-            'component': ['hilt', 'blade', 'scabbard'],
+            'components': ['hilt', 'blade', 'scabbard'],
             'hands to wield': 1
         },
         'longsword': {
             'class': 'sword',
-            'component': ['hilt', 'blade', 'scabbard'],
+            'components': ['hilt', 'blade', 'scabbard'],
+            'hands to wield': 2
+        },
+        'flail': {
+            'class': 'blunt',
+            'components': ['handle', 'chain', 'ball'],
+            'hands to wield': 1
+        },
+        'double flail': {
+            'class': 'blunt',
+            'components': ['handle', 'chain', 'ball', 'chain', 'ball'],
+            'hands to wield': 1
+        },
+        'battle axe': {
+            'class': 'cleave',
+            'components': ['haft', 'blade'],
             'hands to wield': 2
         }
     }
@@ -33,10 +48,11 @@ class Weapon():
             'longsword'
         ],
         'blunt': [
-        
+            'flail',
+            'double flail'
         ],
         'cleave': [
-        
+            'battle axe'
         ],
         'polearm': [
         
@@ -63,13 +79,13 @@ class Weapon():
     def print_stats(self):
         """Prints the weapon's information in the console."""
         print "\nWeapon ID:         %r" % self.weapon_id
-        print "Weapon type:       %s" % self.weapon_type
-        print "Weapon class:      %s" % self.weapon_class
+        print "Weapon type:       %r" % self.weapon_type
+        print "Weapon class:      %r" % self.weapon_class
         print "Weapon components:"
         for component in self.components:
-            print "    %s:" % component.component_type
+            print "    %r:" % component.component_type
             for material in component.materials:
-                print "        %s (%s)" % (
+                print "        %r (%r)" % (
                     material.material_type, material.material_class)
         print "\n"
 
@@ -79,7 +95,7 @@ class Weapon():
             self.weapon_class = Weapon.weapon_type_dct[
                                         self.weapon_type]['class']
             for component in Weapon.weapon_type_dct[
-                    self.weapon_type]['component']:
+                    self.weapon_type]['components']:
                 self.components.append(
                         Component().generate(component))
         else:
@@ -98,6 +114,18 @@ class Component():
         },
         'scabbard': {
             'possible materials': ['leather', 'wood', 'metal']
+        },
+        'haft': {
+            'possible materials': ['wood']
+        },
+        'handle': {
+            'possible materials': ['wood']
+        },
+        'chain': {
+            'possible materials': ['metal']
+        },
+        'ball': {
+            'possible materials': ['metal']
         }
     }
 
@@ -122,19 +150,71 @@ class Material():
     material_class_dct = {
         'wood': {
             'type': {
-                'hickory': {},
-                'ash': {}
+                'bodark': {
+                    'strength': None,
+                    'flexibility': None,
+                    'density': None
+                },
+                'epay': {
+                    'strength': None,
+                    'flexibility': None,
+                    'density': None
+                },
+                'lemonwood': {
+                    'strength': None,
+                    'flexibility': None,
+                    'density': None
+                },
+                'pignut': {
+                    'strength': None,
+                    'flexibility': None,
+                    'density': None
+                },
+                'hickory': {
+                    'strength': None,
+                    'flexibility': None,
+                    'density': None
+                },
+                'oak': {
+                    'strength': None,
+                    'flexibility': None,
+                    'density': None
+                },
+                'maple': {
+                    'strength': None,
+                    'flexibility': None,
+                    'density': None
+                },
+                'yew': {
+                    'strength': None,
+                    'flexibility': None,
+                    'density': None
+                },
+                'elm': {
+                    'strength': None,
+                    'flexibility': None,
+                    'density': None
+                },
+                'ash': {
+                    'strength': None,
+                    'flexibility': None,
+                    'density': None
+                }
             } 
         },
         'fiber': {
             'type': {
                 'linen': {},
                 'hemp': {},
-                'sinew': {}
+                'sinew': {},
+                'silk': {},
+                'rawhide': {}
             }
         },
         'stone': {
             'type': {
+                'chert': {},
+                'flint': {},
                 'granite': {},
                 'marble': {}
             }
@@ -142,15 +222,27 @@ class Material():
         'leather': {
             'type': {
                 'cow leather': {},
-                'goat leather': {}
+                'buffalo leather': {},
+                'goat hide': {},
+                'calfskin': {},
+                'sheepskin': {},
+                'deerskin': {},
+                'elkskin': {},
+                'horse leather': {},
+                'sharkskin': {},
+                'dragonhide': {}
             }
         },
         'metal': {
             'type': {
                 'copper': {},
                 'bronze': {},
+                'silver': {},
+                'gold': {},
                 'iron': {},
-                'steel': {}
+                'steel': {},
+                'silvered steel': {},
+                'adamantine steel': {}
             }
         }
     }
@@ -158,6 +250,7 @@ class Material():
     def __init__(self):
         self.material_class = None
         self.material_type = None
+        self.material_quality = None
     
     def generate(self, material_class, arg='random'):
         self.material_class = material_class
