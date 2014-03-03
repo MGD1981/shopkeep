@@ -5,22 +5,59 @@ from random import choice
 class Weapon():
 
     weapon_type_dct = {
+        'dirk': {
+            'class': 'dagger',
+            'component': ['hilt', 'blade', 'scabbard'],
+            'hands to wield': 1
+        },
         'shortsword': {
             'class': 'sword',
             'component': ['hilt', 'blade', 'scabbard'],
             'hands to wield': 1
+        },
+        'longsword': {
+            'class': 'sword',
+            'component': ['hilt', 'blade', 'scabbard'],
+            'hands to wield': 2
         }
     }
 
+    #TODO: Once a weapon of every class exists, weapon_class_dct may be generated with an init function on weapon_type_dct.
+    #Hardcoded data just for reference right now.
     weapon_class_dct = {
-        'sword': {},
-        'blunt': {}
+        'dagger': [
+            'dirk'
+        ],
+        'sword': [
+            'shortsword',
+            'longsword'
+        ],
+        'blunt': [
+        
+        ],
+        'cleave': [
+        
+        ],
+        'polearm': [
+        
+        ],
+        'bow': [
+        
+        ],
+        'ammunition': [
+        
+        ],
+        'projectile': [
+        
+        ]
     }
 
     def __init__(self):
         self.weapon_id = None #TODO: get unique based on entities.weapons
         self.weapon_type = None
         self.weapon_class = None
+        self.owners = []
+        self.kills = []
         self.components = []
         
     def print_stats(self):
