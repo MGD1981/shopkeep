@@ -34,6 +34,10 @@ Shopkeep Development Plan
 	- Changes whenever hero enters shop.
 	- May also change when visiting off-screen shops.
 	- Foreign visitors may have an exceptionally skewed view of the economy, corrected more quickly with a high skill 'economic sense' or some such.
+- Heroes may shop and adventure in groups
+	- Group shopping may have positive and negative effects on a hero's economic sense (like peer pressure).
+	- Group adventuring make killing monsters easier, but doesnt fit every adventurer's personality.
+	- A monster proven to be exceptionally hard to kill may yield a higher desire in heroes to form groups.
 - Monster generation similar to "Forgotten Beasts" in Dwarf Fortress
 	- Like weapons, monsters have classes and a list of possible "components" made of different materials.
 	- Randomly-generated powers, perhaps informed by town/world info/resources.
