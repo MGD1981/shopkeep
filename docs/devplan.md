@@ -30,13 +30,16 @@ Shopkeep Development Plan
 - Customers may browse the display or you can suggest a special item from your storage.
     - Only so many special items may be shown depending on customer's personality.
     - Special interaction menu(s).
+- Each hero has her own individual perception of the local economy, with her own malleable value for each commodity.
+	- Changes whenever hero enters shop.
+	- May also change when visiting off-screen shops.
+	- Foreign visitors may have an exceptionally skewed view of the economy, corrected more quickly with a high skill 'economic sense' or some such.
 
 
 #Potential Future (post v1)
 
 - Physical shop with limited capacity, ability to expand space, storage, functionality (i.e. purchasing a forge)
 - Potential for shoplifting, robberies, need to hire guards
-- Create CP437 sprite system (OpenGL, like Dwarf Fortress?)
 - Build weapons based on components in addition to templates (e.g. long oak hilt, long curved steel blade, 2" joint)
 	(more specific e.g.: axe head would be composed of heel, beard, bit, toe, cheek, eye, butt; haft composed of shoulder, belly, grip, throat, knob)
 - World map which shows adventure, resource locations, etc.
@@ -50,20 +53,17 @@ Shopkeep Development Plan
 #Immediate Goals
 
 - Create hero-shopkeep transaction menu
-- Create weapon dictionary
+- Weapon dictionary
 	- Weapons
-		- WeaponID (Surrogate PK)
-		- WeaponType (Natural FK)
-		- Components
-			- ComponentType (can be populated from Type) (Natural FK)
-			- Material (Natural FK)
 		- Kills
 			- MonsterID (Surrogate FK)
 			- HeroID (Surrogate FK)
 - Create hero dictionary
 	- inventory = list of weapon ids
-- Initiate following tables (dicts): WeaponType, WeaponClass, ComponentType, Material, Monsters, Heroes
+- Initiate following tables (dicts): Monsters, Heroes
 - Create player class
+- Mapping system for shop (coordinates?)
+- Mapping system for world
 
 
 #To Do
