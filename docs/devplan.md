@@ -34,6 +34,9 @@ Shopkeep Development Plan
 	- Changes whenever hero enters shop.
 	- May also change when visiting off-screen shops.
 	- Foreign visitors may have an exceptionally skewed view of the economy, corrected more quickly with a high skill 'economic sense' or some such.
+- Monster generation similar to "Forgotten Beasts" in Dwarf Fortress
+	- Like weapons, monsters have classes and a list of possible "components" made of different materials.
+	- Randomly-generated powers, perhaps informed by town/world info/resources.
 
 
 #Potential Future (post v1)
