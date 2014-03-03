@@ -23,6 +23,19 @@ class Weapon():
         self.weapon_class = None
         self.components = []
         
+    def print_stats(self):
+        """Prints the weapon's information in the console."""
+        print "\nWeapon ID:         %r" % self.weapon_id
+        print "Weapon type:       %s" % self.weapon_type
+        print "Weapon class:      %s" % self.weapon_class
+        print "Weapon components:"
+        for component in self.components:
+            print "    %s:" % component.component_type
+            for material in component.materials:
+                print "        %s (%s)" % (
+                    material.material_type, material.material_class)
+        print "\n"
+
     def generate(self, arg='random'):
         if arg == 'random':
             self.weapon_type = choice(Weapon.weapon_type_dct.keys())
