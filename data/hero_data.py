@@ -28,7 +28,7 @@ class Personality():
 		self.shrewdness = 0 #ability to assess truth (battle effective)
 		self.guile = 0 #ability to lie (battle effective)
 		self.honesty = 0 #tendency to tell truth
-		self.charisma = 0 #likeability
+		self.charisma = 0 #likability
 		self.patience = 0 #ability to remain calm when angered/annoyed (battle effective)
 		self.fussiness = 0 #tendency to become angered/annoyed
 		self.seriousness = 0 #tendency to take things seriously (battle effective)
