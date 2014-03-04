@@ -4,6 +4,7 @@ from random import choice
 
 class Weapon():
 
+    #TODO: Move dct reference objects to dct class
     weapon_type_dct = {
         'dirk': {
             'class': 'dagger',
@@ -74,7 +75,7 @@ class Weapon():
         self.weapon_class = None
         self.owners = []
         self.kills = []
-        self.components = []
+        self.components = [] #Each component has Joint objects connecting Components
         
     def print_stats(self):
         """Prints the weapon's information in the console."""
@@ -144,6 +145,16 @@ class Component():
             return NotImplementedError(arg)
         return self
 
+
+class Joint():
+
+    def __init__(self):
+        self.connected_components = [] #list of component objects
+        self.material_type = None #material of which joint is made
+        self.material_integrity = None #i.e. 100=new, 0=broken
+        self.joint_quality = None #higher quality = slower rate of deterioration
+        self.joint_integrity = None #i.e. 100-new, 0=broken
+        
 
 class Material():
 
