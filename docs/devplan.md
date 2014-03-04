@@ -138,9 +138,16 @@ Shopkeep Development Plan
 	- Specific Weapon Familiarity (value for each weapon ever wielded)
 	- Impression of shopkeep
 	- Impression of shop
-	- Gullibility?
-	- Guile?
-	
+	- Gullibility
+	- Guile
+	- Perception of worth of individual commodities
+	- Point of origin (e.g. local or visitor)
+	- Ultimate destination (e.g. dungeon, far-away town)
+	- Economy experience (i.e. how well-traveled)
+	- Business savvy
+	- Weapon needs
+	- Secret weapon desires
+
 	
 #Player Traits
 - There should be no general reputation -- just an impression specific to each shopper, which may be shared.
