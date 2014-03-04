@@ -36,10 +36,10 @@ class Personality():
 
 
 class Experience():
-	"""Class containing weapon and monster familiarities"""
+	"""Class containing weapon and monster familiarities/knowledge"""
 	
 	def __init__(self):
-		self.weapon_experience = None #table of weapon abilities (class object?)
+		self.weapon_experience = None #table of weapon abilities and knowledge (class object?)
 		self.monster_experience = None #table of monster familiarity (class object?)
 
 
