@@ -6,13 +6,15 @@ from random import choice, randint
 class Weapon():
     """Weapon class object with unique weapon_id.  Contains Component objects."""
 
+
     def __init__(self):
-        self.weapon_id = None #TODO: get unique based on entities.weapons
+        self.weapon_id = None
         self.weapon_type = None
         self.weapon_class = None
         self.owners = []
         self.kills = []
         self.components = [] #Each component has Joint objects connecting it.
+        
         
     def print_stats(self):
         """Prints the weapon's information in the console."""
@@ -25,15 +27,16 @@ class Weapon():
             for material in component.materials:
                 print "        %r (%r)" % (
                     material.material_type, material.material_class)
-#            for joint in component.joints:
-#                joined = None
-#                for c in self.components:
-#                    if joint in c.joints and c != component:
-#                        joined = c
-#                        break
-#                print "        with a %r joint connecting to the %r." (
-#                    joint.material.material_type, joined.component_type)
+            for joint in component.joints:
+                joined = None
+                for c in self.components:
+                    if joint in c.joints and c != component:
+                        joined = c
+                        break
+                print "        with a %r joint connecting to the %r." (
+                    joint.material.material_type, joined.component_type)
         print "\n"
+
 
     def generate(self, arg='random'):
         """Generates a random weapon from reference_data.weapon_type_dct."""
@@ -52,43 +55,94 @@ class Weapon():
         return self
         
         
-    def assemble(weapon_type, component_list):
+    def assemble(self, weapon_type, component_list):
         """Joint generation & connection function."""
-        joining_table = {}         
-        
-        components_to_connect = ref.weapon_type_dct[
-                                self.weapon_type]['components']
-        n = 0
-        for c in components_to_connect:
-            n += ref.component_type_dct[c]['number of joints']
-        number_of_joints_to_connect = n/2
-        components_connected = []
-        joints_to_connect = []
-        for x in xrange(number_of_joints_to_connect):
-            joints_to_connect.append(Joint().generate())
-#        for component_to_connect in components_to_connect:
-#            for component in self.components:
-#                if component.component_type == component_to_connect:
-                    #connect if not already connected
-                    #test if connected:
-                    #TODO: Build some helper functions
+        joint_table = {}
+        #Remove components without joints from component_list:
+        component_types_to_connect = [
+                c for c in ref.weapon_type_dct[weapon_type][
+                'components'] if ref.component_type_dct[c][
+                'number of joints'] > 0 ]
+        for component in component_list:
+            if component.component_type not in component_type_to_connect:
+                component_list.remove(component)
+
+        for component in component_list:
+            joint_table[component.component_id] = {
+                'component type': component.component_type,
+                'joined to': [],
+                'joints remaining': ref.component_type_dct[component_type]['number of joints']
+            }
+        #joint table now has a key for every component_id
+        #key['joined to'] is list of (id, type) of connected components
+        joints_remaining = 0
+        for component_key in joint_table:
+            joints_remaining += joint_table[component_key]['joints remaining']
+        while joints_remaining > 0:
+            for component_key in joint_table:
+                if ref.component_type_dct[component_key['component type']][
+                            'number of joints'] > 1:
+                    while joint_table[component[key]['joints remaining'] > 0:
+                        for component_key2 in joint_table:
+                            if (joint_table[component_key2]['joints remaining'] > 0 and
+                                    ref.component_type_dct[component_key2[
+                                    'component type']]['number of joints'] == 1:
+                                Joint().generate().join([
+                                        next(c for c in self.component_list if 
+                                                c.component_id == component_key),
+                                        next(c for c in self.component_list if 
+                                                c.component_id == component_key2)])
+                                joints_remaining -= 2
+                                joint_table[component_key]['joined to'].append(
+                                        (component_key2, joint_table[component_key2]['component type']))
+                                joint_table[component_key]['joints remaining'] -= 1
+                                joint_table[component_key2]['joined to'].append(
+                                        (component_key, joint_table[component_key]['component type']))
+                                joint_table[component_key2]['joints remaining'] -= 1
+
+                    for component_key2 in joint_table:
+                        if (joint_table[component_key2]['joints remaining'] > 0:
+                            Joint().generate().join([
+                                    next(c for c in self.component_list if 
+                                            c.component_id == component_key),
+                                    next(c for c in self.component_list if 
+                                            c.component_id == component_key2)])
+                            joints_remaining -= 2
+                            joint_table[component_key]['joined to'].append(
+                                    (component_key2, joint_table[component_key2]['component type']))
+                            joint_table[component_key]['joints remaining'] -= 1
+                            joint_table[component_key2]['joined to'].append(
+                                    (component_key, joint_table[component_key]['component type']))
+                            joint_table[component_key2]['joints remaining'] -= 1
+                            
+        return
+
                     
+        
+
     def set_weapon_id(self):
         """Gives weapon object unique ID."""
         self.weapon_id = entities.weapons['next_id']
-        entities.weapons['next_id'] += 1
+        entities.weapons['next id'] += 1
         return
+        
+        
+    def __repr__(self):
+        return 'Weapon(ID: %r, Type:%r)' % (self.weapon_id, self.weapon_type)
+
 
 
 class Component():
     """Component object class with unique component ID.
        Contains Material objects and Joint objects."""
 
+
     def __init__(self):
         self.component_id = None
         self.component_type = None
         self.materials = []
         self.joints = []
+
 
     def generate(self, component_type, arg='random'):
         if arg == 'random':
@@ -102,15 +156,22 @@ class Component():
         self.set_component_id()
         return self
         
+        
     def set_component_id(self):
         """Gives component object unique ID."""
         self.component_id = entities.components['next_id']
-        entities.components['next_id'] += 1
+        entities.components['next id'] += 1
         return
+        
+        
+    def __repr__(self):
+        return 'Component(ID: %r, Type:%r)' % (self.component_id, self.component_type)
+
 
 
 class Joint():
     """Joint object class.  May exist as attribute of multiple Component objects."""
+
 
     def __init__(self):
         self.material = None #material of which joint is made
@@ -119,22 +180,24 @@ class Joint():
         self.joint_integrity = None #i.e. 100-new, 0=broken
         self.components_joined = []
 
-    def join(components):
+
+    def join(component_list):
         """Joins a list of Component objects."""
         if len(components_joined != 0):
             print "Joint already connected."
             return
         try:
-            if len(set(components)) != len(components):
+            if len(set(component_list)) != len(component_list):
                 print "Cannot join component to itself."
                 return
-            for component in components:
+            for component in component_list:
                 component.joints.append(self)
                 self.components_joined.append(component)
             return
         except AttributeError:
             print "Failed joining invalid components"
             return
+
 
     def generate(self, arg='random'):
         if arg == 'random':
@@ -155,6 +218,7 @@ class Material():
         self.material_class = None
         self.material_type = None
         self.material_quality = None
+    
     
     def generate(self, material_class, arg='random'):
         self.material_class = material_class
