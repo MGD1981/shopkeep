@@ -114,6 +114,31 @@ component_type_dct = {
 }
 
 
+component_class_dct = {
+    'base': [
+    
+    ],
+    'edge': [
+    
+    ],
+    'flagellum': [
+    
+    ],
+    'finger': [
+    
+    ],
+    'extension': [
+    
+    ],
+    'string': [
+    
+    ],
+    'standalone': [
+    
+    ]
+}
+
+
 material_class_dct = {
     'wood': {
         'type': {
