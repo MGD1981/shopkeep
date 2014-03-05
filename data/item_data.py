@@ -173,7 +173,8 @@ class Joint():
     """Joint object class.  May exist as attribute of multiple Component objects."""
 
 
-    def __init__(self):
+    def __init__(self, number_of_connectors):
+        self.joint_connectors = number_of_connectors
         self.material = None #material of which joint is made
         self.material_integrity = None #i.e. 100=new, 0=broken
         self.joint_quality = None #higher quality = slower rate of deterioration
