@@ -1,97 +1,33 @@
 
-
 weapon_type_dct = {
     'dirk': {
         'class': 'dagger',
-        'components': {
-            'hilt': {
-                'joints': ['blade']
-            },
-            'blade': {
-                'joints': ['hilt']
-            },
-            'scabbard': {
-                'joints': []
-            },
-        },
+        'components': ['hilt', 'blade', 'scabbard'],
         'hands to wield': 1
     },
     'shortsword': {
         'class': 'sword',
-        'components': {
-            'hilt': {
-                'joints': ['blade']
-            },
-            'blade': {
-                'joints': ['hilt']
-            },
-            'scabbard': {
-                'joints': []
-            }
-        },
+        'components': ['hilt', 'blade', 'scabbard'],
         'hands to wield': 1
     },
     'longsword': {
         'class': 'sword',
-        'components': {
-            'hilt': {
-                'joints': ['blade']
-            },
-            'blade': {
-                'joints': ['hilt']
-            },
-            'scabbard': {
-                'joints': []
-            }
-        },
+        'components': ['hilt', 'blade', 'scabbard'],
         'hands to wield': 2
     },
     'flail': {
         'class': 'blunt',
-        'components': {
-            'handle': {
-                'joints': ['chain']
-            },
-            'chain': {
-                'joints': ['handle', 'ball']
-            },
-            'ball': {
-                'joints': ['chain']
-            }
-        },
+        'components': ['handle', 'chain', 'ball'],
         'hands to wield': 1
     },
     'double flail': {
         'class': 'blunt',
-        'components': {
-            'handle': {
-                'joints': ['chain', 'chain']
-            },
-            'chain': {
-                'joints': ['handle', 'ball']
-            },
-            'ball': {
-                'joints': ['chain']
-            },
-            'chain': {
-                'joints': ['handle', 'ball']
-            },
-            'ball': {
-                'joints': ['chain']
-            }
-        },
+        'components': ['handle', 'chain', 'ball', 'chain', 'ball'],
         'hands to wield': 1
     },
     'battle axe': {
         'class': 'cleave',
-        'components': {
-            'haft': {
-                'joints': ['blade']
-            },
-            'blade': {
-                'joints': ['haft'],
-            }
-        },
+        'components': ['haft', 'blade'],
         'hands to wield': 2
     }
 }
@@ -132,25 +68,32 @@ weapon_class_dct = {
 
 component_type_dct = {
     'hilt': {
-        'possible materials': ['wood', 'stone', 'metal']
+        'possible materials': ['wood', 'stone', 'metal'],
+        'number of joints': 1
     },
     'blade': {
-        'possible materials': ['metal']
+        'possible materials': ['metal'],
+        'number of joints': 1
     },
     'scabbard': {
-        'possible materials': ['leather', 'wood', 'metal']
+        'possible materials': ['leather', 'wood', 'metal'],
+        'number of joints': 0
     },
     'haft': {
-        'possible materials': ['wood']
+        'possible materials': ['wood'],
+        'number of joints': 1
     },
     'handle': {
-        'possible materials': ['wood']
+        'possible materials': ['wood'],
+        'number of joints': 1
     },
     'chain': {
-        'possible materials': ['metal']
+        'possible materials': ['metal'],
+        'number of joints': 2
     },
     'ball': {
-        'possible materials': ['metal']
+        'possible materials': ['metal'],
+        'number of joints': 1
     }
 }
 
