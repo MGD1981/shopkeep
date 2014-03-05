@@ -63,7 +63,7 @@ class Weapon():
         component_types_to_connect = [
                 c for c in ref.weapon_type_dct[weapon_type][
                 'components'] if ref.component_type_dct[c][
-                'component class'] == 'standalone' ]
+                'class'] == 'standalone' ]
         for component in component_list:
             if component.component_type not in component_type_to_connect:
                 component_list.remove(component)
@@ -71,7 +71,7 @@ class Weapon():
         for component in component_list:
             joint_table[component.component_id] = {
                 'component type': component.component_type,
-                'component class': ref.component_type_dct[component_type]['component class']
+                'component class': ref.component_type_dct[component_type]['class']
                 'joined to': [],
                 'joints remaining': ref.component_type_dct[component_type]['joints']
             }
