@@ -96,6 +96,24 @@ class Joint():
         self.material_integrity = None #i.e. 100=new, 0=broken
         self.joint_quality = None #higher quality = slower rate of deterioration
         self.joint_integrity = None #i.e. 100-new, 0=broken
+        self.components_joined = []
+
+    def join(components):
+        """Joins a list of Component objects."""
+        if len(components_joined != 0):
+            print "Joint already connected."
+            return
+        try:
+            if len(set(components)) != len(components):
+                print "Cannot join component to itself."
+                return
+            for component in components:
+                component.joints.append(self)
+                self.components_joined.append(component)
+            return
+        except AttributeError:
+            print "Failed joining invalid components"
+            return
 
     def generate(self, arg='random'):
         if arg == 'random':
