@@ -56,13 +56,14 @@ class Weapon():
         
         
     def assemble(self, weapon_type, component_list):
-        """Joint generation & connection function."""
+        """Joint generation & connection function."""        
+        
         joint_table = {}
         #Remove components without joints from component_list:
         component_types_to_connect = [
                 c for c in ref.weapon_type_dct[weapon_type][
                 'components'] if ref.component_type_dct[c][
-                'number of joints'] > 0 ]
+                'component class'] == 'standalone' ]
         for component in component_list:
             if component.component_type not in component_type_to_connect:
                 component_list.remove(component)
@@ -70,50 +71,17 @@ class Weapon():
         for component in component_list:
             joint_table[component.component_id] = {
                 'component type': component.component_type,
+                'component class': ref.component_type_dct[component_type]['component class']
                 'joined to': [],
-                'joints remaining': ref.component_type_dct[component_type]['number of joints']
+                'joints remaining': ref.component_type_dct[component_type]['joints']
             }
         #joint table now has a key for every component_id
         #key['joined to'] is list of (id, type) of connected components
-        joints_remaining = 0
+        total_joints_remaining = 0
         for component_key in joint_table:
-            joints_remaining += joint_table[component_key]['joints remaining']
-        while joints_remaining > 0:
-            for component_key in joint_table:
-                if ref.component_type_dct[component_key['component type']][
-                            'number of joints'] > 1:
-                    while joint_table[component[key]['joints remaining'] > 0:
-                        for component_key2 in joint_table:
-                            if (joint_table[component_key2]['joints remaining'] > 0 and
-                                    ref.component_type_dct[component_key2[
-                                    'component type']]['number of joints'] == 1:
-                                Joint().generate().join([
-                                        next(c for c in self.component_list if 
-                                                c.component_id == component_key),
-                                        next(c for c in self.component_list if 
-                                                c.component_id == component_key2)])
-                                joints_remaining -= 2
-                                joint_table[component_key]['joined to'].append(
-                                        (component_key2, joint_table[component_key2]['component type']))
-                                joint_table[component_key]['joints remaining'] -= 1
-                                joint_table[component_key2]['joined to'].append(
-                                        (component_key, joint_table[component_key]['component type']))
-                                joint_table[component_key2]['joints remaining'] -= 1
-
-                    for component_key2 in joint_table:
-                        if (joint_table[component_key2]['joints remaining'] > 0:
-                            Joint().generate().join([
-                                    next(c for c in self.component_list if 
-                                            c.component_id == component_key),
-                                    next(c for c in self.component_list if 
-                                            c.component_id == component_key2)])
-                            joints_remaining -= 2
-                            joint_table[component_key]['joined to'].append(
-                                    (component_key2, joint_table[component_key2]['component type']))
-                            joint_table[component_key]['joints remaining'] -= 1
-                            joint_table[component_key2]['joined to'].append(
-                                    (component_key, joint_table[component_key]['component type']))
-                            joint_table[component_key2]['joints remaining'] -= 1
+            total_joints_remaining += joint_table[component_key]['joints remaining']
+        while total_joints_remaining > 0:
+            pass
                             
         return
 
