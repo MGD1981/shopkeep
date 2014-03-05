@@ -36,6 +36,7 @@ class Weapon():
         print "\n"
 
     def generate(self, arg='random'):
+        """Generates a random weapon from reference_data.weapon_type_dct."""
         if arg == 'random':
             self.weapon_type = choice(ref.weapon_type_dct.keys())
             self.weapon_class = ref.weapon_type_dct[
@@ -44,34 +45,40 @@ class Weapon():
                     self.weapon_type]['components']:
                 self.components.append(
                         Component().generate(component))
-            components_to_connect = ref.weapon_type_dct[
-                                    self.weapon_type]['components']
-            n = 0
-            for c in components_to_connect:
-                n += len(components_to_connect[c]['joints'])
-            number_of_joints_to_connect = n/2
-            components_connected = []
-            joints_to_connect = []
-            for x in xrange(number_of_joints_to_connect):
-                joints_to_connect.append(Joint().generate())
-#            for component_to_connect in components_to_connect:
-#                for component in self.components:
-#                    if component.component_type == component_to_connect:
-                        #connect if not already connected
-                        #test if connected:
-                        #TODO: Build some helper functions
-
-
-            
+            self.assemble(self.weapon_type, self.components)
         else:
             return NotImplementedError(arg)
         return self
+        
+        
+    def assemble(weapon_type, component_list):
+        """Joint generation & connection function."""
+        joining_table = {}         
+        
+        components_to_connect = ref.weapon_type_dct[
+                                self.weapon_type]['components']
+        n = 0
+        for c in components_to_connect:
+            n += ref.component_type_dct[c]['number of joints']
+        number_of_joints_to_connect = n/2
+        components_connected = []
+        joints_to_connect = []
+        for x in xrange(number_of_joints_to_connect):
+            joints_to_connect.append(Joint().generate())
+#        for component_to_connect in components_to_connect:
+#            for component in self.components:
+#                if component.component_type == component_to_connect:
+                    #connect if not already connected
+                    #test if connected:
+                    #TODO: Build some helper functions
 
 
 class Component():
-    """Component object class.  Contains Material objects and Joint objects."""
+    """Component object class with unique component ID.
+       Contains Material objects and Joint objects."""
 
     def __init__(self):
+        self.component_id = None
         self.component_type = None
         self.materials = []
         self.joints = []
