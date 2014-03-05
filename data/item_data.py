@@ -48,6 +48,7 @@ class Weapon():
             self.assemble(self.weapon_type, self.components)
         else:
             return NotImplementedError(arg)
+        self.set_weapon_id()
         return self
         
         
@@ -71,6 +72,12 @@ class Weapon():
                     #connect if not already connected
                     #test if connected:
                     #TODO: Build some helper functions
+                    
+    def set_weapon_id(self):
+        """Gives weapon object unique ID."""
+        self.weapon_id = entities.weapons['next_id']
+        entities.weapons['next_id'] += 1
+        return
 
 
 class Component():
@@ -92,7 +99,14 @@ class Component():
                     component_type]['possible materials'])))
         else:
             return NotImplementedError(arg)
+        self.set_component_id()
         return self
+        
+    def set_component_id(self):
+        """Gives component object unique ID."""
+        self.component_id = entities.components['next_id']
+        entities.components['next_id'] += 1
+        return
 
 
 class Joint():
