@@ -14,11 +14,26 @@ def initialize():
     global player, weapons, components, heroes, adventure_sites, resource_sites, world, town
     import player_data
     player = player_data.get_new_player()
-    weapons = {}
-    components = {}
-    heroes = {}
-    adventure_sites = {}
-    resource_sites = {}
+    weapons = {
+        'next id': 1,
+        'object list': []
+    }
+    components = {
+        'next id': 1,
+        'object list': []
+    }
+    heroes = {
+        'next id': 1,
+        'object list': []
+    }
+    adventure_sites = {
+        'next id': 1,
+        'object list': []
+    }
+    resource_sites = {
+        'next id': 1,
+        'object list': []
+    }
     world = {}
     town = {}
     return
