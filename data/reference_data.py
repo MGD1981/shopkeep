@@ -1,4 +1,3 @@
-
 weapon_type_dct = {
     'dirk': {
         'class': 'dagger',
@@ -68,32 +67,49 @@ weapon_class_dct = {
 
 component_type_dct = {
     'hilt': {
+        'class': 'base',
         'possible materials': ['wood', 'stone', 'metal'],
-        'number of joints': 1
+        'joints': (('single', 'edge'))
     },
     'blade': {
+        'class': 'edge',
         'possible materials': ['metal'],
-        'number of joints': 1
+        'joints': (('single', 'base'))
     },
     'scabbard': {
+        'class': 'standalone',
         'possible materials': ['leather', 'wood', 'metal'],
-        'number of joints': 0
+        'joints': ()
     },
     'haft': {
+        'class': 'base',
         'possible materials': ['wood'],
-        'number of joints': 1
+        'joints': (('multi', 'edge'))
     },
     'handle': {
+        'class': 'base',
         'possible materials': ['wood'],
-        'number of joints': 1
+        'joints': (('multi', 'flagellum'))
     },
     'chain': {
+        'class': 'flagellum',
         'possible materials': ['metal'],
-        'number of joints': 2
+        'joints': (('single', 'handle'), ('single', 'finger'))
     },
     'ball': {
+        'class': 'finger',
         'possible materials': ['metal'],
-        'number of joints': 1
+        'joints': (('single', 'flagellum'))
+    },
+    'limb': {
+        'class': 'extension',
+        'possible materials': ['wood'],
+        'joints': (('single', 'base'), ('single', 'string'))
+    },
+    'bowstring': {
+        'class': 'string',
+        'possible materials': ['fiber'],
+        'joints': (('single', 'extension'), ('single', 'extension'))
     }
 }
 
