@@ -140,102 +140,197 @@ component_class_dct = {
 }
 
 
-material_class_dct = {
-    'wood': {
-        'type': {
-            'bodark': {
-                'strength': None,
-                'flexibility': None,
-                'density': None
-            },
-            'epay': {
-                'strength': None,
-                'flexibility': None,
-                'density': None
-            },
-            'lemonwood': {
-                'strength': None,
-                'flexibility': None,
-                'density': None
-            },
-            'pignut': {
-                'strength': None,
-                'flexibility': None,
-                'density': None
-            },
-            'hickory': {
-                'strength': None,
-                'flexibility': None,
-                'density': None
-            },
-            'oak': {
-                'strength': None,
-                'flexibility': None,
-                'density': None
-            },
-            'maple': {
-                'strength': None,
-                'flexibility': None,
-                'density': None
-            },
-            'yew': {
-                'strength': None,
-                'flexibility': None,
-                'density': None
-            },
-            'elm': {
-                'strength': None,
-                'flexibility': None,
-                'density': None
-            },
-            'ash': {
-                'strength': None,
-                'flexibility': None,
-                'density': None
-            }
-        } 
+material_type_dct = {
+    'bodark': {
+        'class': 'wood',
+        'strength': None,
+        'flexibility': None,
+        'density': None
     },
-    'fiber': {
-        'type': {
-            'linen': {},
-            'hemp': {},
-            'sinew': {},
-            'silk': {},
-            'rawhide': {}
-        }
+    'epay': {
+        'class': 'wood',
+        'strength': None,
+        'flexibility': None,
+        'density': None
     },
-    'stone': {
-        'type': {
-            'chert': {},
-            'flint': {},
-            'granite': {},
-            'marble': {}
-        }
+    'lemonwood': {
+        'class': 'wood',
+        'strength': None,
+        'flexibility': None,
+        'density': None
     },
-    'leather': {
-        'type': {
-            'cow leather': {},
-            'buffalo leather': {},
-            'goat hide': {},
-            'calfskin': {},
-            'sheepskin': {},
-            'deerskin': {},
-            'elkskin': {},
-            'horse leather': {},
-            'sharkskin': {},
-            'dragonhide': {}
-        }
+    'pignut': {
+        'class': 'wood',
+        'strength': None,
+        'flexibility': None,
+        'density': None
     },
-    'metal': {
-        'type': {
-            'copper': {},
-            'bronze': {},
-            'silver': {},
-            'gold': {},
-            'iron': {},
-            'steel': {},
-            'silvered steel': {},
-            'adamantine steel': {}
-        }
+    'hickory': {
+        'class': 'wood',
+        'strength': None,
+        'flexibility': None,
+        'density': None
+    },
+    'oak': {
+        'class': 'wood',
+        'strength': None,
+        'flexibility': None,
+        'density': None
+    },
+    'maple': {
+        'class': 'wood',
+        'strength': None,
+        'flexibility': None,
+        'density': None
+    },
+    'yew': {
+        'class': 'wood',
+        'strength': None,
+        'flexibility': None,
+        'density': None
+    },
+    'elm': {
+        'class': 'wood',
+        'strength': None,
+        'flexibility': None,
+        'density': None
+    },
+    'ash': {
+        'class': 'wood',
+        'strength': None,
+        'flexibility': None,
+        'density': None
+    },
+    'linen': {
+        'class': 'fiber'
+    },
+    'hemp': {
+        'class': 'fiber'
+    },
+    'sinew': {
+        'class': 'fiber'
+    },
+    'silk': {
+        'class': 'fiber'
+    },
+    'rawhide': {
+        'class': 'fiber'
+    },
+    'chert': {
+        'class': 'stone'
+    },
+    'flint': {
+        'class': 'stone'
+    },
+    'granite': {
+        'class': 'stone'
+    },
+    'marble': {
+        'class': 'stone'
+    },
+    'cow leather': {
+        'class': 'leather'
+    },
+    'buffalo leather': {
+        'class': 'leather'
+    },
+    'goat hide': {
+        'class': 'leather'
+    },
+    'calfskin': {
+        'class': 'leather'
+    },
+    'sheepskin': {
+        'class': 'leather'
+    },
+    'deerskin': {
+        'class': 'leather'
+    },
+    'elkskin': {
+        'class': 'leather'
+    },
+    'horse leather': {
+        'class': 'leather'
+    },
+    'sharkskin': {
+        'class': 'leather'
+    },
+    'dragonhide': {
+        'class': 'leather'
+    },
+    'copper': {
+        'class': 'metal'
+    },
+    'bronze': {
+        'class': 'metal'
+    },
+    'silver': {
+        'class': 'metal'
+    },
+    'gold': {
+        'class': 'metal'
+    },
+    'iron': {
+        'class': 'metal'
+    },
+    'steel': {
+        'class': 'metal'
+    },
+    'silvered steel': {
+        'class': 'metal'
+    },
+    'adamantine steel': {
+        'class': 'metal'
     }
+}
+
+#TODO: like weapon_class_dct, make be generated
+material_class_dct = {
+    'wood': [
+        'bodark',
+        'epay',
+        'lemonwood',
+        'pignut',
+        'hickory',
+        'oak',
+        'maple',
+        'yew',
+        'elm',
+        'ash'
+    ],
+    'fiber': [
+        'linen',
+        'hemp',
+        'sinew',
+        'silk',
+        'rawhide'
+    ],
+    'stone': [
+        'chert',
+        'flint',
+        'granite',
+        'marble'
+    ],
+    'leather': [
+        'cow leather',
+        'buffalo leather',
+        'goat hide',
+        'calfskin',
+        'sheepskin',
+        'deerskin',
+        'elkskin',
+        'horse leather',
+        'sharkskin',
+        'dragonhide'
+    ],
+    'metal': [
+        'copper',
+        'bronze',
+        'silver',
+        'gold',
+        'iron',
+        'steel',
+        'silvered steel',
+        'adamantine steel'
+    ]
 }
