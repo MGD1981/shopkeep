@@ -16,6 +16,23 @@ class Weapon():
         self.components = [] #Each component has Joint objects connecting it.
         
         
+    def get_mass(self):
+        m = 0
+        for component in self.components:
+            v = component.component_volume
+            d = component.materials[0] #TODO: Once components may contain
+                                       #multiple materials, change calculation.
+            m += d*v
+        return m
+        
+        
+    def get_volume(self):
+        v = 0
+        for component in self.components:
+            v += component.component.volume
+        return v
+
+
     def print_stats(self):
         """Prints the weapon's information in the console."""
         print "\nWeapon ID:         %r" % self.weapon_id
@@ -112,6 +129,7 @@ class Component():
     def __init__(self):
         self.component_id = None
         self.component_type = None
+        self.component_volume = None
         self.materials = []
         self.joints = []
 
@@ -191,6 +209,7 @@ class Material():
         self.material_class = None
         self.material_type = None
         self.material_quality = None
+        self.material_density = None
     
     
     def generate(self, material_class, arg='random'):
