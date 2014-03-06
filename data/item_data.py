@@ -97,26 +97,25 @@ class Weapon():
         #joint table now has a key for every component_id
         #key['joined to'] is list of (id, type) of connected components
         while any(len(joint_table[c.component_id]['joints remaining']) > 0 for c in component_list):
-            #single joints first
-            for component1 in component_list:
-                for open_joint1 in joint_table[component1.component_id]['joints remaining']:
-                    if open_joint1[0] == 'single':
-                        for component2 in component_list:
-                            if component2.component_id == component1.component_id:
-                                next
-                            if (joint_table[component2.component_id]['component class'] == open_joint1[1]:
-                                try:
-                                    open_joint2_index = joint_table[component2.component_id][
-                                            'joints remaining'].index(('single', component1.component_class)):
-                                except ValueError:
+            for joint_class in ['single', 'multi', 'optional']:
+                for component1 in component_list:
+                    for open_joint1 in joint_table[component1.component_id]['joints remaining']:
+                        if open_joint1[0] == joint_class:
+                            for component2 in component_list:
+                                if component2.component_id == component1.component_id:
                                     next
-                                Joint().generate().join(component1, component2)
-                                joint_table[component1.component_id]['joints remaining'].remove(open_joint1)
-                                joint_table[component2.component_id]['joints remaining'].remove(
-                                        joint_table[component2.component_id]['joints remaining'][open_joint2_index])
-
-        
-                            
+                                if (joint_table[component2.component_id]['component class'] == open_joint1[1]:
+                                    try:
+                                        open_joint2_index = joint_table[component2.component_id][
+                                                'joints remaining'].index(('single', component1.component_class)):
+                                    except ValueError:
+                                        next
+                                    Joint().generate().join(component1, component2)
+                                    if joint_class != 'multi':
+                                        joint_table[component1.component_id]['joints remaining'].remove(open_joint1)
+                                    open_joint2 = joint_table[component2.component_id]['joints remaining'][open_joint2_index]
+                                    if open_joint2[0] != 'multi':
+                                        joint_table[component2.component_id]['joints remaining'].remove(open_joint2)     
         return
 
                     
