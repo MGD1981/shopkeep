@@ -334,3 +334,38 @@ material_class_dct = {
         'adamantine steel'
     ]
 }
+
+
+letter_dct = {
+    'consonant start': [
+        'b', 'bl', 'br',
+        'c', 'ch', 'chr', 'cl', 'cr',
+        'd', 'dr',
+        'f', 'fl', 'fr',
+        'g', 'gh', 'ghr', 'gl', 'gr', 'gw', 
+        'h',
+        'j',
+        'k', 'kh', 'khr', 'kl', 'kr', 'kw',
+        'l',
+        'm',
+        'n', 'ng',
+        'p', 'ph', 'phr', 'phl', 'pl', 'pr', 'ps',
+        'q', 'qu',
+        'r', 'rh',
+        's', 'sc', 'sch', 'scr', 'sh', 'shr', 'sk', 'skr', 'sl', 'sm', 
+             'sn', 'sp', 'spl', 'spr', 'st', 'str', 'sv', 'sw',
+        't', 'th', 'thr', 'tr', 'ts', 'tw',
+        'v', 'vl',
+        'w', 
+        'x', 
+        'y', 
+        'z'
+    ],
+    'vowel starts': [
+        'a', 'aa', 'ae', 'ai', 'au',
+        'e', 'ea', 'eu',
+        'i', 'io',
+        'o', 'oa', 'ou',
+        'u'
+    ]
+}
