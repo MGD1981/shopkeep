@@ -114,6 +114,7 @@ component_type_dct = {
 }
 
 
+#TODO: like weapon_class_dct, make be generated
 component_class_dct = {
     'base': [
     

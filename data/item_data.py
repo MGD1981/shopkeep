@@ -65,21 +65,24 @@ class Weapon():
                 'components'] if ref.component_type_dct[c][
                 'class'] == 'standalone' ]
         for component in component_list:
-            if component.component_type not in component_type_to_connect:
+            if component.component_type not in component_types_to_connect:
                 component_list.remove(component)
 
         for component in component_list:
             joint_table[component.component_id] = {
                 'component type': component.component_type,
-                'component class': ref.component_type_dct[component_type]['class']
+                'component class': ref.component_type_dct[
+                        component.component_type]['class'],
                 'joined to': [],
-                'joints remaining': ref.component_type_dct[component_type]['joints']
+                'joints remaining': ref.component_type_dct[
+                        component.component_type]['joints']
             }
         #joint table now has a key for every component_id
         #key['joined to'] is list of (id, type) of connected components
         total_joints_remaining = 0
         for component_key in joint_table:
-            total_joints_remaining += joint_table[component_key]['joints remaining']
+            total_joints_remaining += joint_table[component_key][
+                                                        'joints remaining']
         while total_joints_remaining > 0:
             pass
                             
@@ -90,7 +93,7 @@ class Weapon():
 
     def set_weapon_id(self):
         """Gives weapon object unique ID."""
-        self.weapon_id = entities.weapons['next_id']
+        self.weapon_id = entities.weapons['next id']
         entities.weapons['next id'] += 1
         return
         
@@ -127,7 +130,7 @@ class Component():
         
     def set_component_id(self):
         """Gives component object unique ID."""
-        self.component_id = entities.components['next_id']
+        self.component_id = entities.components['next id']
         entities.components['next id'] += 1
         return
         
