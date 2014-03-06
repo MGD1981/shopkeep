@@ -69,47 +69,47 @@ component_type_dct = {
     'hilt': {
         'class': 'base',
         'possible materials': ['wood', 'stone', 'metal'],
-        'joints': (('single', 'edge'))
+        'joints': [('single', 'edge')]
     },
     'blade': {
         'class': 'edge',
         'possible materials': ['metal'],
-        'joints': (('single', 'base'))
+        'joints': [('single', 'base')]
     },
     'scabbard': {
         'class': 'standalone',
         'possible materials': ['leather', 'wood', 'metal'],
-        'joints': ()
+        'joints': []
     },
     'haft': {
         'class': 'base',
         'possible materials': ['wood'],
-        'joints': (('multi', 'edge'))
+        'joints': [('multi', 'edge')]
     },
     'handle': {
         'class': 'base',
         'possible materials': ['wood'],
-        'joints': (('multi', 'flagellum'))
+        'joints': [('multi', 'flagellum')]
     },
     'chain': {
         'class': 'flagellum',
         'possible materials': ['metal'],
-        'joints': (('single', 'handle'), ('optional', 'finger'))
+        'joints': [('single', 'handle'), ('optional', 'finger')]
     },
     'ball': {
         'class': 'finger',
         'possible materials': ['metal'],
-        'joints': (('single', 'flagellum'))
+        'joints': [('single', 'flagellum')]
     },
     'limb': {
         'class': 'extension',
         'possible materials': ['wood'],
-        'joints': (('single', 'base'), ('single', 'string'))
+        'joints': [('single', 'base'), ('single', 'string')]
     },
     'bowstring': {
         'class': 'string',
         'possible materials': ['fiber'],
-        'joints': (('single', 'extension'), ('single', 'extension'))
+        'joints': [('single', 'extension'), ('single', 'extension')]
     }
 }
 
