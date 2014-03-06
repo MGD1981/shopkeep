@@ -20,8 +20,8 @@ class Weapon():
         m = 0
         for component in self.components:
             v = component.component_volume
-            d = component.materials[0] #TODO: Once components may contain
-                                       #multiple materials, change calculation.
+            d = ref.material_type_dct[component.materials[0].material_type] #TODO: Once components may contain
+                                                                            #multiple materials, change calculation.
             m += d*v
         return m
         
@@ -222,7 +222,6 @@ class Material():
         self.material_class = None
         self.material_type = None
         self.material_quality = None
-        self.material_density = None
     
     
     def generate(self, material_class, arg='random'):
