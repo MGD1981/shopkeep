@@ -94,6 +94,7 @@ class Weapon():
     def set_weapon_id(self):
         """Gives weapon object unique ID."""
         self.weapon_id = entities.weapons['next id']
+        entities.weapons['object list'].append(self)
         entities.weapons['next id'] += 1
         return
         
@@ -131,6 +132,7 @@ class Component():
     def set_component_id(self):
         """Gives component object unique ID."""
         self.component_id = entities.components['next id']
+        entities.components['object list'].append(self)
         entities.components['next id'] += 1
         return
         
