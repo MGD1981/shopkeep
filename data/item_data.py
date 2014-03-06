@@ -90,7 +90,6 @@ class Weapon():
                 'component type': component.component_type,
                 'component class': ref.component_type_dct[
                         component.component_type]['class'],
-                'joined to': [],
                 'joints remaining': ref.component_type_dct[
                         component.component_type]['joints']
             }
