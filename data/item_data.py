@@ -113,8 +113,8 @@ class Weapon():
                                     if (component2.component_id == 
                                             component1.component_id):
                                         continue
-                                    if (joint_table[component2.component_id][
-                                            'component class'] == open_joint1[1]):
+                                    if (open_joint1 in joint_table[component1.component_id]['joints remaining'] and 
+                                            joint_table[component2.component_id]['component class'] == open_joint1[1]):
                                         try:
                                             open_joint2_index = [i for i, 
                                                 t in enumerate(joint_table[
