@@ -103,6 +103,7 @@ class Weapon():
                     print joint_table[key]
                 print '\n'
 
+                #NOTE: Not handling optional types correctly (attaching two singles to same optional)
                 for joint_class in ['single', 'multi', 'optional']:
                     for component1 in component_list:
                         for open_joint1 in joint_table[component1.component_id][
