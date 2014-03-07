@@ -337,6 +337,7 @@ material_class_dct = {
 
 
 letter_dct = {
+    'monster': {
     'consonant start': [
         'b', 'bl', 'br',
         'c', 'ch', 'chr', 'cl', 'cr',
@@ -397,4 +398,46 @@ letter_dct = {
     'u', 'ua', 'ue', 'ui', 'uo', 'uu',
     'y',
     ]
+    },
+    'human': {
+        'consonant start': [
+        'b', 'c', 'ch', 'd', 
+        'f', 'fr', 'g', 'gw', 
+        'h','j', 'k', 'kr', 
+        'l', 'm', 'n', 'p',
+        'r', 's', 'sh', 'sm', 
+        'st', 't', 'th', 'tr',
+        'v', 'w'
+    ],
+    'vowel start': [
+        'a',
+        'e',
+        'i',
+    ],
+    'consonant end': [
+        'b', 
+        'c', 'ch', 'ck', 
+        'd', 
+        'f',
+        'g', 
+        'k', 
+        'l',
+        'm', 
+        'n', 
+        'p',
+        'r',
+        's', 'sh', 'st',
+        't', 'th', 
+        'x', 
+        'z', 
+    ],
+    'vowel mid': [
+    'a', 
+    'e', 'ea', 'eau', 
+    'i', 'ia', 
+    'o', 'oh', 'oo',
+    'u', 
+    'y',
+    ]
+    }
 }
