@@ -361,11 +361,41 @@ letter_dct = {
         'y', 
         'z'
     ],
-    'vowel starts': [
+    'vowel start': [
         'a', 'aa', 'ae', 'ai', 'au',
         'e', 'ea', 'eu',
         'i', 'io',
         'o', 'oa', 'ou',
         'u'
+    ],
+    'consonant end': [
+        'b', 'bs', 'bsy', 
+        'c', 'ch', 'chy', 'ck', 'cks', 'cky', 'cksy',
+        'd', 'ds', 'dge', 'dges', 'dgy', 'dy', 
+        'f', 'fs', 'fsy', 
+        'g', 'gs', 'gsy', 
+        'k', 'ks', 'ksy', 
+        'l', 'ls', 'lsy', 'ly',
+        'm', 'ms', 'msy', 'my',
+        'n', 'ng', 'ngs', 'ngy', 'ngsy', 'ns', 'ny', 
+        'p', 'ph', 'phy', 'ps', 'psy', 'py', 
+        'qu', 'quy',
+        'r', 'ry', 'rs', 'rsy',
+        's', 'sc', 'sch', 'schy', 'sh', 'shy', 'sk', 'sky', 
+            'sm', 'smy', 'sp', 'spy', 'st', 'sty',
+        't', 'th', 'thy', 'ts', 'tsy', 'ty', 
+        'v', 'vy', 
+        'w', 'wy', 
+        'x', 'xy', 
+        'y',
+        'z', 'zy'
+    ],
+    'vowel mid': [
+    'a', 'ae', 'ai', 'au',
+    'e', 'ea', 'eau', 'ee', 'ei', 'eo', 'eu',
+    'i', 'ia', 'ie', 'io', 'iu',
+    'o', 'oa', 'oe', 'oh', 'oi', 'oo', 'ou',
+    'u', 'ua', 'ue', 'ui', 'uo', 'w',
+    'y',
     ]
 }
