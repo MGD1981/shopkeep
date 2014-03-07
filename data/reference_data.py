@@ -94,7 +94,7 @@ component_type_dct = {
     'chain': {
         'class': 'flagellum',
         'possible materials': ['metal'],
-        'joints': [('single', 'handle'), ('optional', 'finger')]
+        'joints': [('single', 'base'), ('optional', 'finger')]
     },
     'ball': {
         'class': 'finger',

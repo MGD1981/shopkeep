@@ -1,10 +1,11 @@
 import entities
 import reference_data as ref
 from random import choice, randint
+from copy import deepcopy
 
 
 class Weapon():
-    """Weapon class object with unique weapon_id.  Contains Component objects."""
+    """Weapon class object with unique weapon_id. Contains Component objects."""
 
 
     def __init__(self):
@@ -20,8 +21,9 @@ class Weapon():
         m = 0
         for component in self.components:
             v = component.component_volume
-            d = ref.material_type_dct[component.materials[0].material_type] #TODO: Once components may contain
-                                                                            #multiple materials, change calculation.
+            d = ref.material_type_dct[component.materials[0].material_type] 
+            #TODO: Once components may contain
+            #multiple materials, change calculation.
             m += d*v
         return m
         
@@ -77,44 +79,69 @@ class Weapon():
         
         joint_table = {}
         #Remove components without joints from component_list:
-        component_types_to_connect = [
-                c for c in ref.weapon_type_dct[weapon_type][
-                'components'] if ref.component_type_dct[c][
-                'class'] == 'standalone' ]
         for component in component_list:
-            if component.component_type not in component_types_to_connect:
+            if ref.component_type_dct[component.component_type]['class'] == 'standalone':
                 component_list.remove(component)
 
+        #NOTE: Better way than deepcopy? 
         for component in component_list:
             joint_table[component.component_id] = {
                 'component type': component.component_type,
-                'component class': ref.component_type_dct[
+                'component class': deepcopy(ref.component_type_dct)[
                         component.component_type]['class'],
-                'joints remaining': ref.component_type_dct[
+                'joints remaining': deepcopy(ref.component_type_dct)[
                         component.component_type]['joints']
             }
+        print joint_table
         #joint table now has a key for every component_id
         #key['joined to'] is list of (id, type) of connected components
-        while any(len(joint_table[c.component_id]['joints remaining']) > 0 for c in component_list):
-            for joint_class in ['single', 'multi', 'optional']:
-                for component1 in component_list:
-                    for open_joint1 in joint_table[component1.component_id]['joints remaining']:
-                        if open_joint1[0] == joint_class:
-                            for component2 in component_list:
-                                if component2.component_id == component1.component_id:
-                                    next
-                                if (joint_table[component2.component_id]['component class'] == open_joint1[1]:
-                                    try:
-                                        open_joint2_index = joint_table[component2.component_id][
-                                                'joints remaining'].index(('single', component1.component_class)):
-                                    except ValueError:
-                                        next
-                                    Joint().generate().join(component1, component2)
-                                    if joint_class != 'multi':
-                                        joint_table[component1.component_id]['joints remaining'].remove(open_joint1)
-                                    open_joint2 = joint_table[component2.component_id]['joints remaining'][open_joint2_index]
-                                    if open_joint2[0] != 'multi':
-                                        joint_table[component2.component_id]['joints remaining'].remove(open_joint2)     
+        try:
+            while len([i for i, t in enumerate(joint_table[c.component_id]['joints remaining'] for 
+                    c in component_list) if t[0] != 'multi']) > 0:
+
+                for key in joint_table.keys():
+                    print joint_table[key]
+                print '\n'
+
+                for joint_class in ['single', 'multi', 'optional']:
+                    for component1 in component_list:
+                        for open_joint1 in joint_table[component1.component_id][
+                                                            'joints remaining']:
+                            if open_joint1[0] == joint_class:
+                                for component2 in component_list:
+                                    if (component2.component_id == 
+                                            component1.component_id):
+                                        continue
+                                    if (joint_table[component2.component_id][
+                                            'component class'] == open_joint1[1]):
+                                        try:
+                                            open_joint2_index = [i for i, 
+                                                t in enumerate(joint_table[
+                                                component2.component_id][
+                                                'joints remaining']) if t == (
+                                                'single', ref.component_type_dct[
+                                                component1.component_type][
+                                                'class'])][0]
+                                        except IndexError:
+                                            continue
+                                        Joint().generate().join([component1, 
+                                                                 component2])
+                                        print "Joined %r to %r." % (component1, component2)
+                                        if joint_class != 'multi':
+                                            if open_joint1 in joint_table[component1.component_id]['joints remaining']:
+                                                joint_table[component1.component_id][
+                                                        'joints remaining'].remove(
+                                                        open_joint1)
+                                        open_joint2 = joint_table[
+                                                component2.component_id][
+                                                'joints remaining'][
+                                                open_joint2_index]
+                                        if open_joint2[0] != 'multi':
+                                            joint_table[component2.component_id][
+                                                    'joints remaining'].remove(
+                                                open_joint2)     
+        except IndexError:
+            return
         return
 
                     
@@ -181,21 +208,16 @@ class Joint():
         self.material_integrity = None #i.e. 100=new, 0=broken
         self.joint_quality = None #higher quality = slower rate of deterioration
         self.joint_integrity = None #i.e. 100-new, 0=broken
-        self.components_joined = []
 
 
-    def join(component_list):
+    def join(self, component_list):
         """Joins a list of Component objects."""
-        if len(components_joined != 0):
-            print "Joint already connected."
-            return
         try:
             if len(set(component_list)) != len(component_list):
                 print "Cannot join component to itself."
                 return
             for component in component_list:
                 component.joints.append(self)
-                self.components_joined.append(component)
             return
         except AttributeError:
             print "Failed joining invalid components"
@@ -227,8 +249,7 @@ class Material():
         self.material_class = material_class
         if arg == 'random':
             self.material_type = choice(
-                            ref.material_class_dct[
-                                material_class]['type'].keys())
+                            ref.material_type_dct.keys())
         else:
             return NotImplementedError(arg)
         return self
