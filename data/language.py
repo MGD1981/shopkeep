@@ -7,7 +7,7 @@ def create_name(name_type='human'):
     if name_type == 'human':
         syllables = randint(1, 2)
     if name_type == 'monster':
-        syllables = 1
+        syllables = randint(1, 3)
     name_chars = []
     for x in xrange(syllables):
     	start_with = choice(['consonant', 'vowel'])
