@@ -372,7 +372,7 @@ letter_dct = {
         'b', 'bs', 
         'c', 'ch', 'ck', 'cks',
         'd', 'ds', 'dge', 'dges', 'dgy', 
-        'f', 'fs', , 
+        'f', 'fs', 
         'g', 'gs',  
         'k', 'ks', 
         'l', 'ls', 
