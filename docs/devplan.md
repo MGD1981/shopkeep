@@ -42,6 +42,11 @@ Shopkeep Development Plan
 	- Like weapons, monsters have classes and a list of possible "components" made of different materials.
 	- Randomly-generated powers, perhaps informed by town/world info/resources.
 	- New monsters may bring interesting weapons into the world.
+- Peasants!
+	- From http://mu.ranter.net/design-theory/economy/reasonable-cash-economy:
+		"For the most part, though, battlefield spoils were typically vultured by the local peasants after a battle in the hopes that they might be able to sell it off to an itinerant adventurer or bandit for a few pennies to supplement their poverty-stricken existence."
+	- Individual peasants not saved as entities
+	- Only sell, don't buy
 
 
 #Potential Future (post v1)
@@ -60,16 +65,8 @@ Shopkeep Development Plan
 
 #Immediate Goals
 
+- Economy
 - Create hero-shopkeep transaction menu
-- Weapon dictionary
-	- Weapons
-		- Kills
-			- MonsterID (Surrogate FK)
-			- HeroID (Surrogate FK)
-- Create hero dictionary
-	- inventory = list of weapon ids
-- Initiate following tables (dicts): Monsters, Heroes
-- Create player class
 - Mapping system for shop (coordinates?)
 - Mapping system for world
 
