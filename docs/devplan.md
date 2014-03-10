@@ -48,6 +48,8 @@ Shopkeep Development Plan
 	- Individual peasants not saved as entities
 	- Only sell, don't buy
 - Taxes
+- Thieves
+	- Attracted by rumors of valuable/magical items housed at shop
 
 
 #Potential Future (post v1)
