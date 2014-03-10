@@ -294,6 +294,12 @@ material_type_dct = {
         'density': 8.96,
         'intrinsic value': None
     },
+    'tin': {
+        'class': 'metal',
+        'rarity': 2.3,
+        'density': 7.365,
+        'intrinsic value': None
+    },
     'bronze': {
         'class': 'metal',
         'rarity': None,
