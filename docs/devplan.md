@@ -47,6 +47,7 @@ Shopkeep Development Plan
 		"For the most part, though, battlefield spoils were typically vultured by the local peasants after a battle in the hopes that they might be able to sell it off to an itinerant adventurer or bandit for a few pennies to supplement their poverty-stricken existence."
 	- Individual peasants not saved as entities
 	- Only sell, don't buy
+- Taxes
 
 
 #Potential Future (post v1)
