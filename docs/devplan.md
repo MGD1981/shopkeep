@@ -34,6 +34,8 @@ Shopkeep Development Plan
 	- Archery requires much training, and likely only used for one shot per battle?
 		- Bows are strung before battle by hero
 		- Perhaps leave out bows entirely?
+- Battles
+	- Die-roll distributions: http://www.redblobgames.com/articles/probability/damage-rolls.html
 - Customers may browse the display or you can suggest a special item from your storage.
     - Only so many special items may be shown depending on customer's personality.
     - Special interaction menu(s).
