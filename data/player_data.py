@@ -2,7 +2,7 @@ import random
 import entities
 
 def get_new_player():
-	player = {
+    player = {
         'location': [0, 0],
         'coins': 0,
         'appraisal skill': {
@@ -14,4 +14,4 @@ def get_new_player():
         }
     }
 
-	return player
+    return player

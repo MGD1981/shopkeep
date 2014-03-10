@@ -1,24 +1,46 @@
 import entities
 from shop_data import Shop
-from economic_data import Economy
+from economy_data import Economy
 from random import choice
 
 
 class Hero():
-	"""Class holding unique hero object"""
+    """Class holding unique hero object"""
 
-	def __init__(self):
-		self.hero_id = None #TODO: get unique based on entities.heroes
+    def __init__(self):
+        self.hero_id = None #TODO: get unique based on entities.heroes
         self.location = [None, None]
-		self.name = None
-		self.home = None
-		self.inventory = []
-		self.kills = []
-		self.size = 100 #represents percent of "normal" size
-		self.goals = None
-		self.needs = None
-		self.wants = None
+        self.name = None
+        self.home = None
+        self.inventory = []
+        self.kills = []
+        self.size = 100 #represents percent of "normal" size
+        self.goals = None
+        self.needs = None
+        self.wants = None
+
+
+    def generate(self, arg='random'):
+        """Generates a hero."""
+        import language
+        if arg == 'random':
+            pass
+        self.name = language.create_name('human')
+        self.set_hero_id()
+        return self
+
+
+    def set_hero_id(self):
+        """Gives hero object uniquue ID."""
+        self.hero_id = entities.heroes['next id']
+        entities.heroes['object list'].append(self)
+        entities.heroes['next id'] += 1
 		
+
+    def __repr__(self):
+        return 'Hero(ID: %r, Name:%r)' % (self.hero_id, self.name)
+
+
 		
 class Personality():
 	"""Class holding quantitative personality traits (0 = neutral).
