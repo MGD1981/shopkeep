@@ -27,6 +27,8 @@ Shopkeep Development Plan
 - Try to keep minimal personal apotheosis, but town may improve based in part on player's actions.
 - Player able to haggle and potentially deceive customers (e.g. convince someone that a cursed sword is actually magically bless and worth more than normal, or once belonged to an historical figure).  Charisma stat?
 - Weapons based more on real life/history than D&D?
+	- Components may be rejoined if weapon breaks
+	- Component integrity: component unusable if integrity == 0 (e.g. blade sharpened down to nothing)
 - Customers may browse the display or you can suggest a special item from your storage.
     - Only so many special items may be shown depending on customer's personality.
     - Special interaction menu(s).
