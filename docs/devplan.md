@@ -32,6 +32,8 @@ Shopkeep Development Plan
 	- Weapon reach == better defense (i.e. spears are good)
 	- Some weapons easier to use untrained (e.g. mace, which has reach disadvantage)
 	- Archery requires much training, and likely only used for one shot per battle?
+		- Bows are strung before battle by hero
+		- Perhaps leave out bows entirely?
 - Customers may browse the display or you can suggest a special item from your storage.
     - Only so many special items may be shown depending on customer's personality.
     - Special interaction menu(s).
