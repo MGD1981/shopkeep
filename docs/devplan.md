@@ -29,6 +29,8 @@ Shopkeep Development Plan
 - Weapons based more on real life/history than D&D?
 	- Components may be rejoined if weapon breaks
 	- Component integrity: component unusable if integrity == 0 (e.g. blade sharpened down to nothing)
+	- Weapon reach == better defense (i.e. spears are good)
+	- Some weapons easier to use untrained (e.g. mace, which has reach disadvantage)
 - Customers may browse the display or you can suggest a special item from your storage.
     - Only so many special items may be shown depending on customer's personality.
     - Special interaction menu(s).
