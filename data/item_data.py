@@ -42,18 +42,15 @@ class Weapon():
         print "Weapon class:      %r" % self.weapon_class
         print "Weapon components:"
         for component in self.components:
-            print "    %r:" % component.component_type
+            print "    %r (%r):" % (component.component_type, component.component_id)
             for material in component.materials:
                 print "        %r (%r)" % (
                     material.material_type, material.material_class)
             for joint in component.joints:
-                joined = None
-                for c in self.components:
-                    if joint in c.joints and c != component:
-                        joined = c
-                        break
-                print "        with a %r joint connecting to the %r." (
-                    joint.material.material_type, joined.component_type)
+                for component2 in self.components:
+                    if component2 != component and joint in component2.joints:
+                        print "        with a %r joint connecting to the %r (%r)." % (
+                                joint.material.material_type, component2.component_type, component2.component_id)
         print "\n"
 
 
@@ -83,27 +80,20 @@ class Weapon():
             if ref.component_type_dct[component.component_type]['class'] == 'standalone':
                 component_list.remove(component)
 
-        #NOTE: Better way than deepcopy? 
         for component in component_list:
             joint_table[component.component_id] = {
                 'component type': component.component_type,
-                'component class': deepcopy(ref.component_type_dct)[
-                        component.component_type]['class'],
-                'joints remaining': deepcopy(ref.component_type_dct)[
-                        component.component_type]['joints']
+                'component class': deepcopy(ref.component_type_dct[
+                        component.component_type]['class']),
+                'joints remaining': deepcopy(ref.component_type_dct[
+                        component.component_type]['joints'])
             }
-        print joint_table
         #joint table now has a key for every component_id
         #key['joined to'] is list of (id, type) of connected components
         try:
             while len([i for i, t in enumerate(joint_table[c.component_id]['joints remaining'] for 
                     c in component_list) if t[0] != 'multi']) > 0:
 
-                for key in joint_table.keys():
-                    print joint_table[key]
-                print '\n'
-
-                #NOTE: Not handling optional types correctly (attaching two singles to same optional)
                 for joint_class in ['single', 'multi', 'optional']:
                     for component1 in component_list:
                         for open_joint1 in joint_table[component1.component_id][
@@ -127,7 +117,6 @@ class Weapon():
                                             continue
                                         Joint().generate().join([component1, 
                                                                  component2])
-                                        print "Joined %r to %r." % (component1, component2)
                                         if joint_class != 'multi':
                                             if open_joint1 in joint_table[component1.component_id]['joints remaining']:
                                                 joint_table[component1.component_id][
@@ -246,11 +235,14 @@ class Material():
         self.material_quality = None
     
     
-    def generate(self, material_class, arg='random'):
-        self.material_class = material_class
+    def generate(self, material_class='any', arg='random'):
+        if material_class == 'any':
+            self.material_class = choice(ref.material_class_dct.keys())
+        else:
+            self.material_class = material_class
         if arg == 'random':
             self.material_type = choice(
-                            ref.material_type_dct.keys())
+                            ref.material_class_dct[material_class])
         else:
             return NotImplementedError(arg)
         return self
