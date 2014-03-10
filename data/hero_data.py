@@ -9,6 +9,7 @@ class Hero():
 
 	def __init__(self):
 		self.hero_id = None #TODO: get unique based on entities.heroes
+        self.location = [None, None]
 		self.name = None
 		self.home = None
 		self.inventory = []
