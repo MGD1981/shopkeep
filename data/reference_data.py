@@ -343,56 +343,13 @@ material_type_dct = {
     }
 }
 
-#TODO: like weapon_class_dct, make be generated
-material_class_dct = {
-    'wood': [
-        'bodark',
-        'epay',
-        'lemonwood',
-        'pignut',
-        'hickory',
-        'oak',
-        'maple',
-        'yew',
-        'elm',
-        'ash'
-    ],
-    'fiber': [
-        'linen',
-        'hemp',
-        'sinew',
-        'silk',
-        'rawhide'
-    ],
-    'stone': [
-        'chert',
-        'flint',
-        'granite',
-        'marble'
-    ],
-    'leather': [
-        'cow leather',
-        'buffalo leather',
-        'goat hide',
-        'calfskin',
-        'sheepskin',
-        'deerskin',
-        'elkskin',
-        'horse leather',
-        'sharkskin',
-        'dragonhide'
-    ],
-    'metal': [
-        'copper',
-        'bronze',
-        'silver',
-        'gold',
-        'iron',
-        'steel',
-        'silvered steel',
-        'adamantine steel'
-    ]
-}
+
+material_class_dct = {}
+for material_type in material_type_dct.keys():
+    if material_class_dct[material_type['class']] not in material_class_dct.keys():
+        material_class_dct[material_type['class']] = []
+    material_class_dct[material_type['class']].append(material_type)
+ 
 
 
 letter_dct = {
