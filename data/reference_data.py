@@ -140,7 +140,7 @@ component_class_dct = {
 }
 
 
-#Density measured in g·cm−3
+#Density measured in (g x cm)^3
 material_type_dct = {
     'bodark': {
         'class': 'wood',
@@ -346,9 +346,11 @@ material_type_dct = {
 
 material_class_dct = {}
 for material_type in material_type_dct.keys():
-    if material_class_dct[material_type['class']] not in material_class_dct.keys():
-        material_class_dct[material_type['class']] = []
-    material_class_dct[material_type['class']].append(material_type)
+    material_class = material_type_dct[material_type]['class']
+    if material_class not in material_class_dct.keys():
+        material_class_dct[material_class] = []
+    material_class_dct[material_class].append(material_type)
+del material_type, material_class
  
 
 
