@@ -32,37 +32,13 @@ weapon_type_dct = {
 }
 
 
-#TODO: Once a weapon of every class exists, weapon_class_dct may be 
-#generated with an init function on weapon_type_dct.
-#Hardcoded data just for reference right now.
-weapon_class_dct = {
-    'dagger': [
-        'dirk'
-    ],
-    'sword': [
-        'shortsword',
-        'longsword'
-    ],
-    'blunt': [
-        'flail',
-        'double flail'
-    ],
-    'cleave': [
-        'battle axe'
-    ],
-    'polearm': [
-    
-    ],
-    'bow': [
-    
-    ],
-    'ammunition': [
-    
-    ],
-    'projectile': [
-    
-    ]
-}
+weapon_class_dct = {}
+for weapon_type in weapon_type_dct.keys():
+    weapon_class = weapon_type_dct[weapon_type]['class']
+    if weapon_class not in weapon_class_dct.keys():
+        weapon_class_dct[weapon_class] = []
+    weapon_class_dct[weapon_class].append(weapon_type)
+del weapon_type, weapon_class
 
 
 component_type_dct = {
@@ -114,30 +90,13 @@ component_type_dct = {
 }
 
 
-#TODO: like weapon_class_dct, make be generated
-component_class_dct = {
-    'base': [
-    
-    ],
-    'edge': [
-    
-    ],
-    'flagellum': [
-    
-    ],
-    'finger': [
-    
-    ],
-    'extension': [
-    
-    ],
-    'string': [
-    
-    ],
-    'standalone': [
-    
-    ]
-}
+component_class_dct = {}
+for component_type in component_type_dct.keys():
+    component_class = component_type_dct[component_type]['class']
+    if component_class not in component_class_dct.keys():
+        component_class_dct[component_class] = []
+    component_class_dct[component_class].append(component_type)
+del component_type, component_class
 
 
 #Density measured in (g x cm)^3
