@@ -100,207 +100,311 @@ del component_type, component_class
 
 
 #Density measured in (g x cm)^3
+#Hardness in lbf
+#Strength in GPa
+#Flexibility in MPa
 material_type_dct = {
     'bodark': {
         'class': 'wood',
-        'strength': None,
-        'flexibility': None,
-        'density': None,
-        'intrinsic value': None
+        'hardness': 2760,
+        'strength': 11.64,
+        'flexibility': 128.6,
+        'rarity': 'common',
+        'density': 0.855,
     },
-    'epay': {
+    'ipay': {
         'class': 'wood',
-        'strength': None,
-        'flexibility': None,
-        'density': None,
-        'intrinsic value': None
+        'hardness': 3510,
+        'strength': 22.07,
+        'flexibility': 177.0,
+        'rarity': 'rare',
+        'density': 1.100,
     },
     'lemonwood': {
         'class': 'wood',
-        'strength': None,
-        'flexibility': None,
-        'density': None,
-        'intrinsic value': None
-    },
-    'pignut': {
-        'class': 'wood',
-        'strength': None,
-        'flexibility': None,
-        'density': None,
-        'intrinsic value': None
+        'hardness': 1880,
+        'strength': 15.75,
+        'flexibility': 152.4,
+        'rarity': 'very rare',
+        'density': 0.810,
     },
     'hickory': {
         'class': 'wood',
-        'strength': None,
-        'flexibility': None,
-        'density': None,
-        'intrinsic value': None
+        'hardness': 2140,
+        'strength': 15.59,
+        'flexibility': 138.6,
+        'rarity': 'common',
+        'density': 0.835,
     },
     'oak': {
         'class': 'wood',
-        'strength': None,
-        'flexibility': None,
-        'density': None,
-        'intrinsic value': None
+        'hardness': 1350,
+        'strength': 12.15,
+        'flexibility': 102.3,
+        'rarity': 'abundant',
+        'density': 0.755,
     },
     'maple': {
         'class': 'wood',
-        'strength': None,
-        'flexibility': None,
-        'density': None,
-        'intrinsic value': None
+        'hardness': 1450,
+        'strength': 12.62,
+        'flexibility': 109.0,
+        'rarity': 'common',
+        'density': 0.705,
     },
     'yew': {
         'class': 'wood',
-        'strength': None,
-        'flexibility': None,
-        'density': None,
-        'intrinsic value': None
+        'hardness': 1520,
+        'strength': 9.10,
+        'flexibility': 104.8,
+        'rarity': 'rare',
+        'density': 0.675,
     },
     'elm': {
         'class': 'wood',
-        'strength': None,
-        'flexibility': None,
-        'density': None,
-        'intrinsic value': None
+        'hardness': 800,
+        'strength': 7.23,
+        'flexibility': 62.0,
+        'rarity': 'abundant',
+        'density': 0.570,
     },
     'ash': {
         'class': 'wood',
-        'strength': None,
-        'flexibility': None,
-        'density': None,
-        'intrinsic value': None
+        'hardness': 1320,
+        'strength': 12.00,
+        'flexibility': 103.5,
+        'rarity': 'abundant',
+        'density': 0.675,
     },
     'linen': {
         'class': 'fiber',
-        'intrinsic value': None
+        'hardness': None,
+        'strength': None,
+        'flexibility': None,
+        'rarity': None,
+        'density': None,
     },
     'hemp': {
         'class': 'fiber',
-        'intrinsic value': None
+        'hardness': None,
+        'strength': None,
+        'flexibility': None,
+        'rarity': None,
+        'density': None,
     },
     'sinew': {
         'class': 'fiber',
-        'intrinsic value': None
+        'hardness': None,
+        'strength': None,
+        'flexibility': None,
+        'rarity': None,
+        'density': None,
     },
     'silk': {
         'class': 'fiber',
-        'intrinsic value': None
+        'hardness': None,
+        'strength': None,
+        'flexibility': None,
+        'rarity': None,
+        'density': None,
     },
     'rawhide': {
         'class': 'fiber',
-        'intrinsic value': None
+        'hardness': None,
+        'strength': None,
+        'flexibility': None,
+        'rarity': None,
+        'density': None,
     },
     'chert': {
         'class': 'stone',
-        'intrinsic value': None
+        'hardness': 7.0,
+        'strength': None,
+        'flexibility': 'brittle',
+        'rarity': None,
+        'density': 2.65,
     },
     'flint': {
         'class': 'stone',
-        'intrinsic value': None
+        'hardness': None,
+        'strength': None,
+        'flexibility': None,
+        'rarity': None,
+        'density': 2.6,
     },
     'granite': {
         'class': 'stone',
-        'intrinsic value': None
+        'hardness': None,
+        'strength': None,
+        'flexibility': None,
+        'rarity': None,
+        'density': 2.65,
     },
     'marble': {
         'class': 'stone',
-        'intrinsic value': None
+        'hardness': None,
+        'strength': None,
+        'flexibility': None,
+        'rarity': None,
+        'density': 2.55,
     },
     'cow leather': {
         'class': 'leather',
-        'intrinsic value': None
+        'hardness': None,
+        'strength': None,
+        'flexibility': None,
+        'rarity': None,
+        'density': None,
     },
     'buffalo leather': {
         'class': 'leather',
-        'intrinsic value': None
+        'hardness': None,
+        'strength': None,
+        'flexibility': None,
+        'rarity': None,
+        'density': None,
     },
     'goat hide': {
         'class': 'leather',
-        'intrinsic value': None
+        'hardness': None,
+        'strength': None,
+        'flexibility': None,
+        'rarity': None,
+        'density': None,
     },
     'calfskin': {
         'class': 'leather',
-        'intrinsic value': None
+        'hardness': None,
+        'strength': None,
+        'flexibility': None,
+        'rarity': None,
+        'density': None,
     },
     'sheepskin': {
         'class': 'leather',
-        'intrinsic value': None
+        'hardness': None,
+        'strength': None,
+        'flexibility': None,
+        'rarity': None,
+        'density': None,
     },
     'deerskin': {
         'class': 'leather',
-        'intrinsic value': None
+        'hardness': None,
+        'strength': None,
+        'flexibility': None,
+        'rarity': None,
+        'density': None,
     },
     'elkskin': {
         'class': 'leather',
-        'intrinsic value': None
+        'hardness': None,
+        'strength': None,
+        'flexibility': None,
+        'rarity': None,
+        'density': None,
     },
     'horse leather': {
         'class': 'leather',
-        'intrinsic value': None
+        'hardness': None,
+        'strength': None,
+        'flexibility': None,
+        'rarity': None,
+        'density': None,
     },
     'sharkskin': {
         'class': 'leather',
-        'intrinsic value': None
+        'hardness': None,
+        'strength': None,
+        'flexibility': None,
+        'rarity': None,
+        'density': None,
     },
     'dragonhide': {
         'class': 'leather',
-        'intrinsic value': None
+        'hardness': None,
+        'strength': None,
+        'flexibility': None,
+        'rarity': None,
+        'density': None,
     },
     'copper': {
         'class': 'metal',
+        'hardness': None,
+        'strength': None,
+        'flexibility': None,
         'rarity': 60.0,
         'density': 8.96,
-        'intrinsic value': None
     },
     'tin': {
         'class': 'metal',
+        'hardness': None,
+        'strength': None,
+        'flexibility': None,
         'rarity': 2.3,
         'density': 7.365,
-        'intrinsic value': None
     },
     'bronze': {
         'class': 'metal',
+        'hardness': None,
+        'strength': None,
+        'flexibility': None,
         'rarity': None,
         'density': 8.70,
-        'intrinsic value': None
     },
     'silver': {
         'class': 'metal',
+        'hardness': None,
+        'strength': None,
+        'flexibility': None,
         'rarity': 0.075,
         'density': 10.49,
-        'intrinsic value': None
     },
     'gold': {
         'class': 'metal',
+        'hardness': None,
+        'strength': None,
+        'flexibility': None,
         'rarity': 0.004,
         'density': 19.30,
-        'intrinsic value': None
     },
     'iron': {
         'class': 'metal',
+        'hardness': None,
+        'strength': None,
+        'flexibility': None,
         'rarity': 56300.0,
         'density': 7.874,
-        'intrinsic value': None
     },
     'steel': {
         'class': 'metal',
+        'hardness': None,
+        'strength': None,
+        'flexibility': None,
         'rarity': None,
         'density': 7.95,
-        'intrinsic value': None
     },
     'silverine': {
         'class': 'metal',
+        'hardness': None,
+        'strength': None,
+        'flexibility': None,
         'rarity': 0.001,
         'density': 4.506,
-        'instrinsic value': None
     },
     'adamantine steel': {
         'class': 'metal',
+        'hardness': None,
+        'strength': None,
+        'flexibility': None,
         'density': 7.777,
-        'intrinsic value': None
     }
 }
+
+
+#TODO
+for material_type in material_type_dct.keys():
+    material_type_dct[material_type]['intrinsic value'] = 0
 
 
 material_class_dct = {}
