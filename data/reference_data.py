@@ -267,85 +267,9 @@ material_type_dct = {
         'class': 'resource',
         'rarity': None
     },
-    'cow leather': {
+    'leather': {
         'class': 'leather',
-        'toughness': None,
-        'strength': None,
-        'flexibility': None,
-        'rarity': None,
-        'density': None
-    },
-    'buffalo leather': {
-        'class': 'leather',
-        'toughness': None,
-        'strength': None,
-        'flexibility': None,
-        'rarity': None,
-        'density': None
-    },
-    'goat hide': {
-        'class': 'leather',
-        'toughness': None,
-        'strength': None,
-        'flexibility': None,
-        'rarity': None,
-        'density': None
-    },
-    'calfskin': {
-        'class': 'leather',
-        'toughness': None,
-        'strength': None,
-        'flexibility': None,
-        'rarity': None,
-        'density': None
-    },
-    'sheepskin': {
-        'class': 'leather',
-        'toughness': None,
-        'strength': None,
-        'flexibility': None,
-        'rarity': None,
-        'density': None
-    },
-    'deerskin': {
-        'class': 'leather',
-        'toughness': None,
-        'strength': None,
-        'flexibility': None,
-        'rarity': None,
-        'density': None
-    },
-    'elkskin': {
-        'class': 'leather',
-        'toughness': None,
-        'strength': None,
-        'flexibility': None,
-        'rarity': None,
-        'density': None
-    },
-    'horse leather': {
-        'class': 'leather',
-        'toughness': None,
-        'strength': None,
-        'flexibility': None,
-        'rarity': None,
-        'density': None
-    },
-    'sharkskin': {
-        'class': 'leather',
-        'toughness': None,
-        'strength': None,
-        'flexibility': None,
-        'rarity': None,
-        'density': None
-    },
-    'dragonhide': {
-        'class': 'leather',
-        'toughness': None,
-        'strength': None,
-        'flexibility': None,
-        'rarity': None,
-        'density': None
+        'rarity': None
     },
     'copper': {
         'class': 'metal',
