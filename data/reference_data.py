@@ -118,6 +118,7 @@ del component_type, component_class
 #Toughness (Vickers [stone, metal], Crushing Strength [wood], Tensile Strength [fiber]) in MPa
 #Strength (Young's modulus, Elastic modulus) in GPa
 #Flexibility (Shear modulus, Modulus of rupture) in MPa, Elongation [fiber] in % as decimal
+#Rarity (crustal abundance in ppm)
 material_type_dct = {
     'bodark': {
         'class': 'wood',
@@ -197,7 +198,6 @@ material_type_dct = {
         'toughness': 1500.0,
         'strength': 40.0,
         'flexibility': .04,
-        'rarity': None
     },
     'cotton': {
         'class': 'fiber',
@@ -205,7 +205,6 @@ material_type_dct = {
         'toughness': 850.0,
         'strength': 8.0,
         'flexibility': .08,
-        'rarity': None
     },
     'hemp': {
         'class': 'fiber',
@@ -213,14 +212,13 @@ material_type_dct = {
         'toughness': 696.0,
         'strength': 90.0,
         'flexibility': .06,
-        'rarity': None
     },
     'shale': {
         'class': 'stone',
         'toughness': 475.0,
         'strength': 60.0,
         'flexibility': 1600.0,
-        'rarity': None,
+        'rarity': 'common',
         'density': 2.75
     },
     'granite': {
@@ -228,7 +226,7 @@ material_type_dct = {
         'toughness': 825.0,
         'strength': 70.0,
         'flexibility': 24000.0,
-        'rarity': None,
+        'rarity': 'common',
         'density': 2.65
     },
     'sandstone': {
@@ -236,7 +234,7 @@ material_type_dct = {
         'toughness': 805.0,
         'strength': 20.0,
         'flexibility': 400.0,
-        'rarity': None,
+        'rarity': 'common',
         'density': 2.2
     },
     'marble': {
@@ -244,7 +242,7 @@ material_type_dct = {
         'toughness': 190.0,
         'strength': 54.0,
         'flexibility': 27000.0,
-        'rarity': None,
+        'rarity': 'common',
         'density': 2.7
     },
     'limestone': {
@@ -252,31 +250,46 @@ material_type_dct = {
         'toughness': 238.0,
         'strength': 45.0,
         'flexibility': 24000.0,
-        'rarity': None,
+        'rarity': 'common',
         'density': 2.45
     },
     'coal': {
         'class': 'resource',
-        'rarity': None
+        'rarity': 'common'
+    },
+    'iron ore': {
+        'class': 'resource',
+        'rarity': 'abundant'
+    },
+    'copper ore': {
+        'class': 'resource',
+        'rarity': 'common'
+    },
+    'tin ore': {
+        'class': 'resource',
+        'rarity': 'rare'
+    },
+    'silver ore': {
+        'class': 'resource',
+        'rarity': 'rare'
     },
     'flax': {
         'class': 'resource',
-        'rarity': None
+        'rarity': 'common'
     },
     'cotton boll': {
         'class': 'resource',
-        'rarity': None
+        'rarity': 'common'
     },
     'leather': {
         'class': 'leather',
-        'rarity': None
+        'rarity': 'common'
     },
     'copper': {
         'class': 'metal',
         'toughness': 369.0,
         'strength': 119.0,
         'flexibility': 44700.0,
-        'rarity': 60.0,
         'density': 8.96
     },
     'tin': {
@@ -284,7 +297,6 @@ material_type_dct = {
         'toughness': 78.46,
         'strength': 50.0,
         'flexibility': 18000.0,
-        'rarity': 2.3,
         'density': 7.365
     },
     'bronze': {
@@ -299,7 +311,6 @@ material_type_dct = {
         'toughness': 251.0,
         'strength': 76.0,
         'flexibility': 30000.0,
-        'rarity': 0.075,
         'density': 10.49
     },
     'gold': {
@@ -307,7 +318,7 @@ material_type_dct = {
         'toughness': 216.0,
         'strength': 83.0,
         'flexibility': 27000.0,
-        'rarity': 0.004,
+        'rarity': 'very rare',
         'density': 19.30
     },
     'iron': {
@@ -315,7 +326,6 @@ material_type_dct = {
         'toughness': 608.0,
         'strength': 211.0,
         'flexibility': 41000.0,
-        'rarity': 56300.0,
         'density': 7.874
     },
     'steel': {
@@ -330,7 +340,7 @@ material_type_dct = {
         'toughness': 970.0,
         'strength': 110.3,
         'flexibility': 41000.0,
-        'rarity': 0.001,
+        'rarity': 'extremely rare',
         'density': 4.506
     },
     'adamantine steel': {
