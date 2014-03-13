@@ -1,4 +1,9 @@
 weapon_type_dct = {
+    'spear': {
+        'class': 'polearm',
+        'components': ['shaft', 'head'],
+        'hands to wield': 2
+    },
     'dirk': {
         'class': 'dagger',
         'components': ['hilt', 'blade', 'scabbard'],
@@ -42,6 +47,16 @@ del weapon_type, weapon_class
 
 
 component_type_dct = {
+    'shaft': {
+        'class': 'base',
+        'possible materials': ['wood'],
+        'joints': [('multi', 'point')]
+    },
+    'head': {
+        'class': 'point',
+        'possible materials': ['stone', 'metal'],
+        'joints': [('single', 'point')]
+    },
     'hilt': {
         'class': 'base',
         'possible materials': ['wood', 'stone', 'metal'],
@@ -100,304 +115,289 @@ del component_type, component_class
 
 
 #Density measured in (g x cm)^3
-#Hardness in lbf
-#Strength in GPa
-#Flexibility in MPa
+#Toughness (Vickers, Crushing Strength) in MPa
+#Strength (Young's modulus, Elastic modulus) in GPa
+#Flexibility (Shear modulus, Modulus of rupture) in MPa
 material_type_dct = {
     'bodark': {
         'class': 'wood',
-        'hardness': 2760,
+        'toughness': 2760,
         'strength': 11.64,
         'flexibility': 128.6,
         'rarity': 'common',
-        'density': 0.855,
+        'density': 0.855
     },
     'ipay': {
         'class': 'wood',
-        'hardness': 3510,
+        'toughness': 3510,
         'strength': 22.07,
         'flexibility': 177.0,
         'rarity': 'rare',
-        'density': 1.100,
+        'density': 1.100
     },
     'lemonwood': {
         'class': 'wood',
-        'hardness': 1880,
+        'toughness': 1880,
         'strength': 15.75,
         'flexibility': 152.4,
         'rarity': 'very rare',
-        'density': 0.810,
+        'density': 0.810
     },
     'hickory': {
         'class': 'wood',
-        'hardness': 2140,
+        'toughness': 2140,
         'strength': 15.59,
         'flexibility': 138.6,
         'rarity': 'common',
-        'density': 0.835,
+        'density': 0.835
     },
     'oak': {
         'class': 'wood',
-        'hardness': 1350,
+        'toughness': 1350,
         'strength': 12.15,
         'flexibility': 102.3,
         'rarity': 'abundant',
-        'density': 0.755,
+        'density': 0.755
     },
     'maple': {
         'class': 'wood',
-        'hardness': 1450,
+        'toughness': 1450,
         'strength': 12.62,
         'flexibility': 109.0,
         'rarity': 'common',
-        'density': 0.705,
+        'density': 0.705
     },
     'yew': {
         'class': 'wood',
-        'hardness': 1520,
+        'toughness': 1520,
         'strength': 9.10,
         'flexibility': 104.8,
         'rarity': 'rare',
-        'density': 0.675,
+        'density': 0.675
     },
     'elm': {
         'class': 'wood',
-        'hardness': 800,
+        'toughness': 800,
         'strength': 7.23,
         'flexibility': 62.0,
         'rarity': 'abundant',
-        'density': 0.570,
+        'density': 0.570
     },
     'ash': {
         'class': 'wood',
-        'hardness': 1320,
+        'toughness': 51.1,
         'strength': 12.00,
         'flexibility': 103.5,
         'rarity': 'abundant',
-        'density': 0.675,
+        'density': 0.675
     },
     'linen': {
         'class': 'fiber',
-        'hardness': None,
         'strength': None,
         'flexibility': None,
         'rarity': None,
-        'density': None,
+        'density': None
     },
     'hemp': {
         'class': 'fiber',
-        'hardness': None,
-        'strength': None,
+        'strength': 35.0,
         'flexibility': None,
         'rarity': None,
-        'density': None,
+        'density': None
     },
     'sinew': {
         'class': 'fiber',
-        'hardness': None,
         'strength': None,
         'flexibility': None,
         'rarity': None,
-        'density': None,
+        'density': None
     },
     'silk': {
         'class': 'fiber',
-        'hardness': None,
         'strength': None,
         'flexibility': None,
         'rarity': None,
-        'density': None,
+        'density': None
     },
     'rawhide': {
         'class': 'fiber',
-        'hardness': None,
         'strength': None,
         'flexibility': None,
         'rarity': None,
-        'density': None,
-    },
-    'chert': {
-        'class': 'stone',
-        'hardness': 7.0,
-        'strength': None,
-        'flexibility': 'brittle',
-        'rarity': None,
-        'density': 2.65,
-    },
-    'flint': {
-        'class': 'stone',
-        'hardness': None,
-        'strength': None,
-        'flexibility': None,
-        'rarity': None,
-        'density': 2.6,
+        'density': None
     },
     'granite': {
         'class': 'stone',
-        'hardness': None,
-        'strength': None,
-        'flexibility': None,
+        'toughness': 660.0,
+        'strength': 70.0,
+        'flexibility': 27000.0,
         'rarity': None,
-        'density': 2.65,
+        'density': 2.85
     },
     'marble': {
         'class': 'stone',
-        'hardness': None,
-        'strength': None,
+        'toughness': 13.0,
+        'strength': 54.0,
+        'flexibility': 27000.0,
+        'rarity': None,
+        'density': 2.7
+    },
+    'coal': {
+        'class': 'stone',
+        'toughness': None,
+        'strength': 6.9,
         'flexibility': None,
         'rarity': None,
-        'density': 2.55,
+        'density': None
     },
     'cow leather': {
         'class': 'leather',
-        'hardness': None,
+        'toughness': None,
         'strength': None,
         'flexibility': None,
         'rarity': None,
-        'density': None,
+        'density': None
     },
     'buffalo leather': {
         'class': 'leather',
-        'hardness': None,
+        'toughness': None,
         'strength': None,
         'flexibility': None,
         'rarity': None,
-        'density': None,
+        'density': None
     },
     'goat hide': {
         'class': 'leather',
-        'hardness': None,
+        'toughness': None,
         'strength': None,
         'flexibility': None,
         'rarity': None,
-        'density': None,
+        'density': None
     },
     'calfskin': {
         'class': 'leather',
-        'hardness': None,
+        'toughness': None,
         'strength': None,
         'flexibility': None,
         'rarity': None,
-        'density': None,
+        'density': None
     },
     'sheepskin': {
         'class': 'leather',
-        'hardness': None,
+        'toughness': None,
         'strength': None,
         'flexibility': None,
         'rarity': None,
-        'density': None,
+        'density': None
     },
     'deerskin': {
         'class': 'leather',
-        'hardness': None,
+        'toughness': None,
         'strength': None,
         'flexibility': None,
         'rarity': None,
-        'density': None,
+        'density': None
     },
     'elkskin': {
         'class': 'leather',
-        'hardness': None,
+        'toughness': None,
         'strength': None,
         'flexibility': None,
         'rarity': None,
-        'density': None,
+        'density': None
     },
     'horse leather': {
         'class': 'leather',
-        'hardness': None,
+        'toughness': None,
         'strength': None,
         'flexibility': None,
         'rarity': None,
-        'density': None,
+        'density': None
     },
     'sharkskin': {
         'class': 'leather',
-        'hardness': None,
+        'toughness': None,
         'strength': None,
         'flexibility': None,
         'rarity': None,
-        'density': None,
+        'density': None
     },
     'dragonhide': {
         'class': 'leather',
-        'hardness': None,
+        'toughness': None,
         'strength': None,
         'flexibility': None,
         'rarity': None,
-        'density': None,
+        'density': None
     },
     'copper': {
         'class': 'metal',
-        'hardness': None,
-        'strength': None,
-        'flexibility': None,
+        'toughness': 369.0,
+        'strength': 119.0,
+        'flexibility': 44700.0,
         'rarity': 60.0,
-        'density': 8.96,
+        'density': 8.96
     },
     'tin': {
         'class': 'metal',
-        'hardness': None,
-        'strength': None,
-        'flexibility': None,
+        'toughness': 78.46,
+        'strength': 50.0,
+        'flexibility': 18000.0,
         'rarity': 2.3,
-        'density': 7.365,
+        'density': 7.365
     },
     'bronze': {
         'class': 'metal',
-        'hardness': None,
-        'strength': None,
-        'flexibility': None,
-        'rarity': None,
-        'density': 8.70,
+        'toughness': 980.7,
+        'strength': 108.0,
+        'flexibility': 44800,
+        'density': 8.70
     },
     'silver': {
         'class': 'metal',
-        'hardness': None,
-        'strength': None,
-        'flexibility': None,
+        'toughness': 251.0,
+        'strength': 76.0,
+        'flexibility': 30000.0,
         'rarity': 0.075,
-        'density': 10.49,
+        'density': 10.49
     },
     'gold': {
         'class': 'metal',
-        'hardness': None,
-        'strength': None,
-        'flexibility': None,
+        'toughness': 216.0,
+        'strength': 83.0,
+        'flexibility': 27000.0,
         'rarity': 0.004,
-        'density': 19.30,
+        'density': 19.30
     },
     'iron': {
         'class': 'metal',
-        'hardness': None,
-        'strength': None,
-        'flexibility': None,
+        'toughness': 608.0,
+        'strength': 211.0,
+        'flexibility': 41000.0,
         'rarity': 56300.0,
-        'density': 7.874,
+        'density': 7.874
     },
     'steel': {
         'class': 'metal',
-        'hardness': None,
-        'strength': None,
-        'flexibility': None,
-        'rarity': None,
-        'density': 7.95,
+        'toughness': 1373.0,
+        'strength': 200.0,
+        'flexibility': 79300.0,
+        'density': 7.95
     },
     'silverine': {
         'class': 'metal',
-        'hardness': None,
-        'strength': None,
-        'flexibility': None,
+        'toughness': 970.0,
+        'strength': 110.3,
+        'flexibility': 41000.0,
         'rarity': 0.001,
-        'density': 4.506,
+        'density': 4.506
     },
     'adamantine steel': {
         'class': 'metal',
-        'hardness': None,
-        'strength': None,
-        'flexibility': None,
-        'density': 7.777,
+        'toughness': 8826.0,
+        'strength': 120.0,
+        'flexibility': 42000.0,
+        'density': 7.777
     }
 }
 
