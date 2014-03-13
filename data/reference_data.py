@@ -115,13 +115,13 @@ del component_type, component_class
 
 
 #Density measured in (g x cm)^3
-#Toughness (Vickers, Crushing Strength) in MPa
+#Toughness (Vickers [stone, metal], Crushing Strength [wood], Tensile Strength [fiber]) in MPa
 #Strength (Young's modulus, Elastic modulus) in GPa
-#Flexibility (Shear modulus, Modulus of rupture) in MPa
+#Flexibility (Shear modulus, Modulus of rupture) in MPa, Elongation [fiber] in % as decimal
 material_type_dct = {
     'bodark': {
         'class': 'wood',
-        'toughness': 2760,
+        'toughness': 64.7,
         'strength': 11.64,
         'flexibility': 128.6,
         'rarity': 'common',
@@ -129,7 +129,7 @@ material_type_dct = {
     },
     'ipay': {
         'class': 'wood',
-        'toughness': 3510,
+        'toughness': 93.8,
         'strength': 22.07,
         'flexibility': 177.0,
         'rarity': 'rare',
@@ -137,7 +137,7 @@ material_type_dct = {
     },
     'lemonwood': {
         'class': 'wood',
-        'toughness': 1880,
+        'toughness': 67.5,
         'strength': 15.75,
         'flexibility': 152.4,
         'rarity': 'very rare',
@@ -145,7 +145,7 @@ material_type_dct = {
     },
     'hickory': {
         'class': 'wood',
-        'toughness': 2140,
+        'toughness': 63.4,
         'strength': 15.59,
         'flexibility': 138.6,
         'rarity': 'common',
@@ -153,7 +153,7 @@ material_type_dct = {
     },
     'oak': {
         'class': 'wood',
-        'toughness': 1350,
+        'toughness': 50.8,
         'strength': 12.15,
         'flexibility': 102.3,
         'rarity': 'abundant',
@@ -161,7 +161,7 @@ material_type_dct = {
     },
     'maple': {
         'class': 'wood',
-        'toughness': 1450,
+        'toughness': 54.0,
         'strength': 12.62,
         'flexibility': 109.0,
         'rarity': 'common',
@@ -169,7 +169,7 @@ material_type_dct = {
     },
     'yew': {
         'class': 'wood',
-        'toughness': 1520,
+        'toughness': 55.9,
         'strength': 9.10,
         'flexibility': 104.8,
         'rarity': 'rare',
@@ -177,7 +177,7 @@ material_type_dct = {
     },
     'elm': {
         'class': 'wood',
-        'toughness': 800,
+        'toughness': 31.3,
         'strength': 7.23,
         'flexibility': 62.0,
         'rarity': 'abundant',
@@ -193,62 +193,79 @@ material_type_dct = {
     },
     'linen': {
         'class': 'fiber',
-        'strength': None,
-        'flexibility': None,
-        'rarity': None,
-        'density': None
+        'density': 1.6,
+        'toughness': 1500.0,
+        'strength': 40.0,
+        'flexibility': .04,
+        'rarity': None
+    },
+    'cotton': {
+        'class': 'fiber',
+        'density': 1.54,
+        'toughness': 850.0,
+        'strength': 8.0,
+        'flexibility': .08,
+        'rarity': None
     },
     'hemp': {
         'class': 'fiber',
-        'strength': 35.0,
-        'flexibility': None,
-        'rarity': None,
-        'density': None
+        'density': 1.49,
+        'toughness': 696.0,
+        'strength': 90.0,
+        'flexibility': .06,
+        'rarity': None
     },
-    'sinew': {
-        'class': 'fiber',
-        'strength': None,
-        'flexibility': None,
+    'shale': {
+        'class': 'stone',
+        'toughness': 475.0,
+        'strength': 60.0,
+        'flexibility': 1600.0,
         'rarity': None,
-        'density': None
-    },
-    'silk': {
-        'class': 'fiber',
-        'strength': None,
-        'flexibility': None,
-        'rarity': None,
-        'density': None
-    },
-    'rawhide': {
-        'class': 'fiber',
-        'strength': None,
-        'flexibility': None,
-        'rarity': None,
-        'density': None
+        'density': 2.75
     },
     'granite': {
         'class': 'stone',
-        'toughness': 660.0,
+        'toughness': 825.0,
         'strength': 70.0,
-        'flexibility': 27000.0,
+        'flexibility': 24000.0,
         'rarity': None,
-        'density': 2.85
+        'density': 2.65
+    },
+    'sandstone': {
+        'class': 'stone',
+        'toughness': 805.0,
+        'strength': 20.0,
+        'flexibility': 400.0,
+        'rarity': None,
+        'density': 2.2
     },
     'marble': {
         'class': 'stone',
-        'toughness': 13.0,
+        'toughness': 190.0,
         'strength': 54.0,
         'flexibility': 27000.0,
         'rarity': None,
         'density': 2.7
     },
-    'coal': {
+    'limestone': {
         'class': 'stone',
-        'toughness': None,
-        'strength': 6.9,
-        'flexibility': None,
+        'toughness': 238.0,
+        'strength': 45.0,
+        'flexibility': 24000.0,
         'rarity': None,
-        'density': None
+        'density': 2.45
+    },
+    'coal': {
+        'class': 'resource',
+        'rarity': None
+    },
+    'flax': {
+        'class': 'resource',
+        'rarity': None
+    },
+    'cotton boll': {
+        'class': 'resource',
+        'rarity': None
     },
     'cow leather': {
         'class': 'leather',
