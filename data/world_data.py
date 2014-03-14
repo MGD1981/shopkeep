@@ -28,6 +28,7 @@ def generate_terrain(grid, size):
     tiles_remaining -= 3
     while tiles_remaining > 0:
         for t in ['g', 'w', 'r']:
+            checked_tiles = 0
             adjacents = [(eval(t)[0] - 1, eval(t)[1]),
                          (eval(t)[0] + 1, eval(t)[1]),
                          (eval(t)[0], eval(t)[1] - 1),
@@ -37,15 +38,25 @@ def generate_terrain(grid, size):
                 x = next_t[0]
                 y = next_t[1]
                 if x < 0 or x >= size or y < 0 or y >= size:
+                    checked_tiles += 1
+                    if checked_tiles == 4:
+                        jump = (randint(0, size-1), randint(0, size-1))
+                        jumped_to = grid[jump[0]][jump[1]]
+                        if jumped_to in [0, t]: 
+                            exec(t + " = " + str(jump))
                     continue    
                 if grid[next_t[0]][next_t[1]] == 0:
                     grid[next_t[0]][next_t[1]] = t
                     exec(t + " = next_t")
                     tiles_remaining -= 1
                 else:
+                    checked_tiles += 1
+                    checked_tiles += 1
+                    if checked_tiles == 4:
+                        jump = (randint(0, size-1), randint(0, size-1))
+                        jumped_to = grid[jump[0]][jump[1]]
+                        if jumped_to in [0, t]: 
+                            exec(t + " = " + str(jump))
                     continue
-            jump = (randint(0, size-1), randint(0, size-1))
-            jumped_to = grid[jump[0]][jump[1]]
-            if jumped_to in [0, t]: 
-                exec(t + " = " + str(jump))
+
     return grid
