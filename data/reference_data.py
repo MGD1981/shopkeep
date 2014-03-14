@@ -388,6 +388,15 @@ structure_type_dct = {
 }
 
 
+structure_class_dct = {}
+for structure_type in structure_type_dct.keys():
+    structure_class = structure_type_dct[structure_type]['class']
+    if structure_class not in structure_class_dct.keys():
+        structure_class_dct[structure_class] = []
+    structure_class_dct[structure_class].append(structure_type)
+del structure_type, structure_class
+
+
 
 letter_dct = {
     'monster': {
