@@ -1,5 +1,4 @@
 from random import randint, choice, shuffle
-import pdb
 
 def get_new_world(size=64):
     world = {
@@ -11,7 +10,7 @@ def get_new_world(size=64):
     return world
     
     
-    
+# Key: g=grassland, w=woodland, r=rockland
 def generate_terrain(grid, size):
     tiles_remaining = 0
     for row in grid:
