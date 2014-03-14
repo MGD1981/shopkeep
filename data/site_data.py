@@ -1,4 +1,5 @@
 import entities
+import reference_data as ref
 from random import randint
 
 
@@ -19,7 +20,7 @@ class Site()
         size = entities.world['size']
         if arg == 'random':
             x = randint(0, size-1), y = randint(0, size-1)
-            terrain_type = entities.world['grid'][x][y]
+            terrain_type = ref.terrain_dct[entities.world['grid'][x][y]]
             while terrain_type != 0:
                 x = randint(0, size-1), y = randint(0, size-1)
             self.location = [x,y]
