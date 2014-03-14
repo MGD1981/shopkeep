@@ -365,7 +365,28 @@ for material_type in material_type_dct.keys():
         material_class_dct[material_class] = []
     material_class_dct[material_class].append(material_type)
 del material_type, material_class
- 
+
+
+
+terrain_dct = {
+    'g': 'grassland',
+    'w': 'woodland',
+    'r': 'rockland'
+}
+
+
+structure_type_dct = {
+    'farm': {
+        'class': 'grassland'
+    },
+    'sawmill': {
+        'class': 'woodland'
+    },
+    'mine': {
+        'class': 'rockland'
+    }
+}
+
 
 
 letter_dct = {
