@@ -86,4 +86,11 @@ def draw_map(shopmap):
         for m in shopmap[n]:
             if m == 0:
                 line.append(CSI+"40m" + ' ')
+            if m == 'g':
+                line.append(CSI+"42m" + ' ')
+            if m == 'w':
+                line.append(CSI+"46m" + ' ')
+            if m == 'r':
+                line.append(CSI+"43m" + ' ')
+        line.append(CSI+"40m" + ' ')
         print ''.join(line)

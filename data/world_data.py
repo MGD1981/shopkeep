@@ -1,7 +1,7 @@
 from random import randint, choice, shuffle
 import pdb
 
-def get_new_world(size=16):
+def get_new_world(size=64):
     world = {
         'grid': [list([0] * size) for x in xrange(size)],
         'size': size
@@ -47,6 +47,6 @@ def generate_terrain(grid, size):
                     continue
             jump = (randint(0, size-1), randint(0, size-1))
             jumped_to = grid[jump[0]][jump[1]]
-            if jumped_to != 0:
-                exec(jumped_to + " = " + str(jump))
+            if jumped_to in [0, t]: 
+                exec(t + " = " + str(jump))
     return grid

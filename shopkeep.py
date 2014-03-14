@@ -1,17 +1,17 @@
 from display import menus, draw_screen
-from data import mapper, entities
-from display.menus import *
+from data import mapper, entities, world_data
+
 
 def start_game():
-    choice = draw_screen.run_menu(StartMenu())
+    choice = draw_screen.run_menu(menus.StartMenu())
     if choice == "start_new":
+        print "Initializing entities..."
         entities.initialize()
         shopmap = mapper.new_map()
-        draw_screen.draw_map(shopmap)
+        draw_screen.draw_map(entities.world['grid'])
         action = draw_screen.getch()
-        print entities.weapons
     if choice == "continue_saved":
-        choice = run_menu(ContinueGameMenu())
+        choice = draw_screen.run_menu(menus.ContinueGameMenu())
 
 
 if __name__ == "__main__":
