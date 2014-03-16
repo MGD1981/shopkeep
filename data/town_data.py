@@ -1,7 +1,10 @@
 import reference_data as ref
+from entities import world
+from random import randint
 
 def get_new_town():
     town = {
+        'location': [None, None],
         'resource': {},
         'occupation': {
             'adventurer': 0,
@@ -16,6 +19,14 @@ def get_new_town():
             'retail': 1
         }
     }
+
+    #Set location
+    w_size = world['size']
+    town['location'][0] = randint(w_size - (3*w_size/4), w_size - (w_size/4))
+    town['location'][1] = randint(w_size - (3*w_size/4), w_size - (w_size/4))
+    world['grid'][town['location'][0]][town['location'][1]] = 't'
+
+    #Populate resources
     for material_class in ref.material_class_dct.keys():
         town['resource'][material_class] = {}
         for material_type in ref.material_class_dct[material_class]:
@@ -24,4 +35,5 @@ def get_new_town():
                 'available': 0
             }
 
-    return world
+    return town
+

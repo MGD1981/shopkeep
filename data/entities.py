@@ -4,18 +4,19 @@ player = {}
 weapons = {}
 components = {}
 heroes = {}
-adventure_sites = {}
-resource_sites = {}
+sites = {}
 world = {}
 town = {}
 shop = {}
 
 
 def initialize():
-    global player, weapons, components, heroes, adventure_sites, resource_sites, world, town
-    import player_data
+    global player, weapons, components, heroes, sites, world, town
     import world_data
-    world = world_data.get_new_world()
+    world = world_data.get_new_world(32)
+    import town_data
+    town = town_data.get_new_town()
+    import player_data
     player = player_data.get_new_player()
     weapons = {
         'next id': 1,
@@ -29,32 +30,26 @@ def initialize():
         'next id': 1,
         'object list': []
     }
-    adventure_sites = {
+    sites = {
         'next id': 1,
         'object list': []
     }
-    resource_sites = {
-        'next id': 1,
-        'object list': []
-    }
-    town = {}
     shop = {}
     return
 
 
 def load(save_name):
-    global player, weapons, components, heroes, adventure_sites, resource_sites, world, town, shop
+    global player, weapons, components, heroes, sites, world, town, shop
     save_file = open('saves/%s' % save_name)
     dict_list = pickle.load(save_file)
     player = dict_list[0]
     weapons = dict_list[1]
     components = dict_list[2]
     heroes = dict_list[3]
-    adventure_sites = dict_list[4]
-    resource_sites = dict_list[5]
-    world = dict_list[6]
-    town = dict_list[7]
-    shop = dict_list[8]
+    sites = dict_list[4]
+    world = dict_list[5]
+    town = dict_list[6]
+    shop = dict_list[7]
     save_file.close()
     return
 
@@ -66,8 +61,7 @@ def save(save_name):
                  weapons,
                  components,
                  heroes, 
-                 adventure_sites, 
-                 resource_sites,
+                 sites, 
                  world,
                  town,
                  shop]

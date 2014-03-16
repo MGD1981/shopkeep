@@ -81,16 +81,18 @@ def run_menu(menu):
 def draw_map(shopmap):
     cls()
     assert type(shopmap) == list
-    for n in range(1,25):
+    for n in xrange(len(shopmap)):
         line = []
         for m in shopmap[n]:
             if m == 0:
-                line.append(CSI+"40m" + ' ')
+                line.append(CSI+"40m" + '  ')
             if m == 'g':
-                line.append(CSI+"42m" + ' ')
+                line.append(CSI+"43m" + '  ')
             if m == 'w':
-                line.append(CSI+"46m" + ' ')
+                line.append(CSI+"42m" + '  ')
             if m == 'r':
-                line.append(CSI+"43m" + ' ')
+                line.append(CSI+"47m" + '  ')
+            if m == 't':
+                line.append(CSI+"37;40m" + '[]')
         line.append(CSI+"40m" + ' ')
         print ''.join(line)

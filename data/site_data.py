@@ -45,7 +45,6 @@ class Site()
         return 'Site(ID: %r, Type:%r, Loc: %r)' % (self.hero_id, self.site_type, self.location)
         
 
-#TODO: Add structures to reference dict
 class Structure():
     """Structure object which lives on sites."""
     
