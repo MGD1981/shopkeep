@@ -276,31 +276,31 @@ material_type_dct = {
         'useable': False
     },
     'iron ore': {
-        'class': 'resource',
+        'class': 'metal',
         'rarity': 'abundant',
         'useable': False
     },
     'copper ore': {
-        'class': 'resource',
+        'class': 'metal',
         'rarity': 'common'
     },
     'tin ore': {
-        'class': 'resource',
+        'class': 'metal',
         'rarity': 'rare',
         'useable': False
     },
     'silver ore': {
-        'class': 'resource',
+        'class': 'metal',
         'rarity': 'rare',
         'useable': False
     },
     'flax': {
-        'class': 'resource',
+        'class': 'metal',
         'rarity': 'common',
         'useable': False
     },
     'cotton boll': {
-        'class': 'resource',
+        'class': 'metal',
         'rarity': 'common',
         'useable': False
     },
