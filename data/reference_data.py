@@ -377,25 +377,45 @@ terrain_dct = {
 
 structure_type_dct = {
     'farm': {
-        'class': 'grassland'
+        'class': 'grassland',
+        'site type': 'resource',
+        'transformations': ['fallow ground']
     },
     'sawmill': {
-        'class': 'woodland'
+        'class': 'woodland',
+        'site type': 'resource'
     },
     'mine': {
-        'class': 'rockland'
+        'class': 'rockland',
+        'site type': 'resource',
+        'transformations': ['abandoned mine', 'collapsed mine']
+    },
+    'dungeon': {
+        'class': 'grassland',
+        'site type': 'adventure'
+    },
+    'cave': {
+        'class': 'rockland',
+        'site type': 'adventure'
+    },
+    'tower': {
+        'class': 'woodland',
+        'site type': 'adventure'
     }
 }
 
 
 structure_class_dct = {}
+site_type_dct = {}
 for structure_type in structure_type_dct.keys():
     structure_class = structure_type_dct[structure_type]['class']
     if structure_class not in structure_class_dct.keys():
         structure_class_dct[structure_class] = []
     structure_class_dct[structure_class].append(structure_type)
-del structure_type, structure_class
-
+    site_type = structure_type_dct[structure_type]['site type']
+    if site_type not in site_type_dct.keys():
+        site_type_dct[structure_class].append(structure_type)
+del structure_type, structure_class, site_type
 
 
 letter_dct = {
