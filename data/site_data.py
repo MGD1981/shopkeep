@@ -33,10 +33,14 @@ class Site()
                 self.site_type = site_type
                 
             self.structure = Structure().generate(ref.terrain_dct[terrain_type], self.site_type)
-            if 'resource type' in ref.structure_type_dct[Structure.structure_type].keys():
-                self.harvestable['resources'] = []
-                self.harvestable['resources'].append([
-                        ref.structure_type_dct[Structure.structure_type]['resource type'],
+            if 'resource type' in ref.structure_type_dct[self.structure.structure_type].keys():
+                resource_type = ref.structure_type_dct[self.structure.structure_type]['resource type']
+                resource_possibilities = []
+                for possible_material in ref.material_class_dct[resource_type]:
+                    for x in xrange(ref.rarity_dct[ref.material_type_dct[possible_material]['rarity']]):
+                        resource_possibilities.append possible_material
+                self.harvestable['resources'] = choice(
+                        resource_possibilities,
                         randint(50, 500)]) #TODO: Get good numbers for possible resource amounts
                             
         self.set_site_id()
