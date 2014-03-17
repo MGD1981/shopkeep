@@ -126,7 +126,8 @@ material_type_dct = {
         'strength': 11.64,
         'flexibility': 128.6,
         'rarity': 'common',
-        'density': 0.855
+        'density': 0.855,
+        'useable': True
     },
     'ipay': {
         'class': 'wood',
@@ -134,7 +135,8 @@ material_type_dct = {
         'strength': 22.07,
         'flexibility': 177.0,
         'rarity': 'rare',
-        'density': 1.100
+        'density': 1.100,
+        'useable': True
     },
     'lemonwood': {
         'class': 'wood',
@@ -142,7 +144,8 @@ material_type_dct = {
         'strength': 15.75,
         'flexibility': 152.4,
         'rarity': 'very rare',
-        'density': 0.810
+        'density': 0.810,
+        'useable': True
     },
     'hickory': {
         'class': 'wood',
@@ -150,7 +153,8 @@ material_type_dct = {
         'strength': 15.59,
         'flexibility': 138.6,
         'rarity': 'common',
-        'density': 0.835
+        'density': 0.835,
+        'useable': True
     },
     'oak': {
         'class': 'wood',
@@ -158,7 +162,8 @@ material_type_dct = {
         'strength': 12.15,
         'flexibility': 102.3,
         'rarity': 'abundant',
-        'density': 0.755
+        'density': 0.755,
+        'useable': True
     },
     'maple': {
         'class': 'wood',
@@ -166,7 +171,8 @@ material_type_dct = {
         'strength': 12.62,
         'flexibility': 109.0,
         'rarity': 'common',
-        'density': 0.705
+        'density': 0.705,
+        'useable': True
     },
     'yew': {
         'class': 'wood',
@@ -174,7 +180,8 @@ material_type_dct = {
         'strength': 9.10,
         'flexibility': 104.8,
         'rarity': 'rare',
-        'density': 0.675
+        'density': 0.675,
+        'useable': True
     },
     'elm': {
         'class': 'wood',
@@ -182,7 +189,8 @@ material_type_dct = {
         'strength': 7.23,
         'flexibility': 62.0,
         'rarity': 'abundant',
-        'density': 0.570
+        'density': 0.570,
+        'useable': True
     },
     'ash': {
         'class': 'wood',
@@ -190,7 +198,8 @@ material_type_dct = {
         'strength': 12.00,
         'flexibility': 103.5,
         'rarity': 'abundant',
-        'density': 0.675
+        'density': 0.675,
+        'useable': True
     },
     'linen': {
         'class': 'fiber',
@@ -198,6 +207,7 @@ material_type_dct = {
         'toughness': 1500.0,
         'strength': 40.0,
         'flexibility': .04,
+        'useable': True
     },
     'cotton': {
         'class': 'fiber',
@@ -205,6 +215,7 @@ material_type_dct = {
         'toughness': 850.0,
         'strength': 8.0,
         'flexibility': .08,
+        'useable': True
     },
     'hemp': {
         'class': 'fiber',
@@ -212,6 +223,7 @@ material_type_dct = {
         'toughness': 696.0,
         'strength': 90.0,
         'flexibility': .06,
+        'useable': True
     },
     'shale': {
         'class': 'stone',
@@ -219,7 +231,8 @@ material_type_dct = {
         'strength': 60.0,
         'flexibility': 1600.0,
         'rarity': 'common',
-        'density': 2.75
+        'density': 2.75,
+        'useable': True
     },
     'granite': {
         'class': 'stone',
@@ -227,7 +240,8 @@ material_type_dct = {
         'strength': 70.0,
         'flexibility': 24000.0,
         'rarity': 'common',
-        'density': 2.65
+        'density': 2.65,
+        'useable': True
     },
     'sandstone': {
         'class': 'stone',
@@ -235,7 +249,8 @@ material_type_dct = {
         'strength': 20.0,
         'flexibility': 400.0,
         'rarity': 'common',
-        'density': 2.2
+        'density': 2.2,
+        'useable': True
     },
     'marble': {
         'class': 'stone',
@@ -243,7 +258,8 @@ material_type_dct = {
         'strength': 54.0,
         'flexibility': 27000.0,
         'rarity': 'common',
-        'density': 2.7
+        'density': 2.7,
+        'useable': True
     },
     'limestone': {
         'class': 'stone',
@@ -251,15 +267,18 @@ material_type_dct = {
         'strength': 45.0,
         'flexibility': 24000.0,
         'rarity': 'common',
-        'density': 2.45
+        'density': 2.45,
+        'useable': True
     },
     'coal': {
-        'class': 'resource',
-        'rarity': 'common'
+        'class': 'stone',
+        'rarity': 'common',
+        'useable': False
     },
     'iron ore': {
         'class': 'resource',
-        'rarity': 'abundant'
+        'rarity': 'abundant',
+        'useable': False
     },
     'copper ore': {
         'class': 'resource',
@@ -267,37 +286,44 @@ material_type_dct = {
     },
     'tin ore': {
         'class': 'resource',
-        'rarity': 'rare'
+        'rarity': 'rare',
+        'useable': False
     },
     'silver ore': {
         'class': 'resource',
-        'rarity': 'rare'
+        'rarity': 'rare',
+        'useable': False
     },
     'flax': {
         'class': 'resource',
-        'rarity': 'common'
+        'rarity': 'common',
+        'useable': False
     },
     'cotton boll': {
         'class': 'resource',
-        'rarity': 'common'
+        'rarity': 'common',
+        'useable': False
     },
     'leather': {
         'class': 'leather',
-        'rarity': 'common'
+        'rarity': 'common',
+        'useable': True
     },
     'copper': {
         'class': 'metal',
         'toughness': 369.0,
         'strength': 119.0,
         'flexibility': 44700.0,
-        'density': 8.96
+        'density': 8.96,
+        'useable': True
     },
     'tin': {
         'class': 'metal',
         'toughness': 78.46,
         'strength': 50.0,
         'flexibility': 18000.0,
-        'density': 7.365
+        'density': 7.365,
+        'useable': True
     },
     'bronze': {
         'class': 'metal',
@@ -311,7 +337,8 @@ material_type_dct = {
         'toughness': 251.0,
         'strength': 76.0,
         'flexibility': 30000.0,
-        'density': 10.49
+        'density': 10.49,
+        'useable': True
     },
     'gold': {
         'class': 'metal',
@@ -319,21 +346,24 @@ material_type_dct = {
         'strength': 83.0,
         'flexibility': 27000.0,
         'rarity': 'very rare',
-        'density': 19.30
+        'density': 19.30,
+        'useable': True
     },
     'iron': {
         'class': 'metal',
         'toughness': 608.0,
         'strength': 211.0,
         'flexibility': 41000.0,
-        'density': 7.874
+        'density': 7.874,
+        'useable': True
     },
     'steel': {
         'class': 'metal',
         'toughness': 1373.0,
         'strength': 200.0,
         'flexibility': 79300.0,
-        'density': 7.95
+        'density': 7.95,
+        'useable': True
     },
     'silverine': {
         'class': 'metal',
@@ -341,14 +371,16 @@ material_type_dct = {
         'strength': 110.3,
         'flexibility': 41000.0,
         'rarity': 'extremely rare',
-        'density': 4.506
+        'density': 4.506,
+        'useable': True
     },
     'adamantine steel': {
         'class': 'metal',
         'toughness': 8826.0,
         'strength': 120.0,
         'flexibility': 42000.0,
-        'density': 7.777
+        'density': 7.777,
+        'useable': True
     }
 }
 
@@ -379,15 +411,18 @@ structure_type_dct = {
     'farm': {
         'class': 'grassland',
         'site type': 'resource',
+        'resource type': 'fiber',
         'transformations': ['fallow ground']
     },
     'sawmill': {
         'class': 'woodland',
-        'site type': 'resource'
+        'site type': 'resource',
+        'resource type': 'wood'
     },
     'mine': {
         'class': 'rockland',
         'site type': 'resource',
+        'resource type': 'metal',
         'transformations': ['abandoned mine', 'collapsed mine']
     },
     'dungeon': {
