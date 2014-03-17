@@ -33,7 +33,12 @@ class Site()
                 self.site_type = site_type
                 
             self.structure = Structure().generate(ref.terrain_dct[terrain_type], self.site_type)
-            
+            if 'resource type' in ref.structure_type_dct[Structure.structure_type].keys():
+                self.harvestable['resources'] = []
+                self.harvestable['resources'].append([
+                        ref.structure_type_dct[Structure.structure_type]['resource type'],
+                        randint(50, 500)]) #TODO: Get good numbers for possible resource amounts
+                            
         self.set_site_id()
         return self
 
@@ -63,5 +68,11 @@ class Structure():
             self.structure_type = choice(ref.structure_class_dct[terrain_type])
         elif terrain_type == 'random':
             self.structure_type = choice(ref.site_type_dct[site_type])
+            return self
+            
+    def transform(self):
+        if 'transformations' in ref.structure_type_dct[self.structure_type].keys():
+            self.structure_type = choice(ref.structure_type_dct[self.structure_type]['transformations'])
+            return self
+        
 
-        return self
