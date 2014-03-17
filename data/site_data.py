@@ -21,7 +21,7 @@ class Site()
         if arg == 'random':
             x = randint(0, size-1), y = randint(0, size-1)
             terrain_type = ref.terrain_dct[entities.world['grid'][x][y]]
-            while terrain_type != 0:
+            while terrain_type not in [0, 't']:
                 x = randint(0, size-1), y = randint(0, size-1)
             self.location = [x,y]
             self.structure = (Structure().generate('terrain_type'))
@@ -42,7 +42,8 @@ class Site()
         entities.sites['next id'] += 1
         
     def __repr__(self):
-        return 'Site(ID: %r, Type:%r, Loc: %r)' % (self.hero_id, self.site_type, self.location)
+        return 'Site(ID: %r, Type:%r, Loc: %r)' % (
+                self.hero_id, self.site_type, self.location)
         
 
 class Structure():
