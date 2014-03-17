@@ -62,6 +62,6 @@ class Structure():
         elif site_type == 'random':
             self.structure_type = choice(ref.structure_class_dct[terrain_type])
         elif terrain_type == 'random':
-            self.structure_type = choice(ref.site_class_dct[site_type])
+            self.structure_type = choice(ref.site_type_dct[site_type])
 
         return self
