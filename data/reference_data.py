@@ -401,6 +401,20 @@ structure_type_dct = {
     'tower': {
         'class': 'woodland',
         'site type': 'adventure'
+    },
+    'fallow ground': {
+        'class': 'transformed',
+        'site type': 'adventure',
+        'transformations': ['farm']
+    },
+    'abandoned mine': {
+        'class': 'transformed',
+        'site type': 'adventure',
+        'transformations': ['collapsed mine']
+    },
+    'collapsed mine': {
+        'class': 'transformed',
+        'site type': 'resource'
     }
 }
 
