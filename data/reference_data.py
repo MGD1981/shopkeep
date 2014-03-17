@@ -467,6 +467,15 @@ for structure_type in structure_type_dct.keys():
 del structure_type, structure_class, site_type
 
 
+rarity_dct = {
+    'abundant': 200,
+    'common': 100,
+    'rare': 35,
+    'very rare': 7,
+    'extremely rare': 1
+}
+
+
 letter_dct = {
     'monster': {
     'consonant start': [
