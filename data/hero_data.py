@@ -8,7 +8,7 @@ class Hero():
     """Class holding unique hero object"""
 
     def __init__(self):
-        self.hero_id = None #TODO: get unique based on entities.heroes
+        self.hero_id = None 
         self.location = [None, None]
         self.name = None
         self.home = None
@@ -18,6 +18,9 @@ class Hero():
         self.goals = None
         self.needs = None
         self.wants = None
+        self.personality = None
+        self.experience = None
+        self.perceptions = None
 
 
     def generate(self, arg='random'):
@@ -70,7 +73,7 @@ class Perceptions():
 	"""Class containing perceptions of world, economy, shop, and shopkeep"""
 
 	def __init__(self):
-		self.economic_perception = Economy #TODO: Economy class object
+		self.economic_perception = Economy() #TODO: Economy class object
 		self.world_perception = Personality() #Personality class object
 		self.shopkeep_perception = Personality() #Personality class object
 		self.shop_perception = Shop() #TODO: Shop class object

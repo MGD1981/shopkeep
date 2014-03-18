@@ -385,11 +385,6 @@ material_type_dct = {
 }
 
 
-#TODO
-for material_type in material_type_dct.keys():
-    material_type_dct[material_type]['intrinsic value'] = 0
-
-
 material_class_dct = {}
 for material_type in material_type_dct.keys():
     material_class = material_type_dct[material_type]['class']
@@ -397,6 +392,28 @@ for material_type in material_type_dct.keys():
         material_class_dct[material_class] = []
     material_class_dct[material_class].append(material_type)
 del material_type, material_class
+
+
+
+monster_type_dct = {
+    'lich': {
+        'class': 'undead'
+    },
+    'warlock': {
+        'class': 'magic'
+    },
+    'dragon': {
+        'class': 'demon'
+    }
+}
+
+monster_class_dct = {}
+for monster_type in material_type_dct.keys():
+    monster_class = material_type_dct[material_type]['class']
+    if monster_class not in material_class_dct.keys():
+        monster_class_dct[material_class] = []
+    monster_class_dct[material_class].append(material_type)
+del monster_type, material_class
 
 
 

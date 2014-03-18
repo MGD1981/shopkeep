@@ -1,4 +1,6 @@
 import entities
+import reference_data as ref
+from random import choice
 
 
 class Monster():
@@ -13,11 +15,13 @@ class Monster():
         self.size = 100 #represents percent of "normal" size
 
 
-    def generate(self, arg='random'):
+    def generate(self, monster_class='random', arg='random'):
         """Generates a monster."""
         import language
+        if monster_class = 'random':
+            monster_class = choice(ref.monster_type_dct.keys())
         if arg == 'random':
-            pass
+            self.monster_type = choice(ref.monster_class_dct[monster_class])
         self.name = language.create_name('monster')
         self.set_monster_id()
         return self

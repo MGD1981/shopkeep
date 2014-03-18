@@ -3,7 +3,7 @@ from random import choice
 
 
 class Shop():
-	"""Shop object"""
+	"""Shop class object"""
 	
 	def __init__():
 		pass
