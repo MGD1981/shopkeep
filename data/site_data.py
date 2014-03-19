@@ -63,17 +63,26 @@ class Structure():
     
     def __init__(self):
         self.structure_type = None
+        self.worker_capacity = None
+        self.workers = None
+        
         
     def generate(self, terrain_type='random', site_type='random'):
-
+        """Generates a structure at a site"""
         if terrain_type == 'random' and site_type == 'random':
             self.structure_type = choice(ref.structure_type_dct.keys())
         elif site_type == 'random':
             self.structure_type = choice(ref.structure_class_dct[terrain_type])
         elif terrain_type == 'random':
             self.structure_type = choice(ref.site_type_dct[site_type])
-            return self
-            
+        self.workers = 0
+        self.worker_capacity = ref.structure_type_dct[self.structure_type]['worker capacity']
+        return self
+                        
+    def add_worker(self):
+        self.workers += 1
+        self.worker_capacity -= 1
+                    
     def transform(self):
         if 'transformations' in ref.structure_type_dct[self.structure_type].keys():
             self.structure_type = choice(ref.structure_type_dct[self.structure_type]['transformations'])
