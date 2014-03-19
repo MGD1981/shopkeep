@@ -394,6 +394,59 @@ for material_type in material_type_dct.keys():
 del material_type, material_class
 
 
+occupation_type_dct = {
+    'adventurer': {
+        'material requirements': {
+            'toughness': 'high',
+            'strength': 'high',
+            'flexibility': 'medium',
+        }
+    },
+    'farmer': {
+        'material requirements': {
+            'toughness': 'medium',
+            'strength': 'high',
+            'flexibility': 'medium',
+        },
+    'miner': {
+        'material requirements': {
+            'toughness': 'high',
+            'strength': 'high',
+            'flexibility': 'high',
+        },
+    'woodcutter': {
+        'material requirements': {
+            'toughness': 'high',
+            'strength': 'high',
+            'flexibility': 'low',
+        },
+    'artisan': {
+        'material requirements': {
+            'toughness': 'high',
+            'strength': 'low',
+            'flexibility': 'medium',
+        },
+    'homekeeper': {
+        'material requirements': {
+            'toughness': 'low',
+            'strength': 'low',
+            'flexibility': 'high',
+        },
+    'government': {
+        'material requirements': {
+            'toughness': 'low',
+            'strength': 'medium',
+            'flexibility': 'low',
+        },
+    'retail': {
+        'material requirements': {
+            'toughness': 'medium',
+            'strength': 'medium',
+            'flexibility': 'medium',
+        }
+}
+
+
 
 monster_type_dct = {
     'lich': {
