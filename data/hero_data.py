@@ -13,6 +13,11 @@ class Hero():
         self.name = None
         self.home = None
         self.inventory = []
+        self.coins = {
+            'copper': 0,
+            'silver': 0,
+            'gold': 0
+        }
         self.kills = []
         self.size = 100 #represents percent of "normal" size
         self.goals = None
@@ -27,7 +32,7 @@ class Hero():
         """Generates a hero."""
         import language
         if arg == 'random':
-            pass
+            self.coins['copper'] = randint(10,300)
         self.name = language.create_name('human')
         self.set_hero_id()
         return self
