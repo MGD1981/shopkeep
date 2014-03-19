@@ -9,8 +9,6 @@ def get_new_town():
         'occupation': {
             'adventurer': 0,
             'farmer': 0,
-            'shepherd': 0,
-            'hunter': 0,
             'miner': 0,
             'woodcutter': 0,
             'artisan': 0,
@@ -36,4 +34,8 @@ def get_new_town():
             }
 
     return town
-
+    
+    
+def populate_town(town, people=50):
+    """Populates a town with people, each with an occupation."""
+    pass
