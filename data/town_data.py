@@ -58,7 +58,11 @@ def populate_town(town, people=50):
                 site.structure.add_worker()
                 people_to_assign -= 1
                 continue
-        town['occupation'][choice(['artisan', 'homekeeper', 'government', 'retail'])] += 1
+        town['occupation'][choice(
+                ['artisan']*2 + 
+                ['homekeeper']*5 + 
+                ['government'] +
+                ['retail']*2)] += 1
         people_to_assign -= 1            
     
     town['population'] += people
