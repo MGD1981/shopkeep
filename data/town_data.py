@@ -1,11 +1,12 @@
 import reference_data as ref
-from entities import world
-from random import randint
+from entities import world, sites
+from random import randint, shuffle
 
 def get_new_town():
     town = {
         'location': [None, None],
         'resource': {},
+        'population': 1,
         'occupation': {
             'adventurer': 0,
             'farmer': 0,
@@ -38,4 +39,27 @@ def get_new_town():
     
 def populate_town(town, people=50):
     """Populates a town with people, each with an occupation."""
-    pass
+    
+    #1.5 acres farm needed per person
+    #farmer could farm 20-40 (30) acres
+    #30/1.5 = 20 people per farm
+    people_to_assign = people
+    farms_needed = (town['population'] + people)/20 + 1
+    if people_to_assign >= farms_needed:
+        town['occupation']['farmer'] += farms_needed
+        people_to_assign -= farms_needed
+    else:
+        town['occupation']['farmer'] += people_to_assign
+    shuffle(sites)
+    while people_to_assign > 0:
+        for site in sites:
+            if site.structure.worker_capacity > 0:
+                town['occupation'][ref.structure_type_dct[site.structure]['worker type']] += 1
+                site.structure.add_worker()
+                people_to_assign -= 1
+                continue
+        town['occupation'][choice(['artisan', 'homekeeper', 'government', 'retail'])] += 1
+        people_to_assign -= 1            
+    
+    town['population'] += people
+    return town
