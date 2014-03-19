@@ -1,3 +1,5 @@
+from math import pi
+
 weapon_type_dct = {
     'spear': {
         'class': 'polearm',
@@ -45,12 +47,13 @@ for weapon_type in weapon_type_dct.keys():
     weapon_class_dct[weapon_class].append(weapon_type)
 del weapon_type, weapon_class
 
-
+#Volume in cm^3
 component_type_dct = {
     'shaft': {
         'class': 'base',
         'possible materials': ['wood'],
-        'joints': [('multi', 'point')]
+        'joints': [('multi', 'point')],
+        'volume': 200 * (pi * (1.25*1.25))
     },
     'head': {
         'class': 'point',
@@ -75,17 +78,20 @@ component_type_dct = {
     'haft': {
         'class': 'base',
         'possible materials': ['wood'],
-        'joints': [('multi', 'edge')]
+        'joints': [('multi', 'edge')],
+        'volume': 69 * (pi * (1.25*1.25))
     },
     'handle': {
         'class': 'base',
         'possible materials': ['wood'],
-        'joints': [('multi', 'flagellum')]
+        'joints': [('multi', 'flagellum')],
+        'volume': 150 * (pi * (1.25*1.25))
     },
     'chain': {
         'class': 'flagellum',
         'possible materials': ['metal'],
-        'joints': [('single', 'base'), ('optional', 'finger')]
+        'joints': [('single', 'base'), ('optional', 'finger')],
+        'volume': 12 * (7.5 * (pi * (0.75*0.75)))
     },
     'ball': {
         'class': 'finger',
