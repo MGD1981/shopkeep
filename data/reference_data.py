@@ -480,40 +480,48 @@ terrain_dct = {
 structure_type_dct = {
     'farm': {
         'class': 'grassland',
+        'worker type': 'farmer',
         'site type': 'resource',
         'resource type': 'fiber',
         'transformations': ['fallow ground']
     },
     'sawmill': {
         'class': 'woodland',
+        'worker type': 'woodcutter',
         'site type': 'resource',
         'resource type': 'wood'
     },
     'mine': {
         'class': 'rockland',
+        'worker type': 'miner',
         'site type': 'resource',
         'resource type': 'metal',
         'transformations': ['abandoned mine', 'collapsed mine']
     },
     'dungeon': {
         'class': 'grassland',
+        'worker type': 'adventurer',
         'site type': 'adventure'
     },
     'cave': {
         'class': 'rockland',
+        'worker type': 'adventurer',
         'site type': 'adventure'
     },
     'tower': {
         'class': 'woodland',
+        'worker type': 'adventurer',
         'site type': 'adventure'
     },
     'fallow ground': {
         'class': 'transformed',
+        'worker type': 'adventurer',
         'site type': 'adventure',
         'transformations': ['farm']
     },
     'abandoned mine': {
         'class': 'transformed',
+        'worker type': 'adventurer',
         'site type': 'adventure',
         'transformations': ['collapsed mine']
     },
