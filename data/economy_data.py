@@ -5,7 +5,7 @@ import reference_data as ref
 class Economy():
 	"""Economy class object."""
 	
-	def __init__():
+	def __init__(self):
 		weapon_value_table = {}
 		material_value_table = {}
 		
@@ -16,4 +16,5 @@ class Economy():
 			for material_type in material_class['type']:
 				material_value_table[material_type] = None #initializes each material_type price as None
 
-			
+	def generate(self, currency_type):
+		pass
