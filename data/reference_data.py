@@ -58,22 +58,26 @@ component_type_dct = {
     'head': {
         'class': 'point',
         'possible materials': ['stone', 'metal'],
-        'joints': [('single', 'point')]
+        'joints': [('single', 'point')],
+        'volume': 340
     },
     'hilt': {
         'class': 'base',
         'possible materials': ['wood', 'stone', 'metal'],
-        'joints': [('single', 'edge')]
+        'joints': [('single', 'edge')],
+        'volume': 45
     },
     'blade': {
         'class': 'edge',
         'possible materials': ['metal'],
-        'joints': [('single', 'base')]
+        'joints': [('single', 'base')],
+        'volume': 180
     },
     'scabbard': {
         'class': 'standalone',
         'possible materials': ['leather', 'wood', 'metal'],
-        'joints': []
+        'joints': [],
+        'volume': 180
     },
     'haft': {
         'class': 'base',
@@ -96,7 +100,8 @@ component_type_dct = {
     'ball': {
         'class': 'finger',
         'possible materials': ['metal'],
-        'joints': [('single', 'flagellum')]
+        'joints': [('single', 'flagellum')],
+        'volume': (4/3)*pi*8*8*8
     },
     'limb': {
         'class': 'extension',
