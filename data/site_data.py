@@ -53,23 +53,27 @@ class Site()
         
     def tick(self, seconds=1):
         """Causes time to pass at site"""
-        self.structure.time_until_harvest -= seconds
-        if self.structure.time_until_harvest <= 0:
-            resources_harvested = 0
-            for worker in self.structure.workers:
-                workload = randint(500, 1500)
-                if workload <= self.harvestable:
-                    self.harvestable -= workload
-                    resources_harvested += workload
-                else:
-                    resources_harvested += self.harvestable
-                    self.harvestable = 0
-                    self.structure.workers = 0
-                    self.structure.transform()
-                    entities.town['resource'][self.resource] += resources_harvested
-                    return
-            entities.town['resource'][self.resource] += resources_harvested
-            self.structure.time_until_harvest = 60 #TODO: Get from ref
+        if self.site_type == 'resource':
+            self.structure.time_until_harvest -= seconds
+            if self.structure.time_until_harvest <= 0:
+                resources_harvested = 0
+                for worker in self.structure.workers:
+                    workload = randint(500, 1500)
+                    if workload <= self.harvestable:
+                        self.harvestable -= workload
+                        resources_harvested += workload
+                    else:
+                        resources_harvested += self.harvestable
+                        self.harvestable = 0
+                        self.structure.workers = 0
+                        self.structure.transform()
+                        entities.town['resource'][self.resource] += resources_harvested
+                        return
+                entities.town['resource'][self.resource] += resources_harvested
+                self.structure.time_until_harvest = ref.structure_type_dct[
+                        self.structure.structure_type]['time per harvest']
+        else:
+            pass #TODO: adventure site ticks
 
 
     def set_site_id(self):
@@ -103,8 +107,8 @@ class Structure():
             self.structure_type = choice(ref.site_type_dct[site_type])
         self.workers = 0
         self.worker_capacity = ref.structure_type_dct[self.structure_type]['worker capacity']
-        self.time_until_harvest = 60 #TODO: Add specific 'time per harvest' in ref for each resource type
-                                     #This will eliminate need to add different workload amounts for each
+        self.time_until_harvest = ref.structure_type_dct[
+                    self.structure.structure_type]['time per harvest']
         return self
                         
     def add_worker(self):
