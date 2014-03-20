@@ -53,6 +53,7 @@ class Site()
         
     def tick(self, seconds=1):
         """Causes time to pass at site"""
+        
         if self.site_type == 'resource':
             self.structure.time_until_harvest -= seconds
             if self.structure.time_until_harvest <= 0:
@@ -72,12 +73,25 @@ class Site()
                 entities.town['resource'][self.resource] += resources_harvested
                 self.structure.time_until_harvest = ref.structure_type_dct[
                         self.structure.structure_type]['time per harvest']
-        else:
-            pass #TODO: adventure site ticks
+            elif self.site_type == 'adventure': 
+                if len(self.structure.workers) > 0:
+                    for hero in entities.heroes['object list'] if (
+                            hero.hero_id in self.structure.workers):
+                        try:
+                            monster = next(m for m in entities.monsters['object list'] if 
+                                           m.monster_id in self.structure.monsters)
+                            battle(hero, monster)
+                        except StopIteration:
+                            pass #TODO: write code for heroes to leave site
+                        
+                        
+    def battle(self, hero, monster):
+        """Hero and monster fight."""
+        pass
 
 
     def set_site_id(self):
-        """Gives site object uniquue ID."""
+        """Gives site object unique ID."""
         self.site_id = entities.sites['next id']
         entities.sites['object list'].append(self)
         entities.sites['next id'] += 1
@@ -94,6 +108,7 @@ class Structure():
         self.structure_type = None
         self.worker_capacity = None
         self.workers = None
+        self.monsters = None
         self.time_until_harvest = None
         
         
@@ -105,7 +120,11 @@ class Structure():
             self.structure_type = choice(ref.structure_class_dct[terrain_type])
         elif terrain_type == 'random':
             self.structure_type = choice(ref.site_type_dct[site_type])
-        self.workers = 0
+        if ref.structure_type_dct[self.structure_type]['site type'] == 'resource':
+            self.workers = 0
+        else:
+            self.workers = []
+            self.monsters = []
         self.worker_capacity = ref.structure_type_dct[self.structure_type]['worker capacity']
         self.time_until_harvest = ref.structure_type_dct[
                     self.structure.structure_type]['time per harvest']
@@ -113,6 +132,10 @@ class Structure():
                         
     def add_worker(self):
         self.workers += 1
+        self.worker_capacity -= 1
+        
+    def add_hero(self, hero_id):
+        self.workers.append(hero_id)
         self.worker_capacity -= 1
                     
     def transform(self):
