@@ -11,7 +11,7 @@ class Site()
         self.site_type = None
         self.location = [None, None]
         self.structure = None
-        self.monsters = []
+        self.monsters = [] #list of monster ids
         self.resource = None
         self.harvestable = None
         
@@ -53,8 +53,9 @@ class Site()
         
     def tick(self, seconds=1):
         """Causes time to pass at site"""
-        resources_harvested = 0
-        for second in xrange(seconds):
+        self.structure.time_until_harvest -= seconds
+        if self.structure.time_until_harvest <= 0:
+            resources_harvested = 0
             for worker in self.structure.workers:
                 workload = randint(500, 1500)
                 if workload <= self.harvestable:
@@ -67,7 +68,8 @@ class Site()
                     self.structure.transform()
                     entities.town['resource'][self.resource] += resources_harvested
                     return
-        entities.town['resource'][self.resource] += resources_harvested
+            entities.town['resource'][self.resource] += resources_harvested
+            self.structure.time_until_harvest = 60 #TODO: Get from ref
 
 
     def set_site_id(self):
@@ -88,6 +90,7 @@ class Structure():
         self.structure_type = None
         self.worker_capacity = None
         self.workers = None
+        self.time_until_harvest = None
         
         
     def generate(self, terrain_type='random', site_type='random'):
@@ -100,6 +103,8 @@ class Structure():
             self.structure_type = choice(ref.site_type_dct[site_type])
         self.workers = 0
         self.worker_capacity = ref.structure_type_dct[self.structure_type]['worker capacity']
+        self.time_until_harvest = 60 #TODO: Add specific 'time per harvest' in ref for each resource type
+                                     #This will eliminate need to add different workload amounts for each
         return self
                         
     def add_worker(self):
