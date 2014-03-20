@@ -39,9 +39,10 @@ class Site()
                 for possible_material in ref.material_class_dct[resource_type]:
                     for x in xrange(ref.rarity_dct[ref.material_type_dct[possible_material]['rarity']]):
                         resource_possibilities.append possible_material
+                #resources measured in grams
                 self.harvestable['resources'] = choice(
                         resource_possibilities,
-                        randint(50, 500)]) #TODO: Get good numbers for possible resource amounts
+                        randint(1000, 6000)]) #NOTE: These numbers suitable for metal, may not be for other materials
                             
         self.set_site_id()
         return self
