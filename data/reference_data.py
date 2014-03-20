@@ -495,6 +495,7 @@ structure_type_dct = {
         'worker type': 'farmer',
         'site type': 'resource',
         'resource type': 'fiber',
+        'time per harvest': 60,
         'transformations': ['fallow ground']
     },
     'sawmill': {
@@ -502,12 +503,14 @@ structure_type_dct = {
         'worker type': 'woodcutter',
         'site type': 'resource',
         'resource type': 'wood'
+        'time per harvest': 60,
     },
     'mine': {
         'class': 'rockland',
         'worker type': 'miner',
         'site type': 'resource',
         'resource type': 'metal',
+        'time per harvest': 60,
         'transformations': ['abandoned mine', 'collapsed mine']
     },
     'dungeon': {
