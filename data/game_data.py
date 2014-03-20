@@ -7,4 +7,6 @@ def tick():
 	#TODO: Capture mouse/keyboard actions
 	#TODO: Display screen
 	
-	pass
+	for site in entities.sites['object list']:
+		site.tick()
+		
