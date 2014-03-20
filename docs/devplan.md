@@ -82,7 +82,13 @@ Shopkeep Development Plan
 - Economy
 - Create hero-shopkeep transaction menu
 - Mapping system for shop (coordinates?)
-- Mapping system for world
+
+
+##Things that need to happen per tick:
+
+- Resources mined per miner every N ticks (instantly added to town stock?  Probably fine for alpha)
+- Hero movement on world map every N ticks
+- Player/Hero movement in shop every tick
 
 
 #To Do
@@ -94,14 +100,7 @@ Shopkeep Development Plan
 - Determine turn-based or time-based system (mixed?)
 	- If motion every tick, how responsive will keyboard movement be?
 	- Time passes at motion, or when sitting at counter and pressing button?
-- Flesh out concept of adventure locations
-	- World map
-	- Dependent on biomes?
-- Flesh out concept of resource locations
-	- Dependent on biomes?
 - Flesh out concept of new hero generation
-- Create list of weapon types/classes/components/materials
-	- Database would be overkill?  Store in dict.
 - Devise town representation and system of player-town interaction
 - Devise appraisal system to determine player's ability to determine worth/magic
 
