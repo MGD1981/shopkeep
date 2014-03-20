@@ -54,9 +54,9 @@ class Site()
     def tick(self, seconds=1):
         """Causes time to pass at site"""
         
-        if self.site_type == 'resource':
-            self.structure.time_until_harvest -= seconds
-            if self.structure.time_until_harvest <= 0:
+        self.structure.time_until_harvest -= seconds
+        if self.structure.time_until_harvest <= 0:
+            if self.site_type == 'resource':
                 resources_harvested = 0
                 for worker in self.structure.workers:
                     workload = randint(500, 1500)
