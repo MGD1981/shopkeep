@@ -293,7 +293,8 @@ material_type_dct = {
     },
     'copper ore': {
         'class': 'metal',
-        'rarity': 'common'
+        'rarity': 'common',
+        'useable': False
     },
     'tin ore': {
         'class': 'metal',
