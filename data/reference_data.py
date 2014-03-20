@@ -502,8 +502,8 @@ structure_type_dct = {
         'class': 'woodland',
         'worker type': 'woodcutter',
         'site type': 'resource',
-        'resource type': 'wood'
-        'time per harvest': 350,
+        'resource type': 'wood',
+        'time per harvest': 350
     },
     'mine': {
         'class': 'rockland',
@@ -516,28 +516,33 @@ structure_type_dct = {
     'dungeon': {
         'class': 'grassland',
         'worker type': 'adventurer',
-        'site type': 'adventure'
+        'site type': 'adventure',
+        'time per harvest': 800
     },
     'cave': {
         'class': 'rockland',
         'worker type': 'adventurer',
-        'site type': 'adventure'
+        'site type': 'adventure',
+        'time per harvest': 100
     },
     'tower': {
         'class': 'woodland',
         'worker type': 'adventurer',
-        'site type': 'adventure'
+        'site type': 'adventure',
+        'time per harvest': 480
     },
     'fallow ground': {
         'class': 'transformed',
         'worker type': 'adventurer',
         'site type': 'adventure',
+        'time per harvest': 30,
         'transformations': ['farm']
     },
     'abandoned mine': {
         'class': 'transformed',
         'worker type': 'adventurer',
         'site type': 'adventure',
+        'time per harvest': 200,
         'transformations': ['collapsed mine']
     },
     'collapsed mine': {
