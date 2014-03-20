@@ -12,7 +12,8 @@ class Site()
         self.location = [None, None]
         self.structure = None
         self.monsters = []
-        self.harvestable = {}
+        self.resource = None
+        self.harvestable = None
         
 
     def generate(self, site_type='random', arg='random'):
@@ -39,16 +40,34 @@ class Site()
                 for possible_material in ref.material_class_dct[resource_type]:
                     for x in xrange(ref.rarity_dct[ref.material_type_dct[possible_material]['rarity']]):
                         resource_possibilities.append possible_material
+                self.resource = choice(resource_possibilities)
                 #resources measured in grams
-                self.harvestable['resources'] = [
-                        choice(resource_possibilities),
-                        randint(100, 1500)
-                        ] #NOTE: These numbers suitable for metal, may not be for other materials
-                          #NOTE: Mine production should be ~1kg pure metal per day per miner.
-                          #NOTE: Real mine has ~43500kg before producing much less.
+                self.harvestable = randint(100000, 1500000)
+                #NOTE: These numbers suitable for metal, may not be for other materials
+                #NOTE: Mine production should be ~1kg pure metal per day per miner.
+                #NOTE: IRL mine has ~43500kg before producing much less.
                             
         self.set_site_id()
         return self
+        
+        
+    def tick(self, seconds=1):
+        """Causes time to pass at site"""
+        resources_harvested = 0
+        for second in xrange(seconds):
+            for worker in self.structure.workers:
+                workload = randint(500, 1500)
+                if workload <= self.harvestable:
+                    self.harvestable -= workload
+                    resources_harvested += workload
+                else:
+                    resources_harvested += self.harvestable
+                    self.harvestable = 0
+                    self.structure.workers = 0
+                    self.structure.transform()
+                    entities.town['resource'][self.resource] += resources_harvested
+                    return
+        entities.town['resource'][self.resource] += resources_harvested
 
 
     def set_site_id(self):
