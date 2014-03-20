@@ -40,9 +40,12 @@ class Site()
                     for x in xrange(ref.rarity_dct[ref.material_type_dct[possible_material]['rarity']]):
                         resource_possibilities.append possible_material
                 #resources measured in grams
-                self.harvestable['resources'] = choice(
-                        resource_possibilities,
-                        randint(1000, 6000)]) #NOTE: These numbers suitable for metal, may not be for other materials
+                self.harvestable['resources'] = [
+                        choice(resource_possibilities),
+                        randint(100, 1500)
+                        ] #NOTE: These numbers suitable for metal, may not be for other materials
+                          #NOTE: Mine production should be ~1kg pure metal per day per miner.
+                          #NOTE: Real mine has ~43500kg before producing much less.
                             
         self.set_site_id()
         return self
