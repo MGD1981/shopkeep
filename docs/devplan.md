@@ -61,6 +61,7 @@ Shopkeep Development Plan
 	- Attracted by rumors of valuable/magical items housed at shop
 - Money
 	- Wealth is a limited resource in the game world (i.e. only so many coins)
+	- One coin = 10g copper
 
 
 #Potential Future (post v1)
