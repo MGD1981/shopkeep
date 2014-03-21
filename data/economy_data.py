@@ -6,6 +6,7 @@ class Economy():
 	"""Economy class object."""
 	
 	def __init__(self):
+		#Values are per kg
 		weapon_value_table = {}
 		material_value_table = {}
 		coin_standard = None #coins are 10g of material
@@ -19,7 +20,9 @@ class Economy():
 
 	def generate(self, coin_standard='copper'):
 		"""Generates values for the Economy object."""
-		pass
+		self.material_value_table[coin_standard] = 100
+		
+		return self
 		
 	
 	def convert_value_tables(self, new_coin_standard):
@@ -27,6 +30,13 @@ class Economy():
 		pass
 		
 	
-	def get_price(self, new_coin_standard):
+	def get_price(self, coin_standard=None):
 		"""Returns the price of the value in the passed-in denomination."""
+		if coin_standard == None:
+			coin_standard = self.coin_standard
+		pass
+		
+		
+	def be_influenced(self, economy_x):
+		"""Adjusts (weighted) table values in conjunction with another Economy class."""
 		pass
