@@ -420,42 +420,49 @@ occupation_type_dct = {
             'strength': 'high',
             'flexibility': 'medium',
         },
+    },
     'miner': {
         'material requirements': {
             'toughness': 'high',
             'strength': 'high',
             'flexibility': 'high',
         },
+    },
     'woodcutter': {
         'material requirements': {
             'toughness': 'high',
             'strength': 'high',
             'flexibility': 'low',
         },
+    },
     'artisan': {
         'material requirements': {
             'toughness': 'high',
             'strength': 'low',
             'flexibility': 'medium',
         },
+    },
     'homekeeper': {
         'material requirements': {
             'toughness': 'low',
             'strength': 'low',
             'flexibility': 'high',
         },
+    },
     'government': {
         'material requirements': {
             'toughness': 'low',
             'strength': 'medium',
             'flexibility': 'low',
         },
+    },
     'retail': {
         'material requirements': {
             'toughness': 'medium',
             'strength': 'medium',
             'flexibility': 'medium',
         }
+    }
 }
 
 
@@ -473,19 +480,28 @@ monster_type_dct = {
 }
 
 monster_class_dct = {}
-for monster_type in material_type_dct.keys():
-    monster_class = material_type_dct[material_type]['class']
-    if monster_class not in material_class_dct.keys():
-        monster_class_dct[material_class] = []
-    monster_class_dct[material_class].append(material_type)
-del monster_type, material_class
+for monster_type in monster_type_dct.keys():
+    monster_class = monster_type_dct[monster_type]['class']
+    if monster_class not in monster_class_dct.keys():
+        monster_class_dct[monster_class] = []
+    monster_class_dct[monster_class].append(monster_type)
+del monster_type, monster_class
 
 
 
 terrain_dct = {
-    'g': 'grassland',
-    'w': 'woodland',
-    'r': 'rockland'
+    1: {
+        'terrain type': 'grassland',
+        'console representation': '43m  ' 
+    },
+    2: {
+        'terrain type': 'woodland',
+        'console representation': '42m  ' 
+    },
+    3: {
+        'terrain type': 'rockland',
+        'console representation': '47m  ' 
+    }
 }
 
 
@@ -561,7 +577,8 @@ for structure_type in structure_type_dct.keys():
     structure_class_dct[structure_class].append(structure_type)
     site_type = structure_type_dct[structure_type]['site type']
     if site_type not in site_type_dct.keys():
-        site_type_dct[structure_class].append(structure_type)
+        site_type_dct[site_type] = []
+    site_type_dct[site_type].append(structure_type)
 del structure_type, structure_class, site_type
 
 

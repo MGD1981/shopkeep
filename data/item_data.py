@@ -64,14 +64,14 @@ class Weapon():
                     self.weapon_type]['components']:
                 self.components.append(
                         Component().generate(component))
-            self.assemble(self.weapon_type, self.components)
+            self.assemble(self.components)
         else:
             return NotImplementedError(arg)
         self.set_weapon_id()
         return self
         
         
-    def assemble(self, weapon_type, component_list):
+    def assemble(self, component_list):
         """Joint generation & connection function."""        
         
         joint_table = {}
@@ -79,15 +79,14 @@ class Weapon():
         for component in component_list:
             if ref.component_type_dct[component.component_type]['class'] == 'standalone':
                 component_list.remove(component)
-
-        for component in component_list:
-            joint_table[component.component_id] = {
-                'component type': component.component_type,
-                'component class': deepcopy(ref.component_type_dct[
-                        component.component_type]['class']),
-                'joints remaining': deepcopy(ref.component_type_dct[
-                        component.component_type]['joints'])
-            }
+            else:
+                joint_table[component.component_id] = {
+                    'component type': component.component_type,
+                    'component class': deepcopy(ref.component_type_dct[
+                            component.component_type]['class']),
+                    'joints remaining': deepcopy(ref.component_type_dct[
+                            component.component_type]['joints'])
+                }
         #joint table now has a key for every component_id
         #key['joined to'] is list of (id, type) of connected components
         try:
@@ -103,8 +102,10 @@ class Weapon():
                                     if (component2.component_id == 
                                             component1.component_id):
                                         continue
-                                    if (open_joint1 in joint_table[component1.component_id]['joints remaining'] and 
-                                            joint_table[component2.component_id]['component class'] == open_joint1[1]):
+                                    if (open_joint1 in joint_table[component1.component_id][
+                                            'joints remaining'] and 
+                                            joint_table[component2.component_id][
+                                            'component class'] == open_joint1[1]):
                                         try:
                                             open_joint2_index = [i for i, 
                                                 t in enumerate(joint_table[
@@ -118,7 +119,8 @@ class Weapon():
                                         Joint().generate().join([component1, 
                                                                  component2])
                                         if joint_class != 'multi':
-                                            if open_joint1 in joint_table[component1.component_id]['joints remaining']:
+                                            if open_joint1 in joint_table[component1.component_id][
+                                                    'joints remaining']:
                                                 joint_table[component1.component_id][
                                                         'joints remaining'].remove(
                                                         open_joint1)

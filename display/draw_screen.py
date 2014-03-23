@@ -1,5 +1,6 @@
 # coding = utf-8
 import menus
+from data import reference_data as ref
 
 CSI="\x1B["
 # sample: print CSI+"31;40m" + "Colored Text" + CSI + "0m"
@@ -86,13 +87,10 @@ def draw_map(shopmap):
         for m in shopmap[n]:
             if m == 0:
                 line.append(CSI+"40m" + '  ')
-            if m == 'g':
-                line.append(CSI+"43m" + '  ')
-            if m == 'w':
-                line.append(CSI+"42m" + '  ')
-            if m == 'r':
-                line.append(CSI+"47m" + '  ')
             if m == 't':
                 line.append(CSI+"37;40m" + '[]')
+            else:
+                line.append(CSI+ref.terrain_dct[m][
+                        'console representation'])
         line.append(CSI+"40m" + ' ')
         print ''.join(line)
