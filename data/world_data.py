@@ -15,6 +15,14 @@ def get_new_world(size=64):
 # TODO: Speed up by changing jump to any empty tile
 #       that has same adjacent OR chance to skip jump?
 def generate_terrain(grid):
+
+
+    def _get_adjacents(t):
+        return [(t[0] - 1, t[1]),
+                (t[0] + 1, t[1]),
+                (t[0], t[1] - 1),
+                (t[0], t[1] + 1)]
+
     size = len(grid)
     empty_tiles = range(0, size*size)
     tiles_remaining = size*size
@@ -40,14 +48,11 @@ def generate_terrain(grid):
         for terrain_type in terrain_table.keys():
             checked_tiles = 0
             t = terrain_table[terrain_type]
-            adjacents = [(t[0] - 1, t[1]),
-                         (t[0] + 1, t[1]),
-                         (t[0], t[1] - 1),
-                         (t[0], t[1] + 1)]
+            adjacents = _get_adjacents(t)
             shuffle(adjacents)
-            for next_t in adjacents:
-                x = next_t[0]
-                y = next_t[1]
+            for adjacent in adjacents:
+                x = adjacent[0]
+                y = adjacent[1]
                 if x < 0 or x >= size or y < 0 or y >= size:
                     checked_tiles += 1
                     if checked_tiles == 4:
@@ -56,10 +61,10 @@ def generate_terrain(grid):
                         if jumped_to in [0, t]: 
                             terrain_table[terrain_type] = jump
                     continue    
-                if grid[next_t[0]][next_t[1]] == 0:
-                    grid[next_t[0]][next_t[1]] = terrain_type
-                    empty_tiles.remove(next_t[0]*size + next_t[1])
-                    terrain_table[terrain_type] = next_t
+                if adjacent[0]*size + adjacent[1] in empty_tiles:
+                    grid[adjacent[0]][adjacent[1]] = terrain_type
+                    empty_tiles.remove(adjacent[0]*size + adjacent[1])
+                    terrain_table[terrain_type] = adjacent
                     tiles_remaining -= 1
                 else:
                     checked_tiles += 1
@@ -69,5 +74,6 @@ def generate_terrain(grid):
                         if jumped_to in [0, terrain_type]: 
                             terrain_table[terrain_type] = jump
                     continue
+
 
     return grid
