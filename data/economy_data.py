@@ -18,9 +18,12 @@ class Economy():
 			for material_type in material_class['type']:
 				material_value_table[material_type] = None #initializes each material_type price as None
 
-	def generate(self, coin_standard='copper'):
+	def generate(self, town, coin_standard='copper'):
 		"""Generates values for a town's Economy object."""
 		self.material_value_table[coin_standard] = 100
+		for resource in town['resource'].keys(): #for each material class...
+			for material in resource['material']: #for each material in that class...
+				pass
 		
 		return self
 		
