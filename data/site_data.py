@@ -37,7 +37,7 @@ class Site()
             if 'resource type' in ref.structure_type_dct[self.structure.structure_type].keys():
                 resource_type = ref.structure_type_dct[self.structure.structure_type]['resource type']
                 resource_possibilities = []
-                for possible_material in ref.material_class_dct[resource_type]:
+                for possible_material in ref.material_class_dct['types'][resource_type]:
                     for x in xrange(ref.rarity_dct[ref.material_type_dct[possible_material]['rarity']]):
                         resource_possibilities.append possible_material
                 self.resource = choice(resource_possibilities)
