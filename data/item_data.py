@@ -244,7 +244,7 @@ class Material():
             self.material_class = material_class
         if arg == 'random':
             self.material_type = choice(
-                            ref.material_class_dct[material_class])
+                            ref.material_class_dct[material_class]['types'])
         else:
             return NotImplementedError(arg)
         return self
