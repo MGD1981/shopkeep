@@ -284,42 +284,44 @@ material_type_dct = {
     'coal': {
         'class': 'stone',
         'rarity': 'common',
-        'useable': False
+        'useable': False,
+        'material yielded': 'steel'
     },
     'iron ore': {
         'class': 'metal',
         'rarity': 'abundant',
-        'useable': False
+        'useable': False,
+        'material yielded': 'iron'
     },
     'copper ore': {
         'class': 'metal',
         'rarity': 'common',
-        'useable': False
+        'useable': False,
+        'material yielded': 'copper'
     },
     'tin ore': {
         'class': 'metal',
         'rarity': 'rare',
-        'useable': False
+        'useable': False,
+        'material yielded': 'tin'
     },
     'silver ore': {
         'class': 'metal',
         'rarity': 'rare',
-        'useable': False
+        'useable': False,
+        'material yielded': 'silver'
     },
     'flax': {
         'class': 'metal',
         'rarity': 'common',
-        'useable': False
+        'useable': False,
+        'material yielded': 'linen'
     },
     'cotton boll': {
         'class': 'metal',
         'rarity': 'common',
-        'useable': False
-    },
-    'leather': {
-        'class': 'leather',
-        'rarity': 'common',
-        'useable': True
+        'useable': False,
+        'material yielded': 'cotton'
     },
     'copper': {
         'class': 'metal',
@@ -397,70 +399,103 @@ material_type_dct = {
 }
 
 
-material_class_dct = {}
+material_class_dct = {
+    'wood': {
+        'types': [],
+        'trait factor': {
+            'toughness': 1.0,
+            'strength': 1.0,
+            'flexibility': 1.0
+        }
+    },
+    'fiber': {
+        'types': [],
+        'trait factor': {
+            'toughness': 1.0,
+            'strength': 1.0,
+            'flexibility': 1.0
+        }
+    },
+    'stone': {
+        'types': [],
+        'trait factor': {
+            'toughness': 1.0,
+            'strength': 1.0,
+            'flexibility': 1.0
+        }
+    },
+    'metal': {
+        'types': [],
+        'trait factor': {
+            'toughness': 1.0,
+            'strength': 1.0,
+            'flexibility': 1.0
+        }
+    }
+}
 for material_type in material_type_dct.keys():
     material_class = material_type_dct[material_type]['class']
     if material_class not in material_class_dct.keys():
         material_class_dct[material_class] = []
-    material_class_dct[material_class].append(material_type)
+    material_class_dct[material_class]['types'].append(material_type)
 del material_type, material_class
 
 
 occupation_type_dct = {
     'adventurer': {
         'material requirements': {
-            'toughness': 'high',
-            'strength': 'high',
-            'flexibility': 'medium',
+            'toughness': 2.5,
+            'strength': 2.5,
+            'flexibility': 1.5,
         }
     },
     'farmer': {
         'material requirements': {
-            'toughness': 'medium',
-            'strength': 'high',
-            'flexibility': 'medium',
+            'toughness': 1.5,
+            'strength': 2.5,
+            'flexibility': 1.5,
         },
     },
     'miner': {
         'material requirements': {
-            'toughness': 'high',
-            'strength': 'high',
-            'flexibility': 'high',
+            'toughness': 2.5,
+            'strength': 2.5,
+            'flexibility': 2.5,
         },
     },
     'woodcutter': {
         'material requirements': {
-            'toughness': 'high',
-            'strength': 'high',
-            'flexibility': 'low',
+            'toughness': 2.5,
+            'strength': 2.5,
+            'flexibility': 1.0,
         },
     },
     'artisan': {
         'material requirements': {
-            'toughness': 'high',
-            'strength': 'low',
-            'flexibility': 'medium',
+            'toughness': 2.5,
+            'strength': 1.0,
+            'flexibility': 1.5,
         },
     },
     'homekeeper': {
         'material requirements': {
-            'toughness': 'low',
-            'strength': 'low',
-            'flexibility': 'high',
+            'toughness': 1.0,
+            'strength': 1.0,
+            'flexibility': 2.5,
         },
     },
     'government': {
         'material requirements': {
-            'toughness': 'low',
-            'strength': 'medium',
-            'flexibility': 'low',
+            'toughness': 1.0,
+            'strength': 1.5,
+            'flexibility': 1.0,
         },
     },
     'retail': {
         'material requirements': {
-            'toughness': 'medium',
-            'strength': 'medium',
-            'flexibility': 'medium',
+            'toughness': 1.5,
+            'strength': 1.5,
+            'flexibility': 1.5,
         }
     }
 }
