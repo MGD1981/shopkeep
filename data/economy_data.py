@@ -19,7 +19,7 @@ class Economy():
 				material_value_table[material_type] = None #initializes each material_type price as None
 
 	def generate(self, coin_standard='copper'):
-		"""Generates values for the Economy object."""
+		"""Generates values for a town's Economy object."""
 		self.material_value_table[coin_standard] = 100
 		
 		return self
