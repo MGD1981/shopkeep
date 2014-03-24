@@ -79,6 +79,7 @@ class Perceptions():
 
 	def __init__(self):
 		self.economic_perception = Economy() #TODO: Economy class object
+                                             #Will be based on economy object of whatever town hero is from.
 		self.world_perception = Personality() #Personality class object
 		self.shopkeep_perception = Personality() #Personality class object
 		self.shop_perception = Shop() #TODO: Shop class object
