@@ -15,7 +15,7 @@ class Economy():
 		for weapon_type in ref.weapon_type_dct:
 			weapon_value_table[weapon_type] = None #initializes each weapon_type price as None
 		for material_class in ref.material_class_dct:
-			for material_type in material_class['type']:
+			for material_type in material_class['types']:
 				material_value_table[material_type] = None #initializes each material_type price as None
 
 	def generate(self, town, coin_standard='copper'):
