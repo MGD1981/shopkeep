@@ -28,7 +28,7 @@ def get_new_town():
     #Populate resources
     for material_class in ref.material_class_dct.keys():
         town['resource'][material_class] = {}
-        for material_type in ref.material_class_dct[material_class]:
+        for material_type in ref.material_class_dct[material_class]['types']:
             town['resource'][material_class][material_type] = {
                 'harvestable': 0,
                 'available': 0
