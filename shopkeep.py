@@ -1,8 +1,10 @@
 from display import menus, draw_screen
 from data import mapper, entities, world_data
+import pygame as pg
 
 
 def start_game():
+    pg.init()
     choice = draw_screen.run_menu(menus.StartMenu())
     if choice == "start_new":
         print "Initializing entities..."
