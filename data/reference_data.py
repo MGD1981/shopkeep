@@ -527,26 +527,31 @@ del monster_type, monster_class
 shop_tile_dct = {
     1: {
         'tile type': 'floor',
+        'tile class': 'base',
         'passable': True,
         'image file': None
     },
     2: {
         'tile type': 'wall',
+        'tile class': 'overlay',
         'passable': False,
         'image file': None
     },
     3: {
         'tile type': 'door',
+        'tile class': 'overlay',
         'passable': True,
         'image file': None
     },
     4: {
         'tile type': 'stairs',
+        'tile class': 'overlay',
         'passable': False,
         'image file': None
     },
     5: {
         'tile type': 'counter',
+        'tile class': 'overlay',
         'passable': False,
         'image file': None
     }
