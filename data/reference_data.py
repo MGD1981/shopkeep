@@ -524,6 +524,35 @@ del monster_type, monster_class
 
 
 
+shop_tile_dct = {
+    1: {
+        'tile type': 'floor',
+        'passable': True,
+        'image file': None
+    },
+    2: {
+        'tile type': 'wall',
+        'passable': False,
+        'image file': None
+    },
+    3: {
+        'tile type': 'door',
+        'passable': True,
+        'image file': None
+    },
+    4: {
+        'tile type': 'stairs',
+        'passable': False,
+        'image file': None
+    },
+    5: {
+        'tile type': 'counter',
+        'passable': False,
+        'image file': None
+    }
+}
+
+
 terrain_dct = {
     1: {
         'terrain type': 'grassland',
