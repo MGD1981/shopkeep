@@ -1,4 +1,5 @@
 import entities
+import reference_data as ref
 from random import choice
 
 
@@ -7,13 +8,15 @@ class Shop():
 	
 	def __init__(self):
 		self.player_owned = False
-		self.shop_grid = None
 		self.security = None
 		self.decor = None
 		
 	def generate(self, arg):
 		"""Generates a new shop object."""
 		if arg == 'player':
-			self.shop_grid = []
+			shop_grid = ref.initial_shop_overlay
 			
-		return self
+		return {
+                'shopmap': shop_grid,
+                'object': self
+               }

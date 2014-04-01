@@ -1,5 +1,55 @@
 from math import pi
 
+
+screen = (1280, 1024)
+
+
+initial_shop_overlay = [[2,2,2,2,2,2],
+                        [2,4,0,0,0,2],
+                        [2,0,0,5,5,2],
+                        [2,0,0,0,0,2],
+                        [2,0,0,0,0,2],
+                        [2,2,2,3,2,2]]
+
+
+shop_tile_dct = {
+    1: {
+        'tile type': 'floor',
+        'tile class': 'base',
+        'passable': True,
+        'image file': 'floor.png'
+    },
+    2: {
+        'tile type': 'wall',
+        'tile class': 'overlay',
+        'passable': False,
+        'image file': 'wall.png'
+    },
+    3: {
+        'tile type': 'door',
+        'tile class': 'overlay',
+        'passable': True,
+        'image file': None
+    },
+    4: {
+        'tile type': 'stairs',
+        'tile class': 'overlay',
+        'passable': False,
+        'image file': None
+    },
+    5: {
+        'tile type': 'counter',
+        'tile class': 'overlay',
+        'passable': False,
+        'image file': None
+    }
+}
+
+
+sprite_dct = {
+    'player': 'img/player.png'
+}
+
 weapon_type_dct = {
     'spear': {
         'class': 'polearm',
@@ -524,46 +574,6 @@ del monster_type, monster_class
 
 
 
-shop_tile_dct = {
-    1: {
-        'tile type': 'floor',
-        'tile class': 'base',
-        'passable': True,
-        'image file': None
-    },
-    2: {
-        'tile type': 'wall',
-        'tile class': 'overlay',
-        'passable': False,
-        'image file': None
-    },
-    3: {
-        'tile type': 'door',
-        'tile class': 'overlay',
-        'passable': True,
-        'image file': None
-    },
-    4: {
-        'tile type': 'stairs',
-        'tile class': 'overlay',
-        'passable': False,
-        'image file': None
-    },
-    5: {
-        'tile type': 'counter',
-        'tile class': 'overlay',
-        'passable': False,
-        'image file': None
-    }
-}
-
-
-initial_shop_overlay = [[2,2,2,2,2,2],
-                        [2,4,0,0,0,2],
-                        [2,0,0,5,5,2],
-                        [2,0,0,0,0,2],
-                        [2,0,0,0,0,2],
-                        [2,2,2,3,2,2]
 
 
 terrain_dct = {

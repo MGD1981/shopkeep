@@ -39,7 +39,9 @@ def initialize():
         'next id': 1,
         'object list': []
     }
-    shop = {}
+    import shop_data
+    shop = shop_data.Shop().generate('player')
+
     return
 
 

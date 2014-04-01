@@ -31,6 +31,6 @@ class StartMenu(Menu):
 
         o3 = Option()
         o3.text = "Quit"
-        o3.actions = ['default_reset()', 'print CSI+"2J"']
+        o3.actions = ['pg.quit()']
 
         self.options.extend([o1,o2,o3])

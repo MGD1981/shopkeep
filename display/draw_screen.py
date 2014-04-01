@@ -1,82 +1,64 @@
 # coding = utf-8
+import sys
 import menus
 from data import reference_data as ref
+import pygame as pg
+from pygame.locals import *
 
+#ANSI escape sequence for debug mode:
 CSI="\x1B["
 # sample: print CSI+"31;40m" + "Colored Text" + CSI + "0m"
 
-class _Getch:
-    """Gets a single character from standard input.  Does not echo to the
-screen."""
-    def __init__(self):
-        try:
-            self.impl = _GetchWindows()
-        except ImportError:
-            self.impl = _GetchUnix()
+class Debug():
+    """Class containing functions to display console text for debugging."""
 
-    def __call__(self): return self.impl()
+    def cls():
+        print CSI+"37;40m" + CSI+"?25l" + CSI+"2J" # clears screen
 
+    def disp_reset():
+        print CSI+"0m"
 
-class _GetchUnix:
-    def __init__(self):
-        import tty, sys
-
-    def __call__(self):
-        import sys, tty, termios
-        fd = sys.stdin.fileno()
-        old_settings = termios.tcgetattr(fd)
-        try:
-            tty.setraw(sys.stdin.fileno())
-            ch = sys.stdin.read(1)
-        finally:
-            termios.tcsetattr(fd, termios.TCSADRAIN, old_settings)
-        return ch
-
-
-class _GetchWindows:
-    def __init__(self):
-        import msvcrt
-
-    def __call__(self):
-        import msvcrt
-        return msvcrt.getch()
-
-getch = _Getch()
-
-def cls():
-    print CSI+"37;40m" + CSI+"?25l" + CSI+"2J" # clears screen
-
-def disp_reset():
-    print CSI+"0m"
-
-def default_reset():
-    disp_reset()
-    print CSI+"?25h" + CSI+"2J"
+    def default_reset():
+        disp_reset()
+        print CSI+"?25h" + CSI+"2J"
 
 
 
-def run_menu(menu):
+def run_menu(game, menu):
     """Displays a Menu class object."""
+    while True:
+        i = 1
+        print game.font.get_linesize()
+        for option in menu.options:
+            text = game.font.render(" %d) %s" % (i, option.text), 1, (255, 255, 208))
+            textpos = text.get_rect(left=20, top=game.background.get_width() - (
+                             len(menu.options)*(game.font.get_linesize()+26) - ((i-1)*32)))
+            game.background.blit(text, textpos)
+            game.screen.blit(game.background, (0, 0))
+            pg.display.flip()
+            i += 1
+    
+        choice = None
+        while choice == None:
+            for event in pg.event.get():
+                if event.type == QUIT:
+                    pg.quit()
+                    sys.exit()
+                if event.type == KEYDOWN:
+                    try:
+                        choice = int(pg.key.name(event.key))
+                        if choice < 1 or choice > len(menu.options):
+                            choice = None
+                    except:
+                        pass
 
-    print 24*'\n'
-    cls()
-    i = 1
-    for option in menu.options:
-        print " %d) %s" % (i, option.text)
-        i += 1
-    print '\n\n'
-
-    try:
-        choice = int(getch())
         chosen_option = menu.options[choice - 1]
-    except:
-        return run_menu(menu)
-    if chosen_option.actions != None:
-        for action in chosen_option.actions: 
-            exec(action)
-    if chosen_option.return_value != None:
-        return chosen_option.return_value
-    return
+        if chosen_option.actions != None:
+            for action in chosen_option.actions: 
+                exec(action)
+        if chosen_option.return_value != None:
+            return chosen_option.return_value
+        return
 
 
 def draw_map(shopmap):

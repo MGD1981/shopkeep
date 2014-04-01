@@ -1,17 +1,5 @@
-
-#################################
-# Key:                          #
-#                               #
-#  0  = empty (outside shop)    #
-#  1  = empty (inside shop)     #
-# '@' = player                  #
-# 'x' = wall                    #
-# 'n' = counter                 #
-# 'r' = rack                    #
-#                               #
-#                               #
-#################################
+import reference_data as ref
 
 
 def new_map():
-    return [[0] * 24] * 80
+    return ref.initial_shop_overlay
