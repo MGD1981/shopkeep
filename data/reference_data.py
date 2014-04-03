@@ -3,6 +3,9 @@ from math import pi
 
 screen = (1280, 1024)
 
+image_path = 'img/'
+
+shop_position = [128, 128]
 
 initial_shop_overlay = [[2,2,2,2,2,2],
                         [2,4,0,0,0,2],

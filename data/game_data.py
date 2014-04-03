@@ -1,6 +1,7 @@
 import entities
 import pygame as pg
 import reference_data as ref
+import display
 
 
 class Game():
@@ -20,10 +21,10 @@ class Game():
 
     def tick(self):
         """Smallest game time amount passes."""
-        
         #TODO: Capture mouse/keyboard actions
         #TODO: Display screen
         
         for site in entities.sites['object list']:
-            site.tick()
-        
+            site.tick(self)
+        entities.player['object'].tick(self)
+        entities.shop['object'].tick(self)

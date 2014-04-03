@@ -1,21 +1,37 @@
+import os, sys
 import pygame as pg
 from pygame.locals import *
-import reference_data as ref
+from data import reference_data as ref
 
-class Shopkeep(pg.sprite.Sprite):
+def load_image(name, colorkey=None):
+    try:
+        image = pg.image.load(name)
+    except pg.error, message:
+        print 'Cannot load image:', name
+        raise SystemExit, message
+    image = image.convert()
+    if colorkey is not None:
+        if colorkey is -1:
+            colorkey = image.get_at((0,0))
+        image.set_colorkey(colorkey, RLEACCEL)
+    return image, image.get_rect()
+
+
+class Person(pg.sprite.Sprite):
     """The player"""
-    def __init__(self):
+    def __init__(self, img, x, y):
         pg.sprite.Sprite.__init__(self)
-        self.image, self.rect = load_image(ref.sprite_dct['player'],-1)
-        self.pos = 0, 0
+        self.image, self.rect = load_image(img, -1)
+        screen = pg.display.get_surface()
+        self.area = screen.get_rect()
+        self.rect.topleft = x,y
 
-    def update(self):
-        key_press = pg.key.get_pressed()
-        if key_press[K_LEFT]:
-            self.pos[0] -= 1
-        if key_press[K_RIGHT]:
-            self.pos[0] += 1
-        if key_press[K_UP]:
-            self.pos[1] -= 1
-        if key_press[K_DOWN]:
-            self.pos[1] += 1
+
+class BackgroundTile(pg.sprite.Sprite):
+    """Background tiles"""
+    def __init__(self, img, x, y):
+        pg.sprite.Sprite.__init__(self)
+        self.image, self.rect = load_image(img, -1)
+        screen = pg.display.get_surface()
+        self.area = screen.get_rect()
+        self.rect.topleft = x, y

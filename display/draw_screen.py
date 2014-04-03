@@ -1,9 +1,12 @@
 # coding = utf-8
 import sys
 import menus
+import data
+import sprites
 from data import reference_data as ref
 import pygame as pg
 from pygame.locals import *
+import copy
 
 #ANSI escape sequence for debug mode:
 CSI="\x1B["
@@ -23,20 +26,34 @@ class Debug():
         print CSI+"?25h" + CSI+"2J"
 
 
+def draw_shop_background(game, height, width, image):
+    """Renders the entire shop background (floor) to the screen"""
+    position = copy.deepcopy(ref.shop_position)
+    tiles = []
+    for row in xrange(height):
+        for tile in xrange(width):
+            tiles.append(sprites.BackgroundTile(image, position[0], position[1]))
+            position[1] += 32
+        position[0] += 32
+        position[1] = ref.shop_position[1]
+    tiles = pg.sprite.Group(tiles)
+    game.screen.blit(game.background, (0, 0))
+    tiles.draw(game.screen)
+    pg.display.flip()
+
 
 def run_menu(game, menu):
     """Displays a Menu class object."""
     while True:
         i = 1
-        print game.font.get_linesize()
         for option in menu.options:
             text = game.font.render(" %d) %s" % (i, option.text), 1, (255, 255, 208))
-            textpos = text.get_rect(left=20, top=game.background.get_width() - (
-                             len(menu.options)*(game.font.get_linesize()+26) - ((i-1)*32)))
+            textpos = text.get_rect(left=20, bottom=game.background.get_height() - (
+                             len(menu.options)*(game.font.get_linesize()) - ((i-1)*32)))
             game.background.blit(text, textpos)
             game.screen.blit(game.background, (0, 0))
-            pg.display.flip()
             i += 1
+        pg.display.flip()
     
         choice = None
         while choice == None:
@@ -61,18 +78,19 @@ def run_menu(game, menu):
         return
 
 
-def draw_map(shopmap):
-    cls()
-    assert type(shopmap) == list
-    for n in xrange(len(shopmap)):
-        line = []
-        for m in shopmap[n]:
-            if m == 0:
-                line.append(CSI+"40m" + '  ')
-            if m == 't':
-                line.append(CSI+"37;40m" + '[]')
-            else:
-                line.append(CSI+ref.terrain_dct[m][
-                        'console representation'])
-        line.append(CSI+"40m" + ' ')
-        print ''.join(line)
+def draw_map(shopmap, debug=False):
+    if debug:
+        cls()
+        assert type(shopmap) == list
+        for n in xrange(len(shopmap)):
+            line = []
+            for m in shopmap[n]:
+                if m == 0:
+                    line.append(CSI+"40m" + '  ')
+                if m == 't':
+                    line.append(CSI+"37;40m" + '[]')
+                else:
+                    line.append(CSI+ref.terrain_dct[m][
+                            'console representation'])
+            line.append(CSI+"40m" + ' ')
+            print ''.join(line)

@@ -12,13 +12,15 @@ shop = {}
 
 
 def initialize():
-    global player, weapons, components, heroes, monsters, sites, world, town
+    global player, weapons, components, heroes, monsters, sites, world, town, shop
     import world_data
     world = world_data.get_new_world(32)
     import town_data
     town = town_data.get_new_town()
     import player_data
-    player = player_data.get_new_player()
+    player = {
+        'object': player_data.Player()
+    }
     weapons = {
         'next id': 1,
         'object list': []
@@ -40,7 +42,9 @@ def initialize():
         'object list': []
     }
     import shop_data
-    shop = shop_data.Shop().generate('player')
+    shop = {
+        'object': shop_data.Shop().generate('player')
+    }
 
     return
 

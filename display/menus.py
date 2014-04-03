@@ -23,14 +23,22 @@ class StartMenu(Menu):
 
         o1 = Option()
         o1.text = "Start New Game"
-        o1.return_value = "start_new"
+        o1.actions = [
+                      'print "Initializing entities..."',
+                      'data.entities.initialize()'
+                     ]
 
         o2 = Option()
         o2.text = "Continue Saved Game"
-        o2.return_value = "continue_saved"
+        o2.actions = [
+                      'run_menu(game, menus.ContinueGameMenu())'
+                     ]
 
         o3 = Option()
         o3.text = "Quit"
-        o3.actions = ['pg.quit()']
+        o3.actions = [
+                      'print "Thanks for playing!"',
+                      'pg.quit()'
+                     ]
 
         self.options.extend([o1,o2,o3])
