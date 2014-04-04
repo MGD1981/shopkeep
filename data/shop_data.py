@@ -2,6 +2,7 @@ import entities
 import reference_data as ref
 from random import choice
 import display
+import pygame as pg
 
 
 class Shop():
@@ -12,12 +13,14 @@ class Shop():
         self.security = None
         self.decor = None
         self.shop_grid = None
+        self.surface = None
 
 
     def generate(self, arg):
         """Generates a new shop object."""
         if arg == 'player':
             self.shop_grid = ref.initial_shop_overlay
+            self.surface = pg.Surface((len(self.shop_grid)*32,len(self.shop_grid[0])*32))
         return self
 
 

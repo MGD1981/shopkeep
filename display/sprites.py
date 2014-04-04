@@ -1,7 +1,7 @@
 import os, sys
 import pygame as pg
 from pygame.locals import *
-from data import reference_data as ref
+from data import entities, reference_data as ref
 
 def load_image(name, colorkey=None):
     try:
@@ -24,7 +24,24 @@ class Person(pg.sprite.Sprite):
         self.image, self.rect = load_image(img, -1)
         screen = pg.display.get_surface()
         self.area = screen.get_rect()
-        self.rect.topleft = x,y
+        self.rect.topleft = x, y
+
+    def update(self):
+        key_press = pg.key.get_pressed()
+        if key_press[K_LEFT]:
+            entities.player['object'].location[0] -= 1
+            self.rect = self.rect.move(-1,0)
+        if key_press[K_RIGHT]:
+            print "right"
+            entities.player['object'].location[0] += 1
+            self.rect = self.rect.move(1,0)
+        if key_press[K_UP]:
+            entitites.player['object'].location[1] -= 1
+            self.rect = self.rect.move(0,-1)
+        if key_press[K_DOWN]:
+            entities.player['object'].location[1] += 1
+            self.rect = self.rect.move(0,1)
+        
 
 
 class BackgroundTile(pg.sprite.Sprite):

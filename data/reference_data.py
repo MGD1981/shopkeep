@@ -50,7 +50,7 @@ shop_tile_dct = {
 
 
 sprite_dct = {
-    'player': 'img/player.png'
+    'player': 'shopkeeper.png'
 }
 
 weapon_type_dct = {

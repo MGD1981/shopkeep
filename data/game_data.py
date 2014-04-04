@@ -17,7 +17,11 @@ class Game():
         self.background.fill((39, 39, 39))
         self.screen.blit(self.background, (0,0))
         pg.display.flip()
-            
+        self.overlay = None
+
+    def initialize_overlay(self):
+        display.draw_screen.initialize_shop_overlay(self)
+
 
     def tick(self):
         """Smallest game time amount passes."""
@@ -26,5 +30,5 @@ class Game():
         
         for site in entities.sites['object list']:
             site.tick(self)
-        entities.player['object'].tick(self)
         entities.shop['object'].tick(self)
+        display.draw_screen.draw_shop_overlay(self)

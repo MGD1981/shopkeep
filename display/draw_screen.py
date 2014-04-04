@@ -12,6 +12,7 @@ import copy
 CSI="\x1B["
 # sample: print CSI+"31;40m" + "Colored Text" + CSI + "0m"
 
+
 class Debug():
     """Class containing functions to display console text for debugging."""
 
@@ -39,7 +40,42 @@ def draw_shop_background(game, height, width, image):
     tiles = pg.sprite.Group(tiles)
     game.screen.blit(game.background, (0, 0))
     tiles.draw(game.screen)
+
+
+def update_shop_background(game, topleft, bottomright, image):
+    position = copy.deepcopy(ref.shop_position)
+    position[0] = topleft[0]
+    position[1] = topleft[1]
+    horiz = bottomright[0] - topleft[0]
+    vert = topleft[1] - bottomright[1]
+    tiles = []
+    for row in xrange(vert):
+        for tile in xrange(horiz):
+            tiles.append(sprites.BackgroundTile(image, position[0], position[1]))
+            position[1] += 32
+        position[0] += 32
+        position[1] = topleft[1]
+    tiles = pg.sprite.Group(tiles)
+    game.screen.blit(data.entities.shop['object'].surface, ref.shop_position)
+    tiles.draw(game.screen)
+
+
+def initialize_shop_overlay(game):
+    """Initializes objects on top of background in shop"""
+    shop_pos = copy.deepcopy(ref.shop_position)
+    p_x = data.entities.player['object'].location[0] + shop_pos[0] 
+    p_y = data.entities.player['object'].location[1] + shop_pos[1] 
+    player = sprites.Person(ref.image_path + ref.sprite_dct['player'], p_x, p_y) 
+    game.overlay = pg.sprite.Group((player))
+
+
+def draw_shop_overlay(game):
+    """Draws objects on top of background in shop"""
+    game.overlay.update()
+    #game.screen.blit(data.entities.shop['object'].surface, ref.shop_position)
+    game.overlay.draw(game.screen)
     pg.display.flip()
+    
 
 
 def run_menu(game, menu):

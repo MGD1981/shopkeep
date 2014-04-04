@@ -5,10 +5,13 @@ import pygame as pg
 
 def start_game():
     game = game_data.Game()
-
+    clock = pg.time.Clock()
     draw_screen.run_menu(game, menus.StartMenu())
 
+    game.initialize_overlay()
+    entities.shop['object'].tick(game)
     while True:
+        clock.tick(600)
         game.tick()
 #    shopmap = mapper.new_map()
 #    draw_screen.draw_map(entities.world['grid'])

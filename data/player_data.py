@@ -1,5 +1,6 @@
 import random
 import entities
+import display
 import pygame as pg
 from pygame.locals import *
 
@@ -21,14 +22,3 @@ class Player():
         }
     
 
-
-    def tick(self, game):
-        key_press = pg.key.get_pressed()
-        if key_press[K_LEFT]:
-            self.location[0] -= 1
-        if key_press[K_RIGHT]:
-            self.location[0] += 1
-        if key_press[K_UP]:
-            self.location[1] -= 1
-        if key_press[K_DOWN]:
-            self.location[1] += 1
