@@ -13,7 +13,9 @@ class Shop():
         self.security = None
         self.decor = None
         self.shop_grid = None
-        self.surface = None
+        self.surface = None #pygame surface for shop map
+        self.background_tiles = None #group of sprites
+        self.overlay = None #group of sprites
 
 
     def generate(self, arg):

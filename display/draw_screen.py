@@ -71,7 +71,7 @@ def initialize_shop_overlay(game):
 
 def draw_shop_overlay(game):
     """Draws objects on top of background in shop"""
-    game.overlay.update()
+    game.overlay.update(game)
     #game.screen.blit(data.entities.shop['object'].surface, ref.shop_position)
     game.overlay.draw(game.screen)
     pg.display.flip()

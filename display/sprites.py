@@ -26,19 +26,17 @@ class Person(pg.sprite.Sprite):
         self.area = screen.get_rect()
         self.rect.topleft = x, y
 
-    def update(self):
-        key_press = pg.key.get_pressed()
-        if key_press[K_LEFT]:
+    def update(self, game):
+        if game.keys[K_LEFT]:
             entities.player['object'].location[0] -= 1
             self.rect = self.rect.move(-1,0)
-        if key_press[K_RIGHT]:
-            print "right"
+        if game.keys[K_RIGHT]:
             entities.player['object'].location[0] += 1
             self.rect = self.rect.move(1,0)
-        if key_press[K_UP]:
-            entitites.player['object'].location[1] -= 1
+        if game.keys[K_UP]:
+            entities.player['object'].location[1] -= 1
             self.rect = self.rect.move(0,-1)
-        if key_press[K_DOWN]:
+        if game.keys[K_DOWN]:
             entities.player['object'].location[1] += 1
             self.rect = self.rect.move(0,1)
         

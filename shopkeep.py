@@ -11,7 +11,7 @@ def start_game():
     game.initialize_overlay()
     entities.shop['object'].tick(game)
     while True:
-        clock.tick(600)
+        game.clock.tick(60)
         game.tick()
 #    shopmap = mapper.new_map()
 #    draw_screen.draw_map(entities.world['grid'])

@@ -11,6 +11,8 @@ class Game():
         self.screen = pg.display.set_mode(ref.screen)
         pg.display.set_caption('Shopkeep')
 
+        self.clock = pg.time.Clock()
+        self.keys = pg.key.get_pressed()
         self.font = pg.font.Font('display/fonts/UbuntuMono-R.ttf', 26)
         background = pg.Surface(self.screen.get_size())
         self.background = background.convert()
@@ -28,6 +30,11 @@ class Game():
         #TODO: Capture mouse/keyboard actions
         #TODO: Display screen
         
+        for event in pg.event.get():
+            if event.type == pg.KEYDOWN:
+                self.keys = pg.key.get_pressed()
+            elif event.type == pg.KEYUP:
+                self.keys = pg.key.get_pressed()
         for site in entities.sites['object list']:
             site.tick(self)
         entities.shop['object'].tick(self)
