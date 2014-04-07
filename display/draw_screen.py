@@ -34,8 +34,8 @@ def draw_shop_background(game, height, width, image):
     for row in xrange(height):
         for tile in xrange(width):
             tiles.append(sprites.BackgroundTile(image, position[0], position[1]))
-            position[1] += 32
-        position[0] += 32
+            position[1] += ref.tile_size
+        position[0] += ref.tile_size
         position[1] = ref.shop_position[1]
     tiles = pg.sprite.Group(tiles)
     game.screen.blit(game.background, (0, 0))
@@ -52,8 +52,8 @@ def update_shop_background(game, topleft, bottomright, image):
     for row in xrange(vert):
         for tile in xrange(horiz):
             tiles.append(sprites.BackgroundTile(image, position[0], position[1]))
-            position[1] += 32
-        position[0] += 32
+            position[1] += ref.tile_size
+        position[0] += ref.tile_size
         position[1] = topleft[1]
     tiles = pg.sprite.Group(tiles)
     game.screen.blit(data.entities.shop['object'].surface, ref.shop_position)
@@ -85,7 +85,7 @@ def run_menu(game, menu):
         for option in menu.options:
             text = game.font.render(" %d) %s" % (i, option.text), 1, (255, 255, 208))
             textpos = text.get_rect(left=20, bottom=game.background.get_height() - (
-                             len(menu.options)*(game.font.get_linesize()) - ((i-1)*32)))
+                             len(menu.options)*(game.font.get_linesize()) - ((i-1)*ref.tile_size)))
             game.background.blit(text, textpos)
             game.screen.blit(game.background, (0, 0))
             i += 1

@@ -22,15 +22,17 @@ class Shop():
         """Generates a new shop object."""
         if arg == 'player':
             self.shop_grid = ref.initial_shop_overlay
-            self.surface = pg.Surface((len(self.shop_grid)*32,len(self.shop_grid[0])*32))
+            self.surface = pg.Surface((
+                    len(self.shop_grid)*ref.tile_size,
+                    len(self.shop_grid[0])*ref.tile_size))
         return self
 
 
     def tick(self, game):
         """Tick function for Shop object"""
         display.draw_screen.draw_shop_background(game,
-                                     len(self.shop_grid),
-                                     len(self.shop_grid[0]),
-                                     ref.image_path + ref.shop_tile_dct[1]['image file'])
+                         len(self.shop_grid),
+                         len(self.shop_grid[0]),
+                         ref.image_path + ref.shop_tile_dct[1]['image file'])
         return 
 

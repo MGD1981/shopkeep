@@ -9,10 +9,11 @@ def load_image(name, colorkey=None):
     except pg.error, message:
         print 'Cannot load image:', name
         raise SystemExit, message
-    image = image.convert()
+    image = image.convert_alpha()
+    image = pg.transform.scale(image, (ref.tile_size, ref.tile_size))
     if colorkey is not None:
         if colorkey is -1:
-            colorkey = image.get_at((0,0))
+            colorkey = image.get_at((0,0)) #gets transparent colorkey
         image.set_colorkey(colorkey, RLEACCEL)
     return image, image.get_rect()
 
@@ -28,17 +29,17 @@ class Person(pg.sprite.Sprite):
 
     def update(self, game):
         if game.keys[K_LEFT]:
-            entities.player['object'].location[0] -= 1
-            self.rect = self.rect.move(-1,0)
+            entities.player['object'].location[0] -= 2
+            self.rect = self.rect.move(-2,0)
         if game.keys[K_RIGHT]:
-            entities.player['object'].location[0] += 1
-            self.rect = self.rect.move(1,0)
+            entities.player['object'].location[0] += 2
+            self.rect = self.rect.move(2,0)
         if game.keys[K_UP]:
-            entities.player['object'].location[1] -= 1
-            self.rect = self.rect.move(0,-1)
+            entities.player['object'].location[1] -= 2
+            self.rect = self.rect.move(0,-2)
         if game.keys[K_DOWN]:
-            entities.player['object'].location[1] += 1
-            self.rect = self.rect.move(0,1)
+            entities.player['object'].location[1] += 2
+            self.rect = self.rect.move(0,2)
         
 
 

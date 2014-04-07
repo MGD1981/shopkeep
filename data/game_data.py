@@ -13,7 +13,7 @@ class Game():
 
         self.clock = pg.time.Clock()
         self.keys = pg.key.get_pressed()
-        self.font = pg.font.Font('display/fonts/UbuntuMono-R.ttf', 26)
+        self.font = pg.font.Font('display/fonts/UbuntuMono-R.ttf', ref.tile_size * 26/32)
         background = pg.Surface(self.screen.get_size())
         self.background = background.convert()
         self.background.fill((39, 39, 39))

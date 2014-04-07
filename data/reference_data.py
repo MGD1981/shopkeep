@@ -5,7 +5,6 @@ screen = (1280, 1024)
 
 image_path = 'img/'
 
-shop_position = [128, 128]
 
 initial_shop_overlay = [[2,2,2,2,2,2],
                         [2,4,0,0,0,2],
@@ -14,6 +13,9 @@ initial_shop_overlay = [[2,2,2,2,2,2],
                         [2,0,0,0,0,2],
                         [2,2,2,3,2,2]]
 
+default_resolution = (1200, 960)
+tile_size = default_resolution[0] / 20
+shop_position = [tile_size*5, tile_size*5]
 
 shop_tile_dct = {
     1: {
