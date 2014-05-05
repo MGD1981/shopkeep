@@ -13,9 +13,11 @@ initial_shop_overlay = [[2,2,2,2,2,2],
                         [2,0,0,0,0,2],
                         [2,2,2,3,2,2]]
 
-default_resolution = (1200, 960)
+default_resolution = (1280, 1024)
 tile_size = default_resolution[0] / 20
 shop_position = [tile_size*5, tile_size*5]
+initial_player_position = [3,1]
+player_speed = 4
 
 shop_tile_dct = {
     1: {

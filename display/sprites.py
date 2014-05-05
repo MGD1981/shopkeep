@@ -29,17 +29,46 @@ class Person(pg.sprite.Sprite):
 
     def update(self, game):
         if game.keys[K_LEFT]:
-            entities.player['object'].location[0] -= 2
-            self.rect = self.rect.move(-2,0)
+            if self.validate(0,-1):
+                self.move(0,-1)
         if game.keys[K_RIGHT]:
-            entities.player['object'].location[0] += 2
-            self.rect = self.rect.move(2,0)
+            if self.validate(0,1):
+                self.move(0,1)
         if game.keys[K_UP]:
-            entities.player['object'].location[1] -= 2
-            self.rect = self.rect.move(0,-2)
+            if self.validate(1,-1):
+                self.move(1,-1)
         if game.keys[K_DOWN]:
-            entities.player['object'].location[1] += 2
-            self.rect = self.rect.move(0,2)
+            if self.validate(1,1):
+                self.move(1,1)
+        
+    def validate(self, axis, direction):
+        vector = ref.player_speed * direction
+        print "Player loc: %r" % (entities.player['object'].location)
+        print "Going to %r: %r" % (
+                ((entities.player['object'].location[0] + 
+                   (-axis+1)*vector,
+                 (entities.player['object'].location[1] + 
+                   axis*vector)), 
+                 entities.shop['object'].shop_grid[
+                     (entities.player['object'].location[0] + 
+                     (-axis+1)*vector)/ref.tile_size][
+                     (entities.player['object'].location[1] + 
+                     axis*vector)/ref.tile_size]))
+        if entities.shop['object'].shop_grid[
+                (entities.player['object'].location[0] + 
+                (-axis+1)*vector)/ref.tile_size][
+                (entities.player['object'].location[1] + 
+                axis*vector)/ref.tile_size] != 0:
+            return True
+            #return False
+        return True
+
+
+    def move(self, axis, direction):
+        vector = ref.player_speed * direction
+        entities.player['object'].location[axis] += vector
+        self.rect = self.rect.move((-axis+1)*vector, axis*vector)
+        
         
 
 

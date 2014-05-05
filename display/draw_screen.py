@@ -63,8 +63,9 @@ def update_shop_background(game, topleft, bottomright, image):
 def initialize_shop_overlay(game):
     """Initializes objects on top of background in shop"""
     shop_pos = copy.deepcopy(ref.shop_position)
-    p_x = data.entities.player['object'].location[0] + shop_pos[0] 
-    p_y = data.entities.player['object'].location[1] + shop_pos[1] 
+    p_x = data.entities.player['object'].location[0]*ref.tile_size + shop_pos[0] 
+    p_y = data.entities.player['object'].location[1]*ref.tile_size + shop_pos[1] 
+    print p_x, p_y
     player = sprites.Person(ref.image_path + ref.sprite_dct['player'], p_x, p_y) 
     game.overlay = pg.sprite.Group((player))
 

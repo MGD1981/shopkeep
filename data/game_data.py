@@ -27,8 +27,6 @@ class Game():
 
     def tick(self):
         """Smallest game time amount passes."""
-        #TODO: Capture mouse/keyboard actions
-        #TODO: Display screen
         
         for event in pg.event.get():
             if event.type == pg.KEYDOWN:

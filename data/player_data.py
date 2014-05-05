@@ -1,13 +1,14 @@
 import random
 import entities
 import display
+import reference_data as ref
 import pygame as pg
 from pygame.locals import *
 
 class Player():
     """Player object"""
     def __init__(self):
-        self.location = [0, 0]
+        self.location = ref.initial_player_position
         self.coins = {
             'copper': 0,
             'silver': 0,
