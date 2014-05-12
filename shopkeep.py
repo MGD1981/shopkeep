@@ -9,10 +9,18 @@ def start_game():
     draw_screen.run_menu(game, menus.StartMenu())
 
     game.initialize_overlay()
-    entities.shop['object'].tick(game)
+
+    #entities.shop['object'].tick(game)
+
+    game.banner_screen.draw(game)
+    game.world_screen.draw(game)
+    game.status_screen.draw(game)
+    game.message_screen.draw(game)
+    pg.display.flip()
     while True:
-        game.clock.tick(60)
+        game.clock.tick()
         game.tick()
+
 #    shopmap = mapper.new_map()
 #    draw_screen.draw_map(entities.world['grid'])
 

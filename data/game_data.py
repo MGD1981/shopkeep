@@ -2,6 +2,7 @@ import entities
 import pygame as pg
 import reference_data as ref
 import display
+from display import screens
 
 
 class Game():
@@ -14,6 +15,14 @@ class Game():
         self.clock = pg.time.Clock()
         self.keys = pg.key.get_pressed()
         self.font = pg.font.Font('display/fonts/UbuntuMono-R.ttf', ref.tile_size * 26/32)
+
+        self.screens = {
+            banner_screen = screens.BannerScreen(ref.screen[0], ref.screen[1]/16),
+            world_screen = screens.WorldScreen(ref.screen[0]/2, ref.screen[1]*10/16),
+            status_screen = screens.StatusScreen(ref.screen[0]/2, ref.screen[1]*10/16),
+            Message_screen = screens.MessageScreen(ref.screen[0], ref.screen[1]*5/16)
+        }
+
         background = pg.Surface(self.screen.get_size())
         self.background = background.convert()
         self.background.fill((39, 39, 39))
@@ -35,5 +44,7 @@ class Game():
                 self.keys = pg.key.get_pressed()
         for site in entities.sites['object list']:
             site.tick(self)
-        entities.shop['object'].tick(self)
+        #entities.shop['object'].tick(self)
         display.draw_screen.draw_shop_overlay(self)
+        pg.display.flip()
+        print self.clock.get_fps()
