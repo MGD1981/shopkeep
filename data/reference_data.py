@@ -19,7 +19,7 @@ initial_shop_overlay = [[0,0,0,0,0,0,0,0,0,0],
                         [0,0,0,0,2,2,2,3,2,2]]
 
 tile_size = screen[0] / 20
-initial_player_position = [3,1]
+initial_player_position = [7,5]
 player_speed = 4
 
 shop_tile_dct = {
@@ -39,19 +39,19 @@ shop_tile_dct = {
         'tile type': 'door',
         'tile class': 'overlay',
         'passable': True,
-        'image file': None
+        'image file': 'floor.png'
     },
     4: {
         'tile type': 'stairs',
         'tile class': 'overlay',
         'passable': False,
-        'image file': None
+        'image file': 'floor.png'
     },
     5: {
         'tile type': 'counter',
         'tile class': 'overlay',
         'passable': False,
-        'image file': None
+        'image file': 'floor.png' 
     }
 }
 

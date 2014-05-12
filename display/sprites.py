@@ -24,22 +24,26 @@ class Person(pg.sprite.Sprite):
         pg.sprite.Sprite.__init__(self)
         self.image, self.rect = load_image(img, -1)
         screen = pg.display.get_surface()
-        self.area = screen.get_rect()
+        #self.area = screen.get_rect()
         self.rect.topleft = x, y
 
     def update(self, game):
         if game.keys[K_LEFT]:
             if self.validate(0,-1):
                 self.move(0,-1)
+                game.action_log.append('refresh background')
         if game.keys[K_RIGHT]:
             if self.validate(0,1):
                 self.move(0,1)
+                game.action_log.append('refresh background')
         if game.keys[K_UP]:
             if self.validate(1,-1):
                 self.move(1,-1)
+                game.action_log.append('refresh background')
         if game.keys[K_DOWN]:
             if self.validate(1,1):
                 self.move(1,1)
+                game.action_log.append('refresh background')
         
     def validate(self, axis, direction):
         vector = ref.player_speed * direction

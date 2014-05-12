@@ -28,26 +28,6 @@ class Debug():
         print CSI+"?25h" + CSI+"2J"
 
 
-
-"""def update_shop_background(game, topleft, bottomright, image):
-    position = copy.deepcopy(ref.shop_position)
-    position[0] = topleft[0]
-    position[1] = topleft[1]
-    horiz = bottomright[0] - topleft[0]
-    vert = topleft[1] - bottomright[1]
-    tiles = []
-    for row in xrange(vert):
-        for tile in xrange(horiz):
-            tiles.append(sprites.BackgroundTile(image, position[0], position[1]))
-            position[1] += ref.tile_size
-        position[0] += ref.tile_size
-        position[1] = topleft[1]
-    tiles = pg.sprite.Group(tiles)
-    game.screen.blit(data.entities.shop['object'].surface, ref.shop_position)
-    tiles.draw(game.screen)
-"""
-
-
 def run_menu(game, menu):
     """Displays a Menu class object."""
     i = 1

@@ -16,7 +16,7 @@ class Game():
         self.keys = pg.key.get_pressed()
         self.font = pg.font.Font('display/fonts/UbuntuMono-R.ttf', ref.tile_size * 26/32)
 
-        self.action_log = []
+        self.action_log = ['refresh background']
 
         self.screens = {
             'banner': screens.BannerScreen(ref.screen[0], ref.screen[1]/16),

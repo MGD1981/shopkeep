@@ -28,9 +28,9 @@ class Subscreen(object):
                       True, 
                       (
                             (0, 0),
-                            (width-1, 0),
-                            (width-1, height-1),
-                            (0, height-1)
+                            (width-2, 0),
+                            (width-2, height-2),
+                            (0, height-2)
                       ),
                       2
         )
@@ -45,6 +45,10 @@ class BannerScreen(Subscreen):
         super(BannerScreen, self).__init__(width, height)
         self.set_position(0, 0)
 
+    def update(self, game):
+        self.draw_border(game)
+        game.screen.blit(self.background, self.position)
+
 
 class WorldScreen(Subscreen):
 
@@ -54,8 +58,8 @@ class WorldScreen(Subscreen):
 
     def initialize_sprites(self, game):
         """Initializes objects on top of background in shopand returns the sprite group"""
-        p_x = entities.player['object'].location[0]*ref.tile_size + self.position[0] 
-        p_y = entities.player['object'].location[1]*ref.tile_size + self.position[1] 
+        p_x = entities.player['object'].location[0]*ref.tile_size
+        p_y = entities.player['object'].location[1]*ref.tile_size 
         print p_x, p_y
         player = sprites.Person(ref.image_path + ref.sprite_dct['player'], p_x, p_y) 
         self.shop_sprites = pg.sprite.Group((player))
@@ -63,22 +67,28 @@ class WorldScreen(Subscreen):
 
     def update(self, game):
 
-        #draw shop background
-        shop = entities.shop['object']
-        at_pos = [0,0]
-        tiles = []
-        for row in xrange(len(shop.shop_grid)):
-            for tile in xrange(len(shop.shop_grid[0])):
-                tiles.append(sprites.BackgroundTile(
-                    ref.image_path + ref.shop_tile_dct[1]['image file'],
-                    at_pos[0], at_pos[1]
-                ))
-                at_pos[0] += ref.tile_size
-            at_pos[1] += ref.tile_size
-            at_pos[0] = copy.deepcopy(self.position[0])
-        tiles = pg.sprite.Group(tiles)
-        tiles.draw(self.background)
-        self.draw_border(game)
+        for action in game.action_log:
+            if action == 'refresh background':
+                #draw shop background
+                shop = entities.shop['object']
+                at_pos = [0,0]
+                tiles = []
+                for row in xrange(len(shop.shop_grid)):
+                    for tile in xrange(len(shop.shop_grid[0])):
+                        if entities.shop['object'].shop_grid[row][tile] != 0:
+                            tiles.append(sprites.BackgroundTile(
+                                ref.image_path + 
+                                ref.shop_tile_dct[entities.shop['object'].shop_grid[
+                                                                row][tile]]['image file'],
+                                at_pos[0], at_pos[1]
+                            ))
+                        at_pos[0] += ref.tile_size
+                    at_pos[1] += ref.tile_size
+                    at_pos[0] = copy.deepcopy(self.position[0])
+                tiles = pg.sprite.Group(tiles)
+                tiles.draw(self.background)
+                self.draw_border(game)
+                game.action_log.remove(action)
 
         #draw shop foreground
         self.shop_sprites.update(game)
@@ -96,6 +106,7 @@ class StatusScreen(Subscreen):
 
     def update(self, game):
         self.draw_border(game)
+        game.screen.blit(self.background, self.position)
 
 class MessageScreen(Subscreen):
 
@@ -103,4 +114,7 @@ class MessageScreen(Subscreen):
         super(MessageScreen, self).__init__(width, height)
         self.set_position(0, ref.tile_size*11)
 
+    def update(self, game):
+        self.draw_border(game)
+        game.screen.blit(self.background, self.position)
 
