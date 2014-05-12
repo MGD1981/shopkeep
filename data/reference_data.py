@@ -2,12 +2,12 @@ from math import pi
 
 
 screen = (1280, 1024)
+#screen = (640, 512)
 
 image_path = 'img/'
 
 
 initial_shop_overlay = [[0,0,0,0,0,0,0,0,0,0],
-                        [0,0,0,0,0,0,0,0,0,0],
                         [0,0,0,0,0,0,0,0,0,0],
                         [0,0,0,0,0,0,0,0,0,0],
                         [0,0,0,0,0,0,0,0,0,0],
@@ -18,8 +18,7 @@ initial_shop_overlay = [[0,0,0,0,0,0,0,0,0,0],
                         [0,0,0,0,2,1,1,1,1,2],
                         [0,0,0,0,2,2,2,3,2,2]]
 
-default_resolution = (1280, 1024)
-tile_size = default_resolution[0] / 20
+tile_size = screen[0] / 20
 initial_player_position = [3,1]
 player_speed = 4
 

@@ -1,6 +1,7 @@
 from data import reference_data as ref, entities
 import pygame as pg
 import sprites
+import copy
 
 
 class Subscreen(object):
@@ -22,15 +23,14 @@ class Subscreen(object):
            Takes the game object."""
         width = self.surface.get_width()
         height = self.surface.get_height()
-        game.screen.blit(self.background, self.position)
-        pg.draw.lines(self.surface, 
+        pg.draw.lines(self.background, 
                       (255, 255, 208),
                       True, 
                       (
-                            self.position,
-                            self.position[0] + width, self.position[1],
-                            self.position[0] + width, self.position[1] + height,
-                            self.position[0], self.position[1] + height
+                            (0, 0),
+                            (width-1, 0),
+                            (width-1, height-1),
+                            (0, height-1)
                       ),
                       2
         )
@@ -52,18 +52,20 @@ class WorldScreen(Subscreen):
         super(WorldScreen, self).__init__(width, height)
         self.set_position(0, ref.tile_size)
 
-    def initialize_shop_overlay(self, game):
+    def initialize_sprites(self, game):
         """Initializes objects on top of background in shopand returns the sprite group"""
         p_x = entities.player['object'].location[0]*ref.tile_size + self.position[0] 
         p_y = entities.player['object'].location[1]*ref.tile_size + self.position[1] 
         print p_x, p_y
         player = sprites.Person(ref.image_path + ref.sprite_dct['player'], p_x, p_y) 
-        return pg.sprite.Group((player))
+        self.shop_sprites = pg.sprite.Group((player))
+
 
     def update(self, game):
+
         #draw shop background
         shop = entities.shop['object']
-        at_pos = list(self.position)
+        at_pos = [0,0]
         tiles = []
         for row in xrange(len(shop.shop_grid)):
             for tile in xrange(len(shop.shop_grid[0])):
@@ -71,14 +73,17 @@ class WorldScreen(Subscreen):
                     ref.image_path + ref.shop_tile_dct[1]['image file'],
                     at_pos[0], at_pos[1]
                 ))
-            at_pos[0] += ref.tile_size
-            at_pos[1] = self.position[1]
+                at_pos[0] += ref.tile_size
+            at_pos[1] += ref.tile_size
+            at_pos[0] = copy.deepcopy(self.position[0])
         tiles = pg.sprite.Group(tiles)
-        game.screen.blit(game.background, self.position)
-        tiles.draw(game.screen)
+        tiles.draw(self.background)
+        self.draw_border(game)
 
-        #draw shop overlay
-
+        #draw shop foreground
+        self.shop_sprites.update(game)
+        self.shop_sprites.draw(self.background)
+        game.screen.blit(self.background, self.position)
 
 
 
@@ -88,6 +93,9 @@ class StatusScreen(Subscreen):
         super(StatusScreen, self).__init__(width, height)
         self.set_position(ref.screen[0]/2 + 1, ref.tile_size)
 
+
+    def update(self, game):
+        self.draw_border(game)
 
 class MessageScreen(Subscreen):
 

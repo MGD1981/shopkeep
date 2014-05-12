@@ -16,6 +16,8 @@ class Game():
         self.keys = pg.key.get_pressed()
         self.font = pg.font.Font('display/fonts/UbuntuMono-R.ttf', ref.tile_size * 26/32)
 
+        self.action_log = []
+
         self.screens = {
             'banner': screens.BannerScreen(ref.screen[0], ref.screen[1]/16),
             'world': screens.WorldScreen(ref.screen[0]/2, ref.screen[1]*10/16),
@@ -41,8 +43,8 @@ class Game():
         for site in entities.sites['object list']:
             site.tick(self)
         #entities.shop['object'].tick(self)
+
         for screen in self.screens.keys():
             self.screens[screen].update(self)
-        display.draw_screen.draw_shop_overlay(self)
         pg.display.flip()
         print self.clock.get_fps()

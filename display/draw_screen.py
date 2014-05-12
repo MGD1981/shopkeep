@@ -29,7 +29,7 @@ class Debug():
 
 
 
-def update_shop_background(game, topleft, bottomright, image):
+"""def update_shop_background(game, topleft, bottomright, image):
     position = copy.deepcopy(ref.shop_position)
     position[0] = topleft[0]
     position[1] = topleft[1]
@@ -45,29 +45,22 @@ def update_shop_background(game, topleft, bottomright, image):
     tiles = pg.sprite.Group(tiles)
     game.screen.blit(data.entities.shop['object'].surface, ref.shop_position)
     tiles.draw(game.screen)
-
-
-def draw_shop_overlay(game):
-    """Draws objects on top of background in shop"""
-    game.overlay.update(game)
-    #game.screen.blit(data.entities.shop['object'].surface, ref.shop_position)
-    game.overlay.draw(game.screen)
-    
+"""
 
 
 def run_menu(game, menu):
     """Displays a Menu class object."""
+    i = 1
+    for option in menu.options:
+        text = game.font.render(" %d) %s" % (i, option.text), 1, (255, 255, 208))
+        textpos = text.get_rect(left=20, bottom=game.background.get_height() - (
+                         len(menu.options)*(game.font.get_linesize()) - ((i-1)*ref.tile_size)))
+        game.background.blit(text, textpos)
+        i += 1
+    game.screen.blit(game.background, (0, 0))
+    pg.display.flip()
+
     while True:
-        i = 1
-        for option in menu.options:
-            text = game.font.render(" %d) %s" % (i, option.text), 1, (255, 255, 208))
-            textpos = text.get_rect(left=20, bottom=game.background.get_height() - (
-                             len(menu.options)*(game.font.get_linesize()) - ((i-1)*ref.tile_size)))
-            game.background.blit(text, textpos)
-            game.screen.blit(game.background, (0, 0))
-            i += 1
-        pg.display.flip()
-    
         choice = None
         while choice == None:
             for event in pg.event.get():
@@ -87,7 +80,13 @@ def run_menu(game, menu):
             for action in chosen_option.actions: 
                 exec(action)
         if chosen_option.return_value != None:
+            game.background.fill((39, 39, 39))
+            game.screen.blit(game.background, (0,0))
+            pg.display.flip()
             return chosen_option.return_value
+        game.background.fill((39, 39, 39))
+        game.screen.blit(game.background, (0,0))
+        pg.display.flip()
         return
 
 
