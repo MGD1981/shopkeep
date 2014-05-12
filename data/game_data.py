@@ -17,10 +17,10 @@ class Game():
         self.font = pg.font.Font('display/fonts/UbuntuMono-R.ttf', ref.tile_size * 26/32)
 
         self.screens = {
-            banner_screen = screens.BannerScreen(ref.screen[0], ref.screen[1]/16),
-            world_screen = screens.WorldScreen(ref.screen[0]/2, ref.screen[1]*10/16),
-            status_screen = screens.StatusScreen(ref.screen[0]/2, ref.screen[1]*10/16),
-            Message_screen = screens.MessageScreen(ref.screen[0], ref.screen[1]*5/16)
+            'banner': screens.BannerScreen(ref.screen[0], ref.screen[1]/16),
+            'world': screens.WorldScreen(ref.screen[0]/2, ref.screen[1]*10/16),
+            'status': screens.StatusScreen(ref.screen[0]/2, ref.screen[1]*10/16),
+            'message': screens.MessageScreen(ref.screen[0], ref.screen[1]*5/16)
         }
 
         background = pg.Surface(self.screen.get_size())
@@ -28,10 +28,6 @@ class Game():
         self.background.fill((39, 39, 39))
         self.screen.blit(self.background, (0,0))
         pg.display.flip()
-        self.overlay = None
-
-    def initialize_overlay(self):
-        display.draw_screen.initialize_shop_overlay(self)
 
 
     def tick(self):
@@ -45,6 +41,8 @@ class Game():
         for site in entities.sites['object list']:
             site.tick(self)
         #entities.shop['object'].tick(self)
+        for screen in self.screens.keys():
+            self.screens[screen].update(self)
         display.draw_screen.draw_shop_overlay(self)
         pg.display.flip()
         print self.clock.get_fps()

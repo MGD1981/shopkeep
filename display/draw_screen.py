@@ -28,20 +28,6 @@ class Debug():
         print CSI+"?25h" + CSI+"2J"
 
 
-def draw_shop_background(game, height, width, image):
-    """Renders the entire shop background (floor) to the screen"""
-    position = copy.deepcopy(ref.shop_position)
-    tiles = []
-    for row in xrange(height):
-        for tile in xrange(width):
-            tiles.append(sprites.BackgroundTile(image, position[0], position[1]))
-            position[1] += ref.tile_size
-        position[0] += ref.tile_size
-        position[1] = ref.shop_position[1]
-    tiles = pg.sprite.Group(tiles)
-    game.screen.blit(game.background, (0, 0))
-    tiles.draw(game.screen)
-
 
 def update_shop_background(game, topleft, bottomright, image):
     position = copy.deepcopy(ref.shop_position)
@@ -61,22 +47,11 @@ def update_shop_background(game, topleft, bottomright, image):
     tiles.draw(game.screen)
 
 
-def initialize_shop_overlay(game):
-    """Initializes objects on top of background in shop"""
-    shop_pos = copy.deepcopy(ref.shop_position)
-    p_x = data.entities.player['object'].location[0]*ref.tile_size + shop_pos[0] 
-    p_y = data.entities.player['object'].location[1]*ref.tile_size + shop_pos[1] 
-    print p_x, p_y
-    player = sprites.Person(ref.image_path + ref.sprite_dct['player'], p_x, p_y) 
-    game.overlay = pg.sprite.Group((player))
-
-
 def draw_shop_overlay(game):
     """Draws objects on top of background in shop"""
     game.overlay.update(game)
     #game.screen.blit(data.entities.shop['object'].surface, ref.shop_position)
     game.overlay.draw(game.screen)
-    pg.display.flip()
     
 
 

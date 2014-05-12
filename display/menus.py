@@ -25,7 +25,8 @@ class StartMenu(Menu):
         o1.text = "Start New Game"
         o1.actions = [
                       'print "Initializing entities..."',
-                      'data.entities.initialize()'
+                      'data.entities.initialize()',
+                      'game.overlay = game.screens["world"].initialize_shop_overlay(game)'
                      ]
 
         o2 = Option()

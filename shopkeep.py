@@ -8,14 +8,8 @@ def start_game():
     clock = pg.time.Clock()
     draw_screen.run_menu(game, menus.StartMenu())
 
-    game.initialize_overlay()
-
     #entities.shop['object'].tick(game)
 
-    game.banner_screen.draw(game)
-    game.world_screen.draw(game)
-    game.status_screen.draw(game)
-    game.message_screen.draw(game)
     pg.display.flip()
     while True:
         game.clock.tick()

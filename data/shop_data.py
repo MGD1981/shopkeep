@@ -28,11 +28,3 @@ class Shop():
         return self
 
 
-    def tick(self, game):
-        """Tick function for Shop object"""
-        display.draw_screen.draw_shop_background(game,
-                         len(self.shop_grid),
-                         len(self.shop_grid[0]),
-                         ref.image_path + ref.shop_tile_dct[1]['image file'])
-        return 
-
