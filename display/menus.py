@@ -26,7 +26,8 @@ class StartMenu(Menu):
         o1.actions = [
                       'print "Initializing entities..."',
                       'data.entities.initialize()',
-                      'game.screens["world"].initialize_sprites(game)'
+                      'game.screens["world"].initialize_sprites(game)',
+                      'game.screens["banner"].initialize_sprites(game)'
                      ]
 
         o2 = Option()

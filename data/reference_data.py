@@ -19,6 +19,7 @@ initial_shop_overlay = [[0,0,0,0,0,0,0,0,0,0],
                         [0,0,0,0,2,2,2,3,2,2]]
 
 tile_size = screen[0] / 20
+scale = tile_size/32.0
 initial_player_position = [7,5]
 player_speed = 4
 
@@ -52,6 +53,17 @@ shop_tile_dct = {
         'tile class': 'overlay',
         'passable': False,
         'image file': 'wall.png' 
+    }
+}
+
+button_dct = {
+    'shop': {
+        'order': 0,
+        'image file': 'shop_button.png'
+    },
+    'world': {
+        'order': 1,
+        'image file': 'world_button.png'
     }
 }
 

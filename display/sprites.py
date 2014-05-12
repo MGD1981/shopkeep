@@ -10,7 +10,8 @@ def load_image(name, colorkey=None):
         print 'Cannot load image:', name
         raise SystemExit, message
     image = image.convert_alpha()
-    image = pg.transform.scale(image, (ref.tile_size, ref.tile_size))
+    image = pg.transform.scale(image, (int(image.get_width()*ref.scale), 
+                                       int(image.get_height()*ref.scale)))
     if colorkey is not None:
         if colorkey is -1:
             colorkey = image.get_at((0,0)) #gets transparent colorkey
@@ -85,9 +86,18 @@ class Person(pg.sprite.Sprite):
 
 class BackgroundTile(pg.sprite.Sprite):
     """Background tiles"""
-    def __init__(self, img, x, y):
+    def __init__(self, game, img, x, y):
         pg.sprite.Sprite.__init__(self)
         self.image, self.rect = load_image(img, -1)
-        screen = pg.display.get_surface()
-        self.area = screen.get_rect()
+        screen = game.screens['world'].background
         self.rect.topleft = x, y
+
+
+class Button(pg.sprite.Sprite):
+    """Menu buttons"""
+    def __init__(self, game, img, x, y):
+        pg.sprite.Sprite.__init__(self)
+        self.image, self.rect = load_image(img, -1)
+        screen = game.screens['banner'].background
+        self.rect.topleft = x, y
+
