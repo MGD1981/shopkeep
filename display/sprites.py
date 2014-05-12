@@ -20,10 +20,10 @@ def load_image(name, colorkey=None):
 
 class Person(pg.sprite.Sprite):
     """The player"""
-    def __init__(self, img, x, y):
+    def __init__(self, game, img, x, y):
         pg.sprite.Sprite.__init__(self)
         self.image, self.rect = load_image(img, -1)
-        screen = pg.display.get_surface()
+        screen = game.screens['world'].background
         #self.area = screen.get_rect()
         self.rect.topleft = x, y
 
@@ -46,26 +46,33 @@ class Person(pg.sprite.Sprite):
                 game.action_log.append('refresh background')
         
     def validate(self, axis, direction):
+        #axis: 0=x, 1=y
+        #direction: 1=right, down  -1=left, up
         vector = ref.player_speed * direction
-        print "Player loc: %r" % (entities.player['object'].location)
-        print "Going to %r: %r" % (
-                ((entities.player['object'].location[0] + 
-                   (-axis+1)*vector,
-                 (entities.player['object'].location[1] + 
-                   axis*vector)), 
-                 entities.shop['object'].shop_grid[
-                     (entities.player['object'].location[0] + 
-                     (-axis+1)*vector)/ref.tile_size][
-                     (entities.player['object'].location[1] + 
-                     axis*vector)/ref.tile_size]))
-        if entities.shop['object'].shop_grid[
-                (entities.player['object'].location[0] + 
-                (-axis+1)*vector)/ref.tile_size][
-                (entities.player['object'].location[1] + 
-                axis*vector)/ref.tile_size] != 0:
+
+        #TODO: Use native pygame sprite collision detection
+        #      by creating two kinds of sprite groups:
+        #      one passable and one not passable
+
+        try:
+            for sprite_border in [
+                (0,0),
+                (1,0),
+                (1,1),
+                (0,1)
+                                 ]:
+                if not ref.shop_tile_dct[
+                    entities.shop['object'].shop_grid[
+                        ((entities.player['object'].location[1] + 
+                        (sprite_border[1] * (self.rect.height-1))) + 
+                        axis*vector)/ref.tile_size][
+                        ((entities.player['object'].location[0] + 
+                        (sprite_border[0] * (self.rect.width-1))) + 
+                        (-axis+1)*vector)/ref.tile_size]]['passable']:
+                    return False
             return True
-            #return False
-        return True
+        except IndexError:
+            return False 
 
 
     def move(self, axis, direction):

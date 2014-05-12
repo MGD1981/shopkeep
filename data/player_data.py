@@ -8,7 +8,8 @@ from pygame.locals import *
 class Player():
     """Player object"""
     def __init__(self):
-        self.location = ref.initial_player_position
+        self.location = [ref.initial_player_position[0] * ref.tile_size,
+                         ref.initial_player_position[1] * ref.tile_size]
         self.coins = {
             'copper': 0,
             'silver': 0,

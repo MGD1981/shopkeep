@@ -47,4 +47,4 @@ class Game():
         for screen in self.screens.keys():
             self.screens[screen].update(self)
         pg.display.flip()
-        print self.clock.get_fps()
+        #print self.clock.get_fps()

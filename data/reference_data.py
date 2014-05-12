@@ -44,14 +44,14 @@ shop_tile_dct = {
     4: {
         'tile type': 'stairs',
         'tile class': 'overlay',
-        'passable': False,
+        'passable': True,
         'image file': 'floor.png'
     },
     5: {
         'tile type': 'counter',
         'tile class': 'overlay',
         'passable': False,
-        'image file': 'floor.png' 
+        'image file': 'wall.png' 
     }
 }
 

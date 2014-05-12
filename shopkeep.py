@@ -8,15 +8,9 @@ def start_game():
     clock = pg.time.Clock()
     draw_screen.run_menu(game, menus.StartMenu())
 
-    #entities.shop['object'].tick(game)
-
-    pg.display.flip()
     while True:
         game.clock.tick()
         game.tick()
-
-#    shopmap = mapper.new_map()
-#    draw_screen.draw_map(entities.world['grid'])
 
 
 if __name__ == "__main__":

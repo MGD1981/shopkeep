@@ -58,10 +58,10 @@ class WorldScreen(Subscreen):
 
     def initialize_sprites(self, game):
         """Initializes objects on top of background in shopand returns the sprite group"""
-        p_x = entities.player['object'].location[0]*ref.tile_size
-        p_y = entities.player['object'].location[1]*ref.tile_size 
+        p_x = entities.player['object'].location[0]
+        p_y = entities.player['object'].location[1] 
         print p_x, p_y
-        player = sprites.Person(ref.image_path + ref.sprite_dct['player'], p_x, p_y) 
+        player = sprites.Person(game, ref.image_path + ref.sprite_dct['player'], p_x, p_y) 
         self.shop_sprites = pg.sprite.Group((player))
 
 
