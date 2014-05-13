@@ -21,7 +21,7 @@ initial_shop_overlay = [[0,0,0,0,0,0,0,0,0,0],
 tile_size = screen[0] / 20
 scale = tile_size/32.0
 initial_player_position = [7,5]
-player_speed = 4
+player_speed = 2
 
 shop_tile_dct = {
     1: {

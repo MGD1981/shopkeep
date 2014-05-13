@@ -58,6 +58,9 @@ class BannerScreen(Subscreen):
         
     def update(self, game):
         self.buttons.draw(self.background)
+        if self.surface.get_rect().collidepoint(game.mouse_pos):
+            self.buttons.update(game)
+
         self.draw_border(game)
         game.screen.blit(self.background, self.position)
 

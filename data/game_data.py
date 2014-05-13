@@ -35,6 +35,7 @@ class Game():
     def tick(self):
         """Smallest game time amount passes."""
         
+        self.mouse_pos = pg.mouse.get_pos()
         for event in pg.event.get():
             if event.type == pg.KEYDOWN:
                 self.keys = pg.key.get_pressed()
@@ -47,4 +48,4 @@ class Game():
         for screen in self.screens.keys():
             self.screens[screen].update(self)
         pg.display.flip()
-        #print self.clock.get_fps()
+        print "FPS: %d" % self.clock.get_fps()

@@ -24,8 +24,6 @@ class Person(pg.sprite.Sprite):
     def __init__(self, game, img, x, y):
         pg.sprite.Sprite.__init__(self)
         self.image, self.rect = load_image(img, -1)
-        screen = game.screens['world'].background
-        #self.area = screen.get_rect()
         self.rect.topleft = x, y
 
     def update(self, game):
@@ -69,7 +67,8 @@ class Person(pg.sprite.Sprite):
                         axis*vector)/ref.tile_size][
                         ((entities.player['object'].location[0] + 
                         (sprite_border[0] * (self.rect.width-1))) + 
-                        (-axis+1)*vector)/ref.tile_size]]['passable']:
+                        (-axis+1)*vector)/ref.tile_size]]['passable'
+                ]:
                     return False
             return True
         except IndexError:
@@ -89,7 +88,6 @@ class BackgroundTile(pg.sprite.Sprite):
     def __init__(self, game, img, x, y):
         pg.sprite.Sprite.__init__(self)
         self.image, self.rect = load_image(img, -1)
-        screen = game.screens['world'].background
         self.rect.topleft = x, y
 
 
@@ -98,6 +96,24 @@ class Button(pg.sprite.Sprite):
     def __init__(self, game, img, x, y):
         pg.sprite.Sprite.__init__(self)
         self.image, self.rect = load_image(img, -1)
-        screen = game.screens['banner'].background
         self.rect.topleft = x, y
+        self.mouse_on = False
 
+    def update(self, game):
+        if self.rect.collidepoint(game.mouse_pos):
+            self.mouse_on = True
+            pg.draw.rect(
+                game.screens['banner'].background,
+                (255,255,208),
+                self.rect,
+                1
+            )
+        elif self.mouse_on == True:
+            self.mouse_on = False
+            pg.draw.rect(
+                game.screens['banner'].background,
+                (36,36,36),
+                self.rect,
+                1
+            )
+                
