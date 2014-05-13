@@ -1,7 +1,7 @@
 from random import randint, choice, shuffle
 import reference_data as ref
 
-def get_new_world(size=64):
+def get_new_world(size=32):
     world = {
         'grid': [list([0] * size) for x in xrange(size)],
         'size': size

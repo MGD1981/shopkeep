@@ -56,6 +56,7 @@ shop_tile_dct = {
     }
 }
 
+
 button_dct = {
     'shop': {
         'order': 0,
@@ -601,15 +602,18 @@ del monster_type, monster_class
 terrain_dct = {
     1: {
         'terrain type': 'grassland',
-        'console representation': '43m  ' 
+        'console representation': '43m  ', 
+        'image file': 'grassland_tile.png'
     },
     2: {
         'terrain type': 'woodland',
-        'console representation': '42m  ' 
+        'console representation': '42m  ',
+        'image file': 'woodland_tile.png'
     },
     3: {
         'terrain type': 'rockland',
-        'console representation': '47m  ' 
+        'console representation': '47m  ',
+        'image file': 'rockland_tile.png' 
     }
 }
 
