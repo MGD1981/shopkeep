@@ -87,14 +87,13 @@ class WorldScreen(Subscreen):
         tiles = []
         for row in xrange(entities.world['size']):
             for tile in xrange(entities.world['size']):
-                if entities.world['grid'][row][tile] != 't':
-                    tiles.append(sprites.BackgroundTile(
-                        game,
-                        ref.image_path +
-                            ref.terrain_dct[entities.world['grid'][
-                                                        row][tile]]['image file'],
-                        at_pos[0], at_pos[1]
-                    ))
+                tiles.append(sprites.BackgroundTile(
+                    game,
+                    ref.image_path +
+                        ref.terrain_dct[entities.world['grid'][
+                                                    row][tile]]['image file'],
+                    at_pos[0], at_pos[1]
+                ))
                 at_pos[0] +=  self.surface.get_width()/entities.world['size']
             at_pos[1] += self.surface.get_width()/entities.world['size']
             at_pos[0] = copy.deepcopy(self.position[0])
@@ -123,6 +122,10 @@ class WorldScreen(Subscreen):
     def update(self, game):
 
         if game.view == 'shop':
+            if 'reinitialize shop' in game.action_log:
+                self.background.fill((39,39,39))
+                game.action_log.remove('reinitialize shop')
+                game.action_log.append('refresh background')
             for action in game.action_log:
                 if action == 'refresh background':
                         #draw shop background
@@ -136,8 +139,13 @@ class WorldScreen(Subscreen):
             self.shop_sprites.draw(self.background)
 
         elif game.view == 'world':
-            self.world_tiles.update(game)
-            self.world_tiles.draw(self.background)
+            for action in game.action_log:
+                if action == 'refresh background':
+                    self.background.fill((39,39,39))
+                    self.initialize_sprites(game) #TODO: give world sprites their own init function
+                    self.world_tiles.update(game)
+                    self.world_tiles.draw(self.background)
+                    game.action_log.remove(action)
 
         game.screen.blit(self.background, self.position)
 

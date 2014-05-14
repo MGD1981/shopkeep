@@ -27,7 +27,7 @@ def generate_terrain(grid):
     empty_tiles = range(0, size*size)
     tiles_remaining = size*size
     terrain_table = {}
-    for terrain_type in ref.terrain_dct.keys():
+    for terrain_type in [x for x in ref.terrain_dct.keys() if type(x) == int]:
         terrain_table[terrain_type] = None
     starting_points = []
     test_point = (randint(0, size-1), randint(0, size-1))

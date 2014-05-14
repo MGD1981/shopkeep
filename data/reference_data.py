@@ -614,6 +614,11 @@ terrain_dct = {
         'terrain type': 'rockland',
         'console representation': '47m  ',
         'image file': 'rockland_tile.png' 
+    },
+    't': {
+        'terrain type': 'town',
+        'console representation': '37;40m[]',
+        'image file': 'town_tile.png'
     }
 }
 
