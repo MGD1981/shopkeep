@@ -85,8 +85,8 @@ class WorldScreen(Subscreen):
         self.terrain_sprites = pg.sprite.Group()
         at_pos = [0,0]
         tiles = []
-        for row in xrange(len(entities.world['grid'])):
-            for tile in xrange(len(entities.world['grid'][0])):
+        for row in xrange(entities.world['size']):
+            for tile in xrange(entities.world['size']):
                 if entities.world['grid'][row][tile] != 't':
                     tiles.append(sprites.BackgroundTile(
                         game,
@@ -95,8 +95,8 @@ class WorldScreen(Subscreen):
                                                         row][tile]]['image file'],
                         at_pos[0], at_pos[1]
                     ))
-                at_pos[0] += entities.world['size']
-            at_pos[1] += entities.world['size']
+                at_pos[0] +=  self.surface.get_width()/entities.world['size']
+            at_pos[1] += self.surface.get_width()/entities.world['size']
             at_pos[0] = copy.deepcopy(self.position[0])
         self.world_tiles = pg.sprite.Group(tiles) 
 
