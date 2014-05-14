@@ -11,7 +11,7 @@ class Subscreen(object):
     def __init__(self, width, height):
         self.surface = pg.Surface((width, height))
         self.background = self.surface.convert()
-        self.background.fill((39, 39, 39))
+        self.background.fill(ref.background_color)
 
     def set_position(self, x_coord, y_coord):
         """Sets the top-left pixel on the game screen where the subscreen will
@@ -25,7 +25,7 @@ class Subscreen(object):
         height = self.surface.get_height()
         pg.draw.lines(
                       self.background, 
-                      (255, 255, 208),
+                      ref.primary_color,
                       True, 
                       (
                             (0, 0),
@@ -50,12 +50,23 @@ class BannerScreen(Subscreen):
         """Initializes buttons for menu and returns the sprite group"""
         buttons = []
         for button in ref.button_dct.keys():
-            buttons.append(sprites.Button(
-                game,
-                button,
-                ref.image_path + ref.button_dct[button]['image file'],
-                ref.button_dct[button]['order'] * ref.tile_size*2, ref.tile_size*1/8
-            ))
+            if ref.button_dct[button]['order'] >= 0:
+                buttons.append(sprites.Button(
+                    game,
+                    button,
+                    ref.image_path + ref.button_dct[button]['image file'],
+                    ref.button_dct[button]['order'] * ref.tile_size*2, ref.tile_size*1/8
+                ))
+            else:
+                buttons.append(sprites.Button(
+                    game,
+                    button,
+                    ref.image_path + ref.button_dct[button]['image file'],
+                    self.surface.get_width() + 
+                        (ref.button_dct[button]['order'])* 
+                        ref.tile_size*2, 
+                    ref.tile_size*1/8 
+                ))
         self.buttons = pg.sprite.Group(buttons)
         
     def update(self, game):
@@ -73,16 +84,7 @@ class WorldScreen(Subscreen):
         super(WorldScreen, self).__init__(width, height)
         self.set_position(0, ref.tile_size)
 
-    def initialize_sprites(self, game):
-        """Initializes objects on top of background in shop and returns the sprite group"""
-        #Creates player sprite
-        p_x = entities.player['object'].location[0]
-        p_y = entities.player['object'].location[1] 
-        player = sprites.Person(game, ref.image_path + ref.sprite_dct['player'], p_x, p_y) 
-        self.shop_sprites = pg.sprite.Group((player))
-
-        #creates world sprites 
-        self.terrain_sprites = pg.sprite.Group()
+    def initialize_world_sprites(self, game):
         at_pos = [0,0]
         tiles = []
         for row in xrange(entities.world['size']):
@@ -98,6 +100,28 @@ class WorldScreen(Subscreen):
             at_pos[1] += self.surface.get_width()/entities.world['size']
             at_pos[0] = copy.deepcopy(self.position[0])
         self.world_tiles = pg.sprite.Group(tiles) 
+    
+    def initialize_site_sprites(self, game):
+        tiles = []
+        for site in entities.sites['object list']:
+            tiles.append(sprites.BackgroundTile(
+                game,
+                ref.image_path +
+                    ref.structure_type_dct[site.structure]['image file'],
+                site.location[0], site.location[1]
+            ))
+        self.site_tiles = pg.sprite.Group(tiles)
+
+    def initialize_sprites(self, game):
+        """Initializes objects on top of background and returns the sprite group"""
+        #Creates player sprite
+        p_x = entities.player['object'].location[0]
+        p_y = entities.player['object'].location[1] 
+        player = sprites.Person(game, ref.image_path + ref.sprite_dct['player'], p_x, p_y) 
+        self.shop_sprites = pg.sprite.Group((player))
+
+        self.initialize_world_sprites(game)
+        self.initialize_site_sprites(game)
 
         #creates shop_tile sprite group
         shop = entities.shop['object']
@@ -123,7 +147,7 @@ class WorldScreen(Subscreen):
 
         if game.view == 'shop':
             if 'reinitialize shop' in game.action_log:
-                self.background.fill((39,39,39))
+                self.background.fill(ref.background_color)
                 game.action_log.remove('reinitialize shop')
                 game.action_log.append('refresh background')
             for action in game.action_log:
@@ -141,10 +165,10 @@ class WorldScreen(Subscreen):
         elif game.view == 'world':
             for action in game.action_log:
                 if action == 'refresh background':
-                    self.background.fill((39,39,39))
-                    self.initialize_sprites(game) #TODO: give world sprites their own init function
-                    self.world_tiles.update(game)
+                    self.background.fill(ref.background_color)
+                    self.initialize_world_sprites(game)
                     self.world_tiles.draw(self.background)
+                    self.site_tiles.draw(self.background)
                     game.action_log.remove(action)
 
         game.screen.blit(self.background, self.position)

@@ -6,6 +6,8 @@ screen = (1280, 1024)
 
 image_path = 'img/'
 
+background_color = (39, 39, 39)
+primary_color = (255, 255, 208)
 
 initial_shop_overlay = [[0,0,0,0,0,0,0,0,0,0],
                         [0,0,0,0,0,0,0,0,0,0],
@@ -65,6 +67,10 @@ button_dct = {
     'world': {
         'order': 1,
         'image file': 'world_button.png'
+    },
+    'town info': {
+        'order': -1,
+        'image file': 'town_info_button.png'
     }
 }
 
@@ -630,14 +636,16 @@ structure_type_dct = {
         'site type': 'resource',
         'resource type': 'fiber',
         'time per harvest': 120,
-        'transformations': ['fallow ground']
+        'transformations': ['fallow ground'],
+        'image file': 'farm_tile.png'
     },
     'sawmill': {
         'class': 'woodland',
         'worker type': 'woodcutter',
         'site type': 'resource',
         'resource type': 'wood',
-        'time per harvest': 350
+        'time per harvest': 350,
+        'image file': 'sawmill_tile.png'
     },
     'mine': {
         'class': 'rockland',
@@ -645,43 +653,50 @@ structure_type_dct = {
         'site type': 'resource',
         'resource type': 'metal',
         'time per harvest': 600,
-        'transformations': ['abandoned mine', 'collapsed mine']
+        'transformations': ['abandoned mine', 'collapsed mine'],
+        'image file': 'mine_tile.png'
     },
     'dungeon': {
         'class': 'grassland',
         'worker type': 'adventurer',
         'site type': 'adventure',
-        'time per harvest': 800
+        'time per harvest': 800,
+        'image file': ''
     },
     'cave': {
         'class': 'rockland',
         'worker type': 'adventurer',
         'site type': 'adventure',
-        'time per harvest': 100
+        'time per harvest': 100,
+        'image file': ''
     },
     'tower': {
         'class': 'woodland',
         'worker type': 'adventurer',
         'site type': 'adventure',
-        'time per harvest': 480
+        'time per harvest': 480,
+        'image file': ''
     },
     'fallow ground': {
         'class': 'transformed',
         'worker type': 'adventurer',
         'site type': 'adventure',
         'time per harvest': 30,
-        'transformations': ['farm']
+        'transformations': ['farm'],
+        'image file': ''
     },
     'abandoned mine': {
         'class': 'transformed',
         'worker type': 'adventurer',
         'site type': 'adventure',
         'time per harvest': 200,
-        'transformations': ['collapsed mine']
+        'transformations': ['collapsed mine'],
+        'image file': ''
     },
     'collapsed mine': {
         'class': 'transformed',
-        'site type': 'resource'
+        'site type': 'resource',
+        'image file': ''
     }
 }
 
