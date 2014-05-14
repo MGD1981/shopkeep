@@ -40,7 +40,8 @@ class StartMenu(Menu):
         o3.text = "Quit"
         o3.actions = [
                       'print "Thanks for playing!"',
-                      'pg.quit()'
+                      'pg.quit()',
+                      'sys.exit(0)'
                      ]
 
         self.options.extend([o1,o2,o3])

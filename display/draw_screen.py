@@ -60,13 +60,7 @@ def run_menu(game, menu):
             for action in chosen_option.actions: 
                 exec(action)
         if chosen_option.return_value != None:
-            game.background.fill((39, 39, 39))
-            game.screen.blit(game.background, (0,0))
-            pg.display.flip()
             return chosen_option.return_value
-        game.background.fill((39, 39, 39))
-        game.screen.blit(game.background, (0,0))
-        pg.display.flip()
         return
 
 

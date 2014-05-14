@@ -1,8 +1,9 @@
 import entities
 import pygame as pg
+from pygame.locals import *
 import reference_data as ref
 import display
-from display import screens
+from display import screens, draw_screen, menus
 
 
 class Game():
@@ -39,6 +40,8 @@ class Game():
         for event in pg.event.get():
             if event.type == pg.KEYDOWN:
                 self.keys = pg.key.get_pressed()
+                if self.keys[K_ESCAPE]:
+                    draw_screen.run_menu(self, menus.StartMenu())
             elif event.type == pg.KEYUP:
                 self.keys = pg.key.get_pressed()
         for site in entities.sites['object list']:
