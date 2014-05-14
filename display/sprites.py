@@ -79,8 +79,6 @@ class Person(pg.sprite.Sprite):
         vector = ref.player_speed * direction
         entities.player['object'].location[axis] += vector
         self.rect = self.rect.move((-axis+1)*vector, axis*vector)
-        
-        
 
 
 class BackgroundTile(pg.sprite.Sprite):
@@ -93,13 +91,20 @@ class BackgroundTile(pg.sprite.Sprite):
 
 class Button(pg.sprite.Sprite):
     """Menu buttons"""
-    def __init__(self, game, img, x, y):
+    def __init__(self, game, name, img, x, y):
         pg.sprite.Sprite.__init__(self)
+        self.name = name
         self.image, self.rect = load_image(img, -1)
         self.rect.topleft = x, y
         self.mouse_on = False
+        self.clicked = False
 
     def update(self, game):
+        mouse_presses = pg.mouse.get_pressed()
+        if self.mouse_on == True and mouse_presses[0] and not self.clicked:
+            self.clicked = True
+            game.view = self.name
+            print "View: %s" % game.view
         if self.rect.collidepoint(game.mouse_pos):
             self.mouse_on = True
             pg.draw.rect(
@@ -110,6 +115,7 @@ class Button(pg.sprite.Sprite):
             )
         elif self.mouse_on == True:
             self.mouse_on = False
+            self.clicked = False
             pg.draw.rect(
                 game.screens['banner'].background,
                 (36,36,36),

@@ -26,6 +26,8 @@ class Game():
             'message': screens.MessageScreen(ref.screen[0], ref.screen[1]*5/16)
         }
 
+        self.view = 'shop'
+
         background = pg.Surface(self.screen.get_size())
         self.background = background.convert()
         self.background.fill((39, 39, 39))

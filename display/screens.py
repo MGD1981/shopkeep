@@ -33,7 +33,7 @@ class Subscreen(object):
                             (width-2, height-2),
                             (0, height-2)
                       ),
-                      2
+                      1
         )
 
     def update(self, game):
@@ -52,6 +52,7 @@ class BannerScreen(Subscreen):
         for button in ref.button_dct.keys():
             buttons.append(sprites.Button(
                 game,
+                button,
                 ref.image_path + ref.button_dct[button]['image file'],
                 ref.button_dct[button]['order'] * ref.tile_size*2, ref.tile_size*1/8
             ))
@@ -121,20 +122,24 @@ class WorldScreen(Subscreen):
 
     def update(self, game):
 
-        for action in game.action_log:
-            if action == 'refresh background':
-                #draw shop background
+        if game.view == 'shop':
+            for action in game.action_log:
+                if action == 'refresh background':
+                        #draw shop background
 
-                self.shop_tiles.draw(self.background)
-                self.draw_border(game)
-                game.action_log.remove(action)
+                        self.shop_tiles.draw(self.background)
+                        self.draw_border(game)
+                        game.action_log.remove(action)
 
-        #draw shop foreground
-        self.shop_sprites.update(game)
-        self.shop_sprites.draw(self.background)
+                #draw shop foreground
+            self.shop_sprites.update(game)
+            self.shop_sprites.draw(self.background)
+
+        elif game.view == 'world':
+            self.world_tiles.update(game)
+            self.world_tiles.draw(self.background)
+
         game.screen.blit(self.background, self.position)
-
-
 
 class StatusScreen(Subscreen):
 
