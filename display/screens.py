@@ -83,6 +83,7 @@ class WorldScreen(Subscreen):
     def __init__(self, width, height):
         super(WorldScreen, self).__init__(width, height)
         self.set_position(0, ref.tile_size)
+        self.view = 'shop'
 
     def initialize_world_sprites(self, game):
         tile_scale = self.surface.get_width()/entities.world['size']
@@ -148,8 +149,13 @@ class WorldScreen(Subscreen):
 
 
     def update(self, game):
-
-        if game.view == 'shop':
+        if 'world view' in game.action_log:
+            self.view = 'world'
+            game.action_log.remove('world view')
+        if 'shop view' in game.action_log:
+            self.view = 'shop'
+            game.action_log.remove('shop view')
+        if self.view == 'shop':
             if 'reinitialize shop' in game.action_log:
                 self.background.fill(ref.background_color)
                 game.action_log.remove('reinitialize shop')
@@ -166,7 +172,7 @@ class WorldScreen(Subscreen):
             self.shop_sprites.update(game)
             self.shop_sprites.draw(self.background)
 
-        elif game.view == 'world':
+        elif self.view == 'world':
             for action in game.action_log:
                 if action == 'refresh background':
                     self.background.fill(ref.background_color)
@@ -184,9 +190,28 @@ class StatusScreen(Subscreen):
     def __init__(self, width, height):
         super(StatusScreen, self).__init__(width, height)
         self.set_position(ref.screen[0]/2 + 1, ref.tile_size)
+        self.view = 'town info'
 
+    def get_town_info(self):
+        info_list = ['test: 0']
+        return info_list
 
     def update(self, game):
+        if 'town info view' in game.action_log:
+            self.view = 'town info'
+            game.action_log.remove('town info view')
+        if 'world info view' in game.action_log:
+            self.view = 'world info'
+            game.action_log.remove('world info view')
+        if self.view == 'town info':
+            info_list = self.get_town_info() 
+            i = 1
+            for info in info_list:
+                text = game.font.render(" %d) %s" % (i, info), 1, ref.primary_color)
+                textpos = text.get_rect(left=20, top=20)
+                self.background.blit(text, textpos)
+                i += 1
+
         self.draw_border(game)
         game.screen.blit(self.background, self.position)
 

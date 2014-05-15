@@ -32,7 +32,7 @@ def run_menu(game, menu):
     """Displays a Menu class object."""
     i = 1
     for option in menu.options:
-        text = game.font.render(" %d) %s" % (i, option.text), 1, (255, 255, 208))
+        text = game.font.render(" %d) %s" % (i, option.text), 1, ref.primary_color)
         textpos = text.get_rect(left=20, bottom=game.background.get_height() - (
                          len(menu.options)*(game.font.get_linesize()) - ((i-1)*ref.tile_size)))
         game.background.blit(text, textpos)
