@@ -36,12 +36,23 @@ class Site():
             else:
                 self.site_type = site_type
                 
-            self.structure = Structure().generate(ref.terrain_dct[terrain_type]['terrain type'], self.site_type)
-            if 'resource type' in ref.structure_type_dct[self.structure.structure_type].keys():
-                resource_type = ref.structure_type_dct[self.structure.structure_type]['resource type']
+            self.structure = Structure().generate(
+                ref.terrain_dct[terrain_type]['terrain type'], self.site_type
+            )
+            if 'resource type' in ref.structure_type_dct[
+                self.structure.structure_type
+            ].keys():
+                resource_type = ref.structure_type_dct[
+                    self.structure.structure_type]['resource type'
+                ]
                 resource_possibilities = []
-                for possible_material in [x for x in ref.material_class_dct[resource_type]['types'] if 'rarity' in ref.material_type_dct[x].keys()]:
-                    for x in xrange(ref.rarity_dct[ref.material_type_dct[possible_material]['rarity']]):
+                for possible_material in [
+                    x for x in ref.material_class_dct[resource_type][
+                    'types'] if 'rarity' in ref.material_type_dct[x].keys()
+                ]:
+                    for x in xrange(ref.rarity_dct[
+                        ref.material_type_dct[possible_material]['rarity']
+                    ]):
                         resource_possibilities.append(possible_material)
                 self.resource = choice(resource_possibilities)
                 #resources measured in grams
@@ -73,7 +84,16 @@ class Site():
                         self.structure.transform()
                         entities.town['resource'][self.resource] += resources_harvested
                         return
-                entities.town['resource'][self.resource] += resources_harvested
+
+                #Adds resource to 'available' town resources
+                entities.town['resource'][
+                    ref.material_type_dct[self.resource]['class']][
+                    self.resource]['available'] += resources_harvested
+                #Removes resource from 'harvestable' town resources
+                entities.town['resource'][
+                    ref.material_type_dct[self.resource]['class']][
+                    self.resource]['harvestable'] -= resources_harvested
+
                 self.structure.time_until_harvest = ref.structure_type_dct[
                         self.structure.structure_type]['time per harvest']
             elif self.site_type == 'adventure': 

@@ -94,11 +94,11 @@ class WorldScreen(Subscreen):
                     ref.image_path +
                         ref.terrain_dct[entities.world['grid'][
                                                     row][tile]]['image file'],
-                    at_pos[0], at_pos[1]
+                    at_pos[1], at_pos[0]
                 ))
-                at_pos[0] +=  self.surface.get_width()/entities.world['size']
-            at_pos[1] += self.surface.get_width()/entities.world['size']
-            at_pos[0] = copy.deepcopy(self.position[0])
+                at_pos[1] +=  self.surface.get_width()/entities.world['size']
+            at_pos[0] += self.surface.get_width()/entities.world['size']
+            at_pos[1] = copy.deepcopy(self.position[0])
         self.world_tiles = pg.sprite.Group(tiles) 
     
     def initialize_site_sprites(self, game):
@@ -107,8 +107,9 @@ class WorldScreen(Subscreen):
             tiles.append(sprites.BackgroundTile(
                 game,
                 ref.image_path +
-                    ref.structure_type_dct[site.structure]['image file'],
-                site.location[0], site.location[1]
+                    ref.structure_type_dct[site.structure.structure_type]['image file'],
+                site.location[0]*(self.surface.get_width()/entities.world['size']),
+                site.location[1]*(self.surface.get_width()/entities.world['size'])
             ))
         self.site_tiles = pg.sprite.Group(tiles)
 
