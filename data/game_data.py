@@ -45,8 +45,13 @@ class Game():
                 if self.keys[K_ESCAPE]:
                     draw_screen.run_menu(self, menus.StartMenu())
 
-                #DevMode (Ctrl-D)
-                if self.keys[K_d] and (self.keys[K_RCTRL] or self.keys[K_LCTRL]):
+                #DevMode (Ctrl-Shift-D)
+                if (
+                    self.keys[K_d] and 
+                    (self.keys[K_RCTRL] or self.keys[K_LCTRL]) and
+                    (self.keys[K_RSHIFT] or self.keys[K_LSHIFT])
+                ):
+                    import traceback
                     while True:
                         command = str(raw_input('>> '))
                         if command == 'exit':
@@ -54,13 +59,14 @@ class Game():
                         try:
                             exec(command)
                         except Exception as e:
-                            print e
+                            tb = traceback.format_exc()
+                            print tb
                             print "Please try again, or type 'exit' to exit."
 
             elif event.type == pg.KEYUP:
                 self.keys = pg.key.get_pressed()
         for site in entities.sites['object list']:
-            site.tick(self)
+            site.tick()
         #entities.shop['object'].tick(self)
 
         for screen in self.screens.keys():

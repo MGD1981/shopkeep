@@ -297,6 +297,7 @@ material_type_dct = {
         'toughness': 1500.0,
         'strength': 40.0,
         'flexibility': .04,
+        'rarity': 'common',
         'useable': True
     },
     'cotton': {
@@ -304,6 +305,7 @@ material_type_dct = {
         'density': 1.54,
         'toughness': 850.0,
         'strength': 8.0,
+        'rarity': 'abundant',
         'flexibility': .08,
         'useable': True
     },
@@ -312,6 +314,7 @@ material_type_dct = {
         'density': 1.49,
         'toughness': 696.0,
         'strength': 90.0,
+        'rarity': 'abundant',
         'flexibility': .06,
         'useable': True
     },
@@ -633,6 +636,7 @@ structure_type_dct = {
     'farm': {
         'class': 'grassland',
         'worker type': 'farmer',
+        'worker capacity': 10,
         'site type': 'resource',
         'resource type': 'fiber',
         'time per harvest': 120,
@@ -642,6 +646,7 @@ structure_type_dct = {
     'sawmill': {
         'class': 'woodland',
         'worker type': 'woodcutter',
+        'worker capacity': 10,
         'site type': 'resource',
         'resource type': 'wood',
         'time per harvest': 350,
@@ -650,6 +655,7 @@ structure_type_dct = {
     'mine': {
         'class': 'rockland',
         'worker type': 'miner',
+        'worker capacity': 10,
         'site type': 'resource',
         'resource type': 'metal',
         'time per harvest': 600,
@@ -659,6 +665,7 @@ structure_type_dct = {
     'dungeon': {
         'class': 'grassland',
         'worker type': 'adventurer',
+        'worker capacity': 10,
         'site type': 'adventure',
         'time per harvest': 800,
         'image file': ''
@@ -666,6 +673,7 @@ structure_type_dct = {
     'cave': {
         'class': 'rockland',
         'worker type': 'adventurer',
+        'worker capacity': 10,
         'site type': 'adventure',
         'time per harvest': 100,
         'image file': ''
@@ -673,6 +681,7 @@ structure_type_dct = {
     'tower': {
         'class': 'woodland',
         'worker type': 'adventurer',
+        'worker capacity': 10,
         'site type': 'adventure',
         'time per harvest': 480,
         'image file': ''
@@ -680,6 +689,7 @@ structure_type_dct = {
     'fallow ground': {
         'class': 'transformed',
         'worker type': 'adventurer',
+        'worker capacity': 10,
         'site type': 'adventure',
         'time per harvest': 30,
         'transformations': ['farm'],
@@ -688,6 +698,7 @@ structure_type_dct = {
     'abandoned mine': {
         'class': 'transformed',
         'worker type': 'adventurer',
+        'worker capacity': 10,
         'site type': 'adventure',
         'time per harvest': 200,
         'transformations': ['collapsed mine'],

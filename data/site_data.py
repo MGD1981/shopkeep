@@ -22,9 +22,11 @@ class Site():
         if arg == 'random':
             x = randint(0, size-1)
             y = randint(0, size-1)
-            terrain_type = ref.terrain_dct[entities.world['grid'][x][y]]
-            while terrain_type not in [0, 't']:
-                x = randint(0, size-1), y = randint(0, size-1)
+            terrain_type = entities.world['grid'][x][y]
+            while terrain_type in [0, 't']:
+                x = randint(0, size-1)
+                y = randint(0, size-1)
+                terrain_type = entities.world['grid'][x][y]
             self.location = [x,y]
             if site_type == 'random':
                 if randint(1,3) == 1:
@@ -34,11 +36,11 @@ class Site():
             else:
                 self.site_type = site_type
                 
-            self.structure = Structure().generate(ref.terrain_dct[terrain_type], self.site_type)
+            self.structure = Structure().generate(ref.terrain_dct[terrain_type]['terrain type'], self.site_type)
             if 'resource type' in ref.structure_type_dct[self.structure.structure_type].keys():
                 resource_type = ref.structure_type_dct[self.structure.structure_type]['resource type']
                 resource_possibilities = []
-                for possible_material in ref.material_class_dct['types'][resource_type]:
+                for possible_material in [x for x in ref.material_class_dct[resource_type]['types'] if 'rarity' in ref.material_type_dct[x].keys()]:
                     for x in xrange(ref.rarity_dct[ref.material_type_dct[possible_material]['rarity']]):
                         resource_possibilities.append(possible_material)
                 self.resource = choice(resource_possibilities)
@@ -59,7 +61,7 @@ class Site():
         if self.structure.time_until_harvest <= 0:
             if self.site_type == 'resource':
                 resources_harvested = 0
-                for worker in self.structure.workers:
+                for worker in xrange(self.structure.workers):
                     workload = randint(500, 1500)
                     if workload <= self.harvestable:
                         self.harvestable -= workload
@@ -99,7 +101,7 @@ class Site():
         
     def __repr__(self):
         return 'Site(ID: %r, Type:%r, Loc: %r)' % (
-                self.hero_id, self.site_type, self.location)
+                self.site_id, self.site_type, self.location)
         
 
 class Structure():
@@ -121,6 +123,8 @@ class Structure():
             self.structure_type = choice(ref.structure_class_dct[terrain_type])
         elif terrain_type == 'random':
             self.structure_type = choice(ref.site_type_dct[site_type])
+        else:
+            self.structure_type = choice([x for x in ref.site_type_dct[site_type] if ref.structure_type_dct[x]['class'] == terrain_type])
         if ref.structure_type_dct[self.structure_type]['site type'] == 'resource':
             self.workers = 0
         else:
@@ -128,7 +132,7 @@ class Structure():
             self.monsters = []
         self.worker_capacity = ref.structure_type_dct[self.structure_type]['worker capacity']
         self.time_until_harvest = ref.structure_type_dct[
-                    self.structure.structure_type]['time per harvest']
+                    self.structure_type]['time per harvest']
         return self
                         
     def add_worker(self):
