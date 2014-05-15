@@ -85,20 +85,23 @@ class WorldScreen(Subscreen):
         self.set_position(0, ref.tile_size)
 
     def initialize_world_sprites(self, game):
+        tile_scale = self.surface.get_width()/entities.world['size']
+        site_locs = [site.location for site in entities.sites['object list']]
         at_pos = [0,0]
         tiles = []
         for row in xrange(entities.world['size']):
             for tile in xrange(entities.world['size']):
-                tiles.append(sprites.BackgroundTile(
-                    game,
-                    ref.image_path +
-                        ref.terrain_dct[entities.world['grid'][
-                                                    row][tile]]['image file'],
-                    at_pos[1], at_pos[0]
-                ))
-                at_pos[1] +=  self.surface.get_width()/entities.world['size']
-            at_pos[0] += self.surface.get_width()/entities.world['size']
-            at_pos[1] = copy.deepcopy(self.position[0])
+                if [at_pos[0]/tile_scale, at_pos[1]/tile_scale] not in site_locs:
+                    tiles.append(sprites.BackgroundTile(
+                        game,
+                        ref.image_path +
+                            ref.terrain_dct[entities.world['grid'][
+                                                        row][tile]]['image file'],
+                        at_pos[0], at_pos[1]
+                    ))
+                at_pos[0] += tile_scale
+            at_pos[1] += tile_scale
+            at_pos[0] = copy.deepcopy(self.position[0])
         self.world_tiles = pg.sprite.Group(tiles) 
     
     def initialize_site_sprites(self, game):
@@ -168,10 +171,12 @@ class WorldScreen(Subscreen):
                 if action == 'refresh background':
                     self.background.fill(ref.background_color)
                     self.initialize_world_sprites(game)
+                    self.initialize_site_sprites(game) 
                     self.world_tiles.draw(self.background)
                     self.site_tiles.draw(self.background)
                     game.action_log.remove(action)
 
+        self.draw_border(game)
         game.screen.blit(self.background, self.position)
 
 class StatusScreen(Subscreen):
