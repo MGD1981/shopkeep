@@ -3,7 +3,7 @@ import reference_data as ref
 from random import randint, choice
 
 
-class Site()
+class Site():
     """Site object which exists on the world map"""
 
     def __init__(self):
@@ -20,12 +20,13 @@ class Site()
         """Generates a site based on type"""
         size = entities.world['size']
         if arg == 'random':
-            x = randint(0, size-1), y = randint(0, size-1)
+            x = randint(0, size-1)
+            y = randint(0, size-1)
             terrain_type = ref.terrain_dct[entities.world['grid'][x][y]]
             while terrain_type not in [0, 't']:
                 x = randint(0, size-1), y = randint(0, size-1)
             self.location = [x,y]
-            if site_type = 'random':
+            if site_type == 'random':
                 if randint(1,3) == 1:
                     self.site_type = 'adventure'
                 else:
@@ -39,7 +40,7 @@ class Site()
                 resource_possibilities = []
                 for possible_material in ref.material_class_dct['types'][resource_type]:
                     for x in xrange(ref.rarity_dct[ref.material_type_dct[possible_material]['rarity']]):
-                        resource_possibilities.append possible_material
+                        resource_possibilities.append(possible_material)
                 self.resource = choice(resource_possibilities)
                 #resources measured in grams
                 self.harvestable = randint(100000, 1500000)
@@ -75,8 +76,8 @@ class Site()
                         self.structure.structure_type]['time per harvest']
             elif self.site_type == 'adventure': 
                 if len(self.structure.workers) > 0:
-                    for hero in entities.heroes['object list'] if (
-                            hero.hero_id in self.structure.workers):
+                    for hero in [x for x in entities.heroes['object list'] if (
+                            hero.hero_id in self.structure.workers)]:
                         try:
                             monster = next(m for m in entities.monsters['object list'] if 
                                            m.monster_id in self.structure.monsters)
