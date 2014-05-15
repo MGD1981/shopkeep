@@ -112,7 +112,7 @@ class Button(pg.sprite.Sprite):
             self.mouse_on = True
             pg.draw.rect(
                 game.screens['banner'].background,
-                (255,255,208),
+                ref.primary_color,
                 self.rect,
                 1
             )
@@ -121,7 +121,7 @@ class Button(pg.sprite.Sprite):
             self.clicked = False
             pg.draw.rect(
                 game.screens['banner'].background,
-                (36,36,36),
+                ref.background_color,
                 self.rect,
                 1
             )

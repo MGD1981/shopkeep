@@ -193,7 +193,7 @@ class StatusScreen(Subscreen):
         self.view = 'town info'
 
     def get_town_info(self):
-        info_list = ['test: 0']
+        info_list = ['test: 0', 'test2: M']
         return info_list
 
     def update(self, game):
@@ -205,10 +205,10 @@ class StatusScreen(Subscreen):
             game.action_log.remove('world info view')
         if self.view == 'town info':
             info_list = self.get_town_info() 
-            i = 1
+            i = 0
             for info in info_list:
-                text = game.font.render(" %d) %s" % (i, info), 1, ref.primary_color)
-                textpos = text.get_rect(left=20, top=20)
+                text = game.info_font.render("%s" % (info), 0, ref.primary_color)
+                textpos = text.get_rect(left=20, top=(20+i*ref.tile_size))
                 self.background.blit(text, textpos)
                 i += 1
 

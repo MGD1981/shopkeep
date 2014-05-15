@@ -15,7 +15,8 @@ class Game():
 
         self.clock = pg.time.Clock()
         self.keys = pg.key.get_pressed()
-        self.font = pg.font.Font('display/fonts/UbuntuMono-R.ttf', ref.tile_size * 26/32)
+        self.menu_font = pg.font.Font('display/fonts/UbuntuMono-R.ttf', ref.tile_size * 26/32)
+        self.info_font = pg.font.Font('display/fonts/UbuntuMono-R.ttf', ref.tile_size * 11/32)
 
         self.action_log = ['refresh background']
 
@@ -26,11 +27,10 @@ class Game():
             'message': screens.MessageScreen(ref.screen[0], ref.screen[1]*5/16)
         }
 
-        self.view = 'shop'
 
         background = pg.Surface(self.screen.get_size())
         self.background = background.convert()
-        self.background.fill((39, 39, 39))
+        self.background.fill(ref.background_color)
         self.screen.blit(self.background, (0,0))
         pg.display.flip()
 
