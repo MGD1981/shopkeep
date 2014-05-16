@@ -16,7 +16,9 @@ def initialize():
     import world_data
     world = world_data.get_new_world(32)
     import town_data
-    town = town_data.get_new_town()
+    town = {
+        'object': town_data.Town().generate()
+    }
     import player_data
     player = {
         'object': player_data.Player()

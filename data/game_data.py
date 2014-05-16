@@ -15,8 +15,8 @@ class Game():
 
         self.clock = pg.time.Clock()
         self.keys = pg.key.get_pressed()
-        self.menu_font = pg.font.Font('display/fonts/UbuntuMono-R.ttf', ref.tile_size * 26/32)
-        self.info_font = pg.font.Font('display/fonts/UbuntuMono-R.ttf', ref.tile_size * 11/32)
+        self.menu_font = pg.font.Font('display/fonts/UbuntuMono-R.ttf', int(ref.scale*26))
+        self.info_font = pg.font.Font('display/fonts/UbuntuMono-R.ttf', int(ref.scale*11))
 
         self.action_log = ['refresh background']
 

@@ -196,13 +196,13 @@ class StatusScreen(Subscreen):
         info_list = [
             '--Town Information--',
             '',
-            'population: %d' % entities.town['population'],
+            'population: %d' % entities.town['object'].population,
             '',
             'occupations:'
         ]
-        for occupation in sorted(entities.town['occupation'].keys()):
+        for occupation in sorted(entities.town['object'].occupations.keys()):
             info_list.append(
-                '  ' + occupation + (': %d' % entities.town['occupation'][occupation])
+                '  ' + occupation + (': %d' % entities.town['object'].occupations[occupation])
             )
         return info_list
 
