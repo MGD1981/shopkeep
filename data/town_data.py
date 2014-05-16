@@ -1,6 +1,6 @@
 import reference_data as ref
 from entities import world, sites
-from random import randint, shuffle
+from random import randint, choice, shuffle
 
 def get_new_town():
     town = {
@@ -34,7 +34,7 @@ def get_new_town():
                 'available': 0
             }
 
-    return town
+    return populate_town(town)
     
     
 def populate_town(town, people=50):

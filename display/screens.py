@@ -193,7 +193,17 @@ class StatusScreen(Subscreen):
         self.view = 'town info'
 
     def get_town_info(self):
-        info_list = ['test: 0', 'test2: M']
+        info_list = [
+            '--Town Information--',
+            '',
+            'population: %d' % entities.town['population'],
+            '',
+            'occupations:'
+        ]
+        for occupation in sorted(entities.town['occupation'].keys()):
+            info_list.append(
+                '  ' + occupation + (': %d' % entities.town['occupation'][occupation])
+            )
         return info_list
 
     def update(self, game):
@@ -208,7 +218,7 @@ class StatusScreen(Subscreen):
             i = 0
             for info in info_list:
                 text = game.info_font.render("%s" % (info), 0, ref.primary_color)
-                textpos = text.get_rect(left=20, top=(20+i*ref.tile_size))
+                textpos = text.get_rect(left=20, top=(20+i*game.info_font.get_linesize()))
                 self.background.blit(text, textpos)
                 i += 1
 
