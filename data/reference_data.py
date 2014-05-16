@@ -25,6 +25,8 @@ scale = tile_size/32.0
 initial_player_position = [7,5]
 player_speed = 2
 
+initial_range_of_sites = (1,3)
+
 shop_tile_dct = {
     1: {
         'tile type': 'floor',

@@ -67,8 +67,11 @@ class Game():
                 self.keys = pg.key.get_pressed()
         for site in entities.sites['object list']:
             site.tick()
-        #entities.shop['object'].tick(self)
 
+        #entities.shop['object'].tick(self)
+        entities.town['object'].tick(self)
+        
+        #update graphics
         for screen in self.screens.keys():
             self.screens[screen].update(self)
         pg.display.flip()

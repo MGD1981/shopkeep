@@ -86,11 +86,11 @@ class Site():
                         return
 
                 #Adds resource to 'available' town resources
-                entities.town['resource'][
+                entities.town['object'].resources[
                     ref.material_type_dct[self.resource]['class']][
                     self.resource]['available'] += resources_harvested
                 #Removes resource from 'harvestable' town resources
-                entities.town['resource'][
+                entities.town['object'].resources[
                     ref.material_type_dct[self.resource]['class']][
                     self.resource]['harvestable'] -= resources_harvested
 

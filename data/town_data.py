@@ -1,5 +1,6 @@
 import reference_data as ref
 from entities import world, sites
+import site_data
 from random import randint, choice, shuffle
 
 class Town():
@@ -52,12 +53,12 @@ class Town():
             people_to_assign -= farms_needed
         else:
             self.occupations['farmer'] += people_to_assign
-        shuffle(sites)
+        shuffle(sites['object list'])
         while people_to_assign > 0:
-            for site in sites:
+            for site in sites['object list']:
                 if site.structure.worker_capacity > 0:
-                    self.occupations[
-                        ref.structure_type_dct[site.structure]['worker type']] += 1
+                    self.occupations[ref.structure_type_dct[
+                        site.structure.structure_type]['worker type']] += 1
                     site.structure.add_worker()
                     people_to_assign -= 1
                     continue
@@ -71,3 +72,6 @@ class Town():
         self.population += people
         return self
 
+
+    def tick(self, game):
+        pass

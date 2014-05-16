@@ -1,4 +1,6 @@
 import pickle
+import reference_data as ref
+from random import randint
 
 player = {}
 weapons = {}
@@ -15,6 +17,16 @@ def initialize():
     global player, weapons, components, heroes, monsters, sites, world, town, shop
     import world_data
     world = world_data.get_new_world(32)
+    import site_data
+    sites = {
+        'next id': 1,
+        'types': {},
+        'object list': []
+    }
+    for site_type in ref.structure_type_dct.keys():
+        sites['types'][site_type] = 0
+    for x in xrange(randint(ref.initial_range_of_sites[0], ref.initial_range_of_sites[1])):
+        sites['object list'].append(site_data.Site().generate('resource'))
     import town_data
     town = {
         'object': town_data.Town().generate()
@@ -36,10 +48,6 @@ def initialize():
         'object list': []
     }
     monsters = {
-        'next id': 1,
-        'object list': []
-    }
-    sites = {
         'next id': 1,
         'object list': []
     }
