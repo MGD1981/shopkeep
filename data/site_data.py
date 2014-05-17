@@ -22,11 +22,11 @@ class Site():
         if arg == 'random':
             x = randint(0, size-1)
             y = randint(0, size-1)
-            terrain_type = entities.world['grid'][x][y]
+            terrain_type = entities.world['grid'][y][x]
             while terrain_type in [0, 't']:
                 x = randint(0, size-1)
                 y = randint(0, size-1)
-                terrain_type = entities.world['grid'][x][y]
+                terrain_type = entities.world['grid'][y][x]
             self.location = [x,y]
             if site_type == 'random':
                 if randint(1,3) == 1:
@@ -82,17 +82,16 @@ class Site():
                         self.harvestable = 0
                         self.structure.workers = 0
                         self.structure.transform()
-                        entities.town['resource'][self.resource] += resources_harvested
+                        #Adds resource to 'available' town resources
+                        entities.town['object'].resources[
+                            ref.material_type_dct[self.resource]['class']][
+                            self.resource]['available'] += resources_harvested
+                        #Removes resource from 'harvestable' town resources
+                        entities.town['object'].resources[
+                            ref.material_type_dct[self.resource]['class']][
+                            self.resource]['harvestable'] -= resources_harvested
                         return
 
-                #Adds resource to 'available' town resources
-                entities.town['object'].resources[
-                    ref.material_type_dct[self.resource]['class']][
-                    self.resource]['available'] += resources_harvested
-                #Removes resource from 'harvestable' town resources
-                entities.town['object'].resources[
-                    ref.material_type_dct[self.resource]['class']][
-                    self.resource]['harvestable'] -= resources_harvested
 
                 self.structure.time_until_harvest = ref.structure_type_dct[
                         self.structure.structure_type]['time per harvest']
