@@ -1,3 +1,4 @@
+import time
 import entities
 import pygame as pg
 from pygame.locals import *
@@ -19,6 +20,7 @@ class Game():
         self.info_font = pg.font.Font('display/fonts/UbuntuMono-R.ttf', int(ref.scale*11))
 
         self.action_log = ['refresh background']
+        pg.time.set_timer(24, 1000)
 
         self.screens = {
             'banner': screens.BannerScreen(ref.screen[0], ref.screen[1]/16),
@@ -65,8 +67,9 @@ class Game():
 
             elif event.type == pg.KEYUP:
                 self.keys = pg.key.get_pressed()
-        for site in entities.sites['object list']:
-            site.tick()
+            if event.type == pg.USEREVENT:
+                for site in entities.sites['object list']:
+                    site.tick()
 
         #entities.shop['object'].tick(self)
         entities.town['object'].tick(self)

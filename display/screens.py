@@ -192,6 +192,13 @@ class StatusScreen(Subscreen):
         self.set_position(ref.screen[0]/2 + 1, ref.tile_size)
         self.view = 'town info'
 
+    def get_world_info(self):
+        info_list = [
+            '--Site Information--',
+            ''
+        ]
+        return info_list
+
     def get_town_info(self):
         info_list = [
             '--Town Information--',
@@ -213,14 +220,20 @@ class StatusScreen(Subscreen):
         if 'world info view' in game.action_log:
             self.view = 'world info'
             game.action_log.remove('world info view')
+        if 'resource view' in game.action_log:
+            self.view = 'resource'
+            game.action_log.remove('resource view')
         if self.view == 'town info':
             info_list = self.get_town_info() 
-            i = 0
-            for info in info_list:
-                text = game.info_font.render("%s" % (info), 0, ref.primary_color)
-                textpos = text.get_rect(left=20, top=(20+i*game.info_font.get_linesize()))
-                self.background.blit(text, textpos)
-                i += 1
+        if self.view == 'world info':
+            info_list = self.get_world_info()
+
+        i = 0
+        for info in info_list:
+            text = game.info_font.render("%s" % (info), 0, ref.primary_color)
+            textpos = text.get_rect(left=20, top=(20+i*game.info_font.get_linesize()))
+            self.background.blit(text, textpos)
+            i += 1
 
         self.draw_border(game)
         game.screen.blit(self.background, self.position)

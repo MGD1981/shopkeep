@@ -68,10 +68,10 @@ class Site():
         return self
     
     
-    def tick(self, seconds=1):
+    def tick(self, ticks=1):
         """Causes time to pass at site"""
         
-        self.structure.time_until_harvest -= seconds
+        self.structure.time_until_harvest -= ticks
         if self.structure.time_until_harvest <= 0:
             if self.site_type == 'resource':
                 resources_harvested = 0
@@ -95,9 +95,9 @@ class Site():
                             self.resource]['harvestable'] -= resources_harvested
                         return
 
-
                 self.structure.time_until_harvest = ref.structure_type_dct[
                         self.structure.structure_type]['time per harvest']
+
             elif self.site_type == 'adventure': 
                 if len(self.structure.workers) > 0:
                     for hero in [x for x in entities.heroes['object list'] if (
