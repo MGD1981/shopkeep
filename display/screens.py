@@ -156,14 +156,10 @@ class WorldScreen(Subscreen):
             self.view = 'shop'
             game.action_log.remove('shop view')
         if self.view == 'shop':
-            if 'reinitialize shop' in game.action_log:
-                self.background.fill(ref.background_color)
-                game.action_log.remove('reinitialize shop')
-                game.action_log.append('refresh background')
             for action in game.action_log:
                 if action == 'refresh background':
                         #draw shop background
-
+                        self.background.fill(ref.background_color)
                         self.shop_tiles.draw(self.background)
                         self.draw_border(game)
                         game.action_log.remove(action)
@@ -197,6 +193,12 @@ class StatusScreen(Subscreen):
             '--Site Information--',
             ''
         ]
+        for site in sorted(entities.sites['object list']):
+            info_list.extend([
+                '%s at %r:' % (site.structure.structure_type, site.location),
+                '  %s remaining: %d' % (site.resource, site.harvestable),
+                '  %d seconds until next harvest.' % site.structure.time_until_harvest
+            ])
         return info_list
 
     def get_town_info(self):
@@ -228,6 +230,7 @@ class StatusScreen(Subscreen):
         if self.view == 'world info':
             info_list = self.get_world_info()
 
+        self.background.fill(ref.background_color)
         i = 0
         for info in info_list:
             text = game.info_font.render("%s" % (info), 0, ref.primary_color)

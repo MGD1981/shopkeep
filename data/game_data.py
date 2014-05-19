@@ -20,7 +20,7 @@ class Game():
         self.info_font = pg.font.Font('display/fonts/UbuntuMono-R.ttf', int(ref.scale*11))
 
         self.action_log = ['refresh background']
-        pg.time.set_timer(24, 1000)
+        pg.time.set_timer(pg.USEREVENT, 1000)
 
         self.screens = {
             'banner': screens.BannerScreen(ref.screen[0], ref.screen[1]/16),
@@ -46,6 +46,12 @@ class Game():
                 self.keys = pg.key.get_pressed()
                 if self.keys[K_ESCAPE]:
                     draw_screen.run_menu(self, menus.StartMenu())
+                if self.keys[K_w]:
+                    self.action_log.append('world view')
+                    self.action_log.append('refresh background')
+                if self.keys[K_s]:
+                    self.action_log.append('shop view')
+                    self.action_log.append('refresh background')
 
                 #DevMode (Ctrl-Shift-D)
                 if (

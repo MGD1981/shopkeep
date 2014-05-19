@@ -105,8 +105,7 @@ class Button(pg.sprite.Sprite):
             self.clicked = True
             game.action_log.extend([
                 '%s view' % self.name,
-                'refresh background',
-                'reinitialize shop'
+                'refresh background'
             ])
         if self.rect.collidepoint(game.mouse_pos):
             self.mouse_on = True
