@@ -19,6 +19,13 @@ class Site():
     def generate(self, site_type='random', arg='random'):
         """Generates a site based on type"""
         size = entities.world['size']
+        if site_type == 'random':
+            if randint(1,3) == 1:
+                self.site_type = 'adventure'
+            else:
+                self.site_type = 'resource'
+        else:
+            self.site_type = site_type
         if arg == 'random':
             x = randint(0, size-1)
             y = randint(0, size-1)
@@ -27,44 +34,40 @@ class Site():
                 x = randint(0, size-1)
                 y = randint(0, size-1)
                 terrain_type = entities.world['grid'][y][x]
-            self.location = [x,y]
-            if site_type == 'random':
-                if randint(1,3) == 1:
-                    self.site_type = 'adventure'
-                else:
-                    self.site_type = 'resource'
-            else:
-                self.site_type = site_type
-                
-            self.structure = Structure().generate(
-                ref.terrain_dct[terrain_type]['terrain type'], self.site_type
-            )
-            if 'resource type' in ref.structure_type_dct[
-                self.structure.structure_type
-            ].keys():
-                resource_type = ref.structure_type_dct[
-                    self.structure.structure_type]['resource type'
-                ]
-                resource_possibilities = []
-                for possible_material in [
-                    x for x in ref.material_class_dct[resource_type][
-                    'types'] if 'rarity' in ref.material_type_dct[x].keys()
-                ]:
-                    for x in xrange(ref.rarity_dct[
-                        ref.material_type_dct[possible_material]['rarity']
-                    ]):
-                        resource_possibilities.append(possible_material)
-                self.resource = choice(resource_possibilities)
-                #resources measured in grams
-                self.harvestable = randint(100000, 1500000)
-                #NOTE: These numbers suitable for metal, may not be for other materials
-                #NOTE: Mine production should be ~1kg pure metal per day per miner.
-                #NOTE: IRL mine has ~43500kg before producing much less.
-                            
+        elif arg in ref.terrain_type_list:
+            #TODO
+            pass
+
+        self.location = [x,y]
+        self.structure = Structure().generate(
+            ref.terrain_dct[terrain_type]['terrain type'], self.site_type
+        )
+        if 'resource type' in ref.structure_type_dct[
+            self.structure.structure_type
+        ].keys():
+            resource_type = ref.structure_type_dct[
+                self.structure.structure_type]['resource type'
+            ]
+            resource_possibilities = []
+            for possible_material in [
+                x for x in ref.material_class_dct[resource_type][
+                'types'] if 'rarity' in ref.material_type_dct[x].keys()
+            ]:
+                for x in xrange(ref.rarity_dct[
+                    ref.material_type_dct[possible_material]['rarity']
+                ]):
+                    resource_possibilities.append(possible_material)
+            self.resource = choice(resource_possibilities)
+            #resources measured in grams
+            self.harvestable = randint(100000, 1500000)
+            #NOTE: These numbers suitable for metal, may not be for other materials
+            #NOTE: Mine production should be ~1kg pure metal per day per miner.
+            #NOTE: IRL mine has ~43500kg before producing much less.
+                        
         self.set_site_id()
         return self
-        
-        
+    
+    
     def tick(self, seconds=1):
         """Causes time to pass at site"""
         

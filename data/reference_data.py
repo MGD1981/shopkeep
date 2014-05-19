@@ -633,6 +633,10 @@ terrain_dct = {
     }
 }
 
+terrain_type_list = []
+for terrain in [x for x in terrain_dct.keys() if type(x) == int]:
+    terrain_type_list.append(terrain)
+
 
 structure_type_dct = {
     'farm': {
@@ -670,7 +674,7 @@ structure_type_dct = {
         'worker capacity': 10,
         'site type': 'adventure',
         'time per harvest': 800,
-        'image file': ''
+        'image file': 'placeholder_tile.png'
     },
     'cave': {
         'class': 'rockland',
@@ -678,7 +682,7 @@ structure_type_dct = {
         'worker capacity': 10,
         'site type': 'adventure',
         'time per harvest': 100,
-        'image file': ''
+        'image file': 'placeholder_tile.png'
     },
     'tower': {
         'class': 'woodland',
@@ -686,7 +690,7 @@ structure_type_dct = {
         'worker capacity': 10,
         'site type': 'adventure',
         'time per harvest': 480,
-        'image file': ''
+        'image file': 'placeholder_tile.png'
     },
     'fallow ground': {
         'class': 'transformed',
@@ -695,7 +699,7 @@ structure_type_dct = {
         'site type': 'adventure',
         'time per harvest': 30,
         'transformations': ['farm'],
-        'image file': ''
+        'image file': 'placeholder_tile.png'
     },
     'abandoned mine': {
         'class': 'transformed',
@@ -704,12 +708,12 @@ structure_type_dct = {
         'site type': 'adventure',
         'time per harvest': 200,
         'transformations': ['collapsed mine'],
-        'image file': ''
+        'image file': 'placeholder_tile.png'
     },
     'collapsed mine': {
         'class': 'transformed',
         'site type': 'resource',
-        'image file': ''
+        'image file': 'placeholder_tile.png'
     }
 }
 
