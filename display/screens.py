@@ -210,6 +210,10 @@ class StatusScreen(Subscreen):
         for site in sorted(entities.sites['object list']):
             info_list.extend([
                 '%s at %r:' % (site.structure.structure_type, site.location),
+                '  %d / %d workers on site.' % (
+                    site.structure.workers, 
+                    ref.structure_type_dct[site.structure.structure_type]['worker capacity']
+                    ),
                 '  %s remaining: %d' % (site.resource, site.harvestable),
                 '  %d seconds until next harvest.' % site.structure.time_until_harvest
             ])

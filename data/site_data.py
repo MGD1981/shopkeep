@@ -91,18 +91,18 @@ class Site():
                         self.harvestable = 0
                         self.structure.workers = 0
                         self.structure.transform()
-                        #Adds resource to 'available' town resources
-                        entities.town['object'].resources[
-                            ref.material_type_dct[self.resource]['class']][
-                            self.resource]['available'] += resources_harvested
-                        #Removes resource from 'harvestable' town resources
-                        entities.town['object'].resources[
-                            ref.material_type_dct[self.resource]['class']][
-                            self.resource]['harvestable'] -= resources_harvested
-                        return
+                    #Adds resource to 'available' town resources
+                    entities.town['object'].resources[
+                        ref.material_type_dct[self.resource]['class']][
+                        self.resource]['available'] += resources_harvested
+                    #Removes resource from 'harvestable' town resources
+                    entities.town['object'].resources[
+                        ref.material_type_dct[self.resource]['class']][
+                        self.resource]['harvestable'] -= resources_harvested
 
                 self.structure.time_until_harvest = ref.structure_type_dct[
                         self.structure.structure_type]['time per harvest']
+                return
 
             elif self.site_type == 'adventure': 
                 if len(self.structure.workers) > 0:
