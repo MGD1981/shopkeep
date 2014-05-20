@@ -79,6 +79,10 @@ button_dct = {
     'world info': {
         'order': -2,
         'image file': 'world_info_button.png'
+    },
+    'resource info': {
+        'order': -3,
+        'image file': 'resource_info_button.png'
     }
 }
 

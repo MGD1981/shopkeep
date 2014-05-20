@@ -188,6 +188,20 @@ class StatusScreen(Subscreen):
         self.set_position(ref.screen[0]/2 + 1, ref.tile_size)
         self.view = 'town info'
 
+    def get_resource_info(self):
+        info_list = [
+            '-- Town Resources --',
+            ''
+        ]
+        for resource_type in sorted(entities.town['object'].resources.keys()):
+            info_list.append('%s:' % resource_type)
+            for resource in entities.town['object'].resources[resource_type]:
+                info_list.append('  %s: %d' % (
+                    resource, 
+                    entities.town['object'].resources[resource_type][resource]['available']                ))
+            info_list.append('')
+        return info_list
+
     def get_world_info(self):
         info_list = [
             '--Site Information--',
@@ -216,25 +230,49 @@ class StatusScreen(Subscreen):
         return info_list
 
     def update(self, game):
+        if 'switch info view' in game.action_log:
+            try:
+                self.view = [
+                    x for x in ref.button_dct.keys() if ref.button_dct[x][
+                    'order'] == ref.button_dct[self.view]['order'] - 1
+                ][0]
+            except IndexError:
+                self.view = [
+                    x for x in ref.button_dct.keys() if ref.button_dct[x][
+                    'order'] == -1
+                ][0]
+            game.action_log.remove('switch info view')
         if 'town info view' in game.action_log:
             self.view = 'town info'
             game.action_log.remove('town info view')
         if 'world info view' in game.action_log:
             self.view = 'world info'
             game.action_log.remove('world info view')
-        if 'resource view' in game.action_log:
-            self.view = 'resource'
-            game.action_log.remove('resource view')
+        if 'resource info view' in game.action_log:
+            self.view = 'resource info'
+            game.action_log.remove('resource info view')
+
         if self.view == 'town info':
             info_list = self.get_town_info() 
         if self.view == 'world info':
             info_list = self.get_world_info()
+        if self.view == 'resource info':
+            info_list = self.get_resource_info()
 
         self.background.fill(ref.background_color)
         i = 0
         for info in info_list:
             text = game.info_font.render("%s" % (info), 0, ref.primary_color)
-            textpos = text.get_rect(left=20, top=(20+i*game.info_font.get_linesize()))
+            if 20+i*game.info_font.get_linesize() < self.background.get_height():
+                textpos = text.get_rect(
+                    left=20, 
+                    top=(20+i*game.info_font.get_linesize())
+                )
+            else:
+                textpos = text.get_rect(
+                    left=20+self.background.get_width()/2, 
+                    top=(20+(i+2)*game.info_font.get_linesize() - self.background.get_height())
+                )
             self.background.blit(text, textpos)
             i += 1
 

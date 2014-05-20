@@ -61,6 +61,8 @@ class Game():
                 if self.keys[K_s]:
                     self.action_log.append('shop view')
                     self.action_log.append('refresh background')
+                if self.keys[K_TAB]:
+                    self.action_log.append('switch info view')
 
                 #DevMode (Ctrl-Shift-D)
                 if (
