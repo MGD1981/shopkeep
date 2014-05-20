@@ -37,6 +37,15 @@ class Game():
         pg.display.flip()
 
 
+    def pause(self):
+        """Pauses timed events."""
+        pg.time.set_timer(pg.USEREVENT, 0)
+
+    def unpause(self):
+        """Unpauses timed events."""
+        pg.time.set_timer(pg.USEREVENT, 1000)
+
+
     def tick(self):
         """Smallest game time amount passes."""
         
@@ -59,10 +68,12 @@ class Game():
                     (self.keys[K_RCTRL] or self.keys[K_LCTRL]) and
                     (self.keys[K_RSHIFT] or self.keys[K_LSHIFT])
                 ):
+                    self.pause()
                     import traceback
                     while True:
                         command = str(raw_input('>> '))
                         if command == 'exit':
+                            self.unpause()
                             break
                         try:
                             exec(command)
