@@ -36,6 +36,9 @@ class Town():
                     'harvestable': 0,
                     'available': 0
                 }
+        for site in sites['object list']:
+            self.resources[ref.material_type_dct[
+                site.resource]['class']][site.resource]['harvestable'] += site.harvestable
 
         return self.populate_town()
     

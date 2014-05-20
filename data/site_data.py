@@ -60,6 +60,12 @@ class Site():
             self.resource = choice(resource_possibilities)
             #resources measured in grams
             self.harvestable = randint(100000, 1500000)
+            try:
+                entities.town['object'].resources[
+                    ref.material_type_dct[self.resource]['class']][
+                    self.resource]['harvestable'] += self.harvestable
+            except KeyError:
+                pass
             #NOTE: These numbers suitable for metal, may not be for other materials
             #NOTE: Mine production should be ~1kg pure metal per day per miner.
             #NOTE: IRL mine has ~43500kg before producing much less.
