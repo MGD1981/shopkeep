@@ -27,7 +27,7 @@ scale = tile_size/32.0
 initial_player_position = [7,5]
 player_speed = 2
 
-initial_range_of_sites = (1,3)
+initial_range_of_sites = (0,0) #in addition to first 3
 
 shop_tile_dct = {
     1: {
@@ -80,9 +80,9 @@ button_dct = {
         'order': -2,
         'image file': 'world_info_button.png'
     },
-    'resource info': {
+    'shop info': {
         'order': -3,
-        'image file': 'resource_info_button.png'
+        'image file': 'shop_info_button.png'
     }
 }
 

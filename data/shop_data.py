@@ -13,12 +13,16 @@ class Shop():
         self.security = None
         self.decor = None
         self.shop_grid = None
-
+        self.resources = {}
 
     def generate(self, arg):
         """Generates a new shop object."""
         if arg == 'player':
             self.shop_grid = ref.initial_shop_overlay
+        for material_class in ref.material_class_dct.keys():
+            self.resources[material_class] = {}
+            for material_type in ref.material_class_dct[material_class]['types']:
+                self.resources[material_class][material_type] = 0
         return self
 
 

@@ -188,17 +188,18 @@ class StatusScreen(Subscreen):
         self.set_position(ref.screen[0]/2 + 1, ref.tile_size)
         self.view = 'town info'
 
-    def get_resource_info(self):
+    def get_shop_info(self):
         info_list = [
-            '-- Town Resources --',
+            '--Shop Resources--',
             ''
         ]
-        for resource_type in sorted(entities.town['object'].resources.keys()):
+        for resource_type in sorted(entities.shop['object'].resources.keys()):
             info_list.append('%s:' % resource_type)
-            for resource in sorted(entities.town['object'].resources[resource_type]):
+            for resource in sorted(entities.shop['object'].resources[resource_type]):
                 info_list.append('  %s: %d' % (
                     resource, 
-                    entities.town['object'].resources[resource_type][resource]['available']                ))
+                    entities.shop['object'].resources[resource_type][resource]
+            ))
             info_list.append('')
         return info_list
 
@@ -223,14 +224,21 @@ class StatusScreen(Subscreen):
         info_list = [
             '--Town Information--',
             '',
-            'population: %d' % entities.town['object'].population,
-            '',
-            'occupations:'
+            'population: %d:' % entities.town['object'].population
         ]
         for occupation in sorted(entities.town['object'].occupations.keys()):
             info_list.append(
                 '  ' + occupation + (': %d' % entities.town['object'].occupations[occupation])
             )
+        info_list.append('')
+        for resource_type in sorted(entities.town['object'].resources.keys()):
+            info_list.append('%s:' % resource_type)
+            for resource in sorted(entities.town['object'].resources[resource_type]):
+                info_list.append('  %s: %d' % (
+                    resource, 
+                    entities.town['object'].resources[resource_type][resource]['available']                ))
+            info_list.append('')
+        return info_list
         return info_list
 
     def update(self, game):
@@ -252,16 +260,16 @@ class StatusScreen(Subscreen):
         if 'world info view' in game.action_log:
             self.view = 'world info'
             game.action_log.remove('world info view')
-        if 'resource info view' in game.action_log:
-            self.view = 'resource info'
-            game.action_log.remove('resource info view')
+        if 'shop info view' in game.action_log:
+            self.view = 'shop info'
+            game.action_log.remove('shop info view')
 
         if self.view == 'town info':
             info_list = self.get_town_info() 
         if self.view == 'world info':
             info_list = self.get_world_info()
-        if self.view == 'resource info':
-            info_list = self.get_resource_info()
+        if self.view == 'shop info':
+            info_list = self.get_shop_info()
 
         self.background.fill(ref.background_color)
         i = 0
