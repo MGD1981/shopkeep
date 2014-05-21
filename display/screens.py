@@ -216,15 +216,44 @@ class StatusScreen(Subscreen):
             ''
         ]
         for site in sorted(entities.sites['object list']):
-            info_list.extend([
-                '%s at %r:' % (site.structure.structure_type, site.location),
-                '  %d / %d workers on site.' % (
-                    site.structure.workers, 
-                    ref.structure_type_dct[site.structure.structure_type]['worker capacity']
-                    ),
-                '  %s remaining: %d' % (site.resource, site.harvestable),
-                '  %d seconds until next harvest.' % site.structure.time_until_harvest
-            ])
+            if site.site_type == 'resource':
+                info_list.extend([
+                    '%s at %r:' % (site.structure.structure_type, site.location),
+                    '  %d / %d workers on site.' % (
+                        site.structure.workers, 
+                        ref.structure_type_dct[site.structure.structure_type]['worker capacity']
+                        ),
+                    '  %s remaining: %d' % (site.resource, site.harvestable),
+                    '  %d seconds until next harvest.' % site.structure.time_until_harvest
+                ])
+            elif site.site_type == 'adventure':
+                heroes = ''
+                monsters = ''
+                for hero_id in site.structure.workers:
+                    heroes += '%s, ' % [
+                        x.name for x in entities.heroes['object list'
+                        ] if x.hero_id == hero_id][0
+                        ]
+                if len(heroes) > 2:
+                    heroes = heroes[:-2]
+                else:
+                    heroes = 'None'
+                for monster_id in site.structure.monsters:
+                    monsters += '%s, ' % [
+                        x.name for x in entities.monsters['object list'
+                        ] if x.monster_id == monster_id][0
+                        ]
+                if len(monsters) > 2:
+                    monsters = monsters[:-2]
+                else:
+                    monsters = 'None'
+
+                info_list.extend([
+                    '%s at %r:' % (site.structure.structure_type, site.location),
+                    '  heroes on site: %s' % heroes,
+                    '  monsters remaining: %s' % monsters
+                ])
+
         return info_list
 
     def get_town_info(self):

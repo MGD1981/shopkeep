@@ -20,7 +20,7 @@ class Game():
         self.info_font = pg.font.Font('display/fonts/UbuntuMono-R.ttf', int(ref.scale*11))
 
         self.action_log = ['refresh background']
-        pg.time.set_timer(pg.USEREVENT, 1000)
+        pg.time.set_timer(pg.USEREVENT, ref.time_per_tick)
 
         self.screens = {
             'banner': screens.BannerScreen(ref.screen[0], ref.screen[1]/16),
@@ -43,12 +43,12 @@ class Game():
 
     def unpause(self):
         """Unpauses timed events."""
-        pg.time.set_timer(pg.USEREVENT, 1000)
+        pg.time.set_timer(pg.USEREVENT, ref.time_per_tick)
 
 
     def tick(self):
         """Smallest game time amount passes."""
-        
+
         self.mouse_pos = pg.mouse.get_pos()
         for event in pg.event.get():
             if event.type == pg.KEYDOWN:
@@ -89,6 +89,8 @@ class Game():
             if event.type == pg.USEREVENT:
                 for site in entities.sites['object list']:
                     site.tick()
+                for hero in entities.heroes['object list']:
+                    hero.tick()
 
         #entities.shop['object'].tick(self)
         entities.town['object'].tick(self)

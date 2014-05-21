@@ -7,6 +7,8 @@ screen = (1280, 1024)
 image_path = 'img/'
 
 fps = 60
+#time_per_tick = 1000
+time_per_tick = 100
 
 background_color = (39, 39, 39)
 primary_color = (255, 255, 208)
@@ -29,6 +31,10 @@ player_speed = 2
 
 initial_range_of_sites = (0,0) #in addition to first 3
 
+#singular reference points
+
+
+#dicts
 shop_tile_dct = {
     1: {
         'tile type': 'floor',
@@ -166,7 +172,7 @@ component_type_dct = {
     },
     'scabbard': {
         'class': 'standalone',
-        'possible materials': ['leather', 'wood', 'metal'],
+        'possible materials': ['wood', 'metal'],
         'joints': [],
         'volume': 180
     },
@@ -617,7 +623,9 @@ for monster_type in monster_type_dct.keys():
 del monster_type, monster_class
 
 
-
+hero_dct = {
+    'image file': 'placeholder_tile.png'
+}
 
 
 terrain_dct = {

@@ -31,7 +31,7 @@ def generate_terrain(grid):
         terrain_table[terrain_type] = None
     starting_points = []
     test_point = (randint(0, size-1), randint(0, size-1))
-    while len(starting_points) < len(terrain_table.keys()):
+    while len(starting_points) < len(terrain_table.keys()): #TODO: Correct possible infinite loop!
         while test_point not in starting_points:
             starting_points.append(test_point)
             test_point = (randint(0, size-1), randint(0, size-1))

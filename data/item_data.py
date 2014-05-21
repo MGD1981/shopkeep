@@ -57,6 +57,7 @@ class Weapon():
     def generate(self, arg='random'):
         """Generates a random weapon from reference_data.weapon_type_dct."""
         if arg == 'random':
+            #self.weapon_type = choice(ref.weapon_type_dct.keys())
             self.weapon_type = choice(ref.weapon_type_dct.keys())
             self.weapon_class = ref.weapon_type_dct[
                                         self.weapon_type]['class']
@@ -66,7 +67,7 @@ class Weapon():
                         Component().generate(component))
             self.assemble(self.components)
         else:
-            return NotImplementedError(arg)
+            return NotImplementedError(arg) #TODO
         self.set_weapon_id()
         return self
         

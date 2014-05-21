@@ -28,6 +28,7 @@ def initialize():
     site_data.Site().generate('copper', 'rockland')
     site_data.Site().generate('resource', 'grassland')
     site_data.Site().generate('resource', 'woodland')
+    site_data.Site().generate('adventure')
     for x in xrange(randint(ref.initial_range_of_sites[0], ref.initial_range_of_sites[1])):
         site_data.Site().generate('resource')
     import town_data
