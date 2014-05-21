@@ -24,41 +24,49 @@ class Site():
                 self.site_type = 'adventure'
             else:
                 self.site_type = 'resource'
+        elif site_type in ref.material_type_dct.keys():
+            self.site_type = 'resource'
+            self.resource = site_type
         else:
             self.site_type = site_type
+        terrain_list = None
         if arg == 'random':
+            terrain_list = [x for x in ref.terrain_dct.keys() if type(x) == int]
+        elif arg in ref.terrain_type_list:
+            terrain_list = [
+                x for x in ref.terrain_dct.keys() if ref.terrain_dct[x]['terrain type'] == arg
+            ]
+        x = randint(0, size-1)
+        y = randint(0, size-1)
+        terrain_type = entities.world['grid'][y][x]
+        while terrain_type not in terrain_list:
             x = randint(0, size-1)
             y = randint(0, size-1)
             terrain_type = entities.world['grid'][y][x]
-            while terrain_type in [0, 't']:
-                x = randint(0, size-1)
-                y = randint(0, size-1)
-                terrain_type = entities.world['grid'][y][x]
-        elif arg in ref.terrain_type_list:
-            #TODO
-            pass
 
         self.location = [x,y]
         self.structure = Structure().generate(
             ref.terrain_dct[terrain_type]['terrain type'], self.site_type
         )
-        if 'resource type' in ref.structure_type_dct[
-            self.structure.structure_type
-        ].keys():
-            resource_type = ref.structure_type_dct[
-                self.structure.structure_type]['resource type'
-            ]
-            resource_possibilities = []
-            for possible_material in [
-                x for x in ref.material_class_dct[resource_type][
-                'types'] if 'rarity' in ref.material_type_dct[x].keys()
-            ]:
-                for x in xrange(ref.rarity_dct[
-                    ref.material_type_dct[possible_material]['rarity']
-                ]):
-                    resource_possibilities.append(possible_material)
-            self.resource = choice(resource_possibilities)
+        if self.resource == None:
+            if 'resource type' in ref.structure_type_dct[
+                self.structure.structure_type
+                ].keys():
+                resource_type = ref.structure_type_dct[
+                    self.structure.structure_type]['resource type'
+                ]
+                resource_possibilities = []
+                for possible_material in [
+                    x for x in ref.material_class_dct[resource_type][
+                    'types'] if 'rarity' in ref.material_type_dct[x].keys()
+                ]:
+                    for x in xrange(ref.rarity_dct[
+                        ref.material_type_dct[possible_material]['rarity']
+                    ]):
+                        resource_possibilities.append(possible_material)
+                self.resource = choice(resource_possibilities)
             #resources measured in grams
+        if self.resource != None:
             self.harvestable = randint(100000, 1500000)
             try:
                 entities.town['object'].resources[
@@ -152,7 +160,10 @@ class Structure():
         elif terrain_type == 'random':
             self.structure_type = choice(ref.site_type_dct[site_type])
         else:
-            self.structure_type = choice([x for x in ref.site_type_dct[site_type] if ref.structure_type_dct[x]['class'] == terrain_type])
+            self.structure_type = choice(
+                [x for x in ref.site_type_dct[site_type] if ref.structure_type_dct[
+                x]['class'] == terrain_type]
+            )
         if ref.structure_type_dct[self.structure_type]['site type'] == 'resource':
             self.workers = 0
         else:

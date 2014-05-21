@@ -645,7 +645,7 @@ terrain_dct = {
 
 terrain_type_list = []
 for terrain in [x for x in terrain_dct.keys() if type(x) == int]:
-    terrain_type_list.append(terrain)
+    terrain_type_list.append(terrain_dct[terrain]['terrain type'])
 
 
 structure_type_dct = {

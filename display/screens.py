@@ -195,7 +195,7 @@ class StatusScreen(Subscreen):
         ]
         for resource_type in sorted(entities.town['object'].resources.keys()):
             info_list.append('%s:' % resource_type)
-            for resource in entities.town['object'].resources[resource_type]:
+            for resource in sorted(entities.town['object'].resources[resource_type]):
                 info_list.append('  %s: %d' % (
                     resource, 
                     entities.town['object'].resources[resource_type][resource]['available']                ))
@@ -267,7 +267,7 @@ class StatusScreen(Subscreen):
         i = 0
         for info in info_list:
             text = game.info_font.render("%s" % (info), 0, ref.primary_color)
-            if 20+i*game.info_font.get_linesize() < self.background.get_height():
+            if 20+(i+1)*game.info_font.get_linesize() < self.background.get_height():
                 textpos = text.get_rect(
                     left=20, 
                     top=(20+i*game.info_font.get_linesize())
@@ -275,7 +275,7 @@ class StatusScreen(Subscreen):
             else:
                 textpos = text.get_rect(
                     left=20+self.background.get_width()/2, 
-                    top=(20+(i+2)*game.info_font.get_linesize() - self.background.get_height())
+                    top=(20+(i+3)*game.info_font.get_linesize() - self.background.get_height())
                 )
             self.background.blit(text, textpos)
             i += 1
