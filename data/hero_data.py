@@ -1,7 +1,7 @@
 import entities
 from shop_data import Shop
 from economy_data import Economy
-from random import choice
+from random import choice, randint
 
 
 class Hero():
@@ -33,6 +33,9 @@ class Hero():
         import language
         if arg == 'random':
             self.coins['copper'] = randint(10,300)
+        if arg == 'town':
+            self.coins['copper'] = randint(10,300)
+            self.location = entities.town['object'].location
         self.name = language.create_name('human')
         self.set_hero_id()
         return self

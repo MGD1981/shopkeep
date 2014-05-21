@@ -46,10 +46,12 @@ def initialize():
         'next id': 1,
         'object list': []
     }
+    import hero_data
     heroes = {
         'next id': 1,
         'object list': []
     }
+    hero_data.Hero().generate('town')
     monsters = {
         'next id': 1,
         'object list': []

@@ -191,8 +191,15 @@ class StatusScreen(Subscreen):
     def get_shop_info(self):
         info_list = [
             '--Shop Resources--',
-            ''
+            '',
+            'coins:'
         ]
+        for coin in sorted(entities.player['object'].coins.keys()):
+            info_list.append('  %s: %d' % (
+                coin,
+                entities.player['object'].coins[coin]
+            ))
+        info_list.append('')
         for resource_type in sorted(entities.shop['object'].resources.keys()):
             info_list.append('%s:' % resource_type)
             for resource in sorted(entities.shop['object'].resources[resource_type]):
@@ -224,7 +231,7 @@ class StatusScreen(Subscreen):
         info_list = [
             '--Town Information--',
             '',
-            'population: %d:' % entities.town['object'].population
+            'population: %d' % entities.town['object'].population
         ]
         for occupation in sorted(entities.town['object'].occupations.keys()):
             info_list.append(

@@ -26,7 +26,7 @@ class Town():
         w_size = world['size']
         self.location[0] = randint(w_size - (3*w_size/4), w_size - (w_size/4))
         self.location[1] = randint(w_size - (3*w_size/4), w_size - (w_size/4))
-        world['grid'][self.location[0]][self.location[1]] = 't'
+        world['grid'][self.location[1]][self.location[0]] = 't'
 
         #Populate resources
         for material_class in ref.material_class_dct.keys():
