@@ -7,8 +7,8 @@ screen = (1280, 1024)
 image_path = 'img/'
 
 fps = 60
-#time_per_tick = 1000
-time_per_tick = 100
+time_per_tick = 1000
+#time_per_tick = 100
 
 background_color = (39, 39, 39)
 primary_color = (255, 255, 208)

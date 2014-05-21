@@ -85,6 +85,33 @@ class WorldScreen(Subscreen):
         self.set_position(0, ref.tile_size)
         self.view = 'shop'
 
+    def initialize_hero_sprites(self, game):
+        tile_scale = self.surface.get_width()/entities.world['size']
+        tiles = []
+        for hero in entities.heroes['object list']:
+            tiles.append(sprites.BackgroundTile(
+                game,
+                ref.image_path + ref.hero_dct['image file'],
+                hero.location[0]*tile_scale, 
+                hero.location[1]*tile_scale
+            ))
+        self.hero_tiles = pg.sprite.Group(tiles)
+
+    def initialize_refreshed_world_sprites(self, game):
+        tile_scale = self.surface.get_width()/entities.world['size']
+        tiles = []
+        for hero_tile in self.hero_tiles:
+            tiles.append(sprites.BackgroundTile(
+                game,
+                ref.image_path +
+                    ref.terrain_dct[entities.world['grid'][
+                        hero_tile.rect[1]/tile_scale][
+                        hero_tile.rect[0]/tile_scale]]['image file'],
+                    hero_tile.rect[0],
+                    hero_tile.rect[1]
+            ))
+        self.refreshed_world_sprites = pg.sprite.Group(tiles)
+
     def initialize_world_sprites(self, game):
         tile_scale = self.surface.get_width()/entities.world['size']
         site_locs = [site.location for site in entities.sites['object list']]
@@ -127,6 +154,7 @@ class WorldScreen(Subscreen):
 
         self.initialize_world_sprites(game)
         self.initialize_site_sprites(game)
+        self.initialize_hero_sprites(game)
 
         #creates shop_tile sprite group
         shop = entities.shop['object']
@@ -177,6 +205,11 @@ class WorldScreen(Subscreen):
                     self.world_tiles.draw(self.background)
                     self.site_tiles.draw(self.background)
                     game.action_log.remove(action)
+            self.initialize_refreshed_world_sprites(game)
+            #TODO: self.clear_refreshed_world_sprites()
+            self.refreshed_world_sprites.draw(self.background)
+            self.initialize_hero_sprites(game)
+            self.hero_tiles.draw(self.background)
 
         self.draw_border(game)
         game.screen.blit(self.background, self.position)

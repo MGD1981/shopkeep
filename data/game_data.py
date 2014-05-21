@@ -29,7 +29,7 @@ class Game():
             'message': screens.MessageScreen(ref.screen[0], ref.screen[1]*5/16)
         }
 
-
+        self.blink = False
         background = pg.Surface(self.screen.get_size())
         self.background = background.convert()
         self.background.fill(ref.background_color)
@@ -87,6 +87,7 @@ class Game():
             elif event.type == pg.KEYUP:
                 self.keys = pg.key.get_pressed()
             if event.type == pg.USEREVENT:
+                self.blink = not self.blink
                 for site in entities.sites['object list']:
                     site.tick()
                 for hero in entities.heroes['object list']:
