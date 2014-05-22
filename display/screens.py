@@ -4,6 +4,9 @@ import sprites
 import copy
 
 
+def clear_callback(surface, rect):
+    surface.fill(ref.background_color, rect)
+
 class Subscreen(object):
     """Object which holds traits for a particular subscreen of the entire 
     game screen."""
@@ -84,6 +87,7 @@ class WorldScreen(Subscreen):
         super(WorldScreen, self).__init__(width, height)
         self.set_position(0, ref.tile_size)
         self.view = 'shop'
+
 
     def initialize_hero_sprites(self, game):
         tile_scale = self.surface.get_width()/entities.world['size']
@@ -192,7 +196,7 @@ class WorldScreen(Subscreen):
                         self.draw_border(game)
                         game.action_log.remove(action)
 
-                #draw shop foreground
+            #draw shop foreground
             self.shop_sprites.update(game)
             self.shop_sprites.draw(self.background)
 
@@ -205,7 +209,7 @@ class WorldScreen(Subscreen):
                     self.world_tiles.draw(self.background)
                     self.site_tiles.draw(self.background)
                     game.action_log.remove(action)
-            self.hero_tiles.clear(self.background, game.background)
+            self.hero_tiles.clear(self.background, clear_callback)
             self.initialize_refreshed_world_sprites(game)
             self.refreshed_world_sprites.draw(self.background)
             self.initialize_hero_sprites(game)
