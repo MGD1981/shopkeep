@@ -155,7 +155,7 @@ component_type_dct = {
     'head': {
         'class': 'point',
         'possible materials': ['stone', 'metal'],
-        'joints': [('single', 'point')],
+        'joints': [('single', 'base')],
         'volume': 340
     },
     'hilt': {

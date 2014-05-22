@@ -78,6 +78,7 @@ class Weapon():
         joint_table = {}
         #Remove components without joints from component_list:
         for component in component_list:
+            if component.component_type in ['shaft', 'haft']:
             if ref.component_type_dct[component.component_type]['class'] == 'standalone':
                 component_list.remove(component)
             else:
@@ -91,8 +92,10 @@ class Weapon():
         #joint table now has a key for every component_id
         #key['joined to'] is list of (id, type) of connected components
         try:
-            while len([i for i, t in enumerate(joint_table[c.component_id]['joints remaining'] for 
-                    c in component_list) if t[0] != 'multi']) > 0:
+            while len([i for i, t in enumerate(
+                joint_table[c.component_id]['joints remaining'] for 
+                c in component_list
+                ) if t[0] != 'multi']) > 0:
 
                 for joint_class in ['single', 'multi', 'optional']:
                     for component1 in component_list:
@@ -120,9 +123,10 @@ class Weapon():
                                         Joint().generate().join([component1, 
                                                                  component2])
                                         if joint_class != 'multi':
-                                            if open_joint1 in joint_table[component1.component_id][
-                                                    'joints remaining']:
-                                                joint_table[component1.component_id][
+                                            if open_joint1 in joint_table[
+                                                component1.component_id][
+                                                'joints remaining']:
+                                                    joint_table[component1.component_id][
                                                         'joints remaining'].remove(
                                                         open_joint1)
                                         open_joint2 = joint_table[
