@@ -78,7 +78,6 @@ class Weapon():
         joint_table = {}
         #Remove components without joints from component_list:
         for component in component_list:
-            if component.component_type in ['shaft', 'haft']:
             if ref.component_type_dct[component.component_type]['class'] == 'standalone':
                 component_list.remove(component)
             else:
