@@ -92,7 +92,7 @@ class WorldScreen(Subscreen):
     def initialize_hero_sprites(self, game):
         tile_scale = self.surface.get_width()/entities.world['size']
         tiles = []
-        for hero in entities.heroes['object list']:
+        for hero in [x for x in entities.heroes['object list'] if x.traveling]:
             tiles.append(sprites.BackgroundTile(
                 game,
                 ref.image_path + ref.hero_dct['image file'],

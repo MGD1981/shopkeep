@@ -624,7 +624,7 @@ del monster_type, monster_class
 
 
 hero_dct = {
-    'image file': 'placeholder_tile.png'
+    'image file': 'hero_tile.png'
 }
 
 
@@ -692,7 +692,7 @@ structure_type_dct = {
         'worker capacity': 10,
         'site type': 'adventure',
         'time per harvest': 800,
-        'image file': 'placeholder_tile.png'
+        'image file': 'dungeon_tile.png'
     },
     'cave': {
         'class': 'rockland',
@@ -700,7 +700,7 @@ structure_type_dct = {
         'worker capacity': 10,
         'site type': 'adventure',
         'time per harvest': 100,
-        'image file': 'placeholder_tile.png'
+        'image file': 'cave_tile.png'
     },
     'tower': {
         'class': 'woodland',
@@ -708,7 +708,7 @@ structure_type_dct = {
         'worker capacity': 10,
         'site type': 'adventure',
         'time per harvest': 480,
-        'image file': 'placeholder_tile.png'
+        'image file': 'tower_tile.png'
     },
     'fallow ground': {
         'class': 'transformed',
