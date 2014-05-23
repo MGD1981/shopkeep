@@ -173,7 +173,7 @@ class Structure():
         self.time_until_harvest = ref.structure_type_dct[
                     self.structure_type]['time per harvest']
         return self
-                        
+                       
     def add_worker(self):
         self.workers += 1
         self.worker_capacity -= 1
@@ -181,7 +181,10 @@ class Structure():
     def add_hero(self, hero_id):
         self.workers.append(hero_id)
         self.worker_capacity -= 1
-                    
+
+    def add_monster(self, monster_id):
+        self.monsters.append(monster_id)
+
     def transform(self):
         if 'transformations' in ref.structure_type_dct[self.structure_type].keys():
             self.structure_type = choice(ref.structure_type_dct[self.structure_type]['transformations'])

@@ -8,7 +8,7 @@ class Monster():
 
     def __init__(self):
         self.monster_id = None #TODO: get unique based on entities.heroes
-		self.monster_type = None
+        self.monster_type = None
         self.location = [None, None]
         self.name = None
         self.kills = []
@@ -18,8 +18,8 @@ class Monster():
     def generate(self, monster_class='random', arg='random'):
         """Generates a monster."""
         import language
-        if monster_class = 'random':
-            monster_class = choice(ref.monster_type_dct.keys())
+        if monster_class == 'random':
+            monster_class = choice(ref.monster_class_dct.keys())
         if arg == 'random':
             self.monster_type = choice(ref.monster_class_dct[monster_class])
         self.name = language.create_name('monster')

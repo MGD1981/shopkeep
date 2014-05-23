@@ -53,10 +53,13 @@ def initialize():
         'object list': []
     }
     hero_data.Hero().generate('town')
+    import monster_data
     monsters = {
         'next id': 1,
         'object list': []
     }
+    for site in [x for x in sites['object list'] if x.site_type == 'adventure']:
+        site.structure.add_monster(monster_data.Monster().generate().monster_id)
     import shop_data
     shop = {
         'object': shop_data.Shop().generate('player')
