@@ -253,7 +253,7 @@ class StatusScreen(Subscreen):
             ''
         ]
         for site in sorted(entities.sites['object list']):
-            if site.site_type == 'resource':
+            if ref.structure_type_dct[site.structure.structure_type]['site type'] == 'resource':
                 info_list.extend([
                     '%s at %r:' % (site.structure.structure_type, site.location),
                     '  %d / %d workers on site.' % (
@@ -263,7 +263,7 @@ class StatusScreen(Subscreen):
                     '  %s remaining: %d' % (site.resource, site.harvestable),
                     '  %d seconds until next harvest.' % site.structure.time_until_harvest
                 ])
-            elif site.site_type == 'adventure':
+            elif ref.structure_type_dct[site.structure.structure_type]['site type'] == 'adventure':
                 heroes = ''
                 monsters = ''
                 for hero_id in site.structure.workers:

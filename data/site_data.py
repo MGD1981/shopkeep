@@ -11,7 +11,6 @@ class Site():
         self.site_type = None
         self.location = [None, None]
         self.structure = None
-        self.monsters = [] #list of monster ids
         self.resource = None
         self.harvestable = None
         
@@ -87,7 +86,7 @@ class Site():
         
         self.structure.time_until_harvest -= ticks
         if self.structure.time_until_harvest <= 0:
-            if self.site_type == 'resource':
+            if ref.structure_type_dct[self.structure.structure_type]['site type'] == 'resource':
                 resources_harvested = 0
                 for worker in xrange(self.structure.workers):
                     workload = randint(500, 1500)
@@ -112,14 +111,14 @@ class Site():
                         self.structure.structure_type]['time per harvest']
                 return
 
-            elif self.site_type == 'adventure': 
+            elif ref.structure_type_dct[self.structure.structure_type]['site type'] == 'adventure':
                 if len(self.structure.workers) > 0:
-                    for hero in [x for x in entities.heroes['object list'] if (
-                            hero.hero_id in self.structure.workers)]:
+                    for hero in [h for h in entities.heroes['object list'] if (
+                            h.hero_id in self.structure.workers)]:
                         try:
                             monster = next(m for m in entities.monsters['object list'] if 
                                            m.monster_id in self.structure.monsters)
-                            battle(hero, monster)
+                            self.battle(hero, monster)
                         except StopIteration:
                             pass #TODO: write code for heroes to leave site
                         
@@ -187,7 +186,12 @@ class Structure():
 
     def transform(self):
         if 'transformations' in ref.structure_type_dct[self.structure_type].keys():
-            self.structure_type = choice(ref.structure_type_dct[self.structure_type]['transformations'])
+            self.structure_type = choice(ref.structure_type_dct[
+                self.structure_type]['transformations'])
+            if ref.structure_type_dct[self.structure_type]['site type'] == 'resource':
+                self.workers = 0
+            else:
+                self.workers = []
             return self
         
 

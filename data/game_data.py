@@ -20,7 +20,10 @@ class Game():
         self.info_font = pg.font.Font('display/fonts/UbuntuMono-R.ttf', int(ref.scale*11))
 
         self.action_log = ['refresh background']
-        pg.time.set_timer(pg.USEREVENT, ref.time_per_tick)
+        self.speed = 'normal'
+        pg.time.set_timer(pg.USEREVENT, ref.game_speed_dct[self.speed])
+
+        self.speed_keys = [K_1, K_2, K_3, K_4]
 
         self.screens = {
             'banner': screens.BannerScreen(ref.screen[0], ref.screen[1]/16),
@@ -43,7 +46,7 @@ class Game():
 
     def unpause(self):
         """Unpauses timed events."""
-        pg.time.set_timer(pg.USEREVENT, ref.time_per_tick)
+        pg.time.set_timer(pg.USEREVENT, ref.game_speed_dct[self.speed])
 
 
     def tick(self):
@@ -63,6 +66,16 @@ class Game():
                     self.action_log.append('refresh background')
                 if self.keys[K_TAB]:
                     self.action_log.append('switch info view')
+
+                if self.keys[K_1]:
+                    self.speed = 'normal'
+                if self.keys[K_2]:
+                    self.speed = 'fast'
+                if self.keys[K_3]:
+                    self.speed = 'ultra'
+                if self.keys[K_4]:
+                    self.speed = 'ludicrous'
+                pg.time.set_timer(pg.USEREVENT, ref.game_speed_dct[self.speed])
 
                 #DevMode (Ctrl-Shift-D)
                 if (
