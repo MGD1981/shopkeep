@@ -1,4 +1,5 @@
 import entities
+import reference_data as ref
 import copy
 from shop_data import Shop
 from economy_data import Economy
@@ -32,6 +33,11 @@ class Hero():
         self.boredom = 0
         self.traveling = False
         self.destination = [None, None]
+        self.coins = {
+            'copper': 0,
+            'silver': 0,
+            'gold': 0
+        }
 
 
     def tick(self):
@@ -55,7 +61,9 @@ class Hero():
         if 'adventure' in self.wants:
             shuffle(entities.sites['object list'])
             for site in entities.sites['object list']:
-                if site.site_type == 'adventure' and site.structure.worker_capacity > 0:
+                if (ref.structure_type_dct[
+                    site.structure.structure_type]['site type'] == 'adventure' and site.structure.worker_capacity > 0
+                ):
                     self.traveling = True
                     self.wants.remove('adventure')
                     self.boredom = 0

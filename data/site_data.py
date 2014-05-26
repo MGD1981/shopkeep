@@ -19,14 +19,12 @@ class Site():
         size = entities.world['size']
         if site_type == 'random':
             if randint(1,3) == 1:
-                self.site_type = 'adventure'
+                site_type = 'adventure'
             else:
-                self.site_type = 'resource'
+                site_type = 'resource'
         elif site_type in ref.material_type_dct.keys():
-            self.site_type = 'resource'
             self.resource = site_type
-        else:
-            self.site_type = site_type
+            site_type = 'resource'
         terrain_list = None
         if arg == 'random':
             terrain_list = [x for x in ref.terrain_dct.keys() if type(x) == int]
@@ -37,14 +35,15 @@ class Site():
         x = randint(0, size-1)
         y = randint(0, size-1)
         terrain_type = entities.world['grid'][y][x]
-        while terrain_type not in terrain_list:
+        site_locations = [s.location for s in entities.sites['object list']]
+        while terrain_type not in terrain_list or [x,y] in site_locations:
             x = randint(0, size-1)
             y = randint(0, size-1)
             terrain_type = entities.world['grid'][y][x]
 
         self.location = [x,y]
         self.structure = Structure().generate(
-            ref.terrain_dct[terrain_type]['terrain type'], self.site_type
+            ref.terrain_dct[terrain_type]['terrain type'], site_type
         )
         if self.resource == None:
             if 'resource type' in ref.structure_type_dct[
@@ -98,14 +97,15 @@ class Site():
                         self.structure.workers = 0
                         self.structure.transform()
                         game.action_log.append('transformation')
-                    #Adds resource to 'available' town resources
-                    entities.town['object'].resources[
-                        ref.material_type_dct[self.resource]['class']][
-                        self.resource]['available'] += resources_harvested
-                    #Removes resource from 'harvestable' town resources
-                    entities.town['object'].resources[
-                        ref.material_type_dct[self.resource]['class']][
-                        self.resource]['harvestable'] -= resources_harvested
+                        break
+                #Adds resource to 'available' town resources
+                entities.town['object'].resources[
+                    ref.material_type_dct[self.resource]['class']][
+                    self.resource]['available'] += resources_harvested
+                #Removes resource from 'harvestable' town resources
+                entities.town['object'].resources[
+                    ref.material_type_dct[self.resource]['class']][
+                    self.resource]['harvestable'] -= resources_harvested
 
                 self.structure.time_until_harvest = ref.structure_type_dct[
                         self.structure.structure_type]['time per harvest']
@@ -115,12 +115,24 @@ class Site():
                 if len(self.structure.workers) > 0:
                     for hero in [h for h in entities.heroes['object list'] if (
                             h.hero_id in self.structure.workers)]:
+                        hero.boredom += randint(0, 100)
                         try:
                             monster = next(m for m in entities.monsters['object list'] if 
                                            m.monster_id in self.structure.monsters)
                             self.battle(hero, monster)
                         except StopIteration:
-                            pass #TODO: write code for heroes to leave site
+                            adventure_sites = [
+                                s for s in entities.sites['object list'] if ref.structure_type_dct[
+                                s.structure.structure_type]['site type'] == 'adventure'
+                            ]
+                            if hero.boredom < 100 and len(adventure_sites) > 0:
+                                hero.destination = choice(adventure_sites).location
+                            else:
+                                hero.boredom = 0
+                                hero.destination = entities.town['object'].location
+                            hero.traveling = True
+                            self.structure.workers.remove(hero.hero_id)
+                            
                         
                         
     def battle(self, hero, monster):
@@ -153,7 +165,7 @@ class Site():
         
     def __repr__(self):
         return 'Site(ID: %r, Type:%r, Loc: %r)' % (
-                self.site_id, self.site_type, self.location)
+                self.site_id, self.structure.structure_type, self.location)
         
 
 class Structure():
@@ -210,5 +222,4 @@ class Structure():
             else:
                 self.workers = []
                 self.monsters = []
-            return self
 

@@ -104,16 +104,28 @@ class WorldScreen(Subscreen):
     def initialize_refreshed_world_sprites(self, game):
         tile_scale = self.surface.get_width()/entities.world['size']
         tiles = []
+        site_locs = [s.location for s in entities.sites['object list']]
         for hero_tile in self.hero_tiles:
-            tiles.append(sprites.BackgroundTile(
-                game,
-                ref.image_path +
-                    ref.terrain_dct[entities.world['grid'][
-                        hero_tile.rect[1]/tile_scale][
-                        hero_tile.rect[0]/tile_scale]]['image file'],
+            hero_loc = [x/tile_scale for x in hero_tile.rect[0:2]] 
+            if hero_loc in site_locs:
+                site = [s for s in entities.sites if s.location == hero_loc][0]
+                tiles.append(sprites.BackgroundTile(
+                    game,
+                    ref.image_path +
+                        ref.structure_type_dct[site.structure.structure_type]['image file'],
                     hero_tile.rect[0],
                     hero_tile.rect[1]
-            ))
+                ))
+            else:
+                tiles.append(sprites.BackgroundTile(
+                    game,
+                    ref.image_path +
+                        ref.terrain_dct[entities.world['grid'][
+                            hero_tile.rect[1]/tile_scale][
+                            hero_tile.rect[0]/tile_scale]]['image file'],
+                        hero_tile.rect[0],
+                        hero_tile.rect[1]
+                ))
         self.refreshed_world_sprites = pg.sprite.Group(tiles)
 
     def initialize_world_sprites(self, game):

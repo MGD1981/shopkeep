@@ -58,7 +58,9 @@ def initialize():
         'next id': 1,
         'object list': []
     }
-    for site in [x for x in sites['object list'] if x.site_type == 'adventure']:
+    for site in [
+        x for x in sites['object list'] if ref.structure_type_dct[x.structure.structure_type]['site type'] == 'adventure'
+    ]:
         site.structure.add_monster(monster_data.Monster().generate().monster_id)
     import shop_data
     shop = {

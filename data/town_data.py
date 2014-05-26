@@ -37,7 +37,7 @@ class Town():
                     'available': 0
                 }
         for site in sites['object list']:
-            if site.site_type == 'resource':
+            if ref.structure_type_dct[site.structure.structure_type]['site type'] == 'resource':
                 self.resources[ref.material_type_dct[
                     site.resource]['class']][site.resource]['harvestable'] += site.harvestable
 
@@ -59,7 +59,9 @@ class Town():
             self.occupations['farmer'] += people_to_assign
         shuffle(sites['object list'])
         while people_to_assign > 0:
-            for site in [x for x in sites['object list'] if x.site_type == 'resource']:
+            for site in [
+                x for x in sites['object list'] if ref.structure_type_dct[x.structure.structure_type]['site type'] == 'resource'
+            ]:
                 if site.structure.worker_capacity > 0:
                     self.occupations[ref.structure_type_dct[
                         site.structure.structure_type]['worker type']] += 1
