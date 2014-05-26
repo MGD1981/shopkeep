@@ -11,6 +11,7 @@ class Hero():
 
     def __init__(self):
         self.hero_id = None 
+        self.alive = True
         self.location = [None, None]
         self.name = None
         self.home = None

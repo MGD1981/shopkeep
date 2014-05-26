@@ -202,7 +202,7 @@ class WorldScreen(Subscreen):
 
         elif self.view == 'world':
             for action in game.action_log:
-                if action == 'refresh background':
+                if action in ['refresh background', 'transformation']: #TODO: transformations shouldn't need full refresh
                     self.background.fill(ref.background_color)
                     self.initialize_world_sprites(game)
                     self.initialize_site_sprites(game) 

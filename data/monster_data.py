@@ -1,6 +1,7 @@
 import entities
 import reference_data as ref
-from random import choice
+import item_data
+from random import choice, randint
 
 
 class Monster():
@@ -8,10 +9,17 @@ class Monster():
 
     def __init__(self):
         self.monster_id = None #TODO: get unique based on entities.heroes
+        self.alive = True
         self.monster_type = None
         self.location = [None, None]
         self.name = None
         self.kills = []
+        self.inventory = []
+        self.coins = {
+            'copper': 0,
+            'silver': 0,
+            'gold': 0
+        }
         self.size = 100 #represents percent of "normal" size
 
 
@@ -22,6 +30,9 @@ class Monster():
             monster_class = choice(ref.monster_class_dct.keys())
         if arg == 'random':
             self.monster_type = choice(ref.monster_class_dct[monster_class])
+            self.inventory.append(item_data.Weapon().generate())
+            for coin in self.coins.keys():
+                self.coins[coin] = randint(0,100)
         self.name = language.create_name('monster')
         self.set_monster_id()
         return self

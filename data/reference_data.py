@@ -671,7 +671,8 @@ structure_type_dct = {
         'worker capacity': 10,
         'site type': 'resource',
         'resource type': 'fiber',
-        'time per harvest': 120,
+        #'time per harvest': 120,
+        'time per harvest': 1,
         'transformations': ['fallow ground'],
         'image file': 'farm_tile.png'
     },
@@ -739,6 +740,7 @@ structure_type_dct = {
     'collapsed mine': {
         'class': 'transformed',
         'site type': 'resource',
+        'time per harvest': 0,
         'image file': 'placeholder_tile.png'
     }
 }

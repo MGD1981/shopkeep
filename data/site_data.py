@@ -8,7 +8,6 @@ class Site():
 
     def __init__(self):
         self.site_id = None
-        self.site_type = None
         self.location = [None, None]
         self.structure = None
         self.resource = None
@@ -81,7 +80,7 @@ class Site():
         return self
     
     
-    def tick(self, ticks=1):
+    def tick(self, game, ticks=1):
         """Causes time to pass at site"""
         
         self.structure.time_until_harvest -= ticks
@@ -98,6 +97,7 @@ class Site():
                         self.harvestable = 0
                         self.structure.workers = 0
                         self.structure.transform()
+                        game.action_log.append('transformation')
                     #Adds resource to 'available' town resources
                     entities.town['object'].resources[
                         ref.material_type_dct[self.resource]['class']][
@@ -125,7 +125,24 @@ class Site():
                         
     def battle(self, hero, monster):
         """Hero and monster fight."""
-        pass
+        #TODO: Will add more when monsters get fleshed out.
+        victor = choice([hero, monster])
+        if victor == hero:
+            loser = monster
+            entities.monsters['object list'].remove(loser)
+            self.structure.monsters.remove(loser.monster_id)
+        else:
+            loser = hero
+            entities.heroes['object list'].remove(loser)
+            self.structure.workers.remove(loser.hero_id)
+        victor.kills.append(loser)
+        loser.alive = False
+        for coin in loser.coins.keys():
+            victor.coins[coin] += loser.coins[coin]
+        for item in loser.inventory:
+            victor.inventory.append(item)
+
+
 
 
     def set_site_id(self):
@@ -192,6 +209,6 @@ class Structure():
                 self.workers = 0
             else:
                 self.workers = []
+                self.monsters = []
             return self
-        
 
