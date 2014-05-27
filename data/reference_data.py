@@ -2,10 +2,10 @@ from math import pi
 
 
 #screen = (1280, 1024)
-screen = (1120, 896)
+#screen = (1120, 896)
 #screen = (960, 768)
 #screen = (800, 640)
-#screen = (640, 512)
+screen = (640, 512)
 
 image_path = 'img/'
 

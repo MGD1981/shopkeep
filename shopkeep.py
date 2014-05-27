@@ -5,11 +5,10 @@ import pygame as pg
 
 def start_game():
     game = game_data.Game()
-    clock = pg.time.Clock()
     draw_screen.run_menu(game, menus.StartMenu())
 
     while True:
-        game.clock.tick()
+        game.clock.tick(ref.fps)
         game.tick()
 
 

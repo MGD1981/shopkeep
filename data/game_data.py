@@ -32,7 +32,6 @@ class Game():
             'message': screens.MessageScreen(ref.screen[0], ref.screen[1]*5/16)
         }
 
-        self.blink = False
         background = pg.Surface(self.screen.get_size())
         self.background = background.convert()
         self.background.fill(ref.background_color)
@@ -69,13 +68,19 @@ class Game():
 
                 if self.keys[K_1]:
                     self.speed = 'normal'
+                    self.action_log.append('speed change')
                 if self.keys[K_2]:
                     self.speed = 'fast'
+                    self.action_log.append('speed change')
                 if self.keys[K_3]:
                     self.speed = 'ultra'
+                    self.action_log.append('speed change')
                 if self.keys[K_4]:
                     self.speed = 'ludicrous'
-                pg.time.set_timer(pg.USEREVENT, ref.game_speed_dct[self.speed])
+                    self.action_log.append('speed change')
+                if 'speed change' in self.action_log:
+                    pg.time.set_timer(pg.USEREVENT, ref.game_speed_dct[self.speed])
+                    self.action_log.remove('speed change')
 
                 #TODO: Remove this -- for testing only
                 if self.keys[K_h]:
@@ -105,7 +110,6 @@ class Game():
             elif event.type == pg.KEYUP:
                 self.keys = pg.key.get_pressed()
             if event.type == pg.USEREVENT:
-                self.blink = not self.blink
                 for site in entities.sites['object list']:
                     site.tick(self)
                 for hero in entities.heroes['object list']:
@@ -118,4 +122,5 @@ class Game():
         for screen in self.screens.keys():
             self.screens[screen].update(self)
         pg.display.flip()
-        print "FPS: %d" % self.clock.get_fps()
+        #NOTE: For dev:
+        #print "FPS: %d" % self.clock.get_fps()
