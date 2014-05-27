@@ -132,6 +132,7 @@ class Site():
                                 hero.destination = entities.town['object'].location
                             hero.traveling = True
                             self.structure.workers.remove(hero.hero_id)
+                            self.structure.worker_capacity += 1
                             
                         
                         
@@ -147,6 +148,7 @@ class Site():
             loser = hero
             entities.heroes['object list'].remove(loser)
             self.structure.workers.remove(loser.hero_id)
+            self.structure.worker_capacity += 1
         victor.kills.append(loser)
         loser.alive = False
         for coin in loser.coins.keys():

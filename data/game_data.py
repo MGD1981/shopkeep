@@ -77,6 +77,11 @@ class Game():
                     self.speed = 'ludicrous'
                 pg.time.set_timer(pg.USEREVENT, ref.game_speed_dct[self.speed])
 
+                #TODO: Remove this -- for testing only
+                if self.keys[K_h]:
+                    import hero_data
+                    hero_data.Hero().generate('town')
+
                 #DevMode (Ctrl-Shift-D)
                 if (
                     self.keys[K_d] and 

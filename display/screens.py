@@ -108,7 +108,7 @@ class WorldScreen(Subscreen):
         for hero_tile in self.hero_tiles:
             hero_loc = [x/tile_scale for x in hero_tile.rect[0:2]] 
             if hero_loc in site_locs:
-                site = [s for s in entities.sites if s.location == hero_loc][0]
+                site = [s for s in entities.sites['object list'] if s.location == hero_loc][0]
                 tiles.append(sprites.BackgroundTile(
                     game,
                     ref.image_path +

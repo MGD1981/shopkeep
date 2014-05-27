@@ -45,8 +45,8 @@ class Hero():
         if self.location == entities.town['object'].location:
             if randint(1, 2) == 1:
                 self.boredom += 1
-            #if self.boredom >= 100:
-            if self.boredom >= 1: #TODO: Remove line; just for testing
+            #if self.boredom >= 100 and 'adventure' not in self.wants:
+            if self.boredom >= 1 and 'adventure' not in self.wants: #TODO: Remove line; just for testing
                 self.wants.append('adventure')
         if self.traveling:
             self.step_to(self.destination)
