@@ -1,11 +1,11 @@
 from math import pi
 
 
-#screen = (1280, 1024)
+screen = (1280, 1024)
 #screen = (1120, 896)
 #screen = (960, 768)
 #screen = (800, 640)
-screen = (640, 512)
+#screen = (640, 512)
 
 image_path = 'img/'
 
@@ -102,7 +102,10 @@ button_dct = {
 
 
 sprite_dct = {
-    'player': 'shopkeeper.png'
+    'player': [
+        'shopkeeper1.png',
+        'shopkeeper2.png'
+    ]
 }
 
 weapon_type_dct = {

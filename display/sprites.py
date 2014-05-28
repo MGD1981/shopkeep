@@ -16,33 +16,51 @@ def load_image(name, colorkey=None):
         if colorkey is -1:
             colorkey = image.get_at((0,0)) #gets transparent colorkey
         image.set_colorkey(colorkey, RLEACCEL)
-    return image, image.get_rect()
+    return image
 
 
 class Person(pg.sprite.Sprite):
     """The player"""
-    def __init__(self, game, img, x, y):
+    def __init__(self, game, img_list, x, y):
         pg.sprite.Sprite.__init__(self)
-        self.image, self.rect = load_image(img, -1)
+        self.images = []
+        for image in img_list:
+            self.images.append(load_image(ref.image_path + image, -1))
+        self.index = 0
+        self.image = self.images[self.index]
+        self.rect = self.image.get_rect()
         self.rect.topleft = x, y
+        self.blink = False
 
     def update(self, game):
         if game.keys[K_LEFT]:
             if self.validate(0,-1):
                 self.move(0,-1)
-                game.action_log.append('refresh background')
+                self.refresh(game)
         if game.keys[K_RIGHT]:
             if self.validate(0,1):
                 self.move(0,1)
-                game.action_log.append('refresh background')
+                self.refresh(game)
         if game.keys[K_UP]:
             if self.validate(1,-1):
                 self.move(1,-1)
-                game.action_log.append('refresh background')
+                self.refresh(game)
         if game.keys[K_DOWN]:
             if self.validate(1,1):
                 self.move(1,1)
-                game.action_log.append('refresh background')
+                self.refresh(game)
+
+    def refresh(self, game):
+        if game.blink != self.blink:
+            self.blink = game.blink
+            self.animate()
+        game.action_log.append('refresh background')
+
+    def animate(self):
+        self.index += 1
+        if self.index >= len(self.images):
+            self.index = 0
+        self.image = self.images[self.index]
         
     def validate(self, axis, direction):
         #axis: 0=x, 1=y
@@ -85,7 +103,8 @@ class BackgroundTile(pg.sprite.Sprite):
     """Background tiles"""
     def __init__(self, game, img, x, y):
         pg.sprite.Sprite.__init__(self)
-        self.image, self.rect = load_image(img, -1)
+        self.image = load_image(img, -1)
+        self.rect = self.image.get_rect()
         self.rect.topleft = x, y
 
 
@@ -94,7 +113,8 @@ class Button(pg.sprite.Sprite):
     def __init__(self, game, name, img, x, y):
         pg.sprite.Sprite.__init__(self)
         self.name = name
-        self.image, self.rect = load_image(img, -1)
+        self.image = load_image(img, -1)
+        self.rect = self.image.get_rect()
         self.rect.topleft = x, y
         self.mouse_on = False
         self.clicked = False

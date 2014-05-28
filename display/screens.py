@@ -165,7 +165,7 @@ class WorldScreen(Subscreen):
         #Creates player sprite
         p_x = entities.player['object'].location[0]
         p_y = entities.player['object'].location[1] 
-        player = sprites.Person(game, ref.image_path + ref.sprite_dct['player'], p_x, p_y) 
+        player = sprites.Person(game, ref.sprite_dct['player'], p_x, p_y) 
         self.shop_sprites = pg.sprite.Group((player))
 
         self.initialize_world_sprites(game)

@@ -21,7 +21,9 @@ class Game():
 
         self.action_log = ['refresh background']
         self.speed = 'normal'
-        pg.time.set_timer(pg.USEREVENT, ref.game_speed_dct[self.speed])
+        pg.time.set_timer(pg.USEREVENT, ref.game_speed_dct[self.speed]) #game ticks
+        pg.time.set_timer(pg.USEREVENT+1, ref.game_speed_dct[self.speed]/2) #sprite animation ticks
+        self.blink = False
 
         self.speed_keys = [K_1, K_2, K_3, K_4]
 
@@ -114,6 +116,8 @@ class Game():
                     site.tick(self)
                 for hero in entities.heroes['object list']:
                     hero.tick()
+            if event.type == pg.USEREVENT+1:
+                self.blink = not self.blink
 
         #entities.shop['object'].tick(self)
         entities.town['object'].tick(self)
