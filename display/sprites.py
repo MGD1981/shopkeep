@@ -68,7 +68,8 @@ class Person(pg.sprite.Sprite):
         test_sprite = pg.sprite.Sprite()
         test_sprite.rect = copy.deepcopy(self.rect)
         test_sprite.rect[0] = test_sprite.rect[0] + (-axis+1)*vector
-        test_sprite.rect[1] = test_sprite.rect[1] + axis*vector
+        test_sprite.rect[3] = test_sprite.rect[3]/2
+        test_sprite.rect[1] = test_sprite.rect[1] + test_sprite.rect[3] + axis*vector
         if len(pg.sprite.spritecollide(test_sprite, game.screens['world'].impassable_shop_tiles, False)) > 0:
             return False
         return True
