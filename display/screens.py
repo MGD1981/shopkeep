@@ -172,24 +172,30 @@ class WorldScreen(Subscreen):
         self.initialize_site_sprites(game)
         self.initialize_hero_sprites(game)
 
-        #creates shop_tile sprite group
+        #creates shop_tile sprite groups
         shop = entities.shop['object']
         at_pos = [0,0]
-        tiles = []
+        background_tiles = []
+        impassable_tiles = []
         for row in xrange(len(shop.shop_grid)):
             for tile in xrange(len(shop.shop_grid[0])):
-                if entities.shop['object'].shop_grid[row][tile] != 0:
-                    tiles.append(sprites.BackgroundTile(
+                if shop.shop_grid[row][tile] != 0:
+                    if ref.shop_tile_dct[shop.shop_grid[row][tile]]['passable']:
+                        tile_group = background_tiles
+                    else:
+                        tile_group = impassable_tiles
+                    tile_group.append(sprites.BackgroundTile(
                         game,
                         ref.image_path + 
-                            ref.shop_tile_dct[entities.shop['object'].shop_grid[
+                            ref.shop_tile_dct[shop.shop_grid[
                                                         row][tile]]['image file'],
                         at_pos[0], at_pos[1]
                     ))
                 at_pos[0] += ref.tile_size
             at_pos[1] += ref.tile_size
             at_pos[0] = copy.deepcopy(self.position[0])
-        self.shop_tiles = pg.sprite.Group(tiles)
+        self.background_shop_tiles = pg.sprite.Group(background_tiles)
+        self.impassable_shop_tiles = pg.sprite.Group(impassable_tiles)
 
 
     def update(self, game):
@@ -204,7 +210,8 @@ class WorldScreen(Subscreen):
                 if action == 'refresh background':
                         #draw shop background
                         self.background.fill(ref.background_color)
-                        self.shop_tiles.draw(self.background)
+                        self.background_shop_tiles.draw(self.background)
+                        self.impassable_shop_tiles.draw(self.background)
                         self.draw_border(game)
                         game.action_log.remove(action)
 
