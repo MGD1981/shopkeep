@@ -88,6 +88,9 @@ class Game():
                 if self.keys[K_h]:
                     import hero_data
                     hero_data.Hero().generate('town')
+                if self.keys[K_t]:
+                    for site in entities.sites['object list']:
+                        site.structure.transform()
 
                 #DevMode (Ctrl-Shift-D)
                 if (

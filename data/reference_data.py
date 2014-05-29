@@ -729,7 +729,7 @@ structure_type_dct = {
         'site type': 'adventure',
         'time per harvest': 30,
         'transformations': ['farm'],
-        'image file': 'placeholder_tile.png'
+        'image file': 'fallow_ground_tile.png'
     },
     'abandoned mine': {
         'class': 'transformed',
@@ -738,13 +738,13 @@ structure_type_dct = {
         'site type': 'adventure',
         'time per harvest': 200,
         'transformations': ['collapsed mine'],
-        'image file': 'placeholder_tile.png'
+        'image file': 'abandoned_mine_tile.png'
     },
     'collapsed mine': {
         'class': 'transformed',
         'site type': 'resource',
         'time per harvest': 0,
-        'image file': 'placeholder_tile.png'
+        'image file': 'collaped_mine_tile.png'
     }
 }
 
