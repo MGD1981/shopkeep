@@ -225,6 +225,9 @@ class WorldScreen(Subscreen):
                         game.action_log.remove(action)
 
             #draw shop foreground
+            shop_sprite_list = pg.sprite.LayeredUpdates(self.shop_sprites).sprites()
+            shop_sprite_list.sort(key=lambda x: x.rect.bottom)
+            self.shop_sprites = pg.sprite.Group(shop_sprite_list)
             self.shop_sprites.update(game)
             self.shop_sprites.draw(self.background)
 

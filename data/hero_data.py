@@ -87,14 +87,13 @@ class Hero():
                     break
 
     def think(self):
-        if len(self.inventory) >= 2 and 'shopping' not in self.wants:
+        if self.shop_location == None and len(self.inventory) >= 2 and 'shopping' not in self.wants:
             self.wants.append('shopping')
         if self.shop_location != None: #if hero is in the shop
             if self.inventory >= 2 and self.pathfinder == None:
                 transaction_tiles = self.get_tiles('transaction')
                 self.shop_destination = choice(transaction_tiles)
                 self.get_path(self.shop_destination)
-                print "Path: %r" % self.path
 
     def get_path(self, destination):
         gridmap = GridMap(

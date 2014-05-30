@@ -331,21 +331,31 @@ material_type_dct = {
         'density': 0.675,
         'useable': True
     },
+    'flax': {
+        'class': 'fiber',
+        'rarity': 'common',
+        'useable': False,
+        'material yielded': 'linen'
+    },
     'linen': {
         'class': 'fiber',
         'density': 1.6,
         'toughness': 1500.0,
         'strength': 40.0,
         'flexibility': .04,
-        'rarity': 'common',
         'useable': True
+    },
+    'cotton boll': {
+        'class': 'fiber',
+        'rarity': 'abundant',
+        'useable': False,
+        'material yielded': 'cotton'
     },
     'cotton': {
         'class': 'fiber',
         'density': 1.54,
         'toughness': 850.0,
         'strength': 8.0,
-        'rarity': 'abundant',
         'flexibility': .08,
         'useable': True
     },
@@ -432,18 +442,6 @@ material_type_dct = {
         'rarity': 'rare',
         'useable': False,
         'material yielded': 'silver'
-    },
-    'flax': {
-        'class': 'metal',
-        'rarity': 'common',
-        'useable': False,
-        'material yielded': 'linen'
-    },
-    'cotton boll': {
-        'class': 'metal',
-        'rarity': 'common',
-        'useable': False,
-        'material yielded': 'cotton'
     },
     'copper': {
         'class': 'metal',

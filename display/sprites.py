@@ -108,7 +108,6 @@ class Hero(Person):
             if self.hero.path != None:
                 try:
                     self.next_goal = map(lambda x: x*ref.tile_size, (next(self.hero.path)))
-                    print "Got next goal: %r" % self.next_goal
                 except StopIteration:
                     self.hero.pathfinder = None
                     self.hero.path = None

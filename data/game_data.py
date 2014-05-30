@@ -87,7 +87,9 @@ class Game():
                 #TODO: Remove this -- for testing only
                 if self.keys[K_h]:
                     import hero_data
-                    hero_data.Hero().generate('town').wants.append('shopping')
+                    import item_data
+                    hero_data.Hero().generate('town').inventory.append(item_data.Weapon().generate())
+                    
                 if self.keys[K_t]:
                     for site in entities.sites['object list']:
                         site.structure.transform()
