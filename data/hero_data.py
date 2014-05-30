@@ -19,7 +19,7 @@ class Hero():
         self.shop_location = None
         self.shop_destination = None
         self.pathfinder = None
-        self.path_index = None
+        self.path = None
         self.name = None
         self.home = None
         self.inventory = []
@@ -89,51 +89,60 @@ class Hero():
     def think(self):
         if len(self.inventory) >= 2 and 'shopping' not in self.wants:
             self.wants.append('shopping')
+        if self.shop_location != None: #if hero is in the shop
+            if self.inventory >= 2 and self.pathfinder == None:
+                transaction_tiles = self.get_tiles('transaction')
+                self.shop_destination = choice(transaction_tiles)
+                self.get_path(self.shop_destination)
+                print "Path: %r" % self.path
 
-    def step_to(self, destination):
-        if self.shop_location == None: #World map pathfinding
-            x = False
-            y = False
-            if destination[0] != self.location[0]:
-                x = True
-            if destination[1] != self.location[1]:
-                y = True
-            if x and randint(1,3) != 3:
-                self.location[0] = self.location[0] - int(
-                    copysign(1, self.location[0]-destination[0])
-                )
-            if y and randint(1,3) != 3:
-                self.location[1] = self.location[1] - int(
-                    copysign(1, self.location[1]-destination[1])
-                )
-        else: #Shop map pathfinding
-            if self.pathfinder == None:
-                gridmap = GridMap(
-                    len(entities.shop['object'].shop_grid[0])*ref.tile_size,
-                    len(entities.shop['object'].shop_grid)*ref.tile_size
-                )
-                blocked_tiles = []
-                for row in xrange(len(entities.shop['object'].shop_grid)):
-                    for column in xrange(len(entities.shop['object'].shop_grid[row])):
-                        tile = entities.shop['object'].shop_grid[row][column]
-                        if not ref.shop_tile_dct[tile]['passable']:
-                            blocked_tiles.append(column, row)
-                for blocked_tile in blocked_tiles:
-                    for x in range(
-                        blocked_tile[0]*ref.tile_size, blocked_tile[0]*ref.tile_size + ref.tile_size
-                    ):
-                        for y in range(
-                            blocked_tile[1]*ref.tile_size, blocked_tile[1]*ref.tile_size + ref.tile_size
-                        ):
-                            gridmap.set_blocked((x, y))
-                self.pathfinder = PathFinder(gridmap.successors, gridmap.move_cost, gridmap.move_cost)
-                self.path = pathfinder.compute_path(self.shop_location, self.shop_destination)
-                self.path_index = 0
-            else:
-                if self.path_index == len(self.path):
-                    self.pathfinder = None
-                    self.path = None
-                    self.path_index = None
+    def get_path(self, destination):
+        gridmap = GridMap(
+            len(entities.shop['object'].shop_grid[0]),
+            len(entities.shop['object'].shop_grid)
+        )
+        blocked_tiles = self.get_tiles('passable', False)
+        for blocked_tile in blocked_tiles:
+            gridmap.set_blocked(blocked_tile)
+        self.pathfinder = PathFinder(gridmap.successors, gridmap.move_cost, gridmap.move_cost)
+        self.path = self.pathfinder.compute_path(
+            tuple(map(lambda x: x/ref.tile_size, self.shop_location)),
+            destination
+        )
+
+
+    def step_to(self, destination=None):
+        x = False
+        y = False
+        if destination[0] != self.location[0]:
+            x = True
+        if destination[1] != self.location[1]:
+            y = True
+        if x and randint(1,3) != 3:
+            self.location[0] = self.location[0] - int(
+                copysign(1, self.location[0]-destination[0])
+            )
+        if y and randint(1,3) != 3:
+            self.location[1] = self.location[1] - int(
+                copysign(1, self.location[1]-destination[1])
+            )
+
+
+    def get_tiles(self, tile_type, positive=True):
+        """Returns a list of coordinates where that type of tile exists in the shop grid"""
+        if tile_type not in ref.tile_type_list:
+            tester = tile_type
+            tile_type = positive
+        else:
+            tester = 'tile type'
+        tiles = []
+        for row in xrange(len(entities.shop['object'].shop_grid)):
+            for column in xrange(len(entities.shop['object'].shop_grid[row])):
+                tile = entities.shop['object'].shop_grid[row][column]
+                if tile in ref.shop_tile_dct.keys():
+                    if ref.shop_tile_dct[tile][tester] == tile_type:
+                        tiles.append((column, row))
+        return tiles
 
 
         
@@ -151,6 +160,7 @@ class Hero():
             entrance_loc[1] * ref.tile_size
         )
         game.screens['world'].initialize_shop_sprites(game)
+
 
     def generate(self, location='random', weapon='random'):
         """Generates a hero."""

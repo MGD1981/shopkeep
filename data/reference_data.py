@@ -28,7 +28,7 @@ initial_shop_overlay = [[0,0,0,0,0,0,0,0,0,0],
                         [0,0,0,0,2,2,2,2,2,2],
                         [0,0,0,0,2,4,1,1,1,2],
                         [0,0,0,0,2,1,1,5,5,2],
-                        [0,0,0,0,2,1,1,1,1,2],
+                        [0,0,0,0,2,1,1,6,6,2],
                         [0,0,0,0,2,1,1,1,1,2],
                         [0,0,0,0,2,2,2,3,2,2]]
 
@@ -73,9 +73,16 @@ shop_tile_dct = {
         'tile class': 'overlay',
         'passable': False,
         'image file': 'wall.png' 
+    },
+    6: {
+        'tile type': 'transaction',
+        'tile class': 'overlay',
+        'passable': True,
+        'image file': 'floor.png'
     }
 }
 
+tile_type_list = [shop_tile_dct[i]['tile type'] for i in shop_tile_dct.keys() if 'tile type' in shop_tile_dct[i].keys()]
 
 button_dct = {
     'shop': {

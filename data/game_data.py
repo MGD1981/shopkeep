@@ -95,6 +95,10 @@ class Game():
                 if self.keys[K_m]:
                     import site_data
                     site_data.Site().generate('resource', 'rockland')
+                if self.keys[K_i]:
+                    import item_data
+                    for hero in entities.heroes['object list']:
+                        hero.inventory.append(item_data.Weapon().generate())
 
                 #DevMode (Ctrl-Shift-D)
                 if (

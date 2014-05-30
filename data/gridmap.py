@@ -65,3 +65,4 @@ class GridMap(object):
                 print "%s" % ('O' if self.map[row][col] else '.'),
             print ''
 
+

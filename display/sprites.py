@@ -97,9 +97,18 @@ class Hero(Person):
         self.hero = [h for h in entities.heroes['object list'] if h.hero_id == hero_id][0]
 
     def update(self, game):
-        self.rect[0] = self.hero.shop_location[0]
-        self.rect[1] = self.hero.shop_location[1]
-        
+        #TODO: Smoothly move hero through each path node
+        if self.hero.path != None:
+            try:
+                self.hero.shop_location = map(lambda x: x*ref.tile_size, (next(self.hero.path)))
+            except StopIteration:
+                self.hero.pathfinder = None
+                self.hero.path = None
+                self.hero.shop_destination = None
+                
+            self.rect[0] = self.hero.shop_location[0]
+            self.rect[1] = self.hero.shop_location[1]
+                
 
 class BackgroundTile(pg.sprite.Sprite):
     """Background tiles"""
