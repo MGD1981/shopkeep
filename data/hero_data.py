@@ -5,6 +5,8 @@ from shop_data import Shop
 from economy_data import Economy
 from random import choice, randint, shuffle
 from math import copysign
+from pathfinder import PathFinder
+from gridmap import GridMap
 
 
 class Hero():
@@ -14,6 +16,10 @@ class Hero():
         self.hero_id = None 
         self.alive = True
         self.location = [None, None]
+        self.shop_location = None
+        self.shop_destination = None
+        self.pathfinder = None
+        self.path_index = None
         self.name = None
         self.home = None
         self.inventory = []
@@ -41,13 +47,21 @@ class Hero():
 
 
     def tick(self):
+        self.think()
+
+        if 'shopping' in self.wants:
+            self.enter_shop()
 
         if self.location == entities.town['object'].location:
-            if randint(1, 2) == 1:
-                self.boredom += 1
-            #if self.boredom >= 100 and 'adventure' not in self.wants:
-            if self.boredom >= 1 and 'adventure' not in self.wants: #TODO: Remove line; just for testing
-                self.wants.append('adventure')
+            if self.shop_location == None:
+                if randint(1, 5) == 1:
+                    self.boredom += randint(1, 50)
+                if self.boredom >= 100 and 'adventure' not in self.wants:
+                #if self.boredom >= 1 and 'adventure' not in self.wants: #TODO: Remove line; just for testing
+                    self.wants.append('adventure')
+            else:
+                pass
+
         if self.traveling:
             self.step_to(self.destination)
             if self.location == self.destination:
@@ -62,7 +76,8 @@ class Hero():
             shuffle(entities.sites['object list'])
             for site in entities.sites['object list']:
                 if (ref.structure_type_dct[
-                    site.structure.structure_type]['site type'] == 'adventure' and site.structure.worker_capacity > 0
+                    site.structure.structure_type]['site type'] == 'adventure' and
+                    site.structure.worker_capacity > 0
                 ):
                     self.traveling = True
                     self.wants.remove('adventure')
@@ -70,21 +85,70 @@ class Hero():
                     self.destination = site.location
                     break
 
+    def think(self):
+        if len(self.inventory) >= 2 and 'shopping' not in self.wants:
+            self.wants.append('shopping')
+
     def step_to(self, destination):
-        x = False
-        y = False
-        if destination[0] != self.location[0]:
-            x = True
-        if destination[1] != self.location[1]:
-            y = True
-        if x and randint(1,3) != 3:
-            self.location[0] = self.location[0] - int(
-                copysign(1, self.location[0]-destination[0])
-            )
-        if y and randint(1,3) != 3:
-            self.location[1] = self.location[1] - int(
-                copysign(1, self.location[1]-destination[1])
-            )
+        if self.shop_location == None: #World map pathfinding
+            x = False
+            y = False
+            if destination[0] != self.location[0]:
+                x = True
+            if destination[1] != self.location[1]:
+                y = True
+            if x and randint(1,3) != 3:
+                self.location[0] = self.location[0] - int(
+                    copysign(1, self.location[0]-destination[0])
+                )
+            if y and randint(1,3) != 3:
+                self.location[1] = self.location[1] - int(
+                    copysign(1, self.location[1]-destination[1])
+                )
+        else: #Shop map pathfinding
+            if self.pathfinder == None:
+                gridmap = GridMap(
+                    len(entities.shop['object'].shop_grid[0])*ref.tile_size,
+                    len(entities.shop['object'].shop_grid)*ref.tile_size
+                )
+                blocked_tiles = []
+                for row in xrange(len(entities.shop['object'].shop_grid)):
+                    for column in xrange(len(entities.shop['object'].shop_grid[row])):
+                        tile = entities.shop['object'].shop_grid[row][column]
+                        if not ref.shop_tile_dct[tile]['passable']:
+                            blocked_tiles.append(column, row)
+                for blocked_tile in blocked_tiles:
+                    for x in range(
+                        blocked_tile[0]*ref.tile_size, blocked_tile[0]*ref.tile_size + ref.tile_size
+                    ):
+                        for y in range(
+                            blocked_tile[1]*ref.tile_size, blocked_tile[1]*ref.tile_size + ref.tile_size
+                        ):
+                            gridmap.set_blocked((x, y))
+                self.pathfinder = PathFinder(gridmap.successors, gridmap.move_cost, gridmap.move_cost)
+                self.path = pathfinder.compute_path(self.shop_location, self.shop_destination)
+                self.path_index = 0
+            else:
+                if self.path_index == len(self.path):
+                    self.pathfinder = None
+                    self.path = None
+                    self.path_index = None
+
+
+        
+    def enter_shop(self):
+        shop_grid = entities.shop['object'].shop_grid
+        door_locs = []
+        for y in xrange(len(shop_grid)):
+            for x in xrange(len(shop_grid[0])):
+                if shop_grid[y][x] != 0:
+                    if ref.shop_tile_dct[shop_grid[y][x]]['tile type'] == 'door':
+                        door_locs.append((x, y))
+        entrance_loc = choice(door_locs)
+        self.shop_location = (
+            entrance_loc[0] * ref.tile_size,
+            entrance_loc[1] * ref.tile_size
+        )
 
     def generate(self, location='random', weapon='random'):
         """Generates a hero."""

@@ -105,6 +105,10 @@ sprite_dct = {
     'player': [
         'shopkeeper1.png',
         'shopkeeper2.png'
+    ],
+    'hero': [
+        'hero1.png',
+        'hero2.png'
     ]
 }
 
