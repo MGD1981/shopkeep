@@ -122,7 +122,7 @@ class Game():
                 for site in entities.sites['object list']:
                     site.tick(self)
                 for hero in entities.heroes['object list']:
-                    hero.tick()
+                    hero.tick(self)
             if event.type == pg.USEREVENT+1:
                 self.blink = not self.blink
 

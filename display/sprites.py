@@ -21,7 +21,7 @@ def load_image(name, colorkey=None):
 
 
 class Person(pg.sprite.Sprite):
-    """The player"""
+    """People in the shop super-class"""
     def __init__(self, game, img_list, x, y):
         pg.sprite.Sprite.__init__(self)
         self.images = []
@@ -34,22 +34,7 @@ class Person(pg.sprite.Sprite):
         self.blink = False
 
     def update(self, game):
-        if game.keys[K_LEFT]:
-            if self.validate(game, 0,-1):
-                self.move(0,-1)
-                self.refresh(game)
-        if game.keys[K_RIGHT]:
-            if self.validate(game, 0,1):
-                self.move(0,1)
-                self.refresh(game)
-        if game.keys[K_UP]:
-            if self.validate(game, 1,-1):
-                self.move(1,-1)
-                self.refresh(game)
-        if game.keys[K_DOWN]:
-            if self.validate(game, 1,1):
-                self.move(1,1)
-                self.refresh(game)
+        pass
 
     def refresh(self, game):
         if game.blink != self.blink:
@@ -74,11 +59,47 @@ class Person(pg.sprite.Sprite):
             return False
         return True
 
-    def move(self, axis, direction):
+    def move(self, axis, direction, origin=None):
         vector = ref.player_speed * direction
-        entities.player['object'].location[axis] += vector
+        if origin != None:
+            origin[axis] += vector
         self.rect = self.rect.move((-axis+1)*vector, axis*vector)
 
+
+class Player(Person):
+    """Player-controlled shopkeep in the shop"""
+    def __init__(self, game, img_list, x, y):
+        super(Player, self).__init__(game, img_list, x, y)
+
+    def update(self, game):
+        origin = entities.player['object'].location
+        if game.keys[K_LEFT]:
+            if self.validate(game, 0,-1):
+                self.move(0,-1, origin)
+                self.refresh(game)
+        if game.keys[K_RIGHT]:
+            if self.validate(game, 0,1):
+                self.move(0,1, origin)
+                self.refresh(game)
+        if game.keys[K_UP]:
+            if self.validate(game, 1,-1):
+                self.move(1,-1, origin)
+                self.refresh(game)
+        if game.keys[K_DOWN]:
+            if self.validate(game, 1,1):
+                self.move(1,1, origin)
+                self.refresh(game)
+
+class Hero(Person):
+    """Heroes in the shop"""
+    def __init__(self, hero_id, game, img_list, x, y):
+        super(Hero, self).__init__(game, img_list, x, y)
+        self.hero = [h for h in entities.heroes['object list'] if h.hero_id == hero_id][0]
+
+    def update(self, game):
+        self.rect[0] = self.hero.shop_location[0]
+        self.rect[1] = self.hero.shop_location[1]
+        
 
 class BackgroundTile(pg.sprite.Sprite):
     """Background tiles"""

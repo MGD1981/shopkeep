@@ -46,11 +46,12 @@ class Hero():
         }
 
 
-    def tick(self):
+    def tick(self, game):
         self.think()
 
         if 'shopping' in self.wants:
-            self.enter_shop()
+            self.enter_shop(game)
+            self.wants.remove('shopping')
 
         if self.location == entities.town['object'].location:
             if self.shop_location == None:
@@ -136,7 +137,7 @@ class Hero():
 
 
         
-    def enter_shop(self):
+    def enter_shop(self, game):
         shop_grid = entities.shop['object'].shop_grid
         door_locs = []
         for y in xrange(len(shop_grid)):
@@ -149,6 +150,7 @@ class Hero():
             entrance_loc[0] * ref.tile_size,
             entrance_loc[1] * ref.tile_size
         )
+        game.screens['world'].initialize_shop_sprites(game)
 
     def generate(self, location='random', weapon='random'):
         """Generates a hero."""

@@ -160,14 +160,23 @@ class WorldScreen(Subscreen):
             ))
         self.site_tiles = pg.sprite.Group(tiles)
 
-    def initialize_sprites(self, game):
-        """Initializes objects on top of background and returns the sprite group"""
-        #Creates player sprite
+    def initialize_shop_sprites(self, game):
+        #Creates player and shopper sprites
         p_x = entities.player['object'].location[0]
         p_y = entities.player['object'].location[1] 
-        player = sprites.Person(game, ref.sprite_dct['player'], p_x, p_y) 
-        self.shop_sprites = pg.sprite.Group((player))
+        shop_sprites = []
+        shop_sprites.append(sprites.Player(game, ref.sprite_dct['player'], p_x, p_y))
+        for hero in [h for h in entities.heroes['object list'] if h.shop_location != None]:
+            shop_sprites.append(sprites.Hero(
+                hero.hero_id, game, ref.sprite_dct['hero'], hero.shop_location[0], hero.shop_location[1]
+            ))
+        self.shop_sprites = pg.sprite.Group(shop_sprites)
 
+
+    def initialize_sprites(self, game):
+        """Initializes objects on top of background and returns the sprite group"""
+        
+        self.initialize_shop_sprites(game)
         self.initialize_world_sprites(game)
         self.initialize_site_sprites(game)
         self.initialize_hero_sprites(game)
