@@ -155,10 +155,10 @@ class Hero():
                     if ref.shop_tile_dct[shop_grid[y][x]]['tile type'] == 'door':
                         door_locs.append((x, y))
         entrance_loc = choice(door_locs)
-        self.shop_location = (
+        self.shop_location = [
             entrance_loc[0] * ref.tile_size,
             entrance_loc[1] * ref.tile_size
-        )
+        ]
         game.screens['world'].initialize_shop_sprites(game)
 
 

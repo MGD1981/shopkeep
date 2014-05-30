@@ -2,6 +2,8 @@ import os, sys
 import pygame as pg
 from pygame.locals import *
 from data import entities, reference_data as ref
+from random import randint
+from math import copysign
 import copy
 
 def load_image(name, colorkey=None):
@@ -60,6 +62,10 @@ class Person(pg.sprite.Sprite):
         return True
 
     def move(self, axis, direction, origin=None):
+        """Moves sprite's rect in a direction an amount equal to ref.player_speed:
+        axis: 0 for x-axis, 1 for y-axis
+        direction: 1 for forward, -1 for backward
+        """
         vector = ref.player_speed * direction
         if origin != None:
             origin[axis] += vector
@@ -95,19 +101,37 @@ class Hero(Person):
     def __init__(self, hero_id, game, img_list, x, y):
         super(Hero, self).__init__(game, img_list, x, y)
         self.hero = [h for h in entities.heroes['object list'] if h.hero_id == hero_id][0]
+        self.next_goal = None #coordinates of current path index
 
     def update(self, game):
-        #TODO: Smoothly move hero through each path node
-        if self.hero.path != None:
-            try:
-                self.hero.shop_location = map(lambda x: x*ref.tile_size, (next(self.hero.path)))
-            except StopIteration:
-                self.hero.pathfinder = None
-                self.hero.path = None
-                self.hero.shop_destination = None
-                
+        if self.next_goal == None:
+            if self.hero.path != None:
+                try:
+                    self.next_goal = map(lambda x: x*ref.tile_size, (next(self.hero.path)))
+                    print "Got next goal: %r" % self.next_goal
+                except StopIteration:
+                    self.hero.pathfinder = None
+                    self.hero.path = None
+                    self.hero.shop_destination = None
+                    self.next_goal = None
+        else:
+            origin = self.hero.shop_location
+            if origin[0] != self.next_goal[0] and randint(1,3) != 3:
+                axis = 0
+                direction = int(copysign(1, self.next_goal[0] - origin[0]))
+                if self.validate(game, axis, direction):
+                    self.move(axis, direction, origin)
+            if origin[1] != self.next_goal[1] and randint(1,3) != 3:
+                axis = 1
+                direction = int(copysign(1, self.next_goal[1] - origin[1]))
+                if self.validate(game, axis, direction):
+                    self.move(axis, direction, origin)
             self.rect[0] = self.hero.shop_location[0]
             self.rect[1] = self.hero.shop_location[1]
+            if self.hero.shop_location == self.next_goal:
+                self.next_goal = None
+            self.refresh(game)
+                
                 
 
 class BackgroundTile(pg.sprite.Sprite):
