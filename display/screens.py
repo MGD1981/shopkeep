@@ -271,9 +271,9 @@ class StatusScreen(Subscreen):
         for resource_type in sorted(entities.shop['object'].resources.keys()):
             info_list.append('%s:' % resource_type)
             for resource in sorted(entities.shop['object'].resources[resource_type]):
-                info_list.append('  %s: %d' % (
+                info_list.append('  %s: %d kg' % (
                     resource, 
-                    entities.shop['object'].resources[resource_type][resource]
+                    entities.shop['object'].resources[resource_type][resource]/1000
             ))
             info_list.append('')
         return info_list
@@ -291,7 +291,7 @@ class StatusScreen(Subscreen):
                         site.structure.workers, 
                         ref.structure_type_dct[site.structure.structure_type]['worker capacity']
                         ),
-                    '  %s remaining: %d' % (site.resource, site.harvestable),
+                    '  %s remaining: %d kg' % (site.resource, site.harvestable/1000),
                     '  %d seconds until next harvest.' % site.structure.time_until_harvest
                 ])
             elif ref.structure_type_dct[site.structure.structure_type]['site type'] == 'adventure':
@@ -338,9 +338,10 @@ class StatusScreen(Subscreen):
         for resource_type in sorted(entities.town['object'].resources.keys()):
             info_list.append('%s:' % resource_type)
             for resource in sorted(entities.town['object'].resources[resource_type]):
-                info_list.append('  %s: %d' % (
+                info_list.append('  %s: %d kg' % (
                     resource, 
-                    entities.town['object'].resources[resource_type][resource]['available']                ))
+                    entities.town['object'].resources[resource_type][resource]['available']/1000
+                ))
             info_list.append('')
         return info_list
         return info_list
