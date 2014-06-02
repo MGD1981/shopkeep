@@ -2,6 +2,7 @@ from data import reference_data as ref, entities
 import pygame as pg
 import sprites
 import copy
+import operator
 
 
 def clear_callback(surface, rect):
@@ -87,6 +88,7 @@ class WorldScreen(Subscreen):
         super(WorldScreen, self).__init__(width, height)
         self.set_position(0, ref.tile_size)
         self.view = 'shop'
+        self.mouse_over = None
 
 
     def initialize_hero_sprites(self, game):
@@ -208,6 +210,14 @@ class WorldScreen(Subscreen):
 
 
     def update(self, game):
+        try:
+            self.mouse_over = [
+                sprite for sprite in self.site_tiles if 
+                sprite.rect.collidepoint(map(operator.sub, pg.mouse.get_pos(), self.position))][0
+            ]
+        except IndexError:
+            self.mouse_over = None
+            
         if 'world view' in game.action_log:
             self.view = 'world'
             game.action_log.remove('world view')
@@ -344,7 +354,7 @@ class StatusScreen(Subscreen):
                 ))
             info_list.append('')
         return info_list
-        return info_list
+
 
     def update(self, game):
         if 'switch info view' in game.action_log:
@@ -380,7 +390,7 @@ class StatusScreen(Subscreen):
         i = 0
         for info in info_list:
             text = game.info_font.render("%s" % (info), 0, ref.primary_color)
-            if 20+(i+1)*game.info_font.get_linesize() < self.background.get_height():
+            if 20+(i+2)*game.info_font.get_linesize() < self.background.get_height():
                 textpos = text.get_rect(
                     left=20, 
                     top=(20+i*game.info_font.get_linesize())
@@ -388,7 +398,7 @@ class StatusScreen(Subscreen):
             else:
                 textpos = text.get_rect(
                     left=20+self.background.get_width()/2, 
-                    top=(20+(i+3)*game.info_font.get_linesize() - self.background.get_height())
+                    top=(20+(i+4)*game.info_font.get_linesize() - self.background.get_height())
                 )
             self.background.blit(text, textpos)
             i += 1
@@ -401,8 +411,34 @@ class MessageScreen(Subscreen):
     def __init__(self, width, height):
         super(MessageScreen, self).__init__(width, height)
         self.set_position(0, ref.tile_size*11)
+        self.rollover_mode = True
 
     def update(self, game):
+        info_list = []
+        if self.rollover_mode and game.screens['world'].view == 'world':
+            world_screen = game.screens['world']
+            if world_screen.mouse_over != None:
+                info_list.append(
+                    [s for s in entities.sites['object list'] if s.location == map(
+                        lambda x: x/world_screen.mouse_over.rect[2], world_screen.mouse_over.rect[:2])][0]
+                )
+
+        self.background.fill(ref.background_color)
+        i = 0
+        for info in info_list:
+            text = game.info_font.render("%s" % (info), 0, ref.primary_color)
+            if 20+(i+2)*game.info_font.get_linesize() < self.background.get_height():
+                textpos = text.get_rect(
+                    left=20, 
+                    top=(20+i*game.info_font.get_linesize())
+                )
+            else:
+                textpos = text.get_rect(
+                    left=20+self.background.get_width()/2, 
+                    top=(20+(i+4)*game.info_font.get_linesize() - self.background.get_height())
+                )
+            self.background.blit(text, textpos)
+            i += 1
         self.draw_border(game)
         game.screen.blit(self.background, self.position)
 
