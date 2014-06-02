@@ -49,11 +49,11 @@ class Hero():
     def tick(self, game):
         self.think()
 
-        if 'shopping' in self.wants:
-            self.enter_shop(game)
-            self.wants.remove('shopping')
 
         if self.location == entities.town['object'].location:
+            if 'shopping' in self.wants:
+                self.enter_shop(game)
+                self.wants.remove('shopping')
             if self.shop_location == None:
                 if randint(1, 5) == 1:
                     self.boredom += randint(1, 50)
@@ -158,6 +158,7 @@ class Hero():
             entrance_loc[0] * ref.tile_size,
             entrance_loc[1] * ref.tile_size
         ]
+        game.message_log += "%s has entered your shop." % self.name
         game.screens['world'].initialize_shop_sprites(game)
 
 

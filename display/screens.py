@@ -231,7 +231,6 @@ class WorldScreen(Subscreen):
                         self.background.fill(ref.background_color)
                         self.background_shop_tiles.draw(self.background)
                         self.impassable_shop_tiles.draw(self.background)
-                        self.draw_border(game)
                         game.action_log.remove(action)
 
             #draw shop foreground
@@ -256,7 +255,6 @@ class WorldScreen(Subscreen):
             self.initialize_hero_sprites(game)
             self.hero_tiles.draw(self.background)
 
-        self.draw_border(game)
         game.screen.blit(self.background, self.position)
 
 class StatusScreen(Subscreen):
@@ -418,10 +416,20 @@ class MessageScreen(Subscreen):
         if self.rollover_mode and game.screens['world'].view == 'world':
             world_screen = game.screens['world']
             if world_screen.mouse_over != None:
-                info_list.append(
-                    [s for s in entities.sites['object list'] if s.location == map(
-                        lambda x: x/world_screen.mouse_over.rect[2], world_screen.mouse_over.rect[:2])][0]
-                )
+                for site in [
+                    s for s in entities.sites['object list'] if s.location == map(
+                    lambda x: x/world_screen.mouse_over.rect[2], world_screen.mouse_over.rect[:2])
+                ]:
+                    if ref.structure_type_dct[site.structure.structure_type]['site type'] == 'resource':
+                        info_list.append(
+                            "%s %s" % (site.resource.capitalize(), site.structure.structure_type)
+                        )
+                    else:
+                        info_list.append(
+                            "%s" % (site.structure.structure_type.capitalize())
+                        )
+        if not self.rollover_mode or len(info_list) == 0:
+            info_list = game.message_log
 
         self.background.fill(ref.background_color)
         i = 0
@@ -435,10 +443,11 @@ class MessageScreen(Subscreen):
             else:
                 textpos = text.get_rect(
                     left=20+self.background.get_width()/2, 
-                    top=(20+(i+4)*game.info_font.get_linesize() - self.background.get_height())
+                    top=(20+i*game.info_font.get_linesize() - self.background.get_height())
                 )
             self.background.blit(text, textpos)
             i += 1
         self.draw_border(game)
         game.screen.blit(self.background, self.position)
+
 

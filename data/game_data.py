@@ -20,6 +20,7 @@ class Game():
         self.info_font = pg.font.Font('display/fonts/UbuntuMono-R.ttf', int(ref.scale*11))
 
         self.action_log = ['refresh background']
+        self.message_log = self.MessageLog()
         self.speed = 'normal'
         pg.time.set_timer(pg.USEREVENT, ref.game_speed_dct[self.speed]) #game ticks
         pg.time.set_timer(pg.USEREVENT+1, ref.game_speed_dct[self.speed]/2) #sprite animation ticks
@@ -141,3 +142,20 @@ class Game():
         pg.display.flip()
         #NOTE: For dev:
         #print "FPS: %d" % self.clock.get_fps()
+
+
+
+    class MessageLog(list):
+        
+        def __init__(self, max_length=20):
+            self.max_length = max_length
+
+        def __iadd__(self, other):
+            if type(other) == str:
+                other = [other]
+            if len(self) == 0:
+                self = other[:self.max_length]
+            else:
+                self = other.extend(self)[:self.max_length]
+            return self
+
