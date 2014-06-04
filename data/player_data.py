@@ -24,3 +24,18 @@ class Player():
         }
     
 
+    def tick(self):
+        if (len(entities.shop['object'].transaction_queue) > 0 and 
+            self.get_shop_tile() == 'cashier'
+        ):
+            self.transact(entities.shop['object'].transaction_queue[0])
+
+    def transact(self, hero):
+        print "Transaction!"
+        #TODO
+
+    def get_shop_tile(self):
+        return ref.shop_tile_dct[entities.shop['object'].shop_grid[
+            self.location[1]/ref.tile_size][self.location[0]/ref.tile_size]
+            ]['tile type']
+

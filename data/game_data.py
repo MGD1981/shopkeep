@@ -20,7 +20,6 @@ class Game():
         self.info_font = pg.font.Font('display/fonts/UbuntuMono-R.ttf', int(ref.scale*11))
 
         self.action_log = ['refresh background']
-        self.message_log = self.MessageLog()
         self.speed = 'normal'
         pg.time.set_timer(pg.USEREVENT, ref.game_speed_dct[self.speed]) #game ticks
         pg.time.set_timer(pg.USEREVENT+1, ref.game_speed_dct[self.speed]/2) #sprite animation ticks
@@ -34,6 +33,10 @@ class Game():
             'status': screens.StatusScreen(ref.screen[0]/2, ref.screen[1]*10/16),
             'message': screens.MessageScreen(ref.screen[0], ref.screen[1]*5/16)
         }
+
+        self.message_log = self.MessageLog(
+            self.screens['message'].background.get_height() / self.info_font.get_linesize()
+        )
 
         background = pg.Surface(self.screen.get_size())
         self.background = background.convert()
@@ -130,6 +133,7 @@ class Game():
                     site.tick(self)
                 for hero in entities.heroes['object list']:
                     hero.tick(self)
+                entities.player['object'].tick()
             if event.type == pg.USEREVENT+1:
                 self.blink = not self.blink
 

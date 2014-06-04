@@ -49,7 +49,6 @@ class Hero():
     def tick(self, game):
         self.think()
 
-
         if self.location == entities.town['object'].location:
             if 'shopping' in self.wants:
                 self.enter_shop(game)
@@ -61,7 +60,11 @@ class Hero():
                 #if self.boredom >= 1 and 'adventure' not in self.wants: #TODO: Remove line; just for testing
                     self.wants.append('adventure')
             else:
-                pass
+                if ('transaction' in self.wants and 
+                    entities.shop['object'].get_shop_tile(self.get_shop_grid_location()) == 'transaction'
+                ):
+                    if self not in entities.shop['object'].transaction_queue:
+                        entities.shop['object'].transaction_queue.append(self)
 
         if self.traveling:
             self.step_to(self.destination)
@@ -76,8 +79,7 @@ class Hero():
         if 'adventure' in self.wants:
             shuffle(entities.sites['object list'])
             for site in entities.sites['object list']:
-                if (ref.structure_type_dct[
-                    site.structure.structure_type]['site type'] == 'adventure' and
+                if (site.structure.get_attribute('site type') == 'adventure' and
                     site.structure.worker_capacity > 0
                 ):
                     self.traveling = True
@@ -86,14 +88,18 @@ class Hero():
                     self.destination = site.location
                     break
 
+
     def think(self):
         if self.shop_location == None and len(self.inventory) >= 2 and 'shopping' not in self.wants:
             self.wants.append('shopping')
         if self.shop_location != None: #if hero is in the shop
-            if self.inventory >= 2 and self.pathfinder == None:
+            if self.inventory >= 2 and 'transaction' not in self.wants:
+                self.wants.append('transaction')
+            if 'transaction' in self.wants and self.pathfinder == None:
                 transaction_tiles = self.get_tiles('transaction')
                 self.shop_destination = choice(transaction_tiles)
                 self.get_path(self.shop_destination)
+
 
     def get_path(self, destination):
         gridmap = GridMap(
@@ -105,9 +111,12 @@ class Hero():
             gridmap.set_blocked(blocked_tile)
         self.pathfinder = PathFinder(gridmap.successors, gridmap.move_cost, gridmap.move_cost)
         self.path = self.pathfinder.compute_path(
-            tuple(map(lambda x: x/ref.tile_size, self.shop_location)),
+            self.get_shop_grid_location(),
             destination
         )
+
+    def get_shop_grid_location(self):
+        return tuple(map(lambda x: x/ref.tile_size, self.shop_location))
 
 
     def step_to(self, destination=None):

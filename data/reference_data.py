@@ -26,7 +26,7 @@ initial_shop_overlay = [[0,0,0,0,0,0,0,0,0,0],
                         [0,0,0,0,0,0,0,0,0,0],
                         [0,0,0,0,0,0,0,0,0,0],
                         [0,0,0,0,2,2,2,2,2,2],
-                        [0,0,0,0,2,4,1,1,1,2],
+                        [0,0,0,0,2,4,1,7,1,2],
                         [0,0,0,0,2,1,1,5,5,2],
                         [0,0,0,0,2,1,1,6,6,2],
                         [0,0,0,0,2,1,1,1,1,2],
@@ -76,6 +76,12 @@ shop_tile_dct = {
     },
     6: {
         'tile type': 'transaction',
+        'tile class': 'overlay',
+        'passable': True,
+        'image file': 'floor.png'
+    },
+    7: {
+        'tile type': 'cashier',
         'tile class': 'overlay',
         'passable': True,
         'image file': 'floor.png'

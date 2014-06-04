@@ -194,15 +194,20 @@ class Structure():
                 [x for x in ref.site_type_dct[site_type] if ref.structure_type_dct[
                 x]['class'] == terrain_type]
             )
-        if ref.structure_type_dct[self.structure_type]['site type'] == 'resource':
+        if self.get_attribute('site type') == 'resource':
             self.workers = 0
         else:
             self.workers = []
             self.monsters = []
-        self.worker_capacity = ref.structure_type_dct[self.structure_type]['worker capacity']
-        self.time_until_harvest = ref.structure_type_dct[
-                    self.structure_type]['time per harvest']
+        self.worker_capacity = self.get_attribute('worker capacity')
+        self.time_until_harvest = self.get_attribute('time per harvest')
         return self
+
+    def get_attribute(self, attribute):
+        try:
+            return ref.structure_type_dct[self.structure_type][attribute]
+        except KeyError:
+            return KeyError("Invalid attribute of structure: %r" % attribute)
                        
     def add_worker(self):
         self.workers += 1
@@ -217,9 +222,8 @@ class Structure():
 
     def transform(self):
         if 'transformations' in ref.structure_type_dct[self.structure_type].keys():
-            self.structure_type = choice(ref.structure_type_dct[
-                self.structure_type]['transformations'])
-            if ref.structure_type_dct[self.structure_type]['site type'] == 'resource':
+            self.structure_type = choice(self.get_attribute('transformations'))
+            if self.get_attribute('site type') == 'resource':
                 self.workers = 0
             else:
                 self.workers = []

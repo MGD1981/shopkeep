@@ -114,7 +114,7 @@ class WorldScreen(Subscreen):
                 tiles.append(sprites.BackgroundTile(
                     game,
                     ref.image_path +
-                        ref.structure_type_dct[site.structure.structure_type]['image file'],
+                        site.structure.get_attribute('image file'),
                     hero_tile.rect[0],
                     hero_tile.rect[1]
                 ))
@@ -156,7 +156,7 @@ class WorldScreen(Subscreen):
             tiles.append(sprites.BackgroundTile(
                 game,
                 ref.image_path +
-                    ref.structure_type_dct[site.structure.structure_type]['image file'],
+                    site.structure.get_attribute('image file'),
                 site.location[0]*(self.surface.get_width()/entities.world['size']),
                 site.location[1]*(self.surface.get_width()/entities.world['size'])
             ))
@@ -292,17 +292,17 @@ class StatusScreen(Subscreen):
             ''
         ]
         for site in sorted(entities.sites['object list']):
-            if ref.structure_type_dct[site.structure.structure_type]['site type'] == 'resource':
+            if site.structure.get_attribute('site type') == 'resource':
                 info_list.extend([
                     '%s at %r:' % (site.structure.structure_type, site.location),
                     '  %d / %d workers on site.' % (
                         site.structure.workers, 
-                        ref.structure_type_dct[site.structure.structure_type]['worker capacity']
+                        site.structure.get_attribute('worker capacity')
                         ),
                     '  %s remaining: %d kg' % (site.resource, site.harvestable/1000),
                     '  %d seconds until next harvest.' % site.structure.time_until_harvest
                 ])
-            elif ref.structure_type_dct[site.structure.structure_type]['site type'] == 'adventure':
+            elif site.structure.get_attribute('site type') == 'adventure':
                 heroes = ''
                 monsters = ''
                 for hero_id in site.structure.workers:
@@ -420,7 +420,7 @@ class MessageScreen(Subscreen):
                     s for s in entities.sites['object list'] if s.location == map(
                     lambda x: x/world_screen.mouse_over.rect[2], world_screen.mouse_over.rect[:2])
                 ]:
-                    if ref.structure_type_dct[site.structure.structure_type]['site type'] == 'resource':
+                    if site.structure.get_attribute('site type') == 'resource':
                         info_list.append(
                             "%s %s" % (site.resource.capitalize(), site.structure.structure_type)
                         )
