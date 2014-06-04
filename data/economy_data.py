@@ -18,8 +18,10 @@ class Economy():
             for material_type in material_class['types']:
                 material_value_table[material_type] = None #initializes each material_type price as None
 
-    def generate(self, town, coin_standard='copper'):
+    def generate(self, town, coin_standard=None):
         """Generates values for a town's Economy object."""
+        if coin_standard == None:
+            coin_standard = entities.town['object'].coin_standard
         self.material_value_table[coin_standard] = 100
         useable_materials = []
         non_useable_materials = []
@@ -85,10 +87,20 @@ class Economy():
 	def get_price(self, coin_standard=None):
 		"""Returns the price of the value in the passed-in denomination."""
 		if coin_standard == None:
-			coin_standard = self.coin_standard
+			coin_standard = entities.town['object'].coin_standard
 		pass
 		
 		
 	def be_influenced(self, economy_x):
 		"""Adjusts (weighted) table values in conjunction with another Economy class."""
 		pass
+
+
+class Transaction():
+
+    def __init__(self, player, hero):
+        self.player = player
+        self.hero = hero
+
+        self.player_offer = []
+        self.hero_offer = []

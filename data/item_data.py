@@ -183,12 +183,18 @@ class Component():
         
         
     def set_component_id(self):
-        """Gives component object unique ID."""
+        """Returns component object unique ID."""
         self.component_id = entities.components['next id']
         entities.components['object list'].append(self)
         entities.components['next id'] += 1
         return
-        
+
+    
+    def get_value(self, coin_standard=None):
+        """Returns price of component in passed-in denomination"""
+        if coin_standard == None:
+            coin_standard = entities.town['object'].standard_currency
+        pass
         
     def __repr__(self):
         return 'Component(ID: %r, Type:%r)' % (self.component_id, self.component_type)

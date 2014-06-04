@@ -19,6 +19,7 @@ class Town():
             'government': 0,
             'retail': 1
         }
+        self.standard_currency = 'copper'
 
 
     def generate(self):

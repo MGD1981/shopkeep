@@ -1,6 +1,7 @@
 import random
 import entities
 import display
+from economy_data import Transaction
 import reference_data as ref
 import pygame as pg
 from pygame.locals import *
@@ -24,15 +25,17 @@ class Player():
         }
     
 
-    def tick(self):
+    def tick(self, game):
         if (len(entities.shop['object'].transaction_queue) > 0 and 
             self.get_shop_tile() == 'cashier'
         ):
+            game.action_log.append('transaction')
             self.transact(entities.shop['object'].transaction_queue[0])
 
     def transact(self, hero):
         print "Transaction!"
-        #TODO
+        transaction = Transaction(self, hero)
+            
 
     def get_shop_tile(self):
         return ref.shop_tile_dct[entities.shop['object'].shop_grid[
