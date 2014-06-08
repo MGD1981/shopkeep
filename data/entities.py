@@ -33,8 +33,9 @@ def initialize():
         site_data.Site().generate('resource')
     import town_data
     town = {
-        'object': town_data.Town().generate()
+        'object': town_data.Town()
     }
+    town['object'].generate()
     import player_data
     player = {
         'object': player_data.Player()

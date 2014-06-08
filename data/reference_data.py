@@ -470,7 +470,8 @@ material_type_dct = {
         'toughness': 980.7,
         'strength': 108.0,
         'flexibility': 44800,
-        'density': 8.70
+        'density': 8.70,
+        'useable': True
     },
     'silver': {
         'class': 'metal',

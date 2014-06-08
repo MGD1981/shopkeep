@@ -1,5 +1,6 @@
 import entities
 import reference_data as ref
+import item_data
 
 
 class Economy():
@@ -7,37 +8,40 @@ class Economy():
 
     def __init__(self):
         #Values are per kg
-        weapon_value_table = {}
-        material_value_table = {}
-        coin_standard = None #coins are 10g of material
+        self.weapon_value_table = {}
+        self.material_value_table = {}
+        self.coin_standard = None #coins are 10g of material
 
-        #A specific weapon has its value stored by adding its weapon_id key
+        #A specific weapon has its value stored by adding its weapon_id key NOTE: Maybe not -- what was I thinking?
         for weapon_type in ref.weapon_type_dct:
-            weapon_value_table[weapon_type] = None #initializes each weapon_type price as None
-        for material_class in ref.material_class_dct:
-            for material_type in material_class['types']:
-                material_value_table[material_type] = None #initializes each material_type price as None
+            self.weapon_value_table[weapon_type] = None #initializes each weapon_type price as None
+        for material_type in ref.material_class_dct.keys():
+            self.material_value_table[material_type] = None #initializes each material_type price as None
 
-    def generate(self, town, coin_standard=None):
+    def generate(self, town=None, coin_standard=None):
         """Generates values for a town's Economy object."""
+        if town == None:
+            town = entities.town['object']
         if coin_standard == None:
-            coin_standard = entities.town['object'].coin_standard
+            coin_standard = town.standard_currency
         self.material_value_table[coin_standard] = 100
         useable_materials = []
         non_useable_materials = []
-        for resource_class in town['resource'].keys(): #for each material class...
-            for material in resource_class['material']: #for each material in that class...
-                if 'useable' in ref.material_type_dct[material].keys(): #if material has traits:
+        for resource_class in town.resources.keys(): #for each material class...
+            for material in town.resources[resource_class]['material']: #for each material in that class...
+                if ref.material_type_dct[material]['useable']: #if material has traits:
                     useable_materials.append(material)
                 else:
                     non_useable_materials.append(material)
+            print useable_materials
+            print non_useable_materials
             for material in useable_materials:
-                m_available = town['resource'][resource_class][material]['available']
-                m_harvestable = town['resource'][resource_class][material]['harvestable']                
+                m_available = town.resources[resource_class][material]['available']
+                m_harvestable = town.resources[resource_class][material]['harvestable']                
                 m_toughness = (
                     ref.material_type_dct[material]['toughness'] *
                     ref.material_class_dct[resource_class]['trait factor']['toughness']
-                ) #TODO: Add this factor to material_class_dct)
+                )
                 m_strength = (
                     ref.material_type_dct[material]['strength'] * 
                     ref.material_class_dct[resource_class]['trait factor']['strength']
@@ -48,8 +52,8 @@ class Economy():
                 )
                 supply = (m_available + (m_harvestable*0.15))
                 _demand = 0.0
-                for occupation in town['occupation'].keys():
-                    people = town['occupation'][occupation]
+                for occupation in town.occupations.keys():
+                    people = town.occupations[occupation]
                     _demand += (
                         ref.occupation_type_dct[occupation][
                         'material requirements']['toughness'] * m_toughness
@@ -67,13 +71,13 @@ class Economy():
                 self.material_value_table[material_type] = demand/supply
                 
             for material in non_useable_materials:
-                m_available = town['resource'][resource_class][material]['available']
-                m_harvestable = town['resource'][resource_class][material]['harvestable']
+                m_available = town.resources[resource_class][material]['available']
+                m_harvestable = town.resources[resource_class][material]['harvestable']
                 base_value = self.material_value_table[
                     ref.material_type_dct[material]['material yielded']] #TODO: Add to ref
                 supply = (m_available + (m_harvestable*0.15))
                 self.material_value_table[material_type] = (
-                    base_value * (town['population']/supply*1000)
+                    base_value * (town.population/supply*1000)
                 )
 
         return self
@@ -84,12 +88,14 @@ class Economy():
 		pass
 		
 	
-	def get_price(self, coin_standard=None):
-		"""Returns the price of the value in the passed-in denomination."""
-		if coin_standard == None:
-			coin_standard = entities.town['object'].coin_standard
-		pass
-		
+    def get_value(self, item, coin_standard=None):
+        """Returns value of item in passed-in denomination based on current Economy object"""
+        if coin_standard == None:
+            coin_standard = entities.town['object'].standard_currency
+
+        if type(item) == item_data.Component:
+	        pass	
+
 		
 	def be_influenced(self, economy_x):
 		"""Adjusts (weighted) table values in conjunction with another Economy class."""

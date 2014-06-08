@@ -1,4 +1,5 @@
 import reference_data as ref
+from economy_data import Economy
 from entities import world, sites
 import site_data
 from random import randint, choice, shuffle
@@ -20,10 +21,12 @@ class Town():
             'retail': 1
         }
         self.standard_currency = 'copper'
+        self.economy = None
 
 
     def generate(self):
         #Set location
+        self.economy = Economy().generate(self)
         w_size = world['size']
         self.location[0] = randint(w_size - (3*w_size/4), w_size - (w_size/4))
         self.location[1] = randint(w_size - (3*w_size/4), w_size - (w_size/4))

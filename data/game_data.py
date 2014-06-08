@@ -105,6 +105,9 @@ class Game():
                     import item_data
                     for hero in entities.heroes['object list']:
                         hero.inventory.append(item_data.Weapon().generate())
+                if self.keys[K_e]:
+                    print entities.town['object'].economy.material_value_table
+
 
                 #DevMode (Ctrl-Shift-D)
                 if (

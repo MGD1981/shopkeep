@@ -164,7 +164,7 @@ class Component():
     def __init__(self):
         self.component_id = None
         self.component_type = None
-        self.component_volume = None
+        self.component_volume = None # In cubic centimeters
         self.materials = []
         self.joints = []
 
@@ -175,7 +175,8 @@ class Component():
             self.materials.append(
                     Material().generate(choice(
                     ref.component_type_dct[
-                    component_type]['possible materials'])))
+                    self.component_type]['possible materials'])))
+            self.component_volume = ref.component_type_dct[self.component_type]['volume']
         else:
             return NotImplementedError(arg)
         self.set_component_id()
@@ -189,12 +190,6 @@ class Component():
         entities.components['next id'] += 1
         return
 
-    
-    def get_value(self, coin_standard=None):
-        """Returns price of component in passed-in denomination"""
-        if coin_standard == None:
-            coin_standard = entities.town['object'].standard_currency
-        pass
         
     def __repr__(self):
         return 'Component(ID: %r, Type:%r)' % (self.component_id, self.component_type)
