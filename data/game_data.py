@@ -34,8 +34,9 @@ class Game():
             'message': screens.MessageScreen(ref.screen[0], ref.screen[1]*5/16)
         }
 
-        self.message_log = self.MessageLog(
-            self.screens['message'].background.get_height() / self.info_font.get_linesize()
+        self.message_log = MessageLog(
+            [],
+            max_length=self.screens['message'].background.get_height() / self.info_font.get_linesize()
         )
 
         background = pg.Surface(self.screen.get_size())
@@ -62,7 +63,7 @@ class Game():
             if event.type == pg.KEYDOWN:
                 self.keys = pg.key.get_pressed()
                 if self.keys[K_ESCAPE]:
-                    draw_screen.run_menu(self, menus.StartMenu())
+                    draw_screen.run_menu(self, menus.StartMenu('in_progress'))
                 if self.keys[K_w]:
                     self.action_log.append('world view')
                     self.action_log.append('refresh background')
@@ -152,17 +153,21 @@ class Game():
 
 
 
-    class MessageLog(list):
-        
-        def __init__(self, max_length=20):
-            self.max_length = max_length
+class MessageLog(list):
+    
+    def __init__(self, *args, **kwargs):
+        self.max_length = 20
+        super(MessageLog, self).__init__(args[0])
+        if 'max_length' in kwargs.keys():
+            self.max_length == kwargs['max_length']
 
-        def __iadd__(self, other):
-            if type(other) == str:
-                other = [other]
-            if len(self) == 0:
-                self = other[:self.max_length]
-            else:
-                self = other.extend(self)[:self.max_length]
-            return self
+    def __iadd__(self, other):
+        if type(other) == str:
+            other = [other]
+        if len(self) == 0:
+            self = MessageLog(other[:self.max_length], max_length=self.max_length)
+        else:
+            other.extend(self)
+            self = MessageLog(other[:self.max_length], max_length=self.max_length)
+        return self
 

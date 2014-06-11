@@ -30,11 +30,12 @@ class Debug():
 
 def run_menu(game, menu):
     """Displays a Menu class object."""
+    game.background.fill(ref.background_color)
     i = 1
     for option in menu.options:
         text = game.menu_font.render(" %d) %s" % (i, option.text), 1, ref.primary_color, ref.background_color)
         textpos = text.get_rect(left=20, bottom=game.background.get_height() - (
-                         len(menu.options)*(game.menu_font.get_linesize()) - ((i-1)*ref.tile_size)))
+                         len(menu.options)*(game.menu_font.get_linesize()) - ((i-2)*ref.tile_size)))
         game.background.blit(text, textpos)
         i += 1
     game.screen.blit(game.background, (0, 0))

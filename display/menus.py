@@ -18,8 +18,14 @@ class Menu:
 
 class StartMenu(Menu):
 
-    def __init__(self):
+    def __init__(self, arg=None):
         Menu.__init__(self)
+
+        if arg == 'in_progress':
+            o = Option()
+            o.text = "Go Back"
+            o.actions = []
+            self.options.append(o)
 
         o1 = Option()
         o1.text = "Start New Game"

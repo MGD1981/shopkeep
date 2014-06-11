@@ -443,7 +443,7 @@ class MessageScreen(Subscreen):
             else:
                 textpos = text.get_rect(
                     left=20+self.background.get_width()/2, 
-                    top=(20+i*game.info_font.get_linesize() - self.background.get_height())
+                    top=(20+(i+2)*game.info_font.get_linesize() - self.background.get_height())
                 )
             self.background.blit(text, textpos)
             i += 1
