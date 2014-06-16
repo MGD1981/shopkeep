@@ -23,6 +23,7 @@ class Player():
             'leather': 0,
             'metal': 0
         }
+        self.transaction = None
     
 
     def tick(self, game):
@@ -30,12 +31,15 @@ class Player():
             self.get_shop_tile() == 'cashier'
         ):
             game.action_log.append('transaction')
+            game.pause()
             self.transact(entities.shop['object'].transaction_queue[0])
+            game.unpause()
+
 
     def transact(self, hero):
         print "Transaction!"
-        transaction = Transaction(self, hero)
-            
+        self.transaction = Transaction(self, hero)
+         
 
     def get_shop_tile(self):
         return ref.shop_tile_dct[entities.shop['object'].shop_grid[

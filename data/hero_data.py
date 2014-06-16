@@ -70,6 +70,8 @@ class Hero():
             self.step_to(self.destination)
             if self.location == self.destination:
                 self.traveling = False
+                if self.location == entities.town['object']:
+                    self.perceptions.economy.be_influenced(entities.town['object'].economy)
                 for site in entities.sites['object list']:
                     if self.destination == site.location:
                         site.structure.add_hero(self.hero_id)
@@ -176,9 +178,11 @@ class Hero():
         import item_data
         import language
         self.personality = Personality()
+        self.perceptions = Perceptions().generate(self)
         self.coins['copper'] = randint(10,300)
         if location == 'town':
-            self.location = copy.deepcopy(entities.town['object'].location)
+            self.home = entities.town['object']
+            self.location = copy.deepcopy(self.home.location)
         if weapon != None:
             if weapon == 'random':
                 self.inventory.append(item_data.Weapon().generate('random'))
@@ -221,21 +225,24 @@ class Personality():
 
 
 class Experience():
-	"""Class containing weapon and monster familiarities/knowledge"""
+    """Class containing weapon and monster familiarities/knowledge"""
 	
-	def __init__(self):
-		self.weapon_experience = None #table of weapon abilities and knowledge (class object?)
-		self.monster_experience = None #table of monster familiarity (class object?)
+    def __init__(self):
+        self.weapon_experience = None #table of weapon abilities and knowledge (class object?)
+        self.monster_experience = None #table of monster familiarity (class object?)
 
 
 class Perceptions():
-	"""Class containing perceptions of world, economy, shop, and shopkeep"""
+    """Class containing perceptions of world, economy, shop, and shopkeep"""
 
-	def __init__(self):
-		self.economic_perception = Economy() #TODO: Economy class object
+    def __init__(self):
+        self.economy = Economy() #Economy class object
                                              #Will be based on economy object of whatever town hero is from.
-		self.world_perception = Personality() #Personality class object
-		self.shopkeep_perception = Personality() #Personality class object
-		self.shop_perception = Shop() #TODO: Shop class object
-	
+        self.world = Personality() #Personality class object
+        self.shopkeep = Personality() #Personality class object
+        self.shop = Shop() #Shop class object
 
+
+    def generate(self, hero):
+        self.economy.generate(hero.home)
+        return self

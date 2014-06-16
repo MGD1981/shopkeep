@@ -36,7 +36,7 @@ class Game():
 
         self.message_log = MessageLog(
             [],
-            max_length=self.screens['message'].background.get_height() / self.info_font.get_linesize()
+            max_length=self.screens['message'].background.get_height() / self.info_font.get_linesize() - 1
         )
 
         background = pg.Surface(self.screen.get_size())
@@ -159,7 +159,8 @@ class MessageLog(list):
         self.max_length = 20
         super(MessageLog, self).__init__(args[0])
         if 'max_length' in kwargs.keys():
-            self.max_length == kwargs['max_length']
+            self.max_length = kwargs['max_length']
+        
 
     def __iadd__(self, other):
         if type(other) == str:

@@ -413,7 +413,9 @@ class MessageScreen(Subscreen):
 
     def update(self, game):
         info_list = []
-        if self.rollover_mode and game.screens['world'].view == 'world':
+        if 'transaction' in game.action_log and game.screens['world'].view == 'shop':
+            info_list = entities.player['object'].transaction.get_display_text()
+        elif self.rollover_mode and game.screens['world'].view == 'world':
             world_screen = game.screens['world']
             if world_screen.mouse_over != None:
                 for site in [
@@ -435,16 +437,10 @@ class MessageScreen(Subscreen):
         i = 0
         for info in info_list:
             text = game.info_font.render("%s" % (info), 0, ref.primary_color)
-            if 20+(i+2)*game.info_font.get_linesize() < self.background.get_height():
-                textpos = text.get_rect(
-                    left=20, 
-                    top=(20+i*game.info_font.get_linesize())
-                )
-            else:
-                textpos = text.get_rect(
-                    left=20+self.background.get_width()/2, 
-                    top=(20+(i+2)*game.info_font.get_linesize() - self.background.get_height())
-                )
+            textpos = text.get_rect(
+                left=20, 
+                top=(20+i*game.info_font.get_linesize())
+            )
             self.background.blit(text, textpos)
             i += 1
         self.draw_border(game)
