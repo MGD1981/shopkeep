@@ -73,18 +73,19 @@ class Game():
                 if self.keys[K_TAB]:
                     self.action_log.append('switch info view')
 
-                if self.keys[K_1]:
-                    self.speed = 'normal'
-                    self.action_log.append('speed change')
-                if self.keys[K_2]:
-                    self.speed = 'fast'
-                    self.action_log.append('speed change')
-                if self.keys[K_3]:
-                    self.speed = 'ultra'
-                    self.action_log.append('speed change')
-                if self.keys[K_4]:
-                    self.speed = 'ludicrous'
-                    self.action_log.append('speed change')
+                if self.keys[K_LCTRL] or self.keys[K_RCTRL]:
+                    if self.keys[K_1]:
+                        self.speed = 'normal'
+                        self.action_log.append('speed change')
+                    if self.keys[K_2]:
+                        self.speed = 'fast'
+                        self.action_log.append('speed change')
+                    if self.keys[K_3]:
+                        self.speed = 'ultra'
+                        self.action_log.append('speed change')
+                    if self.keys[K_4]:
+                        self.speed = 'ludicrous'
+                        self.action_log.append('speed change')
                 if 'speed change' in self.action_log:
                     pg.time.set_timer(pg.USEREVENT, ref.game_speed_dct[self.speed])
                     self.action_log.remove('speed change')
@@ -100,8 +101,7 @@ class Game():
                         site.structure.transform()
                         self.action_log.append('transformation')
                 if self.keys[K_m]:
-                    import site_data
-                    site_data.Site().generate('resource', 'rockland')
+                    print entities.heroes['object list'][0].perceptions.economy
                 if self.keys[K_i]:
                     import item_data
                     for hero in entities.heroes['object list']:

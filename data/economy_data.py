@@ -109,22 +109,25 @@ class Economy():
 		"""Adjusts (weighted) table values in conjunction with another Economy class."""
 		pass
 
+    def __str__(self):
+        return "Weapon Value Table: \n%r\nMaterial Value Table: \n%r" % (
+            self.weapon_value_table, self.material_value_table
+        )
+
 
 class Transaction():
 
     def __init__(self, player, hero):
+        town = entities.town['object']
         self.player = player
         self.hero = hero
-
-        self.player_offer = []
-        self.hero_offer = []
+        self.stage = 0 # Transaction stage acts as dict key
+        self.player_offer = None
+        self.hero_offer = town.economy.get_value(hero.inventory[0]) #TODO
 
     def get_display_text(self):
         """Returns a list of strings to display on the message screen."""
         text_list = []
-        text_list.extend([
-            "Transaction!",
-            "Hero: %s" % self.hero.name,
-            "Inventory: %s" % str(self.hero.inventory)
-        ])
+        for line in ref.transaction_dct[self.stage]['display text']:
+            text_list.append(eval(line))
         return text_list

@@ -27,13 +27,23 @@ class Player():
     
 
     def tick(self, game):
-        if (len(entities.shop['object'].transaction_queue) > 0 and 
+        if (self.transaction == None and 
+            len(entities.shop['object'].transaction_queue) > 0 and 
             self.get_shop_tile() == 'cashier'
         ):
             game.action_log.append('transaction')
             game.pause()
             self.transact(entities.shop['object'].transaction_queue[0])
             game.unpause()
+        if self.transaction != None:
+            if self.get_shop_tile() != 'cashier': #If player moves from register,
+                self.transaction = None           #transaction ends abruptly
+                game.action_log.remove('transaction')
+            else: # Transaction tick
+                if self.transaction.stage == 0:
+                    if game.keys[K_y]:
+                        print "Transaction Stage set to 1!"
+                        self.transaction.stage = 1
 
 
     def transact(self, hero):

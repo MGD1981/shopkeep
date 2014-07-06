@@ -788,6 +788,26 @@ rarity_dct = {
 }
 
 
+transaction_dct = {
+    0: {
+        'display text': [
+            '"%s would like to make a transaction with you." % self.hero.name',
+            '""',
+            "'  Press \"Y\" to begin the transaction.'"
+        ]
+    },
+    1: {
+        'display text': [
+            '"Transaction!"',
+            '"  %s would like to sell:" % self.hero.name',
+            '"  %s" % self.hero.inventory[0]',
+            '"  for %r pieces of %s." % (self.hero_offer, entities.town["object"].standard_currency)',
+            '""',
+            "'  Press \"Y\" to accept the offer, or \"N\" to reject it.'"
+        ]
+    }
+}
+
 letter_dct = {
     'monster': {
         'consonant start': [
