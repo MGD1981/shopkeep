@@ -5,6 +5,7 @@ from pygame.locals import *
 import reference_data as ref
 import display
 from display import screens, draw_screen, menus
+from copy import copy
 
 
 class Game():
@@ -19,7 +20,7 @@ class Game():
         self.menu_font = pg.font.Font('display/fonts/UbuntuMono-R.ttf', int(ref.scale*26))
         self.info_font = pg.font.Font('display/fonts/UbuntuMono-R.ttf', int(ref.scale*11))
 
-        self.action_log = ['refresh background']
+        self.action_log = GameLog(['refresh background'])
         self.speed = 'normal'
         pg.time.set_timer(pg.USEREVENT, ref.game_speed_dct[self.speed]) #game ticks
         pg.time.set_timer(pg.USEREVENT+1, ref.game_speed_dct[self.speed]/2) #sprite animation ticks
@@ -65,7 +66,7 @@ class Game():
                 if self.keys[K_ESCAPE]:
                     draw_screen.run_menu(self, menus.StartMenu('in_progress'))
                 if self.keys[K_w]:
-                    self.action_log.append('world view')
+                    self.action_log += 'w'
                     self.action_log.append('refresh background')
                 if self.keys[K_s]:
                     self.action_log.append('shop view')
@@ -152,6 +153,43 @@ class Game():
         #print "FPS: %d" % self.clock.get_fps()
 
 
+class GameLog():
+    """Messaging system for functions to check.
+       Every frame, back log switches to front, and back is reinitialized.
+       Messages are placed in the backlog, and actions check the frontlog.
+       Actions are therefore always one tick (frame) behind.
+    """
+    def __init__(self, starting_action_list=None):
+        self.frontlog = []
+        self.backlog = []
+        if starting_action_list != None:
+            self.frontlog.extend(starting_action_list)
+
+    def post_message(self, message):
+        self.backlog.append(message)
+
+    def get_messages(self):
+        return self.frontlog
+
+    def clear_messages(self):
+        self.frontlog = copy.deepycopy(self.backlog)
+        self.backlog = []
+
+    def __iadd__(self, message): #same as post_message()
+        self.backlog.append(message)
+
+    def __iter__(self):
+        self.length = len(self.frontlog)
+        self.current_index = 0
+        return self
+
+    def next(self):
+        if self.current_index == self.length:
+            raise StopIteration
+        current = self.frontlog[self.current_index]
+        self.current_index += 1
+        return current
+        
 
 class MessageLog(list):
     
